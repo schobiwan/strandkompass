@@ -6,11 +6,13 @@
 /* ---------- Farben und Variablen ---------- */
 :root{
   --priel:var(--seen);
+  --forest:#1d3a4a;--rust-text:#a5321f;
   --nord:#2c6a80;--nord-soft:#e1edf0;--ost:#a5671a;--ost-soft:#f6ead6;
   --hdr-bg:#fbf6ea;--hdr-fg:#1d3a4a;--hdr-line:#eadfc6;
   --sky-top:#cfe8f4;--sky-mid:#e9f4f7;--sand-warm:#f3e2bd;--sun:#ffd27a;--deep:#1d3a4a
 }
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --forest:#14232c;--rust-text:var(--rust);
   --nord:#7fc0d4;--nord-soft:#1d3138;--ost:#e3a65a;--ost-soft:#3a2c19;
   --hdr-bg:#14232c;--hdr-fg:#eef3f4;--hdr-line:#24363f;
   --sky-top:#183544;--sky-mid:#172a33;--sand-warm:#2a2419;--sun:#7a5a1f;--deep:#eef3f4
@@ -69,29 +71,31 @@ body:before{background:var(--hdr-bg)}
 .hsearch-btn:focus-visible,.cbtn:focus-visible{outline:3px solid var(--logo-on-dark);outline-offset:2px}
 
 /* Gruppen-Knöpfe */
-.hchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;max-width:560px}
-.hchip{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 13px;border-radius:999px;border:1px solid color-mix(in srgb,var(--deep) 20%,transparent);background:color-mix(in srgb,var(--surface) 55%,transparent);color:var(--deep);font:600 .88rem var(--body);cursor:pointer;transition:background .2s ease,border-color .2s ease}
+.hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;max-width:640px}
+.hchip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid color-mix(in srgb,var(--deep) 20%,transparent);background:color-mix(in srgb,var(--surface) 55%,transparent);color:var(--deep);font:600 .88rem var(--body);cursor:pointer;transition:background .2s ease,border-color .2s ease}
 .hchip span{font-size:.76rem;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
 .hchip:hover{background:var(--surface);border-color:var(--heading)}
-.hchip:first-child{border-color:var(--rust);color:var(--rust)}
+.hchip-all{text-decoration:none;border-style:dashed}
 .hchip:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
 
 /* Fund des Monats als Fundzettel */
 .spot6{position:relative;margin:0 0 0 auto;max-width:480px;width:100%;animation:spotIn .9s var(--ease) both}
 @keyframes spotIn{0%{opacity:0;transform:scale(.975)}}
+.s6-link{display:block;color:inherit;text-decoration:none;border-radius:16px}
+.s6-link:focus-visible{outline:3px solid var(--rust);outline-offset:4px}
 .s6-photo{display:block;border-radius:16px;overflow:hidden;aspect-ratio:16/10;box-shadow:0 26px 60px color-mix(in srgb,var(--heading) 22%,transparent);transform:rotate(1.2deg)}
 .s6-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s var(--ease)}
-.s6-photo:hover img{transform:scale(1.035)}
-.s6-photo:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.s6-link:hover img{transform:scale(1.035)}
+.s6-link:hover b{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
 .s6-label{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;gap:5px;margin:-44px 0 0 -22px;width:min(80%,360px);padding:13px 16px 15px;background:var(--surface);border-radius:12px;border-top:5px solid var(--rust);box-shadow:0 14px 34px color-mix(in srgb,var(--heading) 16%,transparent);transform:rotate(-1.4deg)}
-.spot-tag{color:var(--rust);font:700 .76rem var(--body);letter-spacing:.06em;text-transform:uppercase}
+.spot-tag{color:var(--rust-text);font:700 .76rem var(--body);letter-spacing:.06em;text-transform:uppercase}
 .s6-label b{font:600 clamp(1.35rem,2vw,1.7rem)/1.1 var(--display);color:var(--heading)}
 .s6-label>span:last-child{font-size:.93rem;line-height:1.45;color:var(--muted)}
 .spot-cred{display:block;margin:10px 0 0;font-size:.7rem;color:var(--muted)}
 
 /* Monatsereignisse als Leiste */
 .h6-month{position:relative;z-index:1;padding-block:14px 54px}
-.h5-mh{font:700 .8rem var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--rust);margin:0 0 10px}
+.h5-mh{font:700 .8rem var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--rust-text);margin:0 0 10px}
 .h5-events{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
 .h5-events li{position:relative;padding:10px 14px 10px 32px;border-radius:10px;background:color-mix(in srgb,var(--surface) 78%,transparent);box-shadow:var(--shadow);font-size:.92rem;line-height:1.45;color:var(--fg)}
 .h5-events li:before{content:"";position:absolute;left:14px;top:1.15em;width:8px;height:8px;border-radius:50%;background:var(--priel)}
@@ -100,7 +104,7 @@ body:before{background:var(--hdr-bg)}
 .h6-ripples{position:absolute;left:0;right:0;bottom:0;width:100%;height:60px;fill:none;stroke:color-mix(in srgb,#b08a4a 34%,transparent);stroke-width:1.4;pointer-events:none}
 
 /* ---------- Seevögel-Band ---------- */
-.kicker{display:inline-flex;align-items:center;gap:7px;margin:0 0 6px;font:700 .8rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--rust)}
+.kicker{display:inline-flex;align-items:center;gap:7px;margin:0 0 6px;font:700 .8rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--rust-text)}
 .kicker svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .birdband{padding-block:44px 30px;background:color-mix(in srgb,var(--sand-warm) 55%,var(--bg))}
 .bb-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px;margin-bottom:18px}
@@ -289,6 +293,7 @@ section.block .prose h2:first-child{margin-top:0}
   .h6-month{display:none}
   .h6-ripples{height:40px}
 }
+@media(max-width:760px){.seabtn,.hchip{min-height:44px}}
 @media(max-width:600px){
   .seabar-l{display:none}.seabar-more{margin-left:0}.seabtn{padding:0 12px}
   .birdtiles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:-16px;padding-right:16px}

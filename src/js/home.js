@@ -17,7 +17,6 @@ const animals = $$("#grid > li.bird").map((li) => ({
   mid: Number(li.dataset.mid),
   present: nums(li.dataset.present),
   peak: nums(li.dataset.peak),
-  bird: li.dataset.grp === "Seevögel",
 }));
 const TOTAL = animals.length;
 const SETS = ["grp", "act", "hab", "size"];
@@ -54,7 +53,7 @@ function render() {
   const list = animals.filter((a) => state.matches(a));
   if (state.sort === "az") list.sort(byName);
   else if (state.sort === "size") list.sort((a, b) => a.mid - b.mid || byName(a, b));
-  else list.sort((a, b) => nowRank(a) - nowRank(b) || (b.bird - a.bird) || byName(a, b));
+  else list.sort((a, b) => nowRank(a) - nowRank(b) || byName(a, b));
   const order = list.map((a) => a.key).join();
   grid.classList.toggle("calm", order === lastOrder);
   if (order !== lastOrder) {
@@ -130,6 +129,7 @@ grid.classList.add("calm");
 // Karussell "Jetzt zu finden": Arten in Hauptzeit zuerst (Seevögel vorn), dann alle übrigen aktiven Arten
 const list = $("nowcards");
 const allNow = $$("#nowcards > li");
+$$(".birdtiles > li").forEach((li, i) => { li.dataset.o = String(i); });
 const prev = $("now-prev"), next = $("now-next");
 function sync() {
   const max = list.scrollWidth - list.clientWidth - 2;
@@ -139,13 +139,10 @@ function sync() {
 function setupNow() {
   const sea = getSea();
   const items = allNow.filter((li) => !sea || li.dataset.act.split("|").includes(sea));
-  allNow.forEach((li) => { li.hidden = true; });
-  const peak = items.filter((li) => nums(li.dataset.peak).includes(NOW));
-  const rest = items.filter((li) => !peak.includes(li) && nums(li.dataset.present).includes(NOW));
-  items.forEach((li) => { li.hidden = true; li.classList.toggle("pk", peak.includes(li)); });
-  [...peak, ...rest].forEach((li) => { li.hidden = false; list.appendChild(li); });
-  // Tier des Monats: erste Art in Hauptzeit
-  const top = peak[0] || rest[0];
+  const isPeak = (li) => nums(li.dataset.peak).includes(NOW);
+  const isNow = (li) => nums(li.dataset.present).includes(NOW);
+  // Fund des Monats: erste Art in Hauptzeit, Seevögel haben Vorrang (Reihenfolge aus dem Build)
+  const top = items.find(isPeak) || items.find(isNow);
   if (top && top.dataset.k !== $("spot-link")?.getAttribute("href")?.split("/")[1]) {
     const k = top.dataset.k, im = $("spot-img");
     $("spot-link").href = `arten/${k}/index.html`;
@@ -155,7 +152,19 @@ function setupNow() {
     $("spot-hl").textContent = top.dataset.hl;
     $("spot-cred").innerHTML = top.querySelector(".cred")?.innerHTML || "";
   }
-  if (top) top.hidden = true; // steht schon groß im Kopfbereich
+  // Im Seevögel-Band rückt der Fund des Monats ans Ende, damit er nicht doppelt vorn steht
+  const band = document.querySelector(".birdtiles");
+  if (band && top) {
+    const tiles = $$(".birdtiles > li");
+    tiles.sort((a, b) => (a.dataset.k === top.dataset.k) - (b.dataset.k === top.dataset.k) || Number(a.dataset.o) - Number(b.dataset.o));
+    tiles.forEach((li) => band.appendChild(li));
+  }
+  // Karussell: nur Funde ohne Seevögel (die stehen im Band) und ohne den Fund des Monats
+  const rest = items.filter((li) => li !== top && li.dataset.bird !== "1" && isNow(li));
+  const peak = rest.filter(isPeak);
+  const later = rest.filter((li) => !isPeak(li));
+  allNow.forEach((li) => { li.hidden = true; li.classList.toggle("pk", isPeak(li)); });
+  [...peak, ...later].forEach((li) => { li.hidden = false; list.appendChild(li); });
   list.scrollLeft = 0;
   sync();
 }
