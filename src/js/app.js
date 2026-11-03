@@ -65,3 +65,24 @@ function fit(list, shown) {
   layout();
   document.fonts?.ready.then(layout);
 }
+
+// Meer wählen: Beide, Nordsee oder Ostsee. Die Wahl gilt auf allen Seiten.
+const html = document.documentElement;
+const SEA_KEY = "sk-sea";
+export const getSea = () => html.dataset.sea || "";
+function syncSea() {
+  const v = getSea();
+  $$("[data-sea-set]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.seaSet === v)));
+  const k = v === "nord" ? "cntNord" : v === "ost" ? "cntOst" : "cntAll";
+  $$("[data-cnt-all]").forEach((el) => { el.textContent = el.dataset[k]; });
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-sea-set]");
+  if (!b) return;
+  const v = b.dataset.seaSet;
+  if (v) html.dataset.sea = v; else delete html.dataset.sea;
+  try { v ? localStorage.setItem(SEA_KEY, v) : localStorage.removeItem(SEA_KEY); } catch (err) { /* ohne Speicher gilt die Wahl nur auf dieser Seite */ }
+  syncSea();
+  document.dispatchEvent(new CustomEvent("seachange", { detail: v }));
+});
+syncSea();

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Statischer Build des Strandkompass nach dem Muster von Strandkompass."""
+"""Statischer Build des Strandkompass nach dem Muster von Vogelkompass und Waldtierkompass."""
 import os, json, shutil, html, random, subprocess
-from data import SPECIES, PAIRS, EXT, GROUPS, HABS, ACTS, SIZES, MONTH_EVENTS
+from data import SPECIES, PAIRS, EXT, GROUPS, HABS, ACTS, SIZES, MONTH_EVENTS, SEA_NOTE
 CREDITS = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "credits.json"), encoding="utf-8"))
 
 SITE = "Strandkompass"
@@ -62,6 +62,8 @@ ICON = {
  "year": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',
  "arrow": '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>',
  "wave": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9c2.2 0 2.2-2 4.5-2S9.8 9 12 9s2.3-2 4.5-2S18.8 9 21 9M3 15c2.2 0 2.2-2 4.5-2s2.3 2 4.5 2 2.3-2 4.5-2 2.3 2 4.5 2"/></svg>',
+ "bird": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c3.5 0 5.5-1.6 7-4.5C11.4 6.8 13.2 5 16 5c2 0 3.6 1.3 4 3l1.5.6-1.6.9c-.4 4.6-3.8 8.5-9.4 8.5H6.5"/><path d="M9 17.5 7.5 20M12 17.5 11 20"/><circle cx="16.3" cy="8.2" r=".6" fill="currentColor" stroke="none"/></svg>',
+ "seas": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5h7v15H4zM13 4.5h7v15h-7z"/><path d="M5.5 14c1 0 1-1 2-1s1 1 2 1M14.5 14c1 0 1-1 2-1s1 1 2 1"/></svg>',
  "nord": '<svg viewBox="0 0 16 16" aria-hidden="true"><text x="8" y="11.6" text-anchor="middle" font-size="10" font-weight="700" font-family="sans-serif" fill="currentColor" stroke="none">N</text></svg>',
  "ost": '<svg viewBox="0 0 16 16" aria-hidden="true"><text x="8" y="11.6" text-anchor="middle" font-size="10" font-weight="700" font-family="sans-serif" fill="currentColor" stroke="none">O</text></svg>',
 }
@@ -91,11 +93,33 @@ FAVICON = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect wi
 LDJSON = ('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": DOMAIN + "/",
           "inLanguage": "de-DE", "description": "Strandfunde an Nord- und Ostsee bestimmen: Muscheln, Quallen, Krebse, Bernstein und mehr."}, ensure_ascii=False) + '</script>')
 
-TABS = [("index", "Bestimmen", "Funde", "find"), ("am-strand", "Am Strand", "Strand", "wave"),
+TABS = [("index", "Bestimmen", "Funde", "find"), ("nordsee-ostsee", "Nord- & Ostsee", "Meere", "seas"), ("am-strand", "Am Strand", "Strand", "wave"),
         ("unterscheiden", "Doppelgänger", "Vergleich", "pair"), ("strandjahr", "Strandjahr", "Jahr", "year")]
 
+# Gewähltes Meer früh setzen, damit beim Laden nichts springt
+SEA_BOOT = '<script>try{var s=localStorage.getItem("sk-sea");if(s==="nord"||s==="ost")document.documentElement.dataset.sea=s}catch(e){}</script>'
+
+def seaswitch(extra=""):
+    """Umschalter Beide · Nordsee · Ostsee; app.js merkt sich die Wahl."""
+    b = lambda v, t: f'<button type="button" class="seabtn" data-sea-set="{v}" aria-pressed="{"true" if not v else "false"}">{t}</button>'
+    return (f'<div class="seasw{(" " + extra) if extra else ""}" role="group" aria-label="Meer wählen">'
+            f'{b("", "Beide Meere")}{b("nord", "Nordsee")}{b("ost", "Ostsee")}</div>')
+
+def seabar(R):
+    return (f'<div class="seabar"><div class="wrap seabar-in"><span class="seabar-l">Zeige Funde von</span>{seaswitch()}'
+            f'<a class="seabar-more" href="{R}nordsee-ostsee/index.html">Was ist der Unterschied?</a></div></div>')
+
+def acts_attr(acts):
+    return "|".join(acts)
+
+def counts(ss, label_one=None):
+    """Zahl, die sich beim Umschalten des Meeres anpasst."""
+    a = len(ss); n = sum(1 for x in ss if "nord" in x["act"]); o = sum(1 for x in ss if "ost" in x["act"])
+    return f'<span data-cnt-all="{a}" data-cnt-nord="{n}" data-cnt-ost="{o}">{a}</span>'
+
+
 # ------------------------------------------------------------------ Layout
-def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=None, is_home=False, og="og.jpg"):
+def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=None, is_home=False, og="og.jpg", seafilter=True):
     depth = path.count("/")
     R = "../" * depth
     canon = DOMAIN + "/" + (path[:-len("index.html")] if path.endswith("index.html") else path)
@@ -114,14 +138,14 @@ def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=Non
     dj = f'<script type="application/json" id="wk-data">{json.dumps(data, ensure_ascii=False)}</script>' if data is not None else ""
     sc = f'<script type="module" src="{R}assets/{(scripts[0] if scripts else "app.js")}"></script>'
     full_title = title if is_home else f"{title} · {SITE}"
-    return f'''<!DOCTYPE html><html lang="de" data-root="{R or './'}" data-index> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>{esc(full_title)}</title><meta name="description" content="{esc(desc)}"><link rel="canonical" href="{canon}"><meta name="theme-color" content="#33413f" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1b2423" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark"><link rel="icon" href="{R}favicon.svg" type="image/svg+xml"><link rel="preload" href="{R}fonts/young-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="{R}fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><meta property="og:type" content="website"><meta property="og:site_name" content="{SITE}"><meta property="og:locale" content="de_DE"><meta property="og:title" content="{esc(full_title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{DOMAIN}/photos/{og}"><meta name="twitter:card" content="summary_large_image">{LDJSON if is_home else ""}<link rel="stylesheet" href="{R}assets/site.css"></head> <body> {LOGO} <a class="skip" href="#main">Zum Inhalt springen</a> <nav class="appnav" aria-label="Hauptnavigation"> <div class="wrap"> <a class="brand" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span><span class="sr-only">, zur Startseite</span></a> <ul class="tabs"> {"".join(tabs)} </ul> </div> </nav> <main id="main" tabindex="-1"> {cr} {body} </main> {footer(R)} {dj}{sc} </body> </html>'''
+    return f'''<!DOCTYPE html><html lang="de" data-root="{R or './'}" data-index> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>{esc(full_title)}</title><meta name="description" content="{esc(desc)}"><link rel="canonical" href="{canon}"><meta name="theme-color" content="#33413f" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#1b2423" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">{SEA_BOOT}<link rel="icon" href="{R}favicon.svg" type="image/svg+xml"><link rel="preload" href="{R}fonts/young-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="{R}fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><meta property="og:type" content="website"><meta property="og:site_name" content="{SITE}"><meta property="og:locale" content="de_DE"><meta property="og:title" content="{esc(full_title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{DOMAIN}/photos/{og}"><meta name="twitter:card" content="summary_large_image">{LDJSON if is_home else ""}<link rel="stylesheet" href="{R}assets/site.css"></head> <body> {LOGO} <a class="skip" href="#main">Zum Inhalt springen</a> <nav class="appnav" aria-label="Hauptnavigation"> <div class="wrap"> <a class="brand" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span><span class="sr-only">, zur Startseite</span></a> <ul class="tabs"> {"".join(tabs)} </ul> </div> </nav> <main id="main" tabindex="-1"{' class="seafilter"' if seafilter else ""}> {cr} {body} </main> {footer(R)} {dj}{sc} </body> </html>'''
 
 def footer(R):
-    ent = [("arten/index.html", "Alle Strandfunde"), ("am-strand/index.html", "Sicher am Strand"), ("unterscheiden/index.html", "Doppelgänger unterscheiden"),
+    ent = [("arten/index.html", "Alle Strandfunde"), ("nordsee-ostsee/index.html", "Nordsee und Ostsee"), ("am-strand/index.html", "Sicher am Strand"), ("unterscheiden/index.html", "Doppelgänger unterscheiden"),
            ("strandjahr/index.html", "Strandjahr und Kalender"), ("ausruestung/index.html", "Ausrüstung")]
     leg = [("impressum/index.html", "Impressum"), ("datenschutz/index.html", "Datenschutz"), ("bildnachweis/index.html", "Bildnachweis und Lizenzen")]
     li = lambda xs: "".join(f'<li><a href="{R}{h}">{t}</a></li>' for h, t in xs)
-    return f'''<footer> <div class="wrap"> <a class="flogo" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span></a> <div class="fcols"> <nav aria-label="Entdecken"><p class="fhead">Entdecken</p><ul>{li(ent)}</ul></nav> <nav aria-label="Rechtliches"><p class="fhead">Rechtliches</p><ul>{li(leg)}</ul></nav> <nav aria-label="Schwesterseiten"><p class="fhead">Schwesterseiten</p><ul><li><a href="https://vogelkompass.de/" rel="noopener">Vogelkompass: Vögel bestimmen</a></li><li><a href="https://waldtierkompass.de/" rel="noopener">Strandkompass: Waldtiere bestimmen</a></li></ul></nav> </div> <p class="footnote">Fotos: Wikimedia Commons, unter freien Lizenzen. Mit * markierte Links sind Werbelinks. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> </div> </footer>'''
+    return f'''<footer> <div class="wrap"> <a class="flogo" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span></a> <div class="fcols"> <nav aria-label="Entdecken"><p class="fhead">Entdecken</p><ul>{li(ent)}</ul></nav> <nav aria-label="Rechtliches"><p class="fhead">Rechtliches</p><ul>{li(leg)}</ul></nav> <nav aria-label="Schwesterseiten"><p class="fhead">Schwesterseiten</p><ul><li><a href="https://vogelkompass.de/" rel="noopener">Vogelkompass: Vögel bestimmen</a></li><li><a href="https://waldtierkompass.de/" rel="noopener">Waldtierkompass: Waldtiere bestimmen</a></li></ul></nav> </div> <p class="footnote">Fotos: Wikimedia Commons, unter freien Lizenzen. Mit * markierte Links sind Werbelinks. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> </div> </footer>'''
 
 # ------------------------------------------------------------------ Bausteine
 def img(R, key, alt="", eager=False, cls="", sizes="(max-width: 600px) 92vw, 400px"):
@@ -194,8 +218,11 @@ PRODUCTS = {
    why="Schützen im Watt vor scharfen Austern, Seepocken und Muschelschalen und sitzen auch im Schlick fest am Fuß.",
    url="https://www.amazon.de/s?k=wattschuhe&tag=" + TAG),
  "fernglas": dict(cat="Fernglas", name="Celestron Nature DX 8x42", by="Celestron", tip=False, icon="binoc",
-   why="Für Robben auf der Sandbank und Vögel im Watt aus sicherem Abstand. 8-fache Vergrößerung, wasserdicht und leicht.",
+   why="Für Seevögel im Watt und Robben auf der Sandbank, aus sicherem Abstand. 8-fache Vergrößerung, wasserdicht und leicht.",
    url="https://www.amazon.de/dp/B00B73JONS?tag=" + TAG),
+ "vogelbuch": dict(cat="Buch", name="Vogelführer für Küste und Meer", by="Auswahl bei Amazon", tip=True, icon="book",
+   why="Möwen, Watvögel und Seeschwalben ähneln sich oft. Ein Vogelführer mit Bildern der Jugend- und Winterkleider hilft beim Bestimmen.",
+   url="https://www.amazon.de/s?k=vogelf%C3%BChrer+k%C3%BCste+seev%C3%B6gel&tag=" + TAG),
  "sammelbox": dict(cat="Sammeln", name="Sortierbox für Muscheln und Steine", by="Auswahl bei Amazon", tip=False, icon="box",
    why="Mit vielen kleinen Fächern, damit zerbrechliche Funde wie Herzigel und Plattmuscheln heil nach Hause kommen.",
    url="https://www.amazon.de/s?k=sortierbox+f%C3%A4cher+klein&tag=" + TAG),
@@ -208,6 +235,7 @@ PHOTO = {
  "forscherset": ("David", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Sand_bucket.jpg"),
 }
 GEAR_GRP = {
+ "Seevögel": ["fernglas", "vogelbuch", "strandmuschel"],
  "Muscheln": ["buch", "sammelbox", "wattschuhe"],
  "Schnecken": ["buch", "becherlupe", "sammelbox"],
  "Quallen": ["buch", "becherlupe", "strandmuschel"],
@@ -261,6 +289,33 @@ def chipset(legend, g, items):
         f'<button class="chip" type="button" data-g="{g}" data-v="{esc(v)}" aria-pressed="false">{esc(t)}</button>' for v, t in items) + '</div></fieldset>'
 
 # ------------------------------------------------------------------ Seiten
+BIRD_PRIO = ["eiderente", "basstoelpel", "trottellumme", "austernfischer", "saebelschnaebler", "brandgans", "ringelgans", "sanderling",
+             "alpenstrandlaeufer", "mantelmoewe", "flussseeschwalbe", "silbermoewe", "kormoran", "sturmmoewe", "lachmoewe", "heringsmoewe"]
+
+def birdband(R):
+    birds = sorted([x for x in SPECIES if x["grp"] == "Seevögel"], key=lambda x: BIRD_PRIO.index(x["k"]) if x["k"] in BIRD_PRIO else 99)
+    tiles = "".join(
+        f'<li data-act="{acts_attr(x["act"])}"><a href="{R}arten/{x["k"]}/index.html"><img src="{R}photos/{x["k"]}-400.webp" alt="" width="400" height="320" loading="lazy" decoding="async">'
+        f'<span class="bt-n">{esc(x["n"])}</span><span class="bt-s">{esc(x["sz"])}{" · nur Nordsee" if x["act"] == ["nord"] else ""}</span></a>{cred(x["k"])}</li>' for x in birds)
+    return (f'<section class="birdband" aria-labelledby="bb-h"> <div class="wrap"> <div class="bb-head"><div><p class="kicker">{ICON["bird"]}Zuerst die Seevögel</p>'
+            f'<h2 id="bb-h">Seevögel an der Küste</h2><p class="bb-sub">Möwen, Watvögel, Meeresenten und die Felsenbrüter von Helgoland: {counts(birds)} Arten, die dir an Nord- und Ostsee begegnen.</p></div>'
+            f'<div class="bb-links"><button type="button" class="btn" data-hgrp="Seevögel">Alle Seevögel in der Liste</button><a class="btn ghost" href="{R}unterscheiden/index.html#voegel">Möwen unterscheiden</a></div></div>'
+            f'<ul class="birdtiles">{tiles}</ul> </div> </section>')
+
+def seapair(R):
+    def card_(k, title, facts, txt):
+        n = sum(1 for x in SPECIES if k in x["act"]); only = sum(1 for x in SPECIES if x["act"] == [k])
+        lis = "".join(f"<li>{esc(f)}</li>" for f in facts)
+        return (f'<li class="seacard seacard-{k}"><a href="{R}{"nordsee" if k == "nord" else "ostsee"}/index.html"><b>{title}</b><span>{esc(txt)}</span>'
+                f'<ul>{lis}</ul><span class="sc-n">{n} Arten und Funde{f", {only} davon nur hier" if only else ""}</span></a></li>')
+    return (f'<section class="block seapair" aria-labelledby="sp-h"><div class="wrap"><h2 id="sp-h">Nordsee oder Ostsee?</h2>'
+            f'<p class="intro">Die beiden Meere sind sehr verschieden. Das merkst du schon daran, was am Strand liegt und welche Vögel dort leben.</p><ul class="seacards">'
+            + card_("nord", "Nordsee", ["Ebbe und Flut, 2 bis 4 Meter Unterschied", "Wattenmeer, Halligen und Sandbänke", "Seehunde, Basstölpel und Trottellummen"],
+                    "Salziges Gezeitenmeer mit dem Wattenmeer, einem der wichtigsten Rastgebiete für Zugvögel weltweit.")
+            + card_("ost", "Ostsee", ["Kaum Gezeiten, der Wind bestimmt den Wasserstand", "Viel weniger Salz als die Nordsee", "Bernstein, Feuersteine und Steilküsten"],
+                    "Ein fast geschlossenes Binnenmeer mit Bodden, Förden und Steilküsten. Im Winter rasten hier riesige Entenschwärme.")
+            + f'</ul><p class="actions"><a class="btn ghost" href="{R}nordsee-ostsee/index.html">Alle Unterschiede im Vergleich</a></p></div></section>')
+
 def build_home():
     R = ""
     filt = (chipset("Gruppe", "grp", [(g, g) for g in GROUPS]) +
@@ -269,16 +324,16 @@ def build_home():
             chipset("Größe", "size", list(SIZES.items())) +
             '<fieldset><legend>Außerdem</legend><div class="fchips"><button class="chip" type="button" data-g="flag" data-v="now" aria-pressed="false">Jetzt im <span data-now-name>November</span> zu finden</button>'
             '</div></fieldset>')
-    cards = "".join(card(R, s, i) for i, s in enumerate(sorted(SPECIES, key=lambda x: x["n"])))
+    cards = "".join(card(R, s, i) for i, s in enumerate(sorted(SPECIES, key=lambda x: (x["grp"] != "Seevögel", x["n"]))))
     NOWM_BUILD = 11
     # Reihenfolge für Tier des Monats und Karussell: auffällige Funde zuerst
-    PRIO = ["kegelrobbe", "seehund", "schweinswal", "bernstein", "kompassqualle", "feuerqualle", "ohrenqualle", "lungenqualle", "seestern",
+    PRIO = BIRD_PRIO + ["kegelrobbe", "seehund", "schweinswal", "bernstein", "kompassqualle", "feuerqualle", "ohrenqualle", "lungenqualle", "seestern",
             "nixentaeschchen", "wellhornschnecke", "strandkrabbe", "einsiedlerkrebs", "seestachelbeere", "blaue-nesselqualle", "herzigel", "donnerkeil"]
     pr = lambda x: PRIO.index(x["k"]) if x["k"] in PRIO else 99
     ranked = sorted(SPECIES, key=lambda x: (0 if NOWM_BUILD in x["h"] else 1, pr(x), x["n"]))
     def nowcard(x, i):
         first = x["hl"].split(". ")[0].rstrip(".") + "."
-        return (f'<li data-peak="{",".join(map(str, x["h"]))}" data-present="{",".join(map(str, x["p"]))}" data-k="{x["k"]}" data-name="{esc(x["n"])}" '
+        return (f'<li data-act="{acts_attr(x["act"])}" data-bird="{1 if x["grp"] == "Seevögel" else 0}" data-peak="{",".join(map(str, x["h"]))}" data-present="{",".join(map(str, x["p"]))}" data-k="{x["k"]}" data-name="{esc(x["n"])}" '
                 f'data-hl="{esc(first)}"{"" if NOWM_BUILD in x["p"] else " hidden"}>'
                 f'<a href="arten/{x["k"]}/index.html"><img src="photos/{x["k"]}-400.webp" alt="" width="400" height="300" loading="{"eager" if i < 5 else "lazy"}" decoding="async">'
                 f'<span class="nc-ov"><b>{esc(x["n"])}</b><i>Beste Zeit</i></span></a>{cred(x["k"])}</li>')
@@ -287,16 +342,18 @@ def build_home():
     sp_first = sp["hl"].split(". ")[0].rstrip(".") + "."
     gcount = {g: sum(1 for x in SPECIES if x["grp"] == g) for g in GROUPS}
     gchips = "".join(f'<button type="button" class="hchip" data-hgrp="{g}">{g}<span>{gcount[g]}</span></button>' for g in GROUPS)
-    events = "".join(f'<ul class="h5-events" data-m="{m}"{"" if m == NOWM_BUILD else " hidden"}>' + "".join(f"<li>{esc(e)}</li>" for e in MONTH_EVENTS[m]) + "</ul>" for m in range(1, 13))
-    body = f'''<header class="hero5"> <div class="wrap hero5-in"> <div class="h5-text"> <h1>Was liegt da am Strand?</h1> <p class="lede">{len(SPECIES)} Funde von Nord- und Ostsee, von der Muschel bis zum Bernstein, erkannt am Foto und an wenigen sicheren Merkmalen.</p> <form class="hsearch" id="hsearch" role="search" aria-label="Fund suchen"> <label for="hq"><span class="sr-only">Fund suchen</span>{ICON["find"]}<input type="search" id="hq" placeholder="Suchen, zum Beispiel Bernstein" autocomplete="off" enterkeyhint="search"></label> <button class="hsearch-btn" type="submit">Suchen</button> </form> <div class="hchips" role="group" aria-label="Nach Gruppe zeigen">{gchips}</div> <div class="h5-month"><h2 class="h5-mh">Am Strand im <span data-now-name>November</span></h2>{events}</div> </div>
+    events = "".join(f'<ul class="h5-events" data-m="{m}"{"" if m == NOWM_BUILD else " hidden"}>' + "".join(ev_li(e) for e in MONTH_EVENTS[m]) + "</ul>" for m in range(1, 13))
+    body = f'''<header class="hero5"> <div class="wrap hero5-in"> <div class="h5-text"> <h1>Wer fliegt da? Was liegt da?</h1> <p class="lede">{counts(SPECIES)} Seevögel, Muscheln, Quallen und Strandfunde von Nord- und Ostsee, erkannt am Foto und an wenigen sicheren Merkmalen.</p> <div class="h5-sea"><span class="h5-sea-l">Ich bin an der</span>{seaswitch("onDark")}</div> <form class="hsearch" id="hsearch" role="search" aria-label="Fund suchen"> <label for="hq"><span class="sr-only">Fund suchen</span>{ICON["find"]}<input type="search" id="hq" placeholder="Suchen, zum Beispiel Austernfischer" autocomplete="off" enterkeyhint="search"></label> <button class="hsearch-btn" type="submit">Suchen</button> </form> <div class="hchips" role="group" aria-label="Nach Gruppe zeigen">{gchips}</div> <div class="h5-month"><h2 class="h5-mh">Am Strand im <span data-now-name>November</span></h2>{events}</div> </div>
 <figure class="spot" id="spot"> <a href="arten/{sp["k"]}/index.html" id="spot-link"><img id="spot-img" src="photos/{sp["k"]}.webp" srcset="photos/{sp["k"]}-400.webp 400w, photos/{sp["k"]}.webp 720w" sizes="(max-width: 900px) 92vw, 600px" alt="" width="720" height="540" fetchpriority="high"> <figcaption><span class="spot-tag">Beste Zeit im <span data-now-name>November</span></span><b id="spot-name">{esc(sp["n"])}</b><span id="spot-hl">{esc(sp_first)}</span></figcaption></a> <small class="spot-cred" id="spot-cred">{credit(sp["k"], True)}</small> </figure> </div> </header>
+{birdband(R)}
 <section class="nowband" aria-labelledby="now-h"> <div class="wrap"> <div class="now-head"><h2 id="now-h">Jetzt im <span data-now-name>November</span> zu finden</h2><div class="now-nav"><a href="strandjahr/index.html" data-now-link>Alle im <span data-now-name>November</span></a><button class="cbtn" type="button" id="now-prev" aria-controls="nowcards" aria-label="Vorherige Funde" disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 6-6 6 6 6"/></svg></button><button class="cbtn" type="button" id="now-next" aria-controls="nowcards" aria-label="Weitere Funde"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg></button></div></div> <ul class="nowcards" id="nowcards">{nowc}</ul> </div> </section>
 <div class="bar" id="arten"> <div class="wrap barrow" role="search" aria-label="Funde suchen und filtern"> <label class="search" for="q">{ICON["find"]}<span class="sr-only">Fund suchen</span> <input type="search" id="q" placeholder="Suchen, z. B. Qualle" autocomplete="off" enterkeyhint="search"></label> <button class="chip ftoggle" id="f-toggle" type="button" aria-expanded="false" aria-controls="fpanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"></path></svg>Filter<b class="fcount" id="fcount" hidden></b></button> <label class="sortsel" for="sort"><span>Sortieren</span> <select id="sort"><option value="now">Jetzt zu finden zuerst</option><option value="az">Name A–Z</option><option value="size">Größe, klein zuerst</option></select></label> <span class="rcount" id="rcount" aria-live="polite">{len(SPECIES)} Funde</span> </div> <div class="fpanel" id="fpanel" hidden> <div class="wrap fgrid"> {filt} <div class="factions"><button class="btn ghost" id="f-reset" type="button">Alle Filter zurücksetzen</button><button class="btn" id="f-done" type="button">Ergebnisse anzeigen</button></div> </div> </div> <div class="wrap active" id="active" hidden></div> </div>
 <section class="sub" aria-labelledby="arten-h"> <div class="wrap"> <h2 class="sr-only" id="arten-h">Funde</h2> <ul class="grid" id="grid"> {cards} </ul> <div class="empty" id="empty" hidden><p>Kein Fund passt zu deiner Suche oder Auswahl.</p><button class="btn ghost" type="button" id="empty-reset">Suche und Filter zurücksetzen</button></div> </div> </section>
-<section class="gearband" aria-labelledby="h-gear"><div class="wrap"><div class="head-row"><h2 id="h-gear">Gut ausgerüstet an den Strand</h2><a class="gearmore" href="ausruestung/index.html">Alle Empfehlungen ansehen</a></div><ul class="products"> {"".join(product(R, g) for g in ("uvlampe", "buch", "becherlupe", "kescher", "forscherset", "wattschuhe", "fernglas", "sammelbox"))} </ul>{ADNOTE}</div></section>
-<section class="block"> <div class="wrap"> <h2>Weiter entdecken</h2> <ul class="explore"> <li><a href="am-strand/index.html"><b>Sicher am Strand</b><span>Welche Quallen brennen, was tun bei einem Heuler, und warum du Bernstein nie in die Hosentasche steckst.</span></a></li> <li><a href="unterscheiden/index.html"><b>Doppelgänger unterscheiden</b><span>Ohrenqualle oder Kompassqualle, Seehund oder Kegelrobbe: {len(PAIRS)} Vergleiche mit den entscheidenden Merkmalen.</span></a></li> <li><a href="strandjahr/index.html"><b>Das Strandjahr</b><span>Quallenzeit, Heuler, Bernstein nach dem Sturm: was am Strand wann passiert, Monat für Monat.</span></a></li> <li><a href="ausruestung/index.html"><b>Ausrüstung</b><span>UV-Lampe für die Bernsteinsuche, Becherlupe, Kescher und Wattschuhe.</span></a></li> <li><a href="https://vogelkompass.de/" rel="noopener"><b>Vögel an der Küste?</b><span>Möwen, Austernfischer und Co. findest du auf der Schwesterseite Vogelkompass.</span></a></li> </ul> </div> </section>'''
-    write("index.html", page("index.html", "Strandkompass – Strandfunde an Nord- und Ostsee bestimmen",
-        f"Strandfunde bestimmen: {len(SPECIES)} Muscheln, Schnecken, Quallen, Krebse, Robben und Steine von Nord- und Ostsee mit Doppelgängern und Strandkalender.",
+{seapair(R)}
+<section class="gearband" aria-labelledby="h-gear"><div class="wrap"><div class="head-row"><h2 id="h-gear">Gut ausgerüstet an den Strand</h2><a class="gearmore" href="ausruestung/index.html">Alle Empfehlungen ansehen</a></div><ul class="products"> {"".join(product(R, g) for g in ("fernglas", "vogelbuch", "uvlampe", "buch", "becherlupe", "kescher", "wattschuhe", "sammelbox"))} </ul>{ADNOTE}</div></section>
+<section class="block"> <div class="wrap"> <h2>Weiter entdecken</h2> <ul class="explore"> <li><a href="am-strand/index.html"><b>Sicher am Strand</b><span>Welche Quallen brennen, was tun bei einem Heuler, und warum du Bernstein nie in die Hosentasche steckst.</span></a></li> <li><a href="unterscheiden/index.html"><b>Doppelgänger unterscheiden</b><span>Silbermöwe oder Heringsmöwe, Ohrenqualle oder Kompassqualle: {len(PAIRS)} Vergleiche mit den entscheidenden Merkmalen.</span></a></li> <li><a href="strandjahr/index.html"><b>Das Strandjahr</b><span>Lummensprung, Vogelzug, Quallenzeit und Bernstein nach dem Sturm: was am Strand wann passiert, Monat für Monat.</span></a></li> <li><a href="ausruestung/index.html"><b>Ausrüstung</b><span>UV-Lampe für die Bernsteinsuche, Becherlupe, Kescher und Wattschuhe.</span></a></li> <li><a href="nordsee-ostsee/index.html"><b>Nordsee oder Ostsee?</b><span>Gezeiten, Salzgehalt, Watt und Steilküste: was die beiden Meere unterscheidet und was du wo findest.</span></a></li> <li><a href="https://vogelkompass.de/" rel="noopener"><b>Noch mehr Vögel</b><span>Garten-, Feld- und Waldvögel bestimmst du auf der Schwesterseite Vogelkompass.</span></a></li> </ul> </div> </section>'''
+    write("index.html", page("index.html", "Strandkompass – Seevögel und Strandfunde an Nord- und Ostsee bestimmen",
+        f"Seevögel und Strandfunde bestimmen: {len(SPECIES)} Möwen, Watvögel, Muscheln, Quallen, Krebse, Robben und Steine von Nord- und Ostsee mit Doppelgängern und Strandkalender.",
         body, active="index", scripts=("home.js",), is_home=True))
 
 def build_arten_index():
@@ -304,12 +361,22 @@ def build_arten_index():
     sec = []
     for g in GROUPS:
         ss = sorted([s for s in SPECIES if s["grp"] == g], key=lambda x: x["n"])
-        sec.append(f'<h2 class="h3 grp-h">{g}</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul>')
-    body = f'<section class="block page"> <div class="wrap"> <h1>Alle Strandfunde</h1> <p class="intro">{len(SPECIES)} Funde, nach Gruppen geordnet. Zum Suchen und Filtern geht es zur <a href="../index.html#arten">Startseite</a>.</p> {"".join(sec)} </div> </section>'
-    write("arten/index.html", page("arten/index.html", "Alle Strandfunde", "Alle Strandfunde im Überblick: Muscheln, Schnecken, Quallen, Krebse, Seesterne, Tang, Steine und Meeressäuger.", body, crumbs=[("Funde", "")]))
+        sec.append(f'<h2 class="h3 grp-h" data-grp-h="{esc(g)}">{g}</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul>')
+    body = seabar(R) + f'<section class="block page"> <div class="wrap"> <h1>Alle Strandfunde</h1> <p class="intro">{counts(SPECIES)} Arten und Funde, nach Gruppen geordnet, die Seevögel zuerst. Zum Suchen und Filtern geht es zur <a href="../index.html#arten">Startseite</a>.</p> {"".join(sec)} </div> </section>'
+    write("arten/index.html", page("arten/index.html", "Alle Strandfunde", "Alle Strandfunde im Überblick: Seevögel, Muscheln, Schnecken, Quallen, Krebse, Seesterne, Tang, Steine und Meeressäuger.", body, crumbs=[("Funde", "")]))
 
 def trackbox(s):
     return ""
+
+def seabox(s):
+    note = SEA_NOTE.get(s["k"], {})
+    cols = ""
+    for a in ("nord", "ost"):
+        has = a in s["act"]
+        txt = note.get(a) or (f"An der {ACTS[a]} zu finden." if has else f"An der {ACTS[a]} kaum oder gar nicht.")
+        cols += (f'<div class="seacol seacol-{a}{"" if has else " no"}"><h3>{ACTS[a]}</h3>'
+                 f'<p class="seayes">{"Kommt vor" if has else "Kaum oder gar nicht"}</p><p>{esc(txt)}</p></div>')
+    return f'<section class="seabox" aria-labelledby="h-sea"><h2 id="h-sea">Nordsee und Ostsee</h2><div class="seacols">{cols}</div></section>'
 
 def build_species(s):
     R = "../../"
@@ -331,16 +398,19 @@ def build_species(s):
                  f'<p>{esc(p["short"])}</p> <p><a href="{R}unterscheiden/{p["k"]}/index.html">{esc(name_of(p["a"]))} oder {esc(name_of(p["b"]))}? Alle Unterschiede</a></p> </div> </section>')
     wiki = "https://de.wikipedia.org/w/index.php?search=" + s["lat"].replace(" ", "+")
     gear = GEAR_FOR.get(k) or GEAR_GRP[s["grp"]]
-    body = f'''<article class="sp wrap"> <div class="sp-top"> <figure class="sp-photo"> {img(R, k, s["n"], eager=True, sizes="(max-width: 760px) 92vw, 560px")} <figcaption>{credit(k)}</figcaption> </figure> <div class="sp-intro"> <h1>{esc(s["n"])}</h1> <p class="latin" lang="la">{esc(s["lat"])}</p> <p class="row"><span class="tag status">{esc(s["grp"])}</span><span class="tag">{esc(s["sz"])}</span>{"".join(f'<span class="tag act-tag">{act_svg(a)}{ACTS[a]}</span>' for a in s["act"])}</p> <p class="habs">{habs}</p> <p class="text">{esc(s["short"])} {esc(s["hl"])}</p> {trackbox(s)} </div> </div>
-<div class="sp-cols"> <div class="sp-main"> <section aria-labelledby="h-marks"> <h2 id="h-marks">So erkennst du {"sie" if s["g"]=="f" else ("es" if s["g"]=="n" else "ihn")}</h2> <ul class="marks">{"".join(f"<li>{esc(m)}</li>" for m in s["marks"])}</ul> <dl class="facts">{facts}</dl> </section> <section aria-labelledby="h-year"> <h2 id="h-year">Wann im Jahr</h2> {months_bar(s)} <p class="sr-only">Aktiv: {mlist(s["p"])}. Hauptzeit: {mlist(s["h"])}.</p> <p class="yeartext">{yeartext}</p> </section> <section class="life" aria-labelledby="h-life"> <h2 id="h-life">Lebensweise</h2> {life} </section> <section class="helpbox" aria-label="Hilfe und Beobachtung"> <details class="fold" open data-fold><summary><h2>Rücksicht und Sicherheit</h2></summary><p>{esc(s["help"])}</p></details> <details class="fold" open data-fold><summary><h2>Suchtipp</h2></summary><p>{esc(s["tip"])}</p></details> </section> {alike} <section class="more" aria-labelledby="h-more"> <h2 id="h-more">Mehr erfahren</h2> <ul class="morelinks"> <li><a href="{wiki}" target="_blank" rel="noopener">Wikipedia<span class="sr-only"> (öffnet in neuem Fenster)</span></a></li> </ul> </section> </div>
+    body = f'''<article class="sp wrap"> <div class="sp-top"> <figure class="sp-photo"> {img(R, k, s["n"], eager=True, sizes="(max-width: 760px) 92vw, 560px")} <figcaption>{credit(k)}</figcaption> </figure> <div class="sp-intro"> <h1>{esc(s["n"])}</h1> <p class="latin" lang="la">{esc(s["lat"])}</p> <p class="row"><span class="tag status">{esc(s["grp"])}</span><span class="tag">{esc(s["sz"])}</span>{"".join(f'<span class="tag act-tag act-{a}">{act_svg(a)}{ACTS[a]}</span>' for a in s["act"])}{'<span class="tag act-tag act-none">nicht an der Ostsee</span>' if s["act"] == ["nord"] else ""}</p> <p class="habs">{habs}</p> <p class="text">{esc(s["short"])} {esc(s["hl"])}</p> {trackbox(s)} </div> </div>
+<div class="sp-cols"> <div class="sp-main"> <section aria-labelledby="h-marks"> <h2 id="h-marks">So erkennst du {"sie" if s["g"]=="f" else ("es" if s["g"]=="n" else "ihn")}</h2> <ul class="marks">{"".join(f"<li>{esc(m)}</li>" for m in s["marks"])}</ul> <dl class="facts">{facts}</dl> </section> {seabox(s)} <section aria-labelledby="h-year"> <h2 id="h-year">Wann im Jahr</h2> {months_bar(s)} <p class="sr-only">Aktiv: {mlist(s["p"])}. Hauptzeit: {mlist(s["h"])}.</p> <p class="yeartext">{yeartext}</p> </section> <section class="life" aria-labelledby="h-life"> <h2 id="h-life">Lebensweise</h2> {life} </section> <section class="helpbox" aria-label="Hilfe und Beobachtung"> <details class="fold" open data-fold><summary><h2>Rücksicht und Sicherheit</h2></summary><p>{esc(s["help"])}</p></details> <details class="fold" open data-fold><summary><h2>Suchtipp</h2></summary><p>{esc(s["tip"])}</p></details> </section> {alike} <section class="more" aria-labelledby="h-more"> <h2 id="h-more">Mehr erfahren</h2> <ul class="morelinks"> <li><a href="{wiki}" target="_blank" rel="noopener">Wikipedia<span class="sr-only"> (öffnet in neuem Fenster)</span></a></li> </ul> </section> </div>
 <aside class="sp-side" aria-label="Empfehlungen"> <section class="gearbox" aria-labelledby="h-gear"><h2 id="h-gear">Passend dazu</h2><ul class="products compact"> {"".join(product(R, g, True) for g in gear)} </ul>{ADNOTE}</section> </aside> </div> </article>'''
     write(f"arten/{k}/index.html", page(f"arten/{k}/index.html", f"{s['n']} erkennen", f"{s['n']} ({s['lat']}): {s['short']} Merkmale, Lebensweise und wann du {'sie' if s['g']=='f' else ('es' if s['g']=='n' else 'ihn')} am Strand findest.",
                                         body, crumbs=[("Funde", "arten/index.html"), (s["n"], "")], og=f"{k}.webp"))
 
 def build_pairs():
     R = "../"
-    body = f'<section class="block page"> <div class="wrap"> <h1>Doppelgänger unterscheiden</h1> <p class="intro">Manches am Strand sieht sich zum Verwechseln ähnlich, bei Quallen ist der Unterschied sogar wichtig. Diese Merkmale helfen beim Unterscheiden.</p> <ul class="pairs">{"".join(pair_card(R, p) for p in PAIRS)}</ul> </div> </section>'
-    write("unterscheiden/index.html", page("unterscheiden/index.html", "Doppelgänger unterscheiden", "Ohrenqualle oder Kompassqualle, Seehund oder Kegelrobbe, Rochen-Ei oder Hai-Ei: Strandfunde sicher unterscheiden.", body, active="unterscheiden", crumbs=[("Doppelgänger", "")]))
+    isb = lambda p: p["a"] in BY and BY[p["a"]]["grp"] == "Seevögel"
+    body = (f'<section class="block page"> <div class="wrap"> <h1>Doppelgänger unterscheiden</h1> <p class="intro">Am Strand sieht sich manches zum Verwechseln ähnlich: Möwen, Strandläufer und Seeschwalben ebenso wie Quallen, bei denen der Unterschied sogar wichtig ist. Diese Merkmale helfen beim Unterscheiden.</p>'
+            f'<h2 class="h3 grp-h" id="voegel">Seevögel</h2><ul class="pairs">{"".join(pair_card(R, p, "h3") for p in PAIRS if isb(p))}</ul>'
+            f'<h2 class="h3 grp-h" id="funde">Strandfunde und Meerestiere</h2><ul class="pairs">{"".join(pair_card(R, p, "h3") for p in PAIRS if not isb(p))}</ul> </div> </section>')
+    write("unterscheiden/index.html", page("unterscheiden/index.html", "Doppelgänger unterscheiden", "Silbermöwe oder Heringsmöwe, Sanderling oder Alpenstrandläufer, Ohrenqualle oder Kompassqualle: Seevögel und Strandfunde sicher unterscheiden.", body, active="unterscheiden", crumbs=[("Doppelgänger", "")]))
     for p in PAIRS:
         R = "../../"
         figs = ""
@@ -366,39 +436,121 @@ def cal_table(R):
                 c = "h" if m in s["h"] else ("p" if m in s["p"] else "")
                 t = "beste Zeit" if c == "h" else ("zu finden" if c == "p" else "kaum zu finden")
                 tds += f'<td data-month="{m}" class="m {c}" title="{esc(s["n"])}, {MONTHS[m-1]}: {t}"><span class="sr-only">{MONTHS[m-1]}: {t}</span></td>'
-            rows.append(f'<tr><th scope="row" class="n"><a href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a></th> {tds} </tr>')
+            rows.append(f'<tr data-act="{acts_attr(s["act"])}"><th scope="row" class="n"><a href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a></th> {tds} </tr>')
     return f'<div class="cal-wrap"><table class="cal"> <caption class="sr-only">Wann welcher Fund zu erwarten ist</caption> <thead><tr><th scope="col"><span class="sr-only">Art</span></th> {head}</tr></thead> <tbody> {"".join(rows)} </tbody> </table></div>'
 
 def build_year():
     R = "../"
     links = ""
     for m in range(1, 13):
-        n_p = sum(1 for s in SPECIES if m in s["p"]); n_h = sum(1 for s in SPECIES if m in s["h"])
-        links += f'<li data-month="{m}"><a href="{R}strandjahr/{MSLUG[m-1]}/index.html"><b>{MONTHS[m-1]}</b><span>{n_p} zu finden, {n_h} in bester Zeit</span></a></li>'
-    events = "".join(f'<li data-month="{m}"><b>{MONTHS[m-1]}</b><span>{esc(MONTH_EVENTS[m][0])}</span></li>' for m in range(1, 13))
-    body = f'''<section class="block page"> <div class="wrap"> <h1>Das Strandjahr</h1> <p class="intro">Was am Strand wann passiert: Quallenzeit, Heuler, Bernstein nach dem Sturm. Wähle einen Monat, um zu sehen, was du dann findest.</p> <ul class="monthlinks">{links}</ul> </div> </section>
+        links += f'<li data-month="{m}"><a href="{R}strandjahr/{MSLUG[m-1]}/index.html"><b>{MONTHS[m-1]}</b><span>{counts([s for s in SPECIES if m in s["p"]])} zu finden, {counts([s for s in SPECIES if m in s["h"]])} in bester Zeit</span></a></li>'
+    events = "".join(f'<li data-month="{m}"><b>{MONTHS[m-1]}</b>' + "".join(f'<span data-sea-only="{sea}">{esc(t)}</span>' for sea, t in MONTH_EVENTS[m][:2]) + '</li>' for m in range(1, 13))
+    body = seabar(R) + f'''<section class="block page"> <div class="wrap"> <h1>Das Strandjahr</h1> <p class="intro">Was am Strand wann passiert: Vogelzug im Wattenmeer, Lummensprung, Quallenzeit, Heuler und Bernstein nach dem Sturm. Wähle einen Monat, um zu sehen, was du dann findest.</p> <ul class="monthlinks">{links}</ul> </div> </section>
 <section class="block" aria-labelledby="h-ev"> <div class="wrap"> <h2 id="h-ev">Das Wichtigste im Jahreslauf</h2> <ul class="yearline">{events}</ul> </div> </section>
 <section class="block" aria-labelledby="h-cal"> <div class="wrap"> <h2 id="h-cal">Wann findest du was?</h2> <p class="intro">Monate, in denen du den Fund erwarten kannst, und wann die besten Chancen sind. Der aktuelle Monat ist farbig umrandet.</p> <p class="swipe">Seitlich wischen, um alle Monate zu sehen.</p> {cal_table(R)} </div> </section>'''
     write("strandjahr/index.html", page("strandjahr/index.html", "Das Strandjahr", "Strandkalender für Nord- und Ostsee: wann Quallen, Heuler, Bernstein und Strandfunde zu erwarten sind, Monat für Monat.", body, active="strandjahr", crumbs=[("Strandjahr", "")]))
     for m in range(1, 13):
         R = "../../"
-        peak = sorted([s for s in SPECIES if m in s["h"]], key=lambda x: x["n"])
-        act = sorted([s for s in SPECIES if m in s["p"] and m not in s["h"]], key=lambda x: x["n"])
+        bf = lambda x: (x["grp"] != "Seevögel", x["n"])
+        peak = sorted([s for s in SPECIES if m in s["h"]], key=bf)
+        act = sorted([s for s in SPECIES if m in s["p"] and m not in s["h"]], key=bf)
         sleep = sorted([s for s in SPECIES if m not in s["p"]], key=lambda x: x["n"])
-        ev = "".join(f"<li>{esc(e)}</li>" for e in MONTH_EVENTS[m])
+        ev = "".join(ev_li(e, True) for e in MONTH_EVENTS[m])
         prev_m, next_m = (m - 2) % 12 + 1, m % 12 + 1
         sl = (f'<section class="block" aria-labelledby="h-sl"><div class="wrap"><h2 id="h-sl">Jetzt kaum zu finden</h2><div class="pills">'
-              + "".join(f'<a href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a>' for s in sleep) + '</div></div></section>') if sleep else ""
-        body = f'''<section class="block page"> <div class="wrap"> <h1>Der Strand im {MONTHS[m-1]}</h1> <p class="intro">{len(peak) + len(act)} der {len(SPECIES)} Funde kannst du im {MONTHS[m-1]} erwarten, {len(peak)} davon besonders häufig.</p> <ul class="evlist">{ev}</ul> <p class="actions"><a class="btn ghost" href="{R}strandjahr/{MSLUG[prev_m-1]}/index.html">← {MONTHS[prev_m-1]}</a> <a class="btn ghost" href="{R}strandjahr/{MSLUG[next_m-1]}/index.html">{MONTHS[next_m-1]} →</a></p> </div> </section>
+              + "".join(f'<a data-act="{acts_attr(s["act"])}" href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a>' for s in sleep) + '</div></div></section>') if sleep else ""
+        body = seabar(R) + f'''<section class="block page"> <div class="wrap"> <h1>Der Strand im {MONTHS[m-1]}</h1> <p class="intro">{counts(peak + act)} der {counts(SPECIES)} Arten und Funde kannst du im {MONTHS[m-1]} erwarten, {counts(peak)} davon besonders häufig.</p> <ul class="evlist">{ev}</ul> <p class="actions"><a class="btn ghost" href="{R}strandjahr/{MSLUG[prev_m-1]}/index.html">← {MONTHS[prev_m-1]}</a> <a class="btn ghost" href="{R}strandjahr/{MSLUG[next_m-1]}/index.html">{MONTHS[next_m-1]} →</a></p> </div> </section>
 <section class="block" aria-labelledby="h-pk"><div class="wrap"><h2 id="h-pk">Jetzt besonders gut zu finden</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(peak))}</ul></div></section>
 <section class="block" aria-labelledby="h-ac"><div class="wrap"><h2 id="h-ac">Außerdem zu finden</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(act))}</ul></div></section> {sl} {month_gear(R, m)}'''
-        write(f"strandjahr/{MSLUG[m-1]}/index.html", page(f"strandjahr/{MSLUG[m-1]}/index.html", f"Am Strand im {MONTHS[m-1]}", f"Was du im {MONTHS[m-1]} an Nord- und Ostsee findest: {MONTH_EVENTS[m][0]}", body, active="strandjahr",
+        write(f"strandjahr/{MSLUG[m-1]}/index.html", page(f"strandjahr/{MSLUG[m-1]}/index.html", f"Am Strand im {MONTHS[m-1]}", f"Was du im {MONTHS[m-1]} an Nord- und Ostsee findest: {MONTH_EVENTS[m][0][1]}", body, active="strandjahr",
               crumbs=[("Strandjahr", "strandjahr/index.html"), (MONTHS[m-1], "")]))
+
+SEA_LBL = {"nord": "Nordsee", "ost": "Ostsee", "beide": "Nord- und Ostsee"}
+
+def ev_li(e, tag=False):
+    sea, t = e
+    lab = f'<span class="evsea evsea-{sea}">{SEA_LBL[sea]}</span> ' if tag else ""
+    return f'<li data-sea-only="{sea}">{lab}{esc(t)}</li>'
 
 def month_gear(R, m):
     picks = ("uvlampe", "sammelbox", "fernglas", "buch") if m in (10, 11, 12, 1, 2, 3) else ("becherlupe", "kescher", "wattschuhe", "strandmuschel")
     return (f'<section class="gearband" aria-labelledby="h-gear"><div class="wrap"><div class="head-row"><h2 id="h-gear">Passend zum {MONTHS[m-1]}</h2><a class="gearmore" href="{R}ausruestung/index.html">Alle Empfehlungen ansehen</a></div>'
             f'<ul class="products">{"".join(product(R, g) for g in picks)}</ul>{ADNOTE}</div></section>')
+
+SEA_INFO = {
+ "nord": dict(slug="nordsee", name="Nordsee", h1="Strandfunde und Seevögel an der Nordsee",
+   lede="Die Nordsee ist ein offenes, salziges Gezeitenmeer. Zweimal am Tag fällt das Wattenmeer trocken, und Millionen Zugvögel finden hier Nahrung.",
+   facts=[("Gezeiten", "Ebbe und Flut zweimal täglich, an der deutschen Küste etwa 2 bis 4 Meter Unterschied"),
+          ("Salzgehalt", "etwa 3 bis 3,5 Prozent, im Wattenmeer etwas weniger"),
+          ("Küste", "Wattenmeer, Inseln, Halligen, breite Sandstrände und Deiche"),
+          ("Schutzgebiet", "Nationalparks Wattenmeer, seit 2009 UNESCO-Weltnaturerbe")],
+   places=[("Helgoland", "Basstölpel und Trottellummen am Lummenfelsen, Kegelrobben auf der Düne."),
+           ("Sylt und Amrum", "Breite Sandstrände mit Sanderlingen, nach Sturm Bernstein und Schwertmuscheln."),
+           ("Halligen", "Ringelgänse im Frühjahr, Austernfischer und Seeschwalben im Sommer."),
+           ("St. Peter-Ording", "Kilometerweiter Strand, Salzwiesen und Watt mit vielen Watvögeln."),
+           ("Ostfriesische Inseln", "Möwenkolonien, Watt und Seehundbänke zwischen den Inseln."),
+           ("Cuxhaven und Elbmündung", "Watt, Wattwanderungen und im Sommer Tausende Brandgänse.")],
+   why=[("Das Wattenmeer", "Bei Ebbe liegt der Meeresboden frei. In einem Quadratmeter Watt leben Tausende Würmer, Schnecken und Muscheln. Das macht das Wattenmeer zur wichtigsten Tankstelle für Zugvögel zwischen Arktis und Afrika."),
+        ("Viel Salz, viele Arten", "Weil die Nordsee offen zum Atlantik ist, leben hier mehr Meerestiere als in der Ostsee: Schwertmuscheln, Wellhornschnecken, Seeigel und Rochen."),
+        ("Sicherheit", "Die Flut kommt schnell. Vor einer Wattwanderung die Gezeiten prüfen und längere Strecken nur mit Führung gehen.")]),
+ "ost": dict(slug="ostsee", name="Ostsee", h1="Strandfunde und Seevögel an der Ostsee",
+   lede="Die Ostsee ist ein fast geschlossenes Binnenmeer mit wenig Salz und kaum Gezeiten. Dafür gibt es Steilküsten, Bodden, Förden und die besten Bernsteinstrände.",
+   facts=[("Gezeiten", "kaum spürbar, nur wenige Zentimeter; Wind kann den Wasserstand aber um mehr als einen Meter heben oder senken"),
+          ("Salzgehalt", "rund 1,5 Prozent in der Kieler Bucht, vor Usedom unter 1 Prozent"),
+          ("Küste", "Sand- und Steinstrände, Steilküsten, Kreidefelsen, Bodden und Förden"),
+          ("Schutzgebiete", "Nationalparks Jasmund und Vorpommersche Boddenlandschaft")],
+   places=[("Usedom", "Klassische Bernsteinküste. Achtung: Weißer Phosphor sieht Bernstein ähnlich."),
+           ("Rügen", "Kreidefelsen, Steinstrände mit Feuersteinen und Donnerkeilen, Kegelrobben vor der Küste."),
+           ("Fischland-Darß-Zingst", "Weststrand und Bodden, im Herbst Kraniche und rastende Gänse."),
+           ("Fehmarn", "Seevögel an der Steilküste, im Winter Eiderenten und Meeresenten vor dem Strand."),
+           ("Kieler und Flensburger Förde", "Möwen, Kormorane und Eiderenten in den Häfen."),
+           ("Lübecker Bucht", "Steilküste am Brodtener Ufer, Steinstrände und Ohrenquallen im Sommer.")],
+   why=[("Warum so wenig Salz?", "Viele Flüsse bringen Süßwasser, und mit der Nordsee ist die Ostsee nur über schmale Meerengen verbunden. Salzwasser strömt vor allem bei starken Stürmen ein."),
+        ("Weniger Arten, dafür andere", "Viele Meerestiere vertragen das Brackwasser nicht. Muscheln bleiben kleiner, Seesterne gibt es nur im Westen. Dafür überwintern hier riesige Schwärme von Meeresenten."),
+        ("Bernstein und Steine", "Die Ostsee ist die Bernsteinküste Deutschlands. Nach auflandigem Wind im Herbst und Winter lohnt die Suche im frischen Tang, am besten mit einer Metalldose statt der Hosentasche.")]),
+}
+
+def build_seas():
+    for k in ("nord", "ost"):
+        I = SEA_INFO[k]; R = "../"
+        here = [x for x in SPECIES if k in x["act"]]
+        only = [x for x in here if x["act"] == [k]]
+        both = [x for x in here if len(x["act"]) == 2]
+        other = "ost" if k == "nord" else "nord"
+        not_here = [x for x in SPECIES if x["act"] == [other]]
+        order = lambda ss: sorted(ss, key=lambda x: (GROUPS.index(x["grp"]), x["n"]))
+        facts = "".join(f"<dt>{esc(a)}</dt><dd>{esc(b)}</dd>" for a, b in I["facts"])
+        places = "".join(f'<li><div><b>{esc(a)}</b><span>{esc(b)}</span></div></li>' for a, b in I["places"])
+        why = "".join(f'<h2>{esc(a)}</h2><p>{esc(b)}</p>' for a, b in I["why"])
+        birds = [x for x in order(here) if x["grp"] == "Seevögel"]
+        rest = [x for x in order(here) if x["grp"] != "Seevögel"]
+        sec = lambda hid, t, intro, ss: (f'<section class="block" aria-labelledby="{hid}"><div class="wrap"><h2 id="{hid}">{t}</h2>{intro}'
+                                        f'<ul class="grid">{"".join(card(R, x, i) for i, x in enumerate(ss))}</ul></div></section>') if ss else ""
+        miss = (f'<section class="block"><div class="wrap"><h2>An der {I["name"]} kaum zu finden</h2><p class="intro">Diese Arten und Funde gibt es nur an der {SEA_INFO[other]["name"]}.</p><div class="pills">'
+                + "".join(f'<a href="{R}arten/{x["k"]}/index.html">{esc(x["n"])}</a>' for x in order(not_here)) + '</div></div></section>') if not_here else ""
+        body = f'''<section class="block page seahero seahero-{k}"> <div class="wrap"> <p class="kicker">{ICON["seas"]}Nord- und Ostsee</p> <h1>{esc(I["h1"])}</h1> <p class="intro">{esc(I["lede"])}</p> <dl class="facts seafacts">{facts}</dl> <p class="row"><span class="tag">{len(here)} Arten und Funde</span><span class="tag">{len(birds)} Seevögel</span>{f'<span class="tag status">{len(only)} nur an der {I["name"]}</span>' if only else ""}</p> </div> </section>
+{sec("h-birds", f"Seevögel an der {I['name']}", "", birds)}
+{sec("h-rest", f"Strandfunde und Meerestiere an der {I['name']}", f'<p class="intro">{"Mit Markierung N oder O siehst du, ob es den Fund auch am anderen Meer gibt."}</p>', rest)}
+{miss}
+<section class="block" aria-labelledby="h-places"><div class="wrap"><h2 id="h-places">Gute Orte an der {I["name"]}</h2><ul class="explore tips">{places}</ul></div></section>
+<section class="block"><div class="wrap prose">{why}<p><a href="{R}nordsee-ostsee/index.html">Nordsee und Ostsee im Vergleich</a> · <a href="{R}{SEA_INFO[other]["slug"]}/index.html">Zur {SEA_INFO[other]["name"]}</a></p></div></section>'''
+        write(f'{I["slug"]}/index.html', page(f'{I["slug"]}/index.html', I["h1"], f'{I["lede"]} {len(here)} Seevögel und Strandfunde an der {I["name"]} bestimmen.', body,
+              active="nordsee-ostsee", crumbs=[("Nord- & Ostsee", "nordsee-ostsee/index.html"), (I["name"], "")], seafilter=False))
+    # Vergleichsseite
+    R = "../"
+    N, O = SEA_INFO["nord"], SEA_INFO["ost"]
+    rows = [("Gezeiten", N["facts"][0][1], O["facts"][0][1]), ("Salzgehalt", N["facts"][1][1], O["facts"][1][1]), ("Küste", N["facts"][2][1], O["facts"][2][1]),
+            ("Schutzgebiete", N["facts"][3][1], O["facts"][3][1]),
+            ("Typische Seevögel", "Austernfischer, Säbelschnäbler, Ringelgans, Sanderling; Basstölpel und Trottellumme auf Helgoland", "Eiderenten zu Tausenden im Winter, Kormorane, Möwen und Seeschwalben"),
+            ("Typische Funde", "Schwertmuscheln, Wellhornschnecken, Rochen-Eier, Herzigel", "Bernstein, Hühnergötter, Donnerkeile"),
+            ("Quallen", "Kompassqualle, Feuerqualle, Blaue Nesselqualle, Lungenqualle", "vor allem Ohrenquallen, im Spätsommer Feuerquallen"),
+            ("Robben", "Seehunde im Wattenmeer, Kegelrobben auf Helgoland", "selten, Kegelrobben vor allem vor Rügen")]
+    trs = "".join(f'<tr><th scope="row">{esc(a)}</th><td>{esc(b)}</td><td>{esc(c)}</td></tr>' for a, b, c in rows)
+    body = f'''<section class="block page"> <div class="wrap"> <p class="kicker">{ICON["seas"]}Zwei Meere, zwei Welten</p> <h1>Nordsee und Ostsee im Vergleich</h1> <p class="intro">Beide Meere liegen nur rund 100 Kilometer auseinander und sind doch ganz verschieden: Die Nordsee hat Ebbe und Flut und viel Salz, die Ostsee kaum Gezeiten und Brackwasser. Das bestimmt, welche Vögel, Tiere und Funde du am Strand entdeckst.</p> <div class="cmp-wrap"><table class="cmp seacmp"> <thead><tr><td></td><th scope="col">Nordsee</th><th scope="col">Ostsee</th></tr></thead> <tbody>{trs}</tbody> </table></div> </div> </section>
+{seapair(R)}
+<section class="block"><div class="wrap prose"><h2>Warum hat die Ostsee kaum Ebbe und Flut?</h2><p>Gezeiten entstehen durch die Anziehung von Mond und Sonne. In einem großen, offenen Meer wie dem Atlantik baut sich dabei eine Flutwelle auf, die bis in die Nordsee läuft. Die Ostsee ist dafür zu klein und nur über schmale Meerengen mit der Nordsee verbunden. Ihr Wasserstand ändert sich deshalb vor allem durch Wind: Bei starkem Nordostwind kann es an der deutschen Küste zu Sturmfluten kommen.</p><h2>Was bedeutet das am Strand?</h2><p>An der Nordsee lohnt es sich, nach den Gezeiten zu planen: Bei Niedrigwasser suchen Watvögel im Watt nach Futter, bei Hochwasser sammeln sie sich an Rastplätzen. An der Ostsee kommt es eher auf den Wind an: Nach auflandigem Sturm liegt im Spülsaum am meisten, auch Bernstein.</p><h2>Am Strandkompass umschalten</h2><p>Oben auf der Startseite, in der Liste aller Funde und im Strandjahr kannst du zwischen „Beide Meere“, „Nordsee“ und „Ostsee“ wählen. Dann siehst du nur, was es an deinem Meer gibt. Die Wahl merkt sich dein Browser, bis du sie änderst.</p></div></section>'''
+    write("nordsee-ostsee/index.html", page("nordsee-ostsee/index.html", "Nordsee und Ostsee im Vergleich", "Gezeiten, Salzgehalt, Küste, Seevögel und Strandfunde: Was Nordsee und Ostsee unterscheidet und was du wo findest.", body,
+          active="nordsee-ostsee", crumbs=[("Nord- & Ostsee", "")], seafilter=False))
 
 def build_beach():
     R = "../"
@@ -427,7 +579,7 @@ def build_legal():
     R = "../"
     imp = f'''<section class="block page"> <div class="wrap prose"> <h1>Impressum</h1> <h2>Angaben gemäß § 5 DDG und § 18 Abs. 1 MStV</h2> <p>Nico Schober<br>Herzogin-Cecilie-Allee 10<br>28217 Bremen<br>Deutschland</p> <h2>Kontakt</h2> <p>E-Mail: <a href="mailto:info@nicoschober.com">info@nicoschober.com</a></p> <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2> <p>Nico Schober, Anschrift wie oben.</p> <h2>Art des Angebots</h2> <p>Der Strandkompass ist ein privates Informationsangebot. Er verkauft selbst keine Waren oder Dienstleistungen. Einige Seiten enthalten gekennzeichnete Werbelinks zum Amazon-Partnerprogramm; kaufst du über einen solchen Link ein, erhält der Betreiber eine Provision. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> <h2>Haftung für Inhalte</h2> <p>Die Inhalte wurden mit Sorgfalt erstellt. Für Richtigkeit, Vollständigkeit und Aktualität kann jedoch keine Gewähr übernommen werden. Angaben zu Aktivitätszeiten und Verbreitung sind grobe Richtwerte und können regional abweichen. Die Seite ersetzt keine fachliche oder ärztliche Beratung, etwa nach Quallenkontakt oder bei gestrandeten Tieren. Im Notfall die 112 wählen.</p> <h2>Haftung für Links</h2> <p>Diese Seite enthält Links zu externen Websites, auf deren Inhalte kein Einfluss besteht. Für diese Inhalte ist der jeweilige Anbieter verantwortlich. Zum Zeitpunkt der Verlinkung waren keine Rechtsverstöße erkennbar. Werden Rechtsverletzungen bekannt, wird der betreffende Link umgehend entfernt.</p> <h2>Urheberrecht</h2> <p>Texte und Gestaltung dieser Seite stammen vom Betreiber. Die Fotos stammen von Dritten und stehen unter freien Lizenzen; Urheber und Lizenzen sind aufgeführt unter <a href="../bildnachweis/index.html">Bildnachweis und Lizenzen</a>.</p> </div> </section>'''
     write("impressum/index.html", page("impressum/index.html", "Impressum", "Impressum des Strandkompass.", imp, crumbs=[("Impressum", "")]))
-    ds = f'''<section class="block page"> <div class="wrap prose"> <h1>Datenschutzerklärung</h1> <p class="stand">Stand: November 2026</p> <h2>1. Verantwortlicher</h2> <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist der im <a href="../impressum/index.html">Impressum</a> genannte Betreiber.</p> <h2>2. Das Wichtigste in Kürze</h2> <ul> <li>Es gibt keine Registrierung, keine Cookies, kein Tracking und keine Reichweitenmessung. Werbung gibt es nur in Form gekennzeichneter Links zu Amazon, die erst beim Anklicken eine Verbindung aufbauen.</li> <li>Die Seite speichert nichts in deinem Browser.</li> <li>Schriftarten, Fotos und Zeichnungen werden vom selben Server geladen wie die Seite selbst. Es findet keine Verbindung zu Google Fonts oder anderen Drittanbietern statt.</li> </ul> <h2>3. Hosting und Server-Protokolle</h2> <p>Diese Website wird bei statichost.eu gehostet, einem Dienst von Variable Object Assignment, c/o Knackeriet, Svartmangatan 9, 111 29 Stockholm, Schweden. Die Server stehen nach Angaben des Anbieters in der Europäischen Union; eine Übermittlung in Drittländer findet nicht statt.</p> <p>Beim Aufruf der Seite verarbeitet der Anbieter deine IP-Adresse sowie technisch notwendige Angaben zur Anfrage (abgerufene Datei, Zeitpunkt, Browser), um dir die Seite ausliefern zu können. Nach Angaben des Anbieters wird die IP-Adresse dabei nur für die Dauer der Anfrage im Arbeitsspeicher verarbeitet und nicht protokolliert. Für die Abrechnung werden technische Protokolle ohne personenbezogene Daten (vor allem die übertragene Datenmenge) höchstens sieben Tage aufbewahrt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse liegt in der zuverlässigen und sicheren Bereitstellung der Website. statichost.eu ist Auftragsverarbeiter im Sinne von Art. 28 DSGVO; der Anbieter stellt dafür einen eigenen Vertrag zur Auftragsverarbeitung bereit. Weitere Informationen: <a href="https://www.statichost.eu/privacy/" rel="noopener">Datenschutzerklärung von statichost.eu</a>.</p> <h2>4. Werbelinks zum Amazon-Partnerprogramm</h2> <p>Einige Seiten enthalten mit einem Sternchen gekennzeichnete Links zu Produkten bei Amazon.de. Der Betreiber nimmt am Partnerprogramm von Amazon Europe Core S.à r.l. teil und erhält eine Provision, wenn du über einen solchen Link einkaufst. Auf dieser Website werden dafür keine Skripte, Bilder oder Cookies von Amazon geladen. Erst wenn du einen Werbelink anklickst, wirst du zu Amazon weitergeleitet; Amazon kann dann Cookies setzen, um die Herkunft der Bestellung zuzuordnen. Einzelheiten findest du in der <a href="https://www.amazon.de/gp/help/customer/display.html?nodeId=201909010" target="_blank" rel="noopener">Datenschutzerklärung von Amazon<span class="sr-only"> (öffnet in neuem Fenster)</span></a>.</p> <h2>5. Externe Links</h2> <p>Die Seite verlinkt auf externe Angebote wie Wikipedia, den Vogelkompass oder den Waldtierkompass. Erst wenn du einen solchen Link anklickst, wird eine Verbindung zum jeweiligen Anbieter aufgebaut.</p> <h2>6. Kontakt per E-Mail</h2> <p>Wenn du mir eine E-Mail schreibst, verarbeite ich deine Adresse und den Inhalt der Nachricht, um dir zu antworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Die Nachricht wird gelöscht, sobald dein Anliegen erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p> <h2>7. Deine Rechte</h2> <p>Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Wende dich dafür an die im Impressum genannte Adresse. Außerdem kannst du dich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO). Für den Betreiber zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit der Freien Hansestadt Bremen.</p> </div> </section>'''
+    ds = f'''<section class="block page"> <div class="wrap prose"> <h1>Datenschutzerklärung</h1> <p class="stand">Stand: November 2026</p> <h2>1. Verantwortlicher</h2> <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist der im <a href="../impressum/index.html">Impressum</a> genannte Betreiber.</p> <h2>2. Das Wichtigste in Kürze</h2> <ul> <li>Es gibt keine Registrierung, keine Cookies, kein Tracking und keine Reichweitenmessung. Werbung gibt es nur in Form gekennzeichneter Links zu Amazon, die erst beim Anklicken eine Verbindung aufbauen.</li> <li>Die Seite setzt keine Cookies. Wenn du zwischen Nordsee und Ostsee umschaltest, merkt sich dein Browser diese Wahl im lokalen Speicher (siehe Abschnitt 3a).</li> <li>Schriftarten, Fotos und Zeichnungen werden vom selben Server geladen wie die Seite selbst. Es findet keine Verbindung zu Google Fonts oder anderen Drittanbietern statt.</li> </ul> <h2>3. Hosting und Server-Protokolle</h2> <p>Diese Website wird bei statichost.eu gehostet, einem Dienst von Variable Object Assignment, c/o Knackeriet, Svartmangatan 9, 111 29 Stockholm, Schweden. Die Server stehen nach Angaben des Anbieters in der Europäischen Union; eine Übermittlung in Drittländer findet nicht statt.</p> <p>Beim Aufruf der Seite verarbeitet der Anbieter deine IP-Adresse sowie technisch notwendige Angaben zur Anfrage (abgerufene Datei, Zeitpunkt, Browser), um dir die Seite ausliefern zu können. Nach Angaben des Anbieters wird die IP-Adresse dabei nur für die Dauer der Anfrage im Arbeitsspeicher verarbeitet und nicht protokolliert. Für die Abrechnung werden technische Protokolle ohne personenbezogene Daten (vor allem die übertragene Datenmenge) höchstens sieben Tage aufbewahrt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; das berechtigte Interesse liegt in der zuverlässigen und sicheren Bereitstellung der Website. statichost.eu ist Auftragsverarbeiter im Sinne von Art. 28 DSGVO; der Anbieter stellt dafür einen eigenen Vertrag zur Auftragsverarbeitung bereit. Weitere Informationen: <a href="https://www.statichost.eu/privacy/" rel="noopener">Datenschutzerklärung von statichost.eu</a>.</p> <h2>3a. Gemerkte Auswahl im Browser</h2> <p>Wählst du oben auf der Seite „Nordsee“ oder „Ostsee“, wird diese Auswahl unter dem Namen <code>sk-sea</code> im lokalen Speicher (localStorage) deines Browsers abgelegt, damit du sie nicht auf jeder Seite neu treffen musst. Der Eintrag enthält nur das gewählte Meer, wird nicht an den Server übertragen und bleibt, bis du „Beide Meere“ wählst oder die Website-Daten in deinem Browser löschst. Rechtsgrundlage ist § 25 Abs. 2 Nr. 2 TDDDG, weil die Speicherung für die von dir ausdrücklich gewünschte Funktion erforderlich ist.</p> <h2>4. Werbelinks zum Amazon-Partnerprogramm</h2> <p>Einige Seiten enthalten mit einem Sternchen gekennzeichnete Links zu Produkten bei Amazon.de. Der Betreiber nimmt am Partnerprogramm von Amazon Europe Core S.à r.l. teil und erhält eine Provision, wenn du über einen solchen Link einkaufst. Auf dieser Website werden dafür keine Skripte, Bilder oder Cookies von Amazon geladen. Erst wenn du einen Werbelink anklickst, wirst du zu Amazon weitergeleitet; Amazon kann dann Cookies setzen, um die Herkunft der Bestellung zuzuordnen. Einzelheiten findest du in der <a href="https://www.amazon.de/gp/help/customer/display.html?nodeId=201909010" target="_blank" rel="noopener">Datenschutzerklärung von Amazon<span class="sr-only"> (öffnet in neuem Fenster)</span></a>.</p> <h2>5. Externe Links</h2> <p>Die Seite verlinkt auf externe Angebote wie Wikipedia, den Vogelkompass oder den Waldtierkompass. Erst wenn du einen solchen Link anklickst, wird eine Verbindung zum jeweiligen Anbieter aufgebaut.</p> <h2>6. Kontakt per E-Mail</h2> <p>Wenn du mir eine E-Mail schreibst, verarbeite ich deine Adresse und den Inhalt der Nachricht, um dir zu antworten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Die Nachricht wird gelöscht, sobald dein Anliegen erledigt ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p> <h2>7. Deine Rechte</h2> <p>Du hast das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21). Wende dich dafür an die im Impressum genannte Adresse. Außerdem kannst du dich bei einer Datenschutz-Aufsichtsbehörde beschweren (Art. 77 DSGVO). Für den Betreiber zuständig ist die Landesbeauftragte für Datenschutz und Informationsfreiheit der Freien Hansestadt Bremen.</p> </div> </section>'''
     write("datenschutz/index.html", page("datenschutz/index.html", "Datenschutz", "Datenschutzerklärung des Strandkompass.", ds, crumbs=[("Datenschutz", "")]))
     rows = ""
     for k in sorted(CREDITS, key=lambda x: name_of(x[2:] if x.startswith("x-") else x)):
@@ -492,7 +644,7 @@ if __name__ == "__main__":
     build_assets(); build_home(); build_arten_index()
     for s in SPECIES:
         build_species(s)
-    build_pairs(); build_year(); build_beach(); build_gear(); build_legal()
+    build_pairs(); build_year(); build_seas(); build_beach(); build_gear(); build_legal()
     finalize()
     n = sum(len(fs) for _, _, fs in os.walk(OUT))
     print("Dateien:", n)

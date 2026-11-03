@@ -7,22 +7,35 @@
   <url><loc>https://strandkompass.de/bildnachweis/</loc></url>
   <url><loc>https://strandkompass.de/datenschutz/</loc></url>
   <url><loc>https://strandkompass.de/impressum/</loc></url>
+  <url><loc>https://strandkompass.de/nordsee-ostsee/</loc></url>
+  <url><loc>https://strandkompass.de/nordsee/</loc></url>
+  <url><loc>https://strandkompass.de/ostsee/</loc></url>
   <url><loc>https://strandkompass.de/strandjahr/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/</loc></url>
+  <url><loc>https://strandkompass.de/arten/alpenstrandlaeufer/</loc></url>
   <url><loc>https://strandkompass.de/arten/auster/</loc></url>
+  <url><loc>https://strandkompass.de/arten/austernfischer/</loc></url>
+  <url><loc>https://strandkompass.de/arten/basstoelpel/</loc></url>
   <url><loc>https://strandkompass.de/arten/bernstein/</loc></url>
   <url><loc>https://strandkompass.de/arten/blasentang/</loc></url>
   <url><loc>https://strandkompass.de/arten/blaue-nesselqualle/</loc></url>
+  <url><loc>https://strandkompass.de/arten/brandgans/</loc></url>
   <url><loc>https://strandkompass.de/arten/donnerkeil/</loc></url>
+  <url><loc>https://strandkompass.de/arten/eiderente/</loc></url>
   <url><loc>https://strandkompass.de/arten/einsiedlerkrebs/</loc></url>
   <url><loc>https://strandkompass.de/arten/feuerqualle/</loc></url>
+  <url><loc>https://strandkompass.de/arten/flussseeschwalbe/</loc></url>
+  <url><loc>https://strandkompass.de/arten/heringsmoewe/</loc></url>
   <url><loc>https://strandkompass.de/arten/herzigel/</loc></url>
   <url><loc>https://strandkompass.de/arten/herzmuschel/</loc></url>
   <url><loc>https://strandkompass.de/arten/huehnergott/</loc></url>
   <url><loc>https://strandkompass.de/arten/katzenhai-ei/</loc></url>
   <url><loc>https://strandkompass.de/arten/kegelrobbe/</loc></url>
   <url><loc>https://strandkompass.de/arten/kompassqualle/</loc></url>
+  <url><loc>https://strandkompass.de/arten/kormoran/</loc></url>
+  <url><loc>https://strandkompass.de/arten/lachmoewe/</loc></url>
   <url><loc>https://strandkompass.de/arten/lungenqualle/</loc></url>
+  <url><loc>https://strandkompass.de/arten/mantelmoewe/</loc></url>
   <url><loc>https://strandkompass.de/arten/meersalat/</loc></url>
   <url><loc>https://strandkompass.de/arten/miesmuschel/</loc></url>
   <url><loc>https://strandkompass.de/arten/nixentaeschchen/</loc></url>
@@ -30,6 +43,9 @@
   <url><loc>https://strandkompass.de/arten/ohrenqualle/</loc></url>
   <url><loc>https://strandkompass.de/arten/pantoffelschnecke/</loc></url>
   <url><loc>https://strandkompass.de/arten/plattmuschel/</loc></url>
+  <url><loc>https://strandkompass.de/arten/ringelgans/</loc></url>
+  <url><loc>https://strandkompass.de/arten/saebelschnaebler/</loc></url>
+  <url><loc>https://strandkompass.de/arten/sanderling/</loc></url>
   <url><loc>https://strandkompass.de/arten/sandklaffmuschel/</loc></url>
   <url><loc>https://strandkompass.de/arten/schweinswal/</loc></url>
   <url><loc>https://strandkompass.de/arten/schwertmuschel/</loc></url>
@@ -39,8 +55,11 @@
   <url><loc>https://strandkompass.de/arten/seestachelbeere/</loc></url>
   <url><loc>https://strandkompass.de/arten/seestern/</loc></url>
   <url><loc>https://strandkompass.de/arten/sepiaschale/</loc></url>
+  <url><loc>https://strandkompass.de/arten/silbermoewe/</loc></url>
   <url><loc>https://strandkompass.de/arten/strandkrabbe/</loc></url>
   <url><loc>https://strandkompass.de/arten/strandschnecke/</loc></url>
+  <url><loc>https://strandkompass.de/arten/sturmmoewe/</loc></url>
+  <url><loc>https://strandkompass.de/arten/trottellumme/</loc></url>
   <url><loc>https://strandkompass.de/arten/wattwurm/</loc></url>
   <url><loc>https://strandkompass.de/arten/wellhornschnecke/</loc></url>
   <url><loc>https://strandkompass.de/strandjahr/april/</loc></url>
@@ -57,11 +76,17 @@
   <url><loc>https://strandkompass.de/strandjahr/september/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/blasentang-oder-saegetang/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/feuerqualle-oder-blaue-nesselqualle/</loc></url>
+  <url><loc>https://strandkompass.de/unterscheiden/flussseeschwalbe-oder-kuestenseeschwalbe/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/herzmuschel-oder-plattmuschel/</loc></url>
+  <url><loc>https://strandkompass.de/unterscheiden/lachmoewe-oder-sturmmoewe/</loc></url>
+  <url><loc>https://strandkompass.de/unterscheiden/mantelmoewe-oder-heringsmoewe/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/nixentaeschchen-oder-katzenhai-ei/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/ohrenqualle-oder-kompassqualle/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/pantoffelschnecke-oder-napfschnecke/</loc></url>
+  <url><loc>https://strandkompass.de/unterscheiden/sanderling-oder-alpenstrandlaeufer/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/seehund-oder-kegelrobbe/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/seestachelbeere-oder-ohrenqualle/</loc></url>
+  <url><loc>https://strandkompass.de/unterscheiden/silbermoewe-oder-heringsmoewe/</loc></url>
   <url><loc>https://strandkompass.de/unterscheiden/strandkrabbe-oder-schwimmkrabbe/</loc></url>
+  <url><loc>https://strandkompass.de/unterscheiden/trottellumme-oder-tordalk/</loc></url>
 </urlset>

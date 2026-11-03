@@ -142,7 +142,7 @@ figcaption small a,.sp-photo figcaption a{position:relative;z-index:3;color:inhe
 @media(prefers-reduced-motion:reduce){.nowcards{scroll-behavior:auto}}
 
 .sp-intro .text{margin:18px 0 0}
-@media(max-width:960px){.tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:960px){.tabs{grid-template-columns:repeat(5,minmax(0,1fr))}}
 .pcred2 a{position:relative;z-index:3}
 .pair figcaption{z-index:2}
 .pair .pair-link:after{z-index:1}
@@ -158,3 +158,100 @@ figcaption small a,.sp-photo figcaption a{position:relative;z-index:3;color:inhe
 .explore.tips span a{color:var(--rust)}
 .act svg text,.act-tag svg text{font-family:var(--body)}
 .hero5 h1{font-weight:400;letter-spacing:-.015em}
+
+/* ===== Nordsee und Ostsee ===== */
+:root{--nord:#2c6a80;--nord-soft:#e1edf0;--ost:#a5671a;--ost-soft:#f6ead6}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--nord:#7fc0d4;--nord-soft:#1d3138;--ost:#e3a65a;--ost-soft:#3a2c19}}
+:root[data-theme=dark]{--nord:#7fc0d4;--nord-soft:#1d3138;--ost:#e3a65a;--ost-soft:#3a2c19}
+
+/* Umschalter */
+.seasw{display:inline-flex;gap:3px;padding:3px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.seabtn{min-height:36px;padding:0 15px;border:0;border-radius:999px;background:transparent;color:var(--muted);font:600 .9rem var(--body);cursor:pointer;transition:background .2s ease,color .2s ease}
+.seabtn:hover{color:var(--fg)}
+.seabtn[aria-pressed=true]{background:var(--forest);color:var(--forest-ink)}
+.seabtn[data-sea-set=nord][aria-pressed=true]{background:var(--nord);color:#fff}
+.seabtn[data-sea-set=ost][aria-pressed=true]{background:var(--ost);color:#fff}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .seabtn[data-sea-set][aria-pressed=true]:not([data-sea-set=""]){color:#111}}
+.seasw.onDark{background:color-mix(in srgb,var(--forest-ink) 10%,var(--forest));border-color:color-mix(in srgb,var(--forest-ink) 28%,var(--forest))}
+.seasw.onDark .seabtn{color:color-mix(in srgb,var(--forest-ink) 78%,var(--forest))}
+.seasw.onDark .seabtn:hover{color:var(--forest-ink)}
+.seasw.onDark .seabtn[data-sea-set=""][aria-pressed=true]{background:var(--forest-ink);color:var(--forest)}
+.seasw .seabtn:focus-visible{outline-offset:1px}
+.h5-sea{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:18px 0 4px}
+.h5-sea-l{font:600 .92rem var(--body);color:color-mix(in srgb,var(--forest-ink) 75%,var(--forest))}
+.seabar{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--surface) 55%,var(--bg))}
+.seabar-in{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;padding-block:10px}
+.seabar-l{font:600 .9rem var(--body);color:var(--muted)}
+.seabar-more{font-size:.9rem;color:var(--muted);margin-left:auto}
+@media(max-width:600px){.seabar-l{display:none}.seabar-more{margin-left:0}.seabtn{padding:0 12px}}
+
+/* Filtern nach Meer (Listen, Kalender, Ereignisse) */
+/* purgecss start ignore */
+html[data-sea=nord] .seafilter [data-act]:not([data-act*=nord]),
+html[data-sea=ost] .seafilter [data-act]:not([data-act*=ost]),
+html[data-sea=nord] [data-sea-only=ost],
+html[data-sea=ost] [data-sea-only=nord]{display:none!important}
+/* purgecss end ignore */
+
+/* Meer-Kennzeichen */
+.act-tag.act-nord{background:var(--nord-soft);color:var(--nord)}
+.act-tag.act-ost{background:var(--ost-soft);color:var(--ost)}
+.act-tag.act-none{background:transparent;border:1px dashed var(--line);color:var(--muted)}
+.act:has(use[href="#i-nord"]){background:color-mix(in srgb,var(--nord) 82%,#000)}
+.act:has(use[href="#i-ost"]){background:color-mix(in srgb,var(--ost) 82%,#000)}
+.evsea{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;font:700 .72rem var(--body);letter-spacing:.02em;vertical-align:2px;background:var(--line);color:var(--fg)}
+.evsea-nord{background:var(--nord-soft);color:var(--nord)}
+.evsea-ost{background:var(--ost-soft);color:var(--ost)}
+.yearline li span+span{padding-top:6px;border-top:1px dashed var(--line)}
+
+/* Kasten auf der Fundseite */
+.seabox{margin-top:28px}
+.seacols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin-top:12px}
+.seacol{padding:14px 16px 16px;border-radius:10px;background:var(--surface);box-shadow:var(--shadow);border-top:4px solid var(--nord)}
+.seacol-ost{border-top-color:var(--ost)}
+.seacol h3{font-size:1.15rem;color:var(--heading)}
+.seacol p{margin:6px 0 0;font-size:.95rem;color:var(--muted)}
+.seacol .seayes{font:700 .8rem var(--body);color:var(--nord);margin-top:2px}
+.seacol-ost .seayes{color:var(--ost)}
+.seacol.no{border-top-color:var(--line);background:transparent;box-shadow:none;border:1px dashed var(--line);border-top-width:4px}
+.seacol.no .seayes{color:var(--muted)}
+
+/* Seevögel-Band auf der Startseite */
+.kicker{display:inline-flex;align-items:center;gap:7px;margin:0 0 6px;font:700 .8rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--rust)}
+.kicker svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.birdband{padding-block:44px 30px;background:var(--bg)}
+.bb-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px 24px;margin-bottom:18px}
+.bb-head h2{font-size:clamp(1.6rem,3.2vw,2.2rem);color:var(--heading)}
+.bb-sub{margin:8px 0 0;color:var(--muted);max-width:40em}
+.bb-links{display:flex;flex-wrap:wrap;gap:8px}
+.birdtiles{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media(min-width:1000px){.birdtiles{gap:18px 16px}}
+.birdtiles li{position:relative;display:flex;flex-direction:column}
+.birdtiles li>a{flex:1;display:flex;flex-direction:column;text-decoration:none;border-radius:10px;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);transition:transform .25s var(--ease)}
+.birdtiles li>a:hover{transform:translateY(-3px)}
+.birdtiles img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:color-mix(in srgb,var(--moss) 12%,var(--surface))}
+.bt-n{padding:10px 13px 0;font:400 1.2rem/1.2 var(--display);color:var(--heading);hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
+.bt-s{padding:2px 13px 12px;font-size:.8rem;color:var(--muted)}
+.birdtiles .cred{margin-top:5px;font-size:.64rem;line-height:1.35}
+@media(max-width:600px){.birdtiles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:-16px;padding-right:16px}.birdtiles::-webkit-scrollbar{display:none}.birdtiles li{flex:0 0 42%;scroll-snap-align:start}}
+
+/* Zwei Meere */
+.seacards{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.seacard>a{display:flex;flex-direction:column;gap:8px;height:100%;padding:20px 22px 22px;border-radius:12px;text-decoration:none;background:var(--nord-soft);border-top:5px solid var(--nord);transition:transform .25s var(--ease)}
+.seacard-ost>a{background:var(--ost-soft);border-top-color:var(--ost)}
+.seacard>a:hover{transform:translateY(-3px)}
+.seacard b{font:400 1.7rem var(--display);color:var(--nord)}
+.seacard-ost b{color:var(--ost)}
+.seacard span{color:var(--fg)}
+.seacard ul{margin:2px 0 0;padding-left:18px;color:var(--fg);font-size:.95rem}
+.seacard .sc-n{margin-top:auto;padding-top:6px;font:700 .85rem var(--body);color:var(--muted)}
+.seahero-nord{border-top:6px solid var(--nord)}
+.seahero-ost{border-top:6px solid var(--ost)}
+.seafacts{margin-top:18px;max-width:52em}
+.seacmp th[scope=col]:nth-child(2){color:var(--nord)}
+.seacmp th[scope=col]:nth-child(3){color:var(--ost)}
+
+/* Fundseite: Bildangabe unter dem Foto statt darauf */
+.sp-photo{overflow:visible;box-shadow:none;border-radius:0}
+.sp-photo img{border-radius:10px;box-shadow:var(--shadow)}
+.sp-photo figcaption{position:static;padding:8px 2px 0;font-size:.75rem;line-height:1.45;color:var(--muted);background:none}

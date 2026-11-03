@@ -1,5 +1,5 @@
 // Startseite: Suche, Filter und Sortierung
-import "./app.js";
+import { getSea } from "./app.js";
 import { $, $$, nums, norm, escapeHtml, NOW, reduced, setPressed, focusEl } from "./util.js";
 
 const grid = $("grid");
@@ -17,6 +17,7 @@ const animals = $$("#grid > li.bird").map((li) => ({
   mid: Number(li.dataset.mid),
   present: nums(li.dataset.present),
   peak: nums(li.dataset.peak),
+  bird: li.dataset.grp === "Seevögel",
 }));
 const TOTAL = animals.length;
 const SETS = ["grp", "act", "hab", "size"];
@@ -40,7 +41,8 @@ const state = {
       && (!this.act.size || a.act.some((x) => this.act.has(x)))
       && (!this.hab.size || a.hab.some((x) => this.hab.has(x)))
       && (!this.size.size || this.size.has(a.size))
-      && (!this.now || a.present.includes(NOW));
+      && (!this.now || a.present.includes(NOW))
+      && (!getSea() || a.act.includes(getSea()));
   },
 };
 
@@ -52,7 +54,7 @@ function render() {
   const list = animals.filter((a) => state.matches(a));
   if (state.sort === "az") list.sort(byName);
   else if (state.sort === "size") list.sort((a, b) => a.mid - b.mid || byName(a, b));
-  else list.sort((a, b) => nowRank(a) - nowRank(b) || byName(a, b));
+  else list.sort((a, b) => nowRank(a) - nowRank(b) || (b.bird - a.bird) || byName(a, b));
   const order = list.map((a) => a.key).join();
   grid.classList.toggle("calm", order === lastOrder);
   if (order !== lastOrder) {
@@ -71,7 +73,10 @@ function render() {
   const fc = $("fcount");
   fc.hidden = !n;
   fc.innerHTML = `${n}<span class="sr-only"> aktiv</span>`;
-  $("rcount").textContent = list.length === TOTAL ? `${TOTAL} Funde` : `${list.length} von ${TOTAL} Funden`;
+  const sea = getSea();
+  const base = sea ? animals.filter((a) => a.act.includes(sea)).length : TOTAL;
+  const where = sea === "nord" ? " an der Nordsee" : sea === "ost" ? " an der Ostsee" : "";
+  $("rcount").textContent = list.length === base ? `${base} Funde${where}` : `${list.length} von ${base} Funden${where}`;
 
   $$(".fchips .chip").forEach((c) => {
     const g = c.dataset.g, v = c.dataset.v;
@@ -122,10 +127,18 @@ $("active").addEventListener("click", (e) => {
 render();
 grid.classList.add("calm");
 
-// Karussell "Jetzt unterwegs": Arten in Hauptzeit zuerst, dann alle übrigen aktiven Arten
-{
-  const list = $("nowcards");
-  const items = $$("#nowcards > li");
+// Karussell "Jetzt zu finden": Arten in Hauptzeit zuerst (Seevögel vorn), dann alle übrigen aktiven Arten
+const list = $("nowcards");
+const allNow = $$("#nowcards > li");
+function sync() {
+  const max = list.scrollWidth - list.clientWidth - 2;
+  prev.disabled = list.scrollLeft <= 2;
+  next.disabled = list.scrollLeft >= max;
+}
+function setupNow() {
+  const sea = getSea();
+  const items = allNow.filter((li) => !sea || li.dataset.act.split("|").includes(sea));
+  allNow.forEach((li) => { li.hidden = true; });
   const peak = items.filter((li) => nums(li.dataset.peak).includes(NOW));
   const rest = items.filter((li) => !peak.includes(li) && nums(li.dataset.present).includes(NOW));
   items.forEach((li) => { li.hidden = true; li.classList.toggle("pk", peak.includes(li)); });
@@ -142,14 +155,13 @@ grid.classList.add("calm");
     $("spot-cred").innerHTML = top.querySelector(".cred")?.innerHTML || "";
   }
   if (top) top.hidden = true; // steht schon groß im Kopfbereich
-  $$(".h5-events").forEach((ul) => { ul.hidden = Number(ul.dataset.m) !== NOW; });
-  const prev = $("now-prev"), next = $("now-next");
+  list.scrollLeft = 0;
+  sync();
+}
+$$(".h5-events").forEach((ul) => { ul.hidden = Number(ul.dataset.m) !== NOW; });
+const prev = $("now-prev"), next = $("now-next");
+{
   const step = () => { const li = list.querySelector("li:not([hidden])"); return li ? li.offsetWidth + 12 : list.clientWidth; };
-  const sync = () => {
-    const max = list.scrollWidth - list.clientWidth - 2;
-    prev.disabled = list.scrollLeft <= 2;
-    next.disabled = list.scrollLeft >= max;
-  };
   const go = (dir) => {
     const per = Math.max(1, Math.round(list.clientWidth / step()));
     list.scrollBy({ left: dir * per * step(), behavior: reduced() ? "auto" : "smooth" });
@@ -158,11 +170,12 @@ grid.classList.add("calm");
   next?.addEventListener("click", () => go(1));
   list.addEventListener("scroll", sync, { passive: true });
   addEventListener("resize", sync);
-  sync();
 }
+setupNow();
+document.addEventListener("seachange", () => { setupNow(); render(); });
 
-// Tiergruppen im Kopfbereich setzen den Gruppenfilter
-$$(".hchip").forEach((b) => b.addEventListener("click", () => {
+// Tiergruppen im Kopfbereich und im Seevögel-Band setzen den Gruppenfilter
+$$("[data-hgrp]").forEach((b) => b.addEventListener("click", () => {
   state.grp.clear(); state.grp.add(b.dataset.hgrp); render();
   $("arten").scrollIntoView({ behavior: reduced() ? "auto" : "smooth" });
 }));
