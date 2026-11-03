@@ -45,6 +45,12 @@ body:before{background:var(--hdr-bg)}
 .h6-kicker span[aria-hidden]{color:var(--rust)}
 .buoy{width:26px;height:26px;flex:none}
 .hero6 h1{font-weight:600;font-size:clamp(2.2rem,4.3vw,3.5rem);line-height:1.02;letter-spacing:-.025em;color:var(--deep)}
+.h6-title{display:flex;flex-direction:column;gap:.06em}
+.ht-row{display:flex;align-items:center;gap:.3em}
+.ht-ico{display:grid;place-items:center;flex:none;width:.82em;height:.82em;border-radius:50%;transform:translateY(.05em)}
+.ht-ico svg{width:62%;height:62%;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}
+.ht-bird{background:color-mix(in srgb,var(--priel) 20%,var(--surface));color:var(--priel)}
+.ht-shell{background:color-mix(in srgb,var(--rust) 15%,var(--surface));color:var(--rust)}
 .hero6 .lede{margin:12px 0 0;max-width:31em;font-size:1.08rem;line-height:1.55;color:var(--muted)}
 .hero6 .seabtn-all[aria-pressed=true]{background:var(--deep);color:var(--hdr-bg)}
 .h6-sea{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:14px}

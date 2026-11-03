@@ -54,3 +54,8 @@ def _ripples():
     return ('<svg class="h6-ripples" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" focusable="false">' + "".join(paths) + '</svg>')
 
 RIPPLES = _ripples()
+
+# Zeichen vor den beiden Zeilen der Startseiten-Überschrift
+SHELL = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5 4.2 9.8C6 6.3 8.8 4.5 12 4.5s6 1.8 7.8 5.3z"/>'
+         '<path d="M12 19.5 8.6 6.2M12 19.5 12 4.5M12 19.5l3.4-13.3M12 19.5 5.8 8.2M12 19.5l6.2-11.3"/>'
+         '<path d="M10.2 19.5h3.6"/></svg>')
