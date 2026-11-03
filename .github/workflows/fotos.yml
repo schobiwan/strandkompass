@@ -1,0 +1,19 @@
+name: Fotos laden
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/fetch_photos.py
+      - name: Ergebnis in Branch fotos-eingang speichern
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git checkout -B fotos-eingang
+          git add -f photos_src/incoming
+          git commit -m "Fotos von Wikimedia Commons geladen" || echo nichts
+          git push -f origin fotos-eingang

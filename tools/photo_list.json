@@ -1,0 +1,20 @@
+{
+ "silbermoewe": ["Silbermöwe", "European herring gull"],
+ "heringsmoewe": ["Heringsmöwe", "Lesser black-backed gull"],
+ "mantelmoewe": ["Mantelmöwe", "Great black-backed gull"],
+ "sturmmoewe": ["Sturmmöwe", "Common gull"],
+ "lachmoewe": ["Lachmöwe", "Black-headed gull"],
+ "austernfischer": ["Austernfischer", "Eurasian oystercatcher"],
+ "saebelschnaebler": ["Säbelschnäbler", "Pied avocet"],
+ "eiderente": ["Eiderente", "Common eider"],
+ "brandgans": ["Brandgans", "Common shelduck"],
+ "kormoran": ["Kormoran", "Great cormorant"],
+ "basstoelpel": ["Basstölpel", "Northern gannet"],
+ "trottellumme": ["Trottellumme", "Common murre"],
+ "flussseeschwalbe": ["Flussseeschwalbe", "Common tern"],
+ "sanderling": ["Sanderling", "Sanderling"],
+ "alpenstrandlaeufer": ["Alpenstrandläufer", "Dunlin"],
+ "ringelgans": ["Ringelgans", "Brant (goose)"],
+ "x-kuestenseeschwalbe": ["Küstenseeschwalbe", "Arctic tern"],
+ "x-tordalk": ["Tordalk", "Razorbill"]
+}
