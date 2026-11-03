@@ -28,7 +28,7 @@ for d, _, files in os.walk(DIST):
         for srcset in re.findall(r'srcset="([^"]+)"', page):
             refs += [part.strip().split(" ")[0] for part in srcset.split(",")]
         for ref in refs:
-            if ref.startswith(("http:", "https:", "mailto:")):
+            if ref.startswith(("http:", "https:", "mailto:", "tel:")):
                 continue
             if not os.path.exists(os.path.normpath(os.path.join(d, ref))):
                 problems.append(f"Kaputter Verweis in {os.path.relpath(path, DIST)}: {ref}")

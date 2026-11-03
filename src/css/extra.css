@@ -273,11 +273,13 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .steps{list-style:none;counter-reset:s;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
 .steps li{counter-increment:s;padding:16px 18px 18px;background:var(--surface);border-radius:8px;box-shadow:var(--shadow);font-size:.95rem;color:var(--muted)}
 .steps li:before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--forest);color:var(--forest-ink);font:700 .95rem var(--body);margin-bottom:10px}
+.steps a{color:var(--rust-text);text-underline-offset:2px}
 .steps b{display:block;font-family:var(--display);font-size:1.15rem;color:var(--heading);margin-bottom:4px}
+.explore.tips{margin-top:14px}
 .explore.tips li>div{display:flex;flex-direction:column;gap:6px;height:100%;padding:18px 20px;background:var(--surface);border-radius:8px;box-shadow:var(--shadow);border-top:3px solid var(--moss)}
 .explore.tips b{font-family:var(--display);font-size:1.2rem;color:var(--heading)}
 .explore.tips span{color:var(--muted);font-size:.94rem}
-.explore.tips span a{color:var(--rust)}
+.explore.tips span a,.explore.tips span a:hover{display:inline;height:auto;padding:0;background:none;box-shadow:none;border:0;border-radius:0;transform:none;transition:none;color:var(--rust-text);text-decoration:underline;text-underline-offset:2px}
 .sub-h{margin:28px 0 10px;color:var(--heading)}
 .burn{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}
 .burn-g{background:#5f9a6b}.burn-y{background:#d9b54a}.burn-o{background:#e07b3c}.burn-r{background:#c0392b}
