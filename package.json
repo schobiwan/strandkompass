@@ -3,7 +3,8 @@
   "private": true,
   "description": "Strandkompass – statische Website zum Bestimmen von Strandfunden",
   "scripts": {
-    "build": "python3 build.py"
+    "build": "python3 build.py",
+    "check": "python3 tools/check.py"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",

@@ -11,7 +11,7 @@ STORM = [10, 11, 12, 1, 2, 3]
 
 def S(k, n, g, lat, grp, act, hab, size, sz, mid, p, h, hl, short, marks, facts, life, help, tip, alike=None):
     return dict(k=k, n=n, g=g, lat=lat, grp=grp, act=act, hab=hab, size=size, sz=sz, mid=mid, p=p, h=h, hl=hl, short=short,
-                marks=marks, facts=facts, life=life, help=help, tip=tip, alike=alike, art="none")
+                marks=marks, facts=facts, life=life, help=help, tip=tip, alike=alike)
 
 SPECIES = [
 # ---------------------------------------------------------------- Seevögel
@@ -576,11 +576,11 @@ S("schweinswal", "Schweinswal", "m", "Phocoena phocoena", "Meeressäuger", ["nor
 ]
 
 EXT = {
- "schwimmkrabbe": {"n": "Gemeine Schwimmkrabbe", "lat": "Liocarcinus holsatus", "art": "none", "g": "f"},
- "napfschnecke": {"n": "Gemeine Napfschnecke", "lat": "Patella vulgata", "art": "none", "g": "f"},
- "saegetang": {"n": "Sägetang", "lat": "Fucus serratus", "art": "none", "g": "m"},
- "kuestenseeschwalbe": {"n": "Küstenseeschwalbe", "lat": "Sterna paradisaea", "art": "none", "g": "f"},
- "tordalk": {"n": "Tordalk", "lat": "Alca torda", "art": "none", "g": "m"},
+ "schwimmkrabbe": {"n": "Gemeine Schwimmkrabbe", "lat": "Liocarcinus holsatus", "g": "f"},
+ "napfschnecke": {"n": "Gemeine Napfschnecke", "lat": "Patella vulgata", "g": "f"},
+ "saegetang": {"n": "Sägetang", "lat": "Fucus serratus", "g": "m"},
+ "kuestenseeschwalbe": {"n": "Küstenseeschwalbe", "lat": "Sterna paradisaea", "g": "f"},
+ "tordalk": {"n": "Tordalk", "lat": "Alca torda", "g": "m"},
 }
 
 PAIRS = [
@@ -705,4 +705,38 @@ SEA_NOTE = {
  "seestern": {"nord": "Nach Stürmen manchmal zu Tausenden angespült.", "ost": "In der westlichen Ostsee verbreitet, weiter östlich zu wenig Salz."},
  "huehnergott": {"nord": "Feuersteine liegen auch an manchen Nordseestränden, aber seltener.", "ost": "An den Steinstränden der Ostsee, etwa auf Rügen, häufig zu finden."},
  "donnerkeil": {"nord": "Gelegentlich, etwa auf Sylt.", "ost": "Häufiger an Steinstränden und Steilküsten, besonders auf Rügen."},
+}
+
+# Steckbriefe der beiden Meere für die Seiten Nordsee, Ostsee und den Vergleich
+SEA_INFO = {
+ "nord": dict(slug="nordsee", name="Nordsee", h1="Strandfunde und Seevögel an der Nordsee",
+   lede="Die Nordsee ist ein offenes, salziges Gezeitenmeer. Zweimal am Tag fällt das Wattenmeer trocken, und Millionen Zugvögel finden hier Nahrung.",
+   facts=[("Gezeiten", "Ebbe und Flut zweimal täglich, an der deutschen Küste etwa 2 bis 4 Meter Unterschied"),
+          ("Salzgehalt", "etwa 3 bis 3,5 Prozent, im Wattenmeer etwas weniger"),
+          ("Küste", "Wattenmeer, Inseln, Halligen, breite Sandstrände und Deiche"),
+          ("Schutzgebiet", "Nationalparks Wattenmeer, seit 2009 UNESCO-Weltnaturerbe")],
+   places=[("Helgoland", "Basstölpel und Trottellummen am Lummenfelsen, Kegelrobben auf der Düne."),
+           ("Sylt und Amrum", "Breite Sandstrände mit Sanderlingen, nach Sturm Bernstein und Schwertmuscheln."),
+           ("Halligen", "Ringelgänse im Frühjahr, Austernfischer und Seeschwalben im Sommer."),
+           ("St. Peter-Ording", "Kilometerweiter Strand, Salzwiesen und Watt mit vielen Watvögeln."),
+           ("Ostfriesische Inseln", "Möwenkolonien, Watt und Seehundbänke zwischen den Inseln."),
+           ("Cuxhaven und Elbmündung", "Watt, Wattwanderungen und im Sommer Tausende Brandgänse.")],
+   why=[("Das Wattenmeer", "Bei Ebbe liegt der Meeresboden frei. In einem Quadratmeter Watt leben Tausende Würmer, Schnecken und Muscheln. Das macht das Wattenmeer zur wichtigsten Tankstelle für Zugvögel zwischen Arktis und Afrika."),
+        ("Viel Salz, viele Arten", "Weil die Nordsee offen zum Atlantik ist, leben hier mehr Meerestiere als in der Ostsee: Schwertmuscheln, Wellhornschnecken, Seeigel und Rochen."),
+        ("Sicherheit", "Die Flut kommt schnell. Vor einer Wattwanderung die Gezeiten prüfen und längere Strecken nur mit Führung gehen.")]),
+ "ost": dict(slug="ostsee", name="Ostsee", h1="Strandfunde und Seevögel an der Ostsee",
+   lede="Die Ostsee ist ein fast geschlossenes Binnenmeer mit wenig Salz und kaum Gezeiten. Dafür gibt es Steilküsten, Bodden, Förden und die besten Bernsteinstrände.",
+   facts=[("Gezeiten", "kaum spürbar, nur wenige Zentimeter; Wind kann den Wasserstand aber um mehr als einen Meter heben oder senken"),
+          ("Salzgehalt", "rund 1,5 Prozent in der Kieler Bucht, vor Usedom unter 1 Prozent"),
+          ("Küste", "Sand- und Steinstrände, Steilküsten, Kreidefelsen, Bodden und Förden"),
+          ("Schutzgebiete", "Nationalparks Jasmund und Vorpommersche Boddenlandschaft")],
+   places=[("Usedom", "Klassische Bernsteinküste. Achtung: Weißer Phosphor sieht Bernstein ähnlich."),
+           ("Rügen", "Kreidefelsen, Steinstrände mit Feuersteinen und Donnerkeilen, Kegelrobben vor der Küste."),
+           ("Fischland-Darß-Zingst", "Weststrand und Bodden, im Herbst Kraniche und rastende Gänse."),
+           ("Fehmarn", "Seevögel an der Steilküste, im Winter Eiderenten und Meeresenten vor dem Strand."),
+           ("Kieler und Flensburger Förde", "Möwen, Kormorane und Eiderenten in den Häfen."),
+           ("Lübecker Bucht", "Steilküste am Brodtener Ufer, Steinstrände und Ohrenquallen im Sommer.")],
+   why=[("Warum so wenig Salz?", "Viele Flüsse bringen Süßwasser, und mit der Nordsee ist die Ostsee nur über schmale Meerengen verbunden. Salzwasser strömt vor allem bei starken Stürmen ein."),
+        ("Weniger Arten, dafür andere", "Viele Meerestiere vertragen das Brackwasser nicht. Muscheln bleiben kleiner, Seesterne gibt es nur im Westen. Dafür überwintern hier riesige Schwärme von Meeresenten."),
+        ("Bernstein und Steine", "Die Ostsee ist die Bernsteinküste Deutschlands. Nach auflandigem Wind im Herbst und Winter lohnt die Suche im frischen Tang, am besten mit einer Metalldose statt der Hosentasche.")]),
 }

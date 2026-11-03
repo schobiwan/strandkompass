@@ -1,5 +1,5 @@
-node_modules/
-__pycache__/
 *.pyc
 .DS_Store
 Thumbs.db
+__pycache__/
+node_modules/

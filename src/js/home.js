@@ -23,7 +23,7 @@ const TOTAL = animals.length;
 const SETS = ["grp", "act", "hab", "size"];
 const LABEL = {
   act: { nord: "Nordsee", ost: "Ostsee" },
-  size: { s: "bis Maus", m: "bis Eichhörnchen", l: "bis Fuchs", xl: "größer als ein Fuchs" },
+  size: { s: "klein (bis 3 cm)", m: "handgroß (3–10 cm)", l: "groß (10–40 cm)", xl: "sehr groß (über 40 cm)" },
 };
 
 const state = {
@@ -130,6 +130,7 @@ grid.classList.add("calm");
 // Karussell "Jetzt zu finden": Arten in Hauptzeit zuerst (Seevögel vorn), dann alle übrigen aktiven Arten
 const list = $("nowcards");
 const allNow = $$("#nowcards > li");
+const prev = $("now-prev"), next = $("now-next");
 function sync() {
   const max = list.scrollWidth - list.clientWidth - 2;
   prev.disabled = list.scrollLeft <= 2;
@@ -158,19 +159,20 @@ function setupNow() {
   list.scrollLeft = 0;
   sync();
 }
+// Pfeile des Karussells: um eine sichtbare Seite weiterblättern
+const step = () => { const li = list.querySelector("li:not([hidden])"); return li ? li.offsetWidth + 12 : list.clientWidth; };
+const go = (dir) => {
+  const per = Math.max(1, Math.round(list.clientWidth / step()));
+  list.scrollBy({ left: dir * per * step(), behavior: reduced() ? "auto" : "smooth" });
+};
+prev?.addEventListener("click", () => go(-1));
+next?.addEventListener("click", () => go(1));
+list.addEventListener("scroll", sync, { passive: true });
+addEventListener("resize", sync);
+
+// Monatsereignisse im Kopf: nur den aktuellen Monat zeigen
 $$(".h5-events").forEach((ul) => { ul.hidden = Number(ul.dataset.m) !== NOW; });
-const prev = $("now-prev"), next = $("now-next");
-{
-  const step = () => { const li = list.querySelector("li:not([hidden])"); return li ? li.offsetWidth + 12 : list.clientWidth; };
-  const go = (dir) => {
-    const per = Math.max(1, Math.round(list.clientWidth / step()));
-    list.scrollBy({ left: dir * per * step(), behavior: reduced() ? "auto" : "smooth" });
-  };
-  prev?.addEventListener("click", () => go(-1));
-  next?.addEventListener("click", () => go(1));
-  list.addEventListener("scroll", sync, { passive: true });
-  addEventListener("resize", sync);
-}
+
 setupNow();
 document.addEventListener("seachange", () => { setupNow(); render(); });
 
