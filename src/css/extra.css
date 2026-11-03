@@ -332,9 +332,15 @@ body:before{background:var(--hdr-bg)}
 .brand{color:var(--hdr-fg)}
 .appnav :focus-visible{outline-color:var(--rust)}
 @media(min-width:961px){
-  .appnav .tab{color:var(--hdr-fg)}
-  .appnav .tab:hover{background:color-mix(in srgb,var(--sky-top) 70%,transparent)}
-  .appnav .tab[aria-current=page]{background:var(--sky-top);color:var(--deep);box-shadow:inset 0 -2px 0 var(--rust)}
+  .appnav .tabs{gap:26px}
+  .appnav .tab{position:relative;color:var(--hdr-fg);background:none!important;padding:0;min-height:var(--nav-h);border-radius:0;font-weight:500;opacity:.78;box-shadow:none}
+  .appnav .tab svg{display:none}
+  .appnav .tab:after{content:"";position:absolute;left:0;right:0;bottom:14px;height:2px;border-radius:2px;background:var(--rust);transform:scaleX(0);transition:transform .2s ease}
+  .appnav .tab:hover{opacity:1}
+  .appnav .tab[aria-current=page]{opacity:1;color:var(--deep)}
+  .appnav .tab[aria-current=page]:after,.appnav .tab:hover:after{transform:scaleX(1)}
+  .appnav .tab:hover:after{opacity:.35}
+  .appnav .tab[aria-current=page]:after{opacity:1}
 }
 .hero6{background:
   radial-gradient(circle at 88% -6%,color-mix(in srgb,var(--sun) 70%,transparent) 0,color-mix(in srgb,var(--sun) 22%,transparent) 16%,transparent 34%),
