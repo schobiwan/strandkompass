@@ -43,6 +43,20 @@ for k in keys:
         if not os.path.exists(os.path.join(ROOT, "photos", name)):
             problems.append(f"Foto fehlt: photos/{name}")
 
+# Vogelrufe: jeder Seevogel hat Beschreibung und Aufnahme
+audio_path = os.path.join(ROOT, "audio.json")
+audio = json.load(open(audio_path, encoding="utf-8")) if os.path.exists(audio_path) else {}
+for s in SPECIES:
+    if s["grp"] != "Seevögel":
+        continue
+    if not s.get("call"):
+        problems.append(f"Rufbeschreibung fehlt: {s['k']}")
+    if s["k"] not in audio:
+        problems.append(f"Tonaufnahme fehlt: {s['k']}")
+for k in audio:
+    if not os.path.exists(os.path.join(ROOT, "audio", f"{k}.mp3")):
+        problems.append(f"Tondatei fehlt: audio/{k}.mp3")
+
 # Doppelgänger
 pair_keys = {p["k"] for p in PAIRS}
 for s in SPECIES:
