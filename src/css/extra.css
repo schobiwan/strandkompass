@@ -320,3 +320,28 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 
 .latin{font-family:var(--body)}
 .bt-n,.seacard b{font-weight:600}
+
+/* ===== Kopf: Strand und Sommer statt Grün ===== */
+:root{--hdr-bg:#fbf6ea;--hdr-fg:#1d3a4a;--hdr-line:#eadfc6;--sky-top:#cfe8f4;--sky-mid:#e9f4f7;--sand-warm:#f3e2bd;--sun:#ffd27a;--deep:#1d3a4a}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--hdr-bg:#14232c;--hdr-fg:#eef3f4;--hdr-line:#24363f;--sky-top:#183544;--sky-mid:#172a33;--sand-warm:#2a2419;--sun:#7a5a1f;--deep:#eef3f4}}
+:root[data-theme=dark]{--hdr-bg:#14232c;--hdr-fg:#eef3f4;--hdr-line:#24363f;--sky-top:#183544;--sky-mid:#172a33;--sand-warm:#2a2419;--sun:#7a5a1f;--deep:#eef3f4}
+body:before{background:var(--hdr-bg)}
+.appnav{background:color-mix(in srgb,var(--hdr-bg) 92%,transparent);color:var(--hdr-fg);border-bottom:1px solid var(--hdr-line);-webkit-backdrop-filter:saturate(1.4) blur(10px);backdrop-filter:saturate(1.4) blur(10px)}
+.appnav.scrolled{box-shadow:0 6px 18px color-mix(in srgb,var(--deep) 12%,transparent)}
+.appnav .logo{--logo-accent:var(--rust)}
+.brand{color:var(--hdr-fg)}
+.appnav :focus-visible{outline-color:var(--rust)}
+@media(min-width:961px){
+  .appnav .tab{color:var(--hdr-fg)}
+  .appnav .tab:hover{background:color-mix(in srgb,var(--sky-top) 70%,transparent)}
+  .appnav .tab[aria-current=page]{background:var(--sky-top);color:var(--deep);box-shadow:inset 0 -2px 0 var(--rust)}
+}
+.hero6{background:
+  radial-gradient(circle at 88% -6%,color-mix(in srgb,var(--sun) 70%,transparent) 0,color-mix(in srgb,var(--sun) 22%,transparent) 16%,transparent 34%),
+  linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 46%,var(--sand-warm) 100%)}
+.hero6 h1,.h6-kicker,.hero6 .hchip{color:var(--deep)}
+.hero6 .hchip{border-color:color-mix(in srgb,var(--deep) 20%,transparent)}
+.hero6 .hchip:first-child{border-color:var(--rust);color:var(--rust)}
+.hero6 .seabtn-all[aria-pressed=true]{background:var(--deep);color:var(--hdr-bg)}
+.birdband{background:color-mix(in srgb,var(--sand-warm) 55%,var(--bg))}
+.h6-ripples{stroke:color-mix(in srgb,#b08a4a 34%,transparent)}
