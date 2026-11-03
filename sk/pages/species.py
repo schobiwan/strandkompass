@@ -12,7 +12,7 @@ def build_arten_index():
     for g in GROUPS:
         ss = sorted([s for s in SPECIES if s["grp"] == g], key=lambda x: x["n"])
         sec.append(f'<h2 class="h3 grp-h" data-grp-h="{esc(g)}">{g}</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul>')
-    body = seabar(R) + f'<section class="block page"> <div class="wrap"> <h1>Alle Strandfunde</h1> <p class="intro">{counts(SPECIES)} Arten und Funde, nach Gruppen geordnet, die Seevögel zuerst. Zum Suchen und Filtern geht es zur <a href="../index.html#arten">Startseite</a>.</p> {"".join(sec)} </div> </section>'
+    body = seabar(R) + f'<section class="block page"> <div class="wrap"> <h1>Alle Strandfunde</h1> <p class="intro">{counts(SPECIES)} Arten und Funde, nach Gruppen geordnet: zuerst Seevögel, dann Meeressäuger. Zum Suchen und Filtern geht es zur <a href="../index.html#arten">Startseite</a>.</p> {"".join(sec)} </div> </section>'
     write("arten/index.html", page("arten/index.html", "Alle Strandfunde", "Alle Strandfunde im Überblick: Seevögel, Muscheln, Schnecken, Quallen, Krebse, Seesterne, Tang, Steine und Meeressäuger.", body, crumbs=[("Funde", "")]))
 
 def build_species(s):
