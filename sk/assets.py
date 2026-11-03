@@ -6,7 +6,7 @@ from .icons import FAVICON
 
 TOOLS = os.path.join(ROOT, "node_modules", ".bin")
 
-SAFELIST = ["now", "open", "calm", "scrolled", "clear", "fcount", "pk"]
+SAFELIST = ["now", "open", "calm", "scrolled", "clear", "fcount", "pk", "playing"]
 
 def build_assets():
     from PIL import Image
@@ -16,6 +16,8 @@ def build_assets():
     for f in os.listdir(os.path.join(ROOT, "photos")):
         if f.endswith(".webp"):
             shutil.copy(os.path.join(ROOT, "photos", f), os.path.join(OUT, "photos", f))
+    if os.path.isdir(os.path.join(ROOT, "audio")):
+        shutil.copytree(os.path.join(ROOT, "audio"), os.path.join(OUT, "audio"), dirs_exist_ok=True)
     # Vorschaubild für soziale Netzwerke (1.91:1)
     im = Image.open(os.path.join(ROOT, "photos_src", "sk-og.jpg")).convert("RGB")
     w, h = im.size; th = round(w / 1.91); y = (h - th) // 2

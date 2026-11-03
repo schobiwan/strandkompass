@@ -740,3 +740,29 @@ SEA_INFO = {
         ("Weniger Arten, dafür andere", "Viele Meerestiere vertragen das Brackwasser nicht. Muscheln bleiben kleiner, Seesterne gibt es nur im Westen. Dafür überwintern hier riesige Schwärme von Meeresenten."),
         ("Bernstein und Steine", "Die Ostsee ist die Bernsteinküste Deutschlands. Nach auflandigem Wind im Herbst und Winter lohnt die Suche im frischen Tang, am besten mit einer Metalldose statt der Hosentasche.")]),
 }
+
+# Rufe der Seevögel: kurze, lautmalerische Beschreibung (Tonaufnahmen siehe audio.json)
+CALLS = {
+ "silbermoewe": "lautes, lachendes „kjau-kjau-kjau“ und ein tiefes, kurzes „ag-ag-ag“ bei Gefahr",
+ "heringsmoewe": "wie die Silbermöwe, aber tiefer und rauer: „kau-kau-kau“",
+ "mantelmoewe": "sehr tiefes, heiseres „ouk-ouk-ouk“, deutlich tiefer als bei allen anderen Möwen",
+ "sturmmoewe": "hohes, quäkendes „kija“, heller und dünner als die Silbermöwe",
+ "lachmoewe": "schnarrendes, krächzendes „kwärr“, in Kolonien ein lautes Durcheinander",
+ "austernfischer": "lautes, schrilles „kliep-kliep“, im Frühjahr zu langen Trillerketten gereiht",
+ "saebelschnaebler": "klares, flötendes „klüt-klüt“",
+ "eiderente": "Männchen im Frühjahr ein gurrendes, überrascht klingendes „a-huu“, Weibchen raues Gackern",
+ "brandgans": "Männchen leise pfeifend, Weibchen schnatternd „ak-ak-ak“",
+ "kormoran": "meist stumm, an der Kolonie tiefes Krächzen und Gurgeln",
+ "basstoelpel": "raues, schnarrendes „arra-arra“, in der Kolonie ohrenbetäubend",
+ "trottellumme": "tiefes, knurrendes „oarrr“, auf dem Lummenfelsen ständig zu hören",
+ "flussseeschwalbe": "scharfes, abfallendes „kiiärr“ und kurzes „kit-kit“",
+ "sanderling": "kurzes, hartes „twick“, meist beim Auffliegen",
+ "alpenstrandlaeufer": "raues, gepresstes „trrie“, im Schwarm ein leises Gezwitscher",
+ "ringelgans": "tiefes, rollendes „rronk“, große Trupps murmeln ständig",
+ "kuestenseeschwalbe": "ähnlich der Flussseeschwalbe, aber höher und schärfer: „kriiä“",
+ "tordalk": "tiefes, knarrendes Knurren, nur an der Kolonie",
+}
+for _s in SPECIES:
+    _s["call"] = CALLS.get(_s["k"])
+for _k, _e in EXT.items():
+    _e["call"] = CALLS.get(_k)

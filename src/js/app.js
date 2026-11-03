@@ -1,5 +1,6 @@
 // Läuft auf jeder Seite: Navigation, Monatsangaben, Falt-Abschnitte
 import { $$, nums, NOW, NOW_NAME, MSLUG, href } from "./util.js";
+import "./sound.js";
 
 // Abschnitte auf dem Handy eingeklappt, am Desktop offen
 const mq = matchMedia("(max-width: 760px)");

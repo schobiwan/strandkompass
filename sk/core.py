@@ -5,6 +5,8 @@ from data import SPECIES, PAIRS, EXT, GROUPS, HABS, ACTS, SIZES, MONTH_EVENTS, S
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CREDITS = json.load(open(os.path.join(ROOT, "credits.json"), encoding="utf-8"))
+# Tonaufnahmen: key -> [Urheber, Lizenz, Quelle, Sekunden]
+AUDIO = json.load(open(os.path.join(ROOT, "audio.json"), encoding="utf-8")) if os.path.exists(os.path.join(ROOT, "audio.json")) else {}
 SITE = "Strandkompass"
 DOMAIN = "https://strandkompass.de"
 OUT = os.path.join(ROOT, "dist")

@@ -207,6 +207,27 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .seacol.no{border-top-color:var(--line);background:transparent;box-shadow:none;border:1px dashed var(--line);border-top-width:4px}
 .seacol.no .seayes{color:var(--muted)}
 
+/* ---------- Vogelrufe ---------- */
+.play{--p:0;position:relative;display:inline-grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:var(--deep);color:var(--hdr-bg);cursor:pointer;transition:transform .15s ease,background .2s ease}
+.play:hover{transform:scale(1.06)}
+.play:focus-visible{outline:3px solid var(--rust);outline-offset:3px}
+.play:before{content:"";position:absolute;inset:-4px;border-radius:50%;background:conic-gradient(var(--rust) calc(var(--p) * 360deg),transparent 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px));mask:radial-gradient(farthest-side,transparent calc(100% - 3px),#000 calc(100% - 3px))}
+.play svg{width:16px;height:16px;fill:currentColor}
+.play .i-pause,.play.playing .i-play{display:none}
+.play.playing .i-pause{display:block}
+.play.playing{background:var(--rust);color:#fff}
+.play-lg{width:52px;height:52px}
+.play-lg svg{width:19px;height:19px}
+.play-sm{position:absolute;top:8px;right:8px;z-index:3;width:40px;height:40px;background:color-mix(in srgb,var(--deep) 82%,transparent);box-shadow:0 2px 8px #0003}
+.ph.big figure{position:relative}
+.play-fig{position:absolute;top:12px;right:12px;z-index:3;width:44px;height:44px;background:color-mix(in srgb,var(--deep) 82%,transparent);box-shadow:0 2px 8px #0003}
+.callbox{display:flex;align-items:center;gap:16px;margin:18px 0 0;padding:14px 18px;border-radius:12px;background:var(--surface);box-shadow:var(--shadow);border-left:4px solid var(--priel);max-width:34em}
+.cb-h{margin:0;font:700 .78rem var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--priel)}
+.cb-sec{margin-left:6px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--muted)}
+.cb-call{margin:3px 0 0;font-size:.98rem;line-height:1.45;color:var(--fg)}
+.cb-cred{display:block;margin-top:5px;font-size:.7rem;color:var(--muted)}
+.cb-cred a{color:inherit;text-underline-offset:2px}
+
 /* ---------- Doppelgänger ---------- */
 .pair figure img,.ph.big img,.alike img{background:color-mix(in srgb,var(--moss) 12%,var(--surface))}
 .pair figcaption{z-index:2}

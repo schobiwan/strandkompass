@@ -17,8 +17,10 @@ def build_pairs():
         figs = ""
         for k in (p["a"], p["b"]):
             ik = photo_key(k)
-            figs += f'<figure>{img(R, ik, name_of(k), eager=True)}<figcaption>{esc(name_of(k))} <i lang="la">{esc(lat_of(k))}</i><small>{credit(ik)}</small></figcaption></figure>'
-        rows = "".join(f'<tr><th scope="row">{esc(a)}</th><td>{esc(b)}</td><td>{esc(c)}</td></tr>' for a, b, c in p["rows"])
+            figs += f'<figure>{img(R, ik, name_of(k), eager=True)}{play_button(R, ik, name_of(k), "play-fig")}<figcaption>{esc(name_of(k))} <i lang="la">{esc(lat_of(k))}</i><small>{credit(ik)}</small></figcaption></figure>'
+        call = lambda k: (BY[k] if k in BY else EXT[k]).get("call")
+        extra = [("Ruf", call(p["a"]), call(p["b"]))] if call(p["a"]) and call(p["b"]) else []
+        rows = "".join(f'<tr><th scope="row">{esc(a)}</th><td>{esc(b)}</td><td>{esc(c)}</td></tr>' for a, b, c in list(p["rows"]) + extra)
         btns = " ".join(f'<a class="btn{"" if i==0 else " ghost"}" href="{R}arten/{k}/index.html">{esc(name_of(k))} im Porträt</a>' for i, k in enumerate([x for x in (p["a"], p["b"]) if x in BY]))
         others = [q for q in PAIRS if q["k"] != p["k"]]
         rnd = random.Random(p["k"]); rel = rnd.sample(others, 3)

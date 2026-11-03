@@ -44,6 +44,8 @@ for k in keys:
             problems.append(f"Foto fehlt: photos/{name}")
 
 # Vogelrufe: jeder Seevogel hat Beschreibung und Aufnahme
+# Ohne freie Aufnahme auf Commons (Stand Nov. 2026): nur Beschreibung
+NO_AUDIO = {"sanderling"}
 audio_path = os.path.join(ROOT, "audio.json")
 audio = json.load(open(audio_path, encoding="utf-8")) if os.path.exists(audio_path) else {}
 for s in SPECIES:
@@ -51,7 +53,7 @@ for s in SPECIES:
         continue
     if not s.get("call"):
         problems.append(f"Rufbeschreibung fehlt: {s['k']}")
-    if s["k"] not in audio:
+    if s["k"] not in audio and s["k"] not in NO_AUDIO:
         problems.append(f"Tonaufnahme fehlt: {s['k']}")
 for k in audio:
     if not os.path.exists(os.path.join(ROOT, "audio", f"{k}.mp3")):
@@ -73,4 +75,6 @@ for m, events in MONTH_EVENTS.items():
 if problems:
     print("\n".join(problems))
     sys.exit(f"{len(problems)} Probleme gefunden")
+if NO_AUDIO:
+    print("Hinweis: ohne Tonaufnahme:", ", ".join(sorted(NO_AUDIO)))
 print(f"Alles in Ordnung: {len(SPECIES)} Funde, {len(PAIRS)} Doppelgänger, {sum(1 for _ in os.walk(DIST))} Ordner geprüft")

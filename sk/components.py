@@ -101,3 +101,29 @@ def ev_li(e, tag=False):
     sea, t = e
     lab = f'<span class="evsea evsea-{sea}">{SEA_LBL[sea]}</span> ' if tag else ""
     return f'<li data-sea-only="{sea}">{lab}{esc(t)}</li>'
+
+
+# ------------------------------------------------------------------ Vogelrufe
+PLAY_ICON = ('<svg class="i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3v10l8-5z"/></svg>'
+             '<svg class="i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z"/></svg>')
+
+def play_button(R, key, name, cls=""):
+    """Abspielknopf für den Ruf; leer, wenn es keine Aufnahme gibt."""
+    if key not in AUDIO:
+        return ""
+    sec = AUDIO[key][3]
+    return (f'<button type="button" class="play{(" " + cls) if cls else ""}" data-play data-src="{R}audio/{key}.mp3" aria-pressed="false" '
+            f'aria-label="Ruf: {esc(name)} anhören, {sec} Sekunden">{PLAY_ICON}</button>')
+
+def sound_credit(key):
+    a, lic, url, _ = AUDIO[key]
+    return f'Aufnahme: <a href="{esc(url)}" target="_blank" rel="noopener">{esc(a)}</a>, {lic_link(lic)}'
+
+def callbox(R, s):
+    """Ruf mit Abspielknopf, Beschreibung und Nachweis der Aufnahme."""
+    if not s.get("call"):
+        return ""
+    btn = play_button(R, s["k"], s["n"], "play-lg")
+    sec = f'<span class="cb-sec">{AUDIO[s["k"]][3]} Sekunden</span>' if s["k"] in AUDIO else ""
+    cr = f'<small class="cb-cred">{sound_credit(s["k"])}</small>' if s["k"] in AUDIO else ""
+    return (f'<div class="callbox">{btn}<div class="cb-txt"><p class="cb-h">Ruf {sec}</p><p class="cb-call">{esc(s["call"])}</p>{cr}</div></div>')

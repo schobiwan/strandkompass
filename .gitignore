@@ -2,4 +2,5 @@
 .DS_Store
 Thumbs.db
 __pycache__/
+audio_src/
 node_modules/
