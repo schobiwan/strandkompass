@@ -315,4 +315,4 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 @media(prefers-reduced-motion:reduce){.spot6{animation:none}}
 
 .birdband{background:color-mix(in srgb,#d9c69c 34%,var(--bg))}
-.seabtn[data-sea-set=""][aria-pressed=true]{background:var(--heading);color:var(--bg)}
+.seabtn-all[aria-pressed=true]{background:var(--heading);color:var(--bg)}

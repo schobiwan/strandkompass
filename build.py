@@ -101,7 +101,7 @@ SEA_BOOT = '<script>try{var s=localStorage.getItem("sk-sea");if(s==="nord"||s===
 
 def seaswitch(extra=""):
     """Umschalter Beide · Nordsee · Ostsee; app.js merkt sich die Wahl."""
-    b = lambda v, t: f'<button type="button" class="seabtn" data-sea-set="{v}" aria-pressed="{"true" if not v else "false"}">{t}</button>'
+    b = lambda v, t: f'<button type="button" class="seabtn{"" if v else " seabtn-all"}" data-sea-set="{v}" aria-pressed="{"true" if not v else "false"}">{t}</button>'
     return (f'<div class="seasw{(" " + extra) if extra else ""}" role="group" aria-label="Meer wählen">'
             f'{b("", "Beide Meere")}{b("nord", "Nordsee")}{b("ost", "Ostsee")}</div>')
 
