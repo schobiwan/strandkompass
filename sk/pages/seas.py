@@ -12,7 +12,7 @@ def build_seas():
         only = [x for x in here if x["act"] == [k]]
         other = "ost" if k == "nord" else "nord"
         not_here = [x for x in SPECIES if x["act"] == [other]]
-        order = lambda ss: sorted(ss, key=lambda x: (GROUPS.index(x["grp"]), x["n"]))
+        order = lambda ss: sorted(ss, key=lambda x: (GROUPS.index(x["grp"]), skey(x)))
         facts = "".join(f"<dt>{esc(a)}</dt><dd>{esc(b)}</dd>" for a, b in I["facts"])
         places = "".join(f'<li><div><b>{esc(a)}</b><span>{esc(b)}</span></div></li>' for a, b in I["places"])
         why = "".join(f'<h2>{esc(a)}</h2><p>{esc(b)}</p>' for a, b in I["why"])
@@ -27,9 +27,9 @@ def build_seas():
 {sec("h-rest", f"Strandfunde und Meerestiere an der {I['name']}", f'<p class="intro">{"Mit Markierung N oder O siehst du, ob es den Fund auch am anderen Meer gibt."}</p>', rest)}
 {miss}
 <section class="block" aria-labelledby="h-places"><div class="wrap"><h2 id="h-places">Gute Orte an der {I["name"]}</h2><ul class="explore tips">{places}</ul></div></section>
-<section class="block"><div class="wrap prose">{why}<p><a href="{R}nordsee-ostsee/index.html">Nordsee und Ostsee im Vergleich</a> · <a href="{R}{SEA_INFO[other]["slug"]}/index.html">Zur {SEA_INFO[other]["name"]}</a></p></div></section>'''
+<section class="block"><div class="wrap"><div class="prose">{why}<p><a href="{R}nordsee-ostsee/index.html">Nordsee und Ostsee im Vergleich</a> · <a href="{R}{SEA_INFO[other]["slug"]}/index.html">Zur {SEA_INFO[other]["name"]}</a></p></div></div></section>'''
         write(f'{I["slug"]}/index.html', page(f'{I["slug"]}/index.html', I["h1"], f'{I["lede"]} {len(here)} Seevögel und Strandfunde an der {I["name"]} bestimmen.', body,
-              active="nordsee-ostsee", crumbs=[("Nord- & Ostsee", "nordsee-ostsee/index.html"), (I["name"], "")], seafilter=False))
+              active="nordsee-ostsee", crumbs=[("Meere", "nordsee-ostsee/index.html"), (I["name"], "")], seafilter=False))
     # Vergleichsseite
     R = "../"
     N, O = SEA_INFO["nord"], SEA_INFO["ost"]
@@ -41,7 +41,7 @@ def build_seas():
             ("Robben", "Seehunde im Wattenmeer, Kegelrobben auf Helgoland", "selten, Kegelrobben vor allem vor Rügen")]
     trs = "".join(f'<tr><th scope="row">{esc(a)}</th><td>{esc(b)}</td><td>{esc(c)}</td></tr>' for a, b, c in rows)
     body = f'''<section class="block page"> <div class="wrap"> <p class="kicker">{ICON["seas"]}Zwei Meere, zwei Welten</p> <h1>Nordsee und Ostsee im Vergleich</h1> <p class="intro">Beide Meere liegen nur rund 100 Kilometer auseinander und sind doch ganz verschieden: Die Nordsee hat Ebbe und Flut und viel Salz, die Ostsee kaum Gezeiten und Brackwasser. Das bestimmt, welche Vögel, Tiere und Funde du am Strand entdeckst.</p> <div class="cmp-wrap"><table class="cmp seacmp"> <thead><tr><td></td><th scope="col">Nordsee</th><th scope="col">Ostsee</th></tr></thead> <tbody>{trs}</tbody> </table></div> </div> </section>
-{seapair(R)}
-<section class="block"><div class="wrap prose"><h2>Warum hat die Ostsee kaum Ebbe und Flut?</h2><p>Gezeiten entstehen durch die Anziehung von Mond und Sonne. In einem großen, offenen Meer wie dem Atlantik baut sich dabei eine Flutwelle auf, die bis in die Nordsee läuft. Die Ostsee ist dafür zu klein und nur über schmale Meerengen mit der Nordsee verbunden. Ihr Wasserstand ändert sich deshalb vor allem durch Wind: Bei starkem Nordostwind kann es an der deutschen Küste zu Sturmfluten kommen.</p><h2>Was bedeutet das am Strand?</h2><p>An der Nordsee lohnt es sich, nach den Gezeiten zu planen: Bei Niedrigwasser suchen Watvögel im Watt nach Futter, bei Hochwasser sammeln sie sich an Rastplätzen. An der Ostsee kommt es eher auf den Wind an: Nach auflandigem Sturm liegt im Spülsaum am meisten, auch Bernstein.</p><h2>Am Strandkompass umschalten</h2><p>Oben auf der Startseite, in der Liste aller Funde und im Strandjahr kannst du zwischen „Beide Meere“, „Nordsee“ und „Ostsee“ wählen. Dann siehst du nur, was es an deinem Meer gibt. Die Wahl merkt sich dein Browser, bis du sie änderst.</p></div></section>'''
+{seapair(R, overview=True)}
+<section class="block"><div class="wrap"><div class="prose"><h2>Warum hat die Ostsee kaum Ebbe und Flut?</h2><p>Gezeiten entstehen durch die Anziehung von Mond und Sonne. In einem großen, offenen Meer wie dem Atlantik baut sich dabei eine Flutwelle auf, die bis in die Nordsee läuft. Die Ostsee ist dafür zu klein und nur über schmale Meerengen mit der Nordsee verbunden. Ihr Wasserstand ändert sich deshalb vor allem durch Wind: Bei starkem Nordostwind kann es an der deutschen Küste zu Sturmfluten kommen.</p><h2>Was bedeutet das am Strand?</h2><p>An der Nordsee lohnt es sich, nach den Gezeiten zu planen: Bei Niedrigwasser suchen Watvögel im Watt nach Futter, bei Hochwasser sammeln sie sich an Rastplätzen. An der Ostsee kommt es eher auf den Wind an: Nach auflandigem Sturm liegt im Spülsaum am meisten, auch Bernstein.</p><h2>Am Strandkompass umschalten</h2><p>Oben auf der Startseite, in der Liste aller Funde und im Strandjahr kannst du zwischen „Beide Meere“, „Nordsee“ und „Ostsee“ wählen. Dann siehst du nur, was es an deinem Meer gibt. Die Wahl merkt sich dein Browser, bis du sie änderst.</p></div></div></section>'''
     write("nordsee-ostsee/index.html", page("nordsee-ostsee/index.html", "Nordsee und Ostsee im Vergleich", "Gezeiten, Salzgehalt, Küste, Seevögel und Strandfunde: Was Nordsee und Ostsee unterscheidet und was du wo findest.", body,
-          active="nordsee-ostsee", crumbs=[("Nord- & Ostsee", "")], seafilter=False))
+          active="nordsee-ostsee", crumbs=[("Meere", "")], seafilter=False))

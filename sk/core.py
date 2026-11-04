@@ -18,6 +18,11 @@ PAIRBY = {p["k"]: p for p in PAIRS}
 TAG = "schobiwan-21"
 
 
+def skey(x):
+    """Sortierschlüssel nach Duden: Umlaute wie Grundbuchstaben (Säbelschnäbler vor Sturmmöwe)."""
+    n = x["n"] if isinstance(x, dict) else x
+    return n.lower().replace("ä", "a").replace("ö", "o").replace("ü", "u").replace("ß", "ss")
+
 def esc(s):
     """HTML-sicher ausgeben (auch für Attribute)."""
     return html.escape(str(s), quote=True)

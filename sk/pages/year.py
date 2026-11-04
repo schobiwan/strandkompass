@@ -6,11 +6,11 @@ from ..components import *
 from ..products import *
 
 def cal_table(R):
-    head = "".join(f'<th scope="col" data-month="{m}"><a href="{R}strandjahr/{MSLUG[m-1]}/index.html"><abbr title="{MONTHS[m-1]}">{MSHORT[m-1]}</abbr></a></th>' for m in range(1, 13))
+    head = "".join(f'<th scope="col" data-month="{m}"><a href="{R}strandjahr/{MSLUG[m-1]}/index.html"><abbr title="{MONTHS[m-1]}"><span class="ml">{MSHORT[m-1]}</span><span class="ms" aria-hidden="true">{MONTHS[m-1][0]}</span></abbr></a></th>' for m in range(1, 13))
     rows = []
     for g in GROUPS:
         rows.append(f'<tr class="grow"><th scope="rowgroup" colspan="13">{g}</th></tr>')
-        for s in sorted([x for x in SPECIES if x["grp"] == g], key=lambda x: x["n"]):
+        for s in sorted([x for x in SPECIES if x["grp"] == g], key=skey):
             tds = ""
             for m in range(1, 13):
                 c = "h" if m in s["h"] else ("p" if m in s["p"] else "")
@@ -26,15 +26,15 @@ def build_year():
         links += f'<li data-month="{m}"><a href="{R}strandjahr/{MSLUG[m-1]}/index.html"><b>{MONTHS[m-1]}</b><span>{counts([s for s in SPECIES if m in s["p"]])} zu finden, {counts([s for s in SPECIES if m in s["h"]])} in bester Zeit</span></a></li>'
     events = "".join(f'<li data-month="{m}"><b>{MONTHS[m-1]}</b>' + "".join(f'<span data-sea-only="{sea}">{esc(t)}</span>' for sea, t in MONTH_EVENTS[m][:2]) + '</li>' for m in range(1, 13))
     body = seabar(R) + f'''<section class="block page"> <div class="wrap"> <h1>Das Strandjahr</h1> <p class="intro">Was am Strand wann passiert: Vogelzug im Wattenmeer, Lummensprung, Quallenzeit, Heuler und Bernstein nach dem Sturm. Wähle einen Monat, um zu sehen, was du dann findest.</p> <ul class="monthlinks">{links}</ul> </div> </section>
-<section class="block" aria-labelledby="h-ev"> <div class="wrap"> <h2 id="h-ev">Das Wichtigste im Jahreslauf</h2> <ul class="yearline">{events}</ul> </div> </section>
-<section class="block" aria-labelledby="h-cal"> <div class="wrap"> <h2 id="h-cal">Wann findest du was?</h2> <p class="intro">Monate, in denen du den Fund erwarten kannst, und wann die besten Chancen sind. Der aktuelle Monat ist farbig umrandet.</p> <p class="swipe">Seitlich wischen, um alle Monate zu sehen.</p> {cal_table(R)} </div> </section>'''
+<section class="block" aria-labelledby="h-ev"> <div class="wrap"> <h2 id="h-ev">Das Wichtigste im Jahreslauf</h2> <ul class="yearline" data-scroll-now>{events}</ul> </div> </section>
+<section class="block" aria-labelledby="h-cal"> <div class="wrap"> <h2 id="h-cal">Wann findest du was?</h2> <p class="intro">Monate, in denen du den Fund erwarten kannst, und wann die besten Chancen sind.</p> <ul class="callegend" aria-label="Legende"><li><i class="lgi p"></i>zu finden</li><li><i class="lgi h"></i>beste Zeit</li><li><i class="lgi now"></i>aktueller Monat</li></ul> {cal_table(R)} </div> </section>'''
     write("strandjahr/index.html", page("strandjahr/index.html", "Das Strandjahr", "Strandkalender für Nord- und Ostsee: wann Quallen, Heuler, Bernstein und Strandfunde zu erwarten sind, Monat für Monat.", body, active="strandjahr", crumbs=[("Strandjahr", "")]))
     for m in range(1, 13):
         R = "../../"
-        bf = lambda x: (x["grp"] != "Seevögel", x["n"])
+        bf = lambda x: (x["grp"] != "Seevögel", skey(x))
         peak = sorted([s for s in SPECIES if m in s["h"]], key=bf)
         act = sorted([s for s in SPECIES if m in s["p"] and m not in s["h"]], key=bf)
-        sleep = sorted([s for s in SPECIES if m not in s["p"]], key=lambda x: x["n"])
+        sleep = sorted([s for s in SPECIES if m not in s["p"]], key=skey)
         ev = "".join(ev_li(e, True) for e in MONTH_EVENTS[m])
         prev_m, next_m = (m - 2) % 12 + 1, m % 12 + 1
         sl = ('<section class="block" aria-labelledby="h-sl"><div class="wrap"><h2 id="h-sl">Jetzt kaum zu finden</h2><div class="pills">'

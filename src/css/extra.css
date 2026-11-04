@@ -7,13 +7,13 @@
 :root{
   --priel:var(--seen);
   --forest:#1d3a4a;--rust-text:#a5321f;
-  --nord:#2c6a80;--nord-soft:#e1edf0;--ost:#a5671a;--ost-soft:#f6ead6;
+  --nord:#2c6a80;--nord-soft:#e1edf0;--ost:#a5671a;--ost-soft:#f6ead6;--ost-text:#8a5410;--moss-strong:#5f6b3a;
   --hdr-bg:#fbf6ea;--hdr-fg:#1d3a4a;--hdr-line:#eadfc6;
   --sky-top:#cfe8f4;--sky-mid:#e9f4f7;--sand-warm:#f3e2bd;--sun:#ffd27a;--deep:#1d3a4a
 }
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){
   --forest:#14232c;--rust-text:var(--rust);
-  --nord:#7fc0d4;--nord-soft:#1d3138;--ost:#e3a65a;--ost-soft:#3a2c19;
+  --nord:#7fc0d4;--nord-soft:#1d3138;--ost:#e3a65a;--ost-soft:#3a2c19;--ost-text:var(--ost);--moss-strong:var(--moss);
   --hdr-bg:#14232c;--hdr-fg:#eef3f4;--hdr-line:#24363f;
   --sky-top:#183544;--sky-mid:#172a33;--sand-warm:#2a2419;--sun:#7a5a1f;--deep:#eef3f4
 }}
@@ -166,7 +166,7 @@ figcaption small a,.sp-photo figcaption a{position:relative;z-index:3;color:inhe
 .act-tag svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
 .act svg text,.act-tag svg text{font-family:var(--body)}
 .act-tag.act-nord{background:var(--nord-soft);color:var(--nord)}
-.act-tag.act-ost{background:var(--ost-soft);color:var(--ost)}
+.act-tag.act-ost{background:var(--ost-soft);color:var(--ost-text)}
 .act-tag.act-none{background:transparent;border:1px dashed var(--line);color:var(--muted)}
 
 /* ---------- Meer-Umschalter und Filter ---------- */
@@ -203,7 +203,7 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .seacol h3{font-size:1.15rem;color:var(--heading)}
 .seacol p{margin:6px 0 0;font-size:.95rem;color:var(--muted)}
 .seacol .seayes{font:700 .8rem var(--body);color:var(--nord);margin-top:2px}
-.seacol-ost .seayes{color:var(--ost)}
+.seacol-ost .seayes{color:var(--ost-text)}
 .seacol.no{border-top-color:var(--line);background:transparent;box-shadow:none;border:1px dashed var(--line);border-top-width:4px}
 .seacol.no .seayes{color:var(--muted)}
 
@@ -251,7 +251,7 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .evlist li:before{content:"";position:absolute;left:16px;top:50%;width:12px;height:12px;margin-top:-6px;border-radius:50%;background:var(--moss);box-shadow:0 0 0 4px color-mix(in srgb,var(--moss) 22%,transparent)}
 .evsea{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:999px;font:700 .72rem var(--body);letter-spacing:.02em;vertical-align:2px;background:var(--line);color:var(--fg)}
 .evsea-nord{background:var(--nord-soft);color:var(--nord)}
-.evsea-ost{background:var(--ost-soft);color:var(--ost)}
+.evsea-ost{background:var(--ost-soft);color:var(--ost-text)}
 
 /* ---------- Nordsee, Ostsee und Vergleich ---------- */
 .seacards{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
@@ -259,7 +259,7 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .seacard-ost>a{background:var(--ost-soft);border-top-color:var(--ost)}
 .seacard>a:hover{transform:translateY(-3px)}
 .seacard b{font:600 1.7rem var(--display);color:var(--nord)}
-.seacard-ost b{color:var(--ost)}
+.seacard-ost b{color:var(--ost-text)}
 .seacard span{color:var(--fg)}
 .seacard ul{margin:2px 0 0;padding-left:18px;color:var(--fg);font-size:.95rem}
 .seacard .sc-n{margin-top:auto;padding-top:6px;font:700 .85rem var(--body);color:var(--muted)}
@@ -267,7 +267,7 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .seahero-ost{border-top:6px solid var(--ost)}
 .seafacts{margin-top:18px;max-width:52em}
 .seacmp th[scope=col]:nth-child(2){color:var(--nord)}
-.seacmp th[scope=col]:nth-child(3){color:var(--ost)}
+.seacmp th[scope=col]:nth-child(3){color:var(--ost-text)}
 
 /* ---------- Am Strand: Schritte, Tipps, Warnungen ---------- */
 .steps{list-style:none;counter-reset:s;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
@@ -342,3 +342,78 @@ section.block .prose h2:first-child{margin-top:0}
   .gearband .plink{font-size:.82rem;min-height:34px;margin-top:8px}
 }
 @media(prefers-reduced-motion:reduce){.nowcards{scroll-behavior:auto}.spot6{animation:none}}
+
+/* ---------- Strandjahr: Legende und Handy ---------- */
+.callegend{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 12px;padding:0;font-size:.9rem;color:var(--muted)}
+.callegend li{display:flex;align-items:center;gap:7px}
+.callegend .lgi{position:relative;width:22px;height:18px;border-radius:4px;background:color-mix(in srgb,var(--line) 55%,var(--surface))}
+.callegend .lgi.p{background:color-mix(in srgb,var(--moss) 45%,var(--surface));box-shadow:inset 0 0 0 1.5px var(--moss)}
+.callegend .lgi.h{background:var(--moss-strong)}
+.callegend .lgi.h:after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--surface)}
+.callegend .lgi.now{background:transparent;box-shadow:inset 0 0 0 2px var(--rust)}
+.cal td.m.h{background:var(--moss-strong)}
+.cal .ms{display:none}
+@media(max-width:600px){
+  table.cal{min-width:0;border-spacing:2px;padding:6px 6px 8px}
+  .cal th{font-size:.72rem}
+  .cal .ml{display:none}.cal .ms{display:inline}
+  .cal .n{white-space:normal;width:7.2em;max-width:7.2em;font-size:.8rem;line-height:1.15;padding-right:4px}
+  .cal .n a{min-height:30px}
+  .cal td.m{height:22px}
+  .cal td.m.h:after{width:4px;height:4px;margin:-2px 0 0 -2px}
+  .yearline{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
+  .yearline li{scroll-snap-align:start}
+  .monthlinks{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .monthlinks a{padding:6px 8px}
+  .monthlinks span{font-size:.74rem}
+}
+
+/* ---------- Monatsleiste auf Fundseiten ---------- */
+.months span{font-size:.7rem;height:28px}
+.months span.h{background:var(--moss-strong);color:#fffdf8}
+.monthlegend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:8px 0 0;padding:0;list-style:none;font-size:.82rem;color:var(--muted)}
+.monthlegend li{display:flex;align-items:center;gap:6px}
+.monthlegend i{width:16px;height:12px;border-radius:3px;display:inline-block}
+.monthlegend i.p{background:color-mix(in srgb,var(--moss) 45%,var(--surface));box-shadow:inset 0 0 0 1.5px var(--moss)}
+.monthlegend i.h{background:var(--moss-strong)}
+.monthlegend i.now{box-shadow:inset 0 0 0 2px var(--rust)}
+@media(max-width:560px){.months{gap:2px}.months span{font-size:.62rem}}
+
+/* ---------- Gruppenmarke neutral, Rot bleibt Warnungen vorbehalten ---------- */
+.tag.status{background:color-mix(in srgb,var(--forest) 9%,var(--surface));border-color:color-mix(in srgb,var(--forest) 22%,var(--surface));color:var(--heading)}
+.habs{display:block;font-size:.9rem;color:var(--muted);margin-top:10px}
+.habs .habs-l{font-weight:700;color:var(--fg)}
+.sp .more .pills{margin-bottom:6px}
+
+/* ---------- Startseite: Rasterkopf, Mehr-Knopf, Legende ---------- */
+.grid-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;padding-top:48px;margin-bottom:12px}
+.grid-head h2{font-size:clamp(1.7rem,3.2vw,2.3rem);color:var(--heading)}
+.actlegend{margin:0;display:flex;align-items:center;gap:6px;font-size:.88rem;color:var(--muted)}
+.actlegend .act{position:static;width:24px;height:24px}
+.actlegend .act+.act,.actlegend .act-o{margin-left:10px}
+.actlegend .act svg{width:14px;height:14px}
+.gridmore{display:flex;justify-content:center;margin:24px 0 0}
+.gridmore .btn{min-height:44px}
+.hchip,.seabtn{min-height:40px}
+@media(max-width:760px){
+  .hchips{flex-wrap:wrap;overflow:visible;margin-right:0;padding-right:0}
+  .birdtiles{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
+}
+
+/* ---------- Produkte ohne Foto: kompakt statt leerer Bildfläche ---------- */
+.products:not(.compact) .product.nopic .pimg{aspect-ratio:auto;height:auto;background:none;display:block;padding:18px 18px 0}
+.products:not(.compact) .product.nopic .picon{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:color-mix(in srgb,var(--forest) 8%,var(--surface));position:static}
+.products:not(.compact) .product.nopic .picon svg{width:26px!important;height:26px!important}
+.products:not(.compact) .product.nopic .ptip{position:static;display:inline-block;margin-left:10px;vertical-align:middle}
+.products:not(.compact) .product.nopic .pimg{display:flex;align-items:center}
+
+/* Textseiten: Spalte links an der Seitenkante statt mittig */
+.wrap.prose{max-width:1120px}
+.wrap.prose>*{max-width:760px}
+@media(max-width:600px){
+  table.cal{table-layout:fixed}
+  .cal thead th:first-child,.cal .n{width:7.4em}
+  .cal .n{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:anywhere}
+}
+@media(max-width:520px){.tab .ts{font-size:.66rem;letter-spacing:-.01em}.tab{padding:0 1px}}
+.brand:focus-visible{outline:3px solid var(--rust);outline-offset:4px;border-radius:6px}

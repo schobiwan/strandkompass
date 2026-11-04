@@ -60,30 +60,32 @@ def months_bar(s):
         cls = "h" if m in s["h"] else ("p" if m in s["p"] else "")
         t = "Hauptzeit" if cls == "h" else ("aktiv" if cls == "p" else "kaum zu sehen")
         out.append(f'<span data-month="{m}" class="{cls}" title="{MONTHS[m-1]}: {t}">{MSHORT[m-1]}</span>')
-    return f'<div class="months" aria-hidden="true"> {"".join(out)} </div>'
+    return (f'<div class="months" aria-hidden="true"> {"".join(out)} </div>'
+            '<ul class="monthlegend" aria-hidden="true"><li><i class="p"></i>zu finden</li><li><i class="h"></i>beste Zeit</li><li><i class="now"></i>jetzt</li></ul>')
 
 def pair_card(R, p, h="h2"):
-    figs = "".join(f'<figure>{img(R, photo_key(k))}<figcaption>{esc(name_of(k))}<small>{credit(photo_key(k), True)}</small></figcaption></figure>' for k in (p["a"], p["b"]))
-    return (f'<li class="pair"> <div class="ph" aria-hidden="true"> {figs} </div> <div class="pb"> <{h}><a class="pair-link" href="{R}unterscheiden/{p["k"]}/index.html">'
+    figs = "".join(f'<figure>{img(R, photo_key(k))}<figcaption><span aria-hidden="true">{esc(name_of(k))}</span><small>{credit(photo_key(k), True)}</small></figcaption></figure>' for k in (p["a"], p["b"]))
+    return (f'<li class="pair"> <div class="ph"> {figs} </div> <div class="pb"> <{h}><a class="pair-link" href="{R}unterscheiden/{p["k"]}/index.html">'
             f'{esc(name_of(p["a"]))} oder {esc(name_of(p["b"]))}?</a></{h}> <p>{esc(p["short"])}</p> <span class="to" aria-hidden="true">Alle Unterschiede</span> </div> </li>')
 
 def chipset(legend, g, items):
     return f'<fieldset><legend>{legend}</legend><div class="fchips">' + "".join(
         f'<button class="chip" type="button" data-g="{g}" data-v="{esc(v)}" aria-pressed="false">{esc(t)}</button>' for v, t in items) + '</div></fieldset>'
 
-def seapair(R):
+def seapair(R, overview=False):
     def card_(k, title, facts, txt):
         n = sum(1 for x in SPECIES if k in x["act"]); only = sum(1 for x in SPECIES if x["act"] == [k])
-        lis = "".join(f"<li>{esc(f)}</li>" for f in facts)
+        lis = "" if overview else "".join(f"<li>{esc(f)}</li>" for f in facts)
         return (f'<li class="seacard seacard-{k}"><a href="{R}{"nordsee" if k == "nord" else "ostsee"}/index.html"><b>{title}</b><span>{esc(txt)}</span>'
                 f'<ul>{lis}</ul><span class="sc-n">{n} Arten und Funde{f", {only} davon nur hier" if only else ""}</span></a></li>')
-    return ('<section class="block seapair" aria-labelledby="sp-h"><div class="wrap"><h2 id="sp-h">Nordsee oder Ostsee?</h2>'
-            '<p class="intro">Die beiden Meere sind sehr verschieden. Das merkst du schon daran, was am Strand liegt und welche Vögel dort leben.</p><ul class="seacards">'
+    head = ('<h2 id="sp-h">Alle Funde je Meer</h2><p class="intro">Was du nur an der Nordsee oder nur an der Ostsee findest, mit allen Arten und Funden.</p>' if overview else
+            '<h2 id="sp-h">Nordsee oder Ostsee?</h2><p class="intro">Die beiden Meere sind sehr verschieden. Das merkst du schon daran, was am Strand liegt und welche Vögel dort leben.</p>')
+    return ('<section class="block seapair" aria-labelledby="sp-h"><div class="wrap">' + head + '<ul class="seacards">'
             + card_("nord", "Nordsee", ["Ebbe und Flut, 2 bis 4 Meter Unterschied", "Wattenmeer, Halligen und Sandbänke", "Seehunde, Basstölpel und Trottellummen"],
                     "Salziges Gezeitenmeer mit dem Wattenmeer, einem der wichtigsten Rastgebiete für Zugvögel weltweit.")
             + card_("ost", "Ostsee", ["Kaum Gezeiten, der Wind bestimmt den Wasserstand", "Viel weniger Salz als die Nordsee", "Bernstein, Feuersteine und Steilküsten"],
                     "Ein fast geschlossenes Binnenmeer mit Bodden, Förden und Steilküsten. Im Winter rasten hier riesige Entenschwärme.")
-            + f'</ul><p class="actions"><a class="btn ghost" href="{R}nordsee-ostsee/index.html">Alle Unterschiede im Vergleich</a></p></div></section>')
+            + '</ul>' + ('' if overview else f'<p class="actions"><a class="btn ghost" href="{R}nordsee-ostsee/index.html">Alle Unterschiede im Vergleich</a></p>') + '</div></section>')
 
 def seabox(s):
     note = SEA_NOTE.get(s["k"], {})

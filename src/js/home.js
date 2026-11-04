@@ -49,11 +49,23 @@ const byName = (a, b) => a.name.localeCompare(b.name, "de");
 const nowRank = (a) => (a.peak.includes(NOW) ? 0 : a.present.includes(NOW) ? 1 : 2);
 let lastOrder = "";
 
+// Ohne Suche und Filter zeigt die Startseite nur die ersten Funde; die Seevögel stehen dann im Band darüber
+const FIRST = 12;
+let expanded = false;
+const moreBox = $("gridmore"), moreBtn = $("more-btn");
+
 function render() {
-  const list = animals.filter((a) => state.matches(a));
+  let list = animals.filter((a) => state.matches(a));
   if (state.sort === "az") list.sort(byName);
   else if (state.sort === "size") list.sort((a, b) => a.mid - b.mid || byName(a, b));
   else list.sort((a, b) => nowRank(a) - nowRank(b) || byName(a, b));
+  const full = list.length;
+  const collapsed = !expanded && !state.q.trim() && !state.count();
+  if (collapsed) list = list.filter((a) => a.grp !== "Seevögel").slice(0, FIRST);
+  if (moreBox) {
+    moreBox.hidden = !collapsed || list.length >= full;
+    moreBtn.textContent = `Alle ${full} Funde anzeigen`;
+  }
   const order = list.map((a) => a.key).join();
   grid.classList.toggle("calm", order === lastOrder);
   if (order !== lastOrder) {
@@ -75,7 +87,7 @@ function render() {
   const sea = getSea();
   const base = sea ? animals.filter((a) => a.act.includes(sea)).length : TOTAL;
   const where = sea === "nord" ? " an der Nordsee" : sea === "ost" ? " an der Ostsee" : "";
-  $("rcount").textContent = list.length === base ? `${base} Funde${where}` : `${list.length} von ${base} Funden${where}`;
+  $("rcount").textContent = full === base ? `${base} Funde${where}` : `${full} von ${base} Funden${where}`;
 
   $$(".fchips .chip").forEach((c) => {
     const g = c.dataset.g, v = c.dataset.v;
@@ -123,65 +135,39 @@ $("active").addEventListener("click", (e) => {
   render();
   focusEl($("active").querySelector("button") || q);
 });
+moreBtn?.addEventListener("click", () => {
+  const n = grid.querySelectorAll("li.bird:not([hidden])").length;
+  expanded = true; render();
+  focusEl(grid.querySelectorAll("li.bird:not([hidden]) a.open")[n] || q);
+});
 render();
 grid.classList.add("calm");
 
-// Karussell "Jetzt zu finden": Arten in Hauptzeit zuerst (Seevögel vorn), dann alle übrigen aktiven Arten
-const list = $("nowcards");
-const allNow = $$("#nowcards > li");
+// Fund des Monats: erste Art in Hauptzeit, Seevögel haben Vorrang (Reihenfolge aus dem Build)
+const SPOT = JSON.parse($("spotdata")?.textContent || "[]");
 $$(".birdtiles > li").forEach((li, i) => { li.dataset.o = String(i); });
-const prev = $("now-prev"), next = $("now-next");
-function sync() {
-  const max = list.scrollWidth - list.clientWidth - 2;
-  prev.disabled = list.scrollLeft <= 2;
-  next.disabled = list.scrollLeft >= max;
-}
 function setupNow() {
   const sea = getSea();
-  const items = allNow.filter((li) => !sea || li.dataset.act.split("|").includes(sea));
-  const isPeak = (li) => nums(li.dataset.peak).includes(NOW);
-  const isNow = (li) => nums(li.dataset.present).includes(NOW);
-  // Fund des Monats: erste Art in Hauptzeit, Seevögel haben Vorrang (Reihenfolge aus dem Build)
-  const top = items.find(isPeak) || items.find(isNow);
-  if (top && top.dataset.k !== $("spot-link")?.getAttribute("href")?.split("/")[1]) {
-    const k = top.dataset.k, im = $("spot-img");
-    $("spot-link").href = `arten/${k}/index.html`;
-    im.src = `photos/${k}.webp`;
-    im.srcset = `photos/${k}-400.webp 400w, photos/${k}.webp 720w`;
-    $("spot-name").textContent = top.dataset.name;
-    $("spot-hl").textContent = top.dataset.hl;
-    $("spot-cred").innerHTML = top.querySelector(".cred")?.innerHTML || "";
+  const items = SPOT.filter((x) => !sea || x.act.includes(sea));
+  const top = items.find((x) => x.h.includes(NOW)) || items.find((x) => x.p.includes(NOW));
+  if (!top) return;
+  if (top.k !== $("spot-link")?.getAttribute("href")?.split("/")[1]) {
+    const im = $("spot-img");
+    $("spot-link").href = `arten/${top.k}/index.html`;
+    im.src = `photos/${top.k}.webp`;
+    im.srcset = `photos/${top.k}-400.webp 400w, photos/${top.k}.webp 720w`;
+    $("spot-name").textContent = top.n;
+    $("spot-hl").textContent = top.hl;
+    $("spot-cred").innerHTML = document.getElementById(top.k)?.querySelector(":scope > small")?.innerHTML || "";
   }
   // Im Seevögel-Band rückt der Fund des Monats ans Ende, damit er nicht doppelt vorn steht
   const band = document.querySelector(".birdtiles");
-  if (band && top) {
+  if (band) {
     const tiles = $$(".birdtiles > li");
-    tiles.sort((a, b) => (a.dataset.k === top.dataset.k) - (b.dataset.k === top.dataset.k) || Number(a.dataset.o) - Number(b.dataset.o));
+    tiles.sort((a, b) => (a.dataset.k === top.k) - (b.dataset.k === top.k) || Number(a.dataset.o) - Number(b.dataset.o));
     tiles.forEach((li) => band.appendChild(li));
   }
-  // Karussell: nur Funde ohne Seevögel (die stehen im Band) und ohne den Fund des Monats
-  const rest = items.filter((li) => li !== top && li.dataset.bird !== "1" && isNow(li));
-  const peak = rest.filter(isPeak);
-  const later = rest.filter((li) => !isPeak(li));
-  allNow.forEach((li) => { li.hidden = true; li.classList.toggle("pk", isPeak(li)); });
-  [...peak, ...later].forEach((li) => { li.hidden = false; list.appendChild(li); });
-  list.scrollLeft = 0;
-  sync();
 }
-// Pfeile des Karussells: um eine sichtbare Seite weiterblättern
-const step = () => { const li = list.querySelector("li:not([hidden])"); return li ? li.offsetWidth + 12 : list.clientWidth; };
-const go = (dir) => {
-  const per = Math.max(1, Math.round(list.clientWidth / step()));
-  list.scrollBy({ left: dir * per * step(), behavior: reduced() ? "auto" : "smooth" });
-};
-prev?.addEventListener("click", () => go(-1));
-next?.addEventListener("click", () => go(1));
-list.addEventListener("scroll", sync, { passive: true });
-addEventListener("resize", sync);
-
-// Monatsereignisse im Kopf: nur den aktuellen Monat zeigen
-$$(".h5-events").forEach((ul) => { ul.hidden = Number(ul.dataset.m) !== NOW; });
-
 setupNow();
 document.addEventListener("seachange", () => { setupNow(); render(); });
 

@@ -20,6 +20,11 @@ onScroll();
 $$("[data-now-name]").forEach((el) => { el.textContent = NOW_NAME; });
 $$("a[data-now-link]").forEach((a) => { a.href = href(`strandjahr/${MSLUG[NOW - 1]}/`); });
 $$("[data-month]").forEach((el) => { if (Number(el.dataset.month) === NOW) el.classList.add("now"); });
+// Waagerechte Monatslisten (Handy) beim aktuellen Monat beginnen
+$$("[data-scroll-now]").forEach((ul) => {
+  const li = ul.querySelector("li.now");
+  if (li && ul.scrollWidth > ul.clientWidth) ul.scrollLeft += li.getBoundingClientRect().left - ul.getBoundingClientRect().left;
+});
 
 // "Jetzt unterwegs"-Liste im Kopf der Startseite
 $$("[data-now-list]").forEach((list) => {
