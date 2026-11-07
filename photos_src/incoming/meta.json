@@ -1,0 +1,90 @@
+{
+ "p-fernglas": [
+  {
+   "file": "p-fernglas.jpg",
+   "title": "File:2020 Lornetka Baigish 8x30.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:2020_Lornetka_Baigish_8x30.jpg",
+   "artist": "Jacek Halicki",
+   "license": "CC BY-SA 4.0",
+   "w": 4670,
+   "h": 3470
+  }
+ ],
+ "p-wattschuhe": [
+  {
+   "file": "p-wattschuhe.jpg",
+   "title": "File:Badeschuhe.JPG",
+   "url": "https://commons.wikimedia.org/wiki/File:Badeschuhe.JPG",
+   "artist": "User:Mattes",
+   "license": "CC BY 2.0 de",
+   "w": 4896,
+   "h": 3672
+  }
+ ],
+ "p-strandmuschel": [
+  {
+   "file": "p-strandmuschel.jpg",
+   "title": "File:Strandmuschel.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Strandmuschel.jpg",
+   "artist": "Camper2",
+   "license": "CC BY-SA 4.0",
+   "w": 4565,
+   "h": 2637
+  }
+ ],
+ "p-kescher": [
+  {
+   "file": "p-kescher.jpg",
+   "title": "File:Landing net 2.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Landing_net_2.jpg",
+   "artist": "Huangdan2060",
+   "license": "CC BY 3.0",
+   "w": 2592,
+   "h": 1944
+  }
+ ],
+ "p-vogelbuch": [
+  {
+   "file": "p-vogelbuch.jpg",
+   "title": "File:U of M Ornithology Class 4-12-14 (13799829933).jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:U_of_M_Ornithology_Class_4-12-14_(13799829933).jpg",
+   "artist": "USFWS Mountain Prairie",
+   "license": "Public domain",
+   "w": 2736,
+   "h": 3648
+  }
+ ],
+ "p-vogelbuch2": [
+  {
+   "file": "p-vogelbuch2.jpg",
+   "title": "File:Birding in the Park (0d1c031d-108b-47ef-81bc-ef4670a3b17c).JPG",
+   "url": "https://commons.wikimedia.org/wiki/File:Birding_in_the_Park_(0d1c031d-108b-47ef-81bc-ef4670a3b17c).JPG",
+   "artist": "NPS",
+   "license": "Public domain",
+   "w": 1536,
+   "h": 1536
+  }
+ ],
+ "p-buch": [
+  {
+   "file": "p-buch.jpg",
+   "title": "File:American seashells (1954) (17540656063).jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:American_seashells_(1954)_(17540656063).jpg",
+   "artist": "Internet Archive Book Images",
+   "license": "Public domain",
+   "w": 2316,
+   "h": 3510
+  }
+ ],
+ "p-sammelbox": [
+  {
+   "file": "p-sammelbox.jpg",
+   "title": "File:Shells & book.jpg",
+   "url": "https://commons.wikimedia.org/wiki/File:Shells_%26_book.jpg",
+   "artist": "Andrea Michelbach",
+   "license": "CC BY-SA 3.0",
+   "w": 4080,
+   "h": 2720
+  }
+ ]
+}
