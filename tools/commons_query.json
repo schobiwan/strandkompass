@@ -1,8 +1,46 @@
 {
  "wikitext": [],
- "audio_search": {
-  "sanderling": "intitle:Sanderling",
-  "sanderling2": "intitle:\"Calidris alba\"",
-  "sanderling3": "Calidris alba XC"
+ "audio_search": {},
+ "image_search": {
+  "fernglas": [
+   "binoculars beach",
+   "binoculars bird watching coast",
+   "Fernglas"
+  ],
+  "vogelbuch": [
+   "birdwatcher field guide",
+   "Vogelbeobachtung Watt",
+   "bird watching Wadden Sea"
+  ],
+  "buch": [
+   "field guide seashells",
+   "beachcombing shells book",
+   "Strandgut Bestimmungsbuch"
+  ],
+  "becherlupe": [
+   "bug viewer",
+   "magnifier box insect child",
+   "Becherlupe"
+  ],
+  "kescher": [
+   "Kescher Kinder Strand",
+   "child dip net beach",
+   "shrimping net"
+  ],
+  "wattschuhe": [
+   "Wattwanderung",
+   "water shoes",
+   "barefoot mudflat Wadden"
+  ],
+  "sammelbox": [
+   "seashell collection box",
+   "shells sorted compartments",
+   "collection of seashells"
+  ],
+  "strandmuschel": [
+   "Strandmuschel",
+   "beach tent",
+   "beach shelter wind"
+  ]
  }
 }

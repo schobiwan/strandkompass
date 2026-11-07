@@ -36,4 +36,24 @@ for key, term in q.get("audio_search", {}).items():
             ext = ii["url"].split("?")[0].rsplit(".", 1)[1].lower()
             fn = f"{key}-s{n}.{ext}"; open(os.path.join(OUT, fn), "wb").write(get(ii["url"], True)); m["file"] = fn; n += 1
         res["search"][key].append(m)
+res["images"] = {}
+for key, terms in q.get("image_search", {}).items():
+    res["images"][key] = []
+    seen = set()
+    for term in terms:
+        d = api(action="query", list="search", srsearch=term + " filetype:bitmap", srnamespace=6, srlimit=8)
+        for hit in d["query"]["search"]:
+            t = hit["title"]
+            if t in seen: continue
+            seen.add(t)
+            pg = api(action="query", prop="imageinfo", titles=t, iiprop="url|extmetadata|size", iiurlwidth=480)["query"]["pages"][0]
+            if "imageinfo" not in pg: continue
+            ii = pg["imageinfo"][0]; md = ii.get("extmetadata", {})
+            n = len(res["images"][key])
+            fn = f"img-{key}-{n:02d}.jpg"
+            try: open(os.path.join(OUT, fn), "wb").write(get(ii["thumburl"], True))
+            except Exception as e: print("skip", t, e); continue
+            res["images"][key].append({"file": fn, "title": t, "page": ii["descriptionurl"], "w": ii.get("width"), "h": ii.get("height"),
+                "artist": strip(md.get("Artist", {}).get("value")), "license": strip(md.get("LicenseShortName", {}).get("value")),
+                "desc": strip(md.get("ImageDescription", {}).get("value"))[:160]})
 json.dump(res, open(os.path.join(OUT, "result.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
