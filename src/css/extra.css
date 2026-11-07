@@ -417,3 +417,24 @@ section.block .prose h2:first-child{margin-top:0}
 }
 @media(max-width:520px){.tab .ts{font-size:.66rem;letter-spacing:-.01em}.tab{padding:0 1px}}
 .brand:focus-visible{outline:3px solid var(--rust);outline-offset:4px;border-radius:6px}
+
+/* ---------- Hover: jedes Bedienelement reagiert sichtbar ---------- */
+.btn{transition:background-color .15s,border-color .15s,color .15s}
+.btn:hover{background:color-mix(in srgb,var(--forest) 80%,#fff);border-color:color-mix(in srgb,var(--forest) 80%,#fff)}
+.btn.ghost:hover{background:var(--surface);border-color:var(--heading);color:var(--heading)}
+.btn.light:hover{background:color-mix(in srgb,var(--forest-ink) 88%,var(--forest))}
+.chip:hover:not([aria-pressed=true]):not([aria-expanded=true]),.sortsel select:hover{border-color:var(--heading);background:color-mix(in srgb,var(--forest) 6%,var(--surface))}
+.ftoggle[aria-expanded=true]:hover{background:color-mix(in srgb,var(--forest) 80%,#fff)}
+.sortsel select{cursor:pointer}
+.seabtn[aria-pressed=true]:hover{background:color-mix(in srgb,var(--heading) 85%,#000)}
+.seabtn:hover:not([aria-pressed=true]){background:color-mix(in srgb,var(--forest) 8%,transparent)}
+.monthlinks a:hover{background:color-mix(in srgb,var(--forest) 6%,var(--surface));border-color:var(--forest)}
+.pair-link:hover,.bird h3 a:hover,.birdtiles li>a:hover b{color:var(--rust-text)}
+/* Textlinks: Unterstrich und Farbe wechseln */
+footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,
+.credits td a:hover,table a:hover,figcaption a:hover,.cb-cred a:hover,.pcred2 a:hover,.sp-photo figcaption a:hover,.crumbs a:hover{color:var(--rust-text);text-decoration-color:currentColor;text-decoration-line:underline}
+.seabar-more{text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:2px}
+.gearmore{text-decoration-color:color-mix(in srgb,currentColor 35%,transparent)}
+.fold>summary:hover{color:var(--rust-text)}
+@media(min-width:761px){.fold>summary:hover{color:inherit}}
+.steps a:hover,.explore.tips span a:hover,.prose a:hover,.intro a:hover,.yeartext a:hover{text-decoration-thickness:2px}
