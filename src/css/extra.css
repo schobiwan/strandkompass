@@ -151,7 +151,7 @@ body:before{background:var(--hdr-bg)}
 .bird img{background:color-mix(in srgb,var(--moss) 12%,var(--surface))}
 .latin{font-family:var(--body)}
 .grp-h{margin:34px 0 14px;color:var(--heading);font-size:1.5rem}
-.grp-h:first-of-type{margin-top:8px}
+.grp-h:first-of-type{margin-top:28px}
 .cred,.pcred{position:relative;z-index:3;display:block;font-size:.7rem;line-height:1.4;color:var(--muted)}
 .cred a,.pcred a,.spot-cred a,.pcred2 a{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:2px}
 .cred a:hover,.pcred a:hover,.spot-cred a:hover{text-decoration-color:currentColor}
@@ -520,3 +520,16 @@ footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips s
 .seabar-more{display:inline-flex;align-items:center;min-height:32px}
 .qtable th a,.qtab th a,table th[scope=row]>a{display:inline-flex;align-items:center;min-height:28px}
 .hsearch input{min-height:44px}
+
+/* ---------- Abstände unter Überschriften und Einleitungen ----------
+   Abschnittsüberschrift → Kartenraster, Link-Leiste oder Produkte: einheitlich 18–22 px */
+main h2+.grid,main h2+.pills,main h2+.products,main h2+.cmp-wrap,main h2+.seacards{margin-top:clamp(16px,2vw,22px)}
+main .intro+.grid,main .intro+.pills,main .intro+.products{margin-top:clamp(16px,2vw,22px)}
+.grpjump{margin:6px 0 0}
+main .grp-h{margin:44px 0 16px}
+.alike h2{margin-bottom:10px}
+.bb-sub{margin-top:12px}
+.grid-head{row-gap:10px}
+main .grp-h:first-of-type{margin-top:28px}
+.gearband .head-row{row-gap:12px}
+.head-row{row-gap:12px}
