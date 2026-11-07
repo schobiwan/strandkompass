@@ -40,6 +40,13 @@ PRODUCTS = {
 PHOTO = {
  "uvlampe": ("Amber Bugs", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Dominican_Amber_Fossilized_Wasp_Enhydro_02.png"),
  "forscherset": ("David", "CC BY 2.0", "https://commons.wikimedia.org/wiki/File:Sand_bucket.jpg"),
+ "fernglas": ("Jacek Halicki", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:2020_Lornetka_Baigish_8x30.jpg"),
+ "wattschuhe": ("Mattes", "CC BY 2.0 de", "https://commons.wikimedia.org/wiki/File:Badeschuhe.JPG"),
+ "strandmuschel": ("Camper2", "CC BY-SA 4.0", "https://commons.wikimedia.org/wiki/File:Strandmuschel.jpg"),
+ "kescher": ("Huangdan2060", "CC BY 3.0", "https://commons.wikimedia.org/wiki/File:Landing_net_2.jpg"),
+ "vogelbuch": ("USFWS Mountain-Prairie", "gemeinfrei", "https://commons.wikimedia.org/wiki/File:U_of_M_Ornithology_Class_4-12-14_(13799829933).jpg"),
+ "buch": ("R. Tucker Abbott, American Seashells (1954)", "gemeinfrei", "https://commons.wikimedia.org/wiki/File:American_seashells_(1954)_(17540656063).jpg"),
+ "sammelbox": ("Andrea Michelbach", "CC BY-SA 3.0", "https://commons.wikimedia.org/wiki/File:Shells_%26_book.jpg"),
 }
 
 GEAR_GRP = {
