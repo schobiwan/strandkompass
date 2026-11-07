@@ -2,35 +2,14 @@
  "wikitext": [],
  "audio_search": {},
  "image_search": {
-  "vogelbuch": [
-   "bird field guide open book",
-   "birdwatcher reading field guide",
-   "Vogelbestimmungsbuch",
-   "field guide birds binoculars"
-  ],
-  "buch": [
-   "field guide book nature",
-   "Bestimmungsbuch",
-   "naturalist reading book beach",
-   "open book shells"
-  ],
   "becherlupe": [
-   "magnifying glass child nature",
-   "Lupe Kind Natur",
-   "magnifier jar",
-   "child magnifying glass shell"
-  ],
-  "sammelbox": [
-   "Setzkasten Muscheln",
-   "shell collection drawer",
-   "seashells in box",
-   "specimen box shells",
-   "Muschelsammlung"
-  ],
-  "kescher": [
-   "child fishing net",
-   "Kescher",
-   "children rock pooling net"
+   "magnifying glass",
+   "Lupe",
+   "loupe child",
+   "magnifying glass crab",
+   "Kind mit Lupe",
+   "bug box magnifier",
+   "insect viewer"
   ]
  }
 }
