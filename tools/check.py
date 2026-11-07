@@ -30,7 +30,11 @@ for d, _, files in os.walk(DIST):
         for ref in refs:
             if ref.startswith(("http:", "https:", "mailto:", "tel:")):
                 continue
-            if not os.path.exists(os.path.normpath(os.path.join(d, ref))):
+            ref = ref.split("?")[0] or "./"
+            target = os.path.normpath(os.path.join(d, ref))
+            if ref.endswith("/") or ref in (".", ".."):
+                target = os.path.join(target, "index.html")
+            if not os.path.exists(target):
                 problems.append(f"Kaputter Verweis in {os.path.relpath(path, DIST)}: {ref}")
 
 # Fotos und Bildnachweise

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Grundlagen: Pfade, Konstanten, Daten-Nachschlagen und kleine Helfer."""
-import os, json, html
+import os, json, html, re
 from data import SPECIES, PAIRS, EXT, GROUPS, HABS, ACTS, SIZES, MONTH_EVENTS, SEA_NOTE, SEA_INFO
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -35,7 +35,15 @@ def esc(s):
     """HTML-sicher ausgeben (auch für Attribute)."""
     return html.escape(str(s), quote=True)
 
+_IDX = re.compile(r'((?:href|action)=")((?:\.\./)*(?:[^"#?:]*/)?)index\.html')
+
+def pretty(html):
+    """Saubere URLs: Verweise auf …/index.html zeigen auf das Verzeichnis (…/), die Startseite auf ./"""
+    return _IDX.sub(lambda m: m.group(1) + (m.group(2) or "./"), html)
+
 def write(path, content):
+    if path.endswith(".html"):
+        content = pretty(content)
     full = os.path.join(OUT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as f:

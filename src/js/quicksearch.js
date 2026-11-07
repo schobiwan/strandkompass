@@ -29,15 +29,15 @@ async function results() {
   if (!hits.length) {
     const g = suggest(q, all.map((x) => x.name));
     const hit = g && all.find((x) => x.name === g);
-    list.innerHTML = `<li class="snone">Nichts gefunden.${hit ? ` Meintest du <a href="${ROOT}arten/${hit.key}/index.html">${escapeHtml(hit.name)}</a>?` : ""}</li>`;
+    list.innerHTML = `<li class="snone">Nichts gefunden.${hit ? ` Meintest du <a href="${ROOT}arten/${hit.key}/">${escapeHtml(hit.name)}</a>?` : ""}</li>`;
   } else {
     list.innerHTML = hits.slice(0, 8).map((x) =>
-      `<li><a href="${ROOT}arten/${x.key}/index.html"><img src="${ROOT}photos/${x.key}-400.webp" alt="" width="48" height="38" loading="lazy">${escapeHtml(x.name)}${x.r >= 3 ? `<span>${x.r === 3 ? "ähnelt der gesuchten Art" : "passt zum Aussehen"}</span>` : ""}</a></li>`).join("");
+      `<li><a href="${ROOT}arten/${x.key}/"><img src="${ROOT}photos/${x.key}-400.webp" alt="" width="48" height="38" loading="lazy">${escapeHtml(x.name)}${x.r >= 3 ? `<span>${x.r === 3 ? "ähnelt der gesuchten Art" : "passt zum Aussehen"}</span>` : ""}</a></li>`).join("");
   }
   more.hidden = hits.length <= 8;
   // Kurze Ansage für Screenreader statt der ganzen Liste
   status.textContent = hits.length ? `${hits.length} Treffer${hits.length > 8 ? ", die ersten 8 werden gezeigt" : ""}` : "Nichts gefunden";
-  moreLink.href = `${ROOT}index.html?q=${encodeURIComponent(q)}#arten`;
+  moreLink.href = `${ROOT}?q=${encodeURIComponent(q)}#arten`;
 }
 
 function openSearch() {
