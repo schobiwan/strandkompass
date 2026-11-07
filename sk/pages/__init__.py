@@ -1,1 +1,1 @@
-"""Die einzelnen Seiten des Küstenkompass."""
+"""Die einzelnen Seiten des Meereskompass."""

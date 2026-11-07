@@ -7,8 +7,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CREDITS = json.load(open(os.path.join(ROOT, "credits.json"), encoding="utf-8"))
 # Tonaufnahmen: key -> [Urheber, Lizenz, Quelle, Sekunden]
 AUDIO = json.load(open(os.path.join(ROOT, "audio.json"), encoding="utf-8")) if os.path.exists(os.path.join(ROOT, "audio.json")) else {}
-SITE = "Küstenkompass"
-DOMAIN = "https://kuestenkompass.de"
+SITE = "Meereskompass"
+DOMAIN = "https://meereskompass.de"
 OUT = os.path.join(ROOT, "dist")
 MONTHS = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
 MSHORT = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]

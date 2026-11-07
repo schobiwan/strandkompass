@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Inhalte des Küstenkompass: Tiere, Pflanzen und Funde an Nord- und Ostsee."""
+"""Inhalte des Meereskompass: Tiere, Pflanzen und Funde an Nord- und Ostsee."""
 
 GROUPS = ["Seevögel", "Robben", "Wale & Delfine", "Muscheln", "Schnecken", "Quallen", "Krebse & Würmer", "Seesterne & Seeigel", "Tang & Seegras", "Strandfunde"]
 HABS = ["Spülsaum", "Watt", "Salzwiese", "Steine & Buhnen", "Flachwasser", "Offenes Meer", "Vogelfelsen"]

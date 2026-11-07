@@ -1,1 +1,1 @@
-"""Seitengenerator des Küstenkompass."""
+"""Seitengenerator des Meereskompass."""

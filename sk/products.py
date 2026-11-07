@@ -95,7 +95,7 @@ def product(R, key, compact=False):
             f'<a class="plink" href="{p["url"]}" target="_blank" rel="sponsored nofollow noopener"><span>Bei Amazon ansehen<span aria-hidden="true">*</span></span>{ICON["arrow"]}'
             f'<span class="sr-only"> {esc(p["name"])} (Werbelink, öffnet in neuem Fenster)</span></a> </div> </li>')
 
-ADNOTE = '<p class="adnote"><span aria-hidden="true">*</span> Werbelink: Wenn du über diesen Link etwas kaufst, erhält der Küstenkompass eine kleine Provision von Amazon. Für dich ändert sich am Preis nichts. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>'
+ADNOTE = '<p class="adnote"><span aria-hidden="true">*</span> Werbelink: Wenn du über diesen Link etwas kaufst, erhält der Meereskompass eine kleine Provision von Amazon. Für dich ändert sich am Preis nichts. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>'
 
 def month_gear(R, m):
     picks = ("uvlampe", "sammelbox", "fernglas", "buch") if m in (10, 11, 12, 1, 2, 3) else ("becherlupe", "kescher", "wattschuhe", "strandmuschel")

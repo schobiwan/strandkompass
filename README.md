@@ -1,9 +1,9 @@
-# Küstenkompass
+# Meereskompass
 
 Statische Website zum Bestimmen von Seevögeln, Robben und Walen an Nord- und Ostsee,
 dazu Quallen, Muscheln und Strandfunde. Schwesterseite von Vogelkompass und Waldtierkompass.
 
-Domain: kuestenkompass.de (früherer Arbeitsname: Strandkompass; das Repository heißt weiter `strandkompass`).
+Domain: meereskompass.de (frühere Arbeitsnamen: Strandkompass, Küstenkompass; das Repository heißt weiter `strandkompass`).
 Reihenfolge der Gruppen überall: Seevögel, Robben, Wale & Delfine, danach die übrigen Funde.
 
 ## Bauen
@@ -30,7 +30,7 @@ python3 tools/check.py  # prüft Links, Fotos, Bildnachweise und Daten
 | `sk/products.py` | Produktempfehlungen mit Amazon-Werbelinks |
 | `sk/pages/` | Die Seiten: Start, Funde, Doppelgänger, Strandjahr, Meere, Info |
 | `sk/assets.py` | Schriften und Fotos kopieren, CSS/JS bündeln, Sitemap |
-| `src/css/` | `base.css` (Grundgerüst), `extra.css` (Küstenkompass) |
+| `src/css/` | `base.css` (Grundgerüst), `extra.css` (Meereskompass) |
 | `src/js/` | `app.js` (jede Seite), `home.js` (Startseite) |
 | `tools/` | Prüfskript und Foto-Werkzeug |
 
