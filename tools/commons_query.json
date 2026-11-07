@@ -2,45 +2,35 @@
  "wikitext": [],
  "audio_search": {},
  "image_search": {
-  "fernglas": [
-   "binoculars beach",
-   "binoculars bird watching coast",
-   "Fernglas"
-  ],
   "vogelbuch": [
-   "birdwatcher field guide",
-   "Vogelbeobachtung Watt",
-   "bird watching Wadden Sea"
+   "bird field guide open book",
+   "birdwatcher reading field guide",
+   "Vogelbestimmungsbuch",
+   "field guide birds binoculars"
   ],
   "buch": [
-   "field guide seashells",
-   "beachcombing shells book",
-   "Strandgut Bestimmungsbuch"
+   "field guide book nature",
+   "Bestimmungsbuch",
+   "naturalist reading book beach",
+   "open book shells"
   ],
   "becherlupe": [
-   "bug viewer",
-   "magnifier box insect child",
-   "Becherlupe"
-  ],
-  "kescher": [
-   "Kescher Kinder Strand",
-   "child dip net beach",
-   "shrimping net"
-  ],
-  "wattschuhe": [
-   "Wattwanderung",
-   "water shoes",
-   "barefoot mudflat Wadden"
+   "magnifying glass child nature",
+   "Lupe Kind Natur",
+   "magnifier jar",
+   "child magnifying glass shell"
   ],
   "sammelbox": [
-   "seashell collection box",
-   "shells sorted compartments",
-   "collection of seashells"
+   "Setzkasten Muscheln",
+   "shell collection drawer",
+   "seashells in box",
+   "specimen box shells",
+   "Muschelsammlung"
   ],
-  "strandmuschel": [
-   "Strandmuschel",
-   "beach tent",
-   "beach shelter wind"
+  "kescher": [
+   "child fishing net",
+   "Kescher",
+   "children rock pooling net"
   ]
  }
 }
