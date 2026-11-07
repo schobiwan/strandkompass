@@ -43,10 +43,31 @@ def cred(key):
     """Kleine Bildangabe direkt auf dem Foto, liegt über dem Kartenlink."""
     return f'<small class="cred">{credit(key, True)}</small>'
 
+def search_fields(s):
+    """Suchtexte wie beim Vogelkompass: Namen, Doppelgänger, Merkmale (Aussehen, Gruppe, Lebensraum, Meer)."""
+    names = " ".join([s["n"], s["lat"]])
+    alt = " ".join(name_of(p["b"] if p["a"] == s["k"] else p["a"]) for p in PAIRS if s["k"] in (p["a"], p["b"]))
+    marks = list(s["marks"]) + [s["short"], s["grp"], " ".join(s["hab"]), " ".join(ACTS[a] for a in s["act"])]
+    return names, alt, marks
+
+_SEARCH_JSON = None
+def search_json():
+    """Daten für die Schnellsuche auf jeder Seite: [Name, Schlüssel, Namen, Doppelgänger, Merkmale]."""
+    global _SEARCH_JSON
+    if _SEARCH_JSON is None:
+        import json
+        rows = []
+        for s in SPECIES:
+            names, alt, marks = search_fields(s)
+            rows.append([s["n"], s["k"], names, alt, "|".join(marks)])
+        _SEARCH_JSON = json.dumps(rows, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    return _SEARCH_JSON
+
 def card(R, s, i=0):
     acts = "".join(f'<span class="act" title="{ACTS[a]}">{act_svg(a)}<span class="sr-only">{ACTS[a]}</span></span>' for a in s["act"])
-    search = " ".join([s["n"], s["lat"], s["grp"]] + [ACTS[a] for a in s["act"]])
-    return (f'<li class="bird" id="{s["k"]}" style="--i:{i}" data-key="{s["k"]}" data-name="{esc(s["n"])}" data-search="{esc(search)}" '
+    names, alt, marks = search_fields(s)
+    return (f'<li class="bird" id="{s["k"]}" style="--i:{i}" data-key="{s["k"]}" data-name="{esc(s["n"])}" data-search="{esc(names)}" '
+            f'data-alt="{esc(alt)}" data-marks="{esc("|".join(marks))}" '
             f'data-grp="{esc(s["grp"])}" data-act="{"|".join(s["act"])}" data-hab="{esc("|".join(s["hab"]))}" data-size="{s["size"]}" data-mid="{s["mid"]}" '
             f'data-present="{",".join(map(str, s["p"]))}" data-peak="{",".join(map(str, s["h"]))}"> '
             f'{img(R, s["k"], "", eager=i < 6)}{cred(s["k"])} <div class="txt"> <h3><a class="open" href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a></h3> '

@@ -1,6 +1,7 @@
 // Startseite: Suche, Filter und Sortierung
 import { getSea } from "./app.js";
-import { $, $$, nums, norm, escapeHtml, NOW, reduced, setPressed, focusEl } from "./util.js";
+import { $, $$, nums, escapeHtml, NOW, reduced, setPressed, focusEl } from "./util.js";
+import { prepare, rank, suggest } from "./search.js";
 
 const grid = $("grid");
 const q = $("q");
@@ -9,7 +10,8 @@ const animals = $$("#grid > li.bird").map((li) => ({
   li,
   key: li.dataset.key,
   name: li.dataset.name,
-  search: norm(li.dataset.search),
+  search: prepare(li.dataset.search, li.dataset.alt || "", (li.dataset.marks || "").split("|")),
+  score: 0,
   grp: li.dataset.grp,
   act: li.dataset.act.split("|"),
   hab: li.dataset.hab.split("|"),
@@ -34,8 +36,8 @@ const state = {
     this.now = false;
   },
   matches(a) {
-    const term = norm(this.q.trim());
-    return (!term || a.search.includes(term))
+    a.score = rank(a.search, this.q);
+    return a.score >= 0
       && (!this.grp.size || this.grp.has(a.grp))
       && (!this.act.size || a.act.some((x) => this.act.has(x)))
       && (!this.hab.size || a.hab.some((x) => this.hab.has(x)))
@@ -57,9 +59,11 @@ const moreBox = $("gridmore"), moreBtn = $("more-btn");
 
 function render() {
   let list = animals.filter((a) => state.matches(a));
-  if (state.sort === "az") list.sort(byName);
-  else if (state.sort === "size") list.sort((a, b) => a.mid - b.mid || byName(a, b));
-  else list.sort((a, b) => nowRank(a) - nowRank(b) || byName(a, b));
+  // Mit Suchbegriff zuerst nach Treffergüte: Name vor Doppelgänger vor Aussehen
+  const byScore = (a, b) => (state.q.trim() ? a.score - b.score : 0);
+  if (state.sort === "az") list.sort((a, b) => byScore(a, b) || byName(a, b));
+  else if (state.sort === "size") list.sort((a, b) => byScore(a, b) || a.mid - b.mid || byName(a, b));
+  else list.sort((a, b) => byScore(a, b) || nowRank(a) - nowRank(b) || byName(a, b));
   const full = list.length;
   const collapsed = !expanded && !state.q.trim() && !state.count();
   if (collapsed) list = list.filter((a) => !BANDED.has(a.grp)).slice(0, FIRST);
@@ -80,6 +84,10 @@ function render() {
   }
   lastOrder = order;
   $("empty").hidden = list.length > 0;
+  // Tippfehler: ähnlichsten Namen vorschlagen
+  const hint = $("suggest"), guess = !list.length && state.q.trim() ? suggest(state.q, animals.map((a) => a.name)) : null;
+  hint.hidden = !guess;
+  if (guess) hint.innerHTML = `Meintest du <button type="button" class="suggest-btn" data-guess="${escapeHtml(guess)}">${escapeHtml(guess)}</button>?`;
 
   const n = state.count();
   const fc = $("fcount");
@@ -117,6 +125,14 @@ toggle.addEventListener("click", () => showPanel());
 $("f-done").addEventListener("click", () => { showPanel(false); toggle.focus(); });
 $("f-reset").addEventListener("click", () => { state.reset(true); render(); });
 $("empty-reset").addEventListener("click", () => { state.reset(); render(); focusEl(q); });
+$("suggest").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-guess]");
+  if (!b) return;
+  q.value = b.dataset.guess; state.q = q.value; render(); focusEl(q);
+});
+// Suchbegriff aus der Schnellsuche anderer Seiten (?q=…)
+const urlQ = new URLSearchParams(location.search).get("q");
+if (urlQ) { q.value = urlQ; state.q = urlQ; }
 panel.addEventListener("click", (e) => {
   const c = e.target.closest(".fchips .chip");
   if (!c) return;

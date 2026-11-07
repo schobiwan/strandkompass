@@ -6,7 +6,7 @@ from .icons import FAVICON
 
 TOOLS = os.path.join(ROOT, "node_modules", ".bin")
 
-SAFELIST = ["now", "open", "calm", "scrolled", "clear", "fcount", "pk", "playing"]
+SAFELIST = ["now", "open", "calm", "scrolled", "clear", "fcount", "pk", "playing", "snone", "suggest-btn"]
 
 def build_assets():
     from PIL import Image

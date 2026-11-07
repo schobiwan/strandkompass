@@ -1,4 +1,5 @@
 // Läuft auf jeder Seite: Navigation, Monatsangaben, Falt-Abschnitte
+import "./quicksearch.js";
 import { $$, nums, NOW, NOW_NAME, MSLUG, href } from "./util.js";
 import "./sound.js";
 

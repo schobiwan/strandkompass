@@ -442,3 +442,26 @@ footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips s
 /* Kopfzeile „Wer taucht da auf?“ bleibt am Desktop einzeilig */
 .hero6 h1{font-size:clamp(2.1rem,3.7vw,3.15rem)}
 @media(min-width:600px){.ht-row{white-space:nowrap}}
+
+/* ---------- Schnellsuche (wie Vogelkompass) ---------- */
+.navsearch{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;margin-left:8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--hdr-fg) 28%,transparent);background:transparent;color:var(--hdr-fg);font:600 .9rem var(--body);cursor:pointer;flex:none}
+.navsearch svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.navsearch:hover{background:color-mix(in srgb,var(--hdr-fg) 8%,transparent);border-color:var(--hdr-fg)}
+.sdlg{border:0;border-radius:16px;padding:16px;width:min(560px,calc(100vw - 32px));margin-top:10vh;background:var(--surface);color:var(--fg);box-shadow:0 24px 64px rgba(0,0,0,.3)}
+.sdlg::backdrop{background:rgba(0,0,0,.4)}
+.sform{display:flex;gap:8px;align-items:center}
+.sform .search{flex:1;max-width:none}
+.sclose{font:600 .9rem var(--body);background:none;border:0;color:var(--muted);min-height:44px;padding:0 6px;cursor:pointer}
+.sclose:hover{color:var(--fg)}
+.sresults{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:2px}
+.sresults a{display:grid;grid-template-columns:48px 1fr;align-items:center;column-gap:12px;padding:6px;border-radius:10px;color:var(--fg);text-decoration:none;font-weight:700}
+.sresults a:hover,.sresults a:focus-visible{background:color-mix(in srgb,var(--moss) 14%,var(--surface))}
+.sresults img{width:48px;height:38px;object-fit:cover;border-radius:6px;grid-row:span 2}
+.sresults a span{grid-column:2;font-weight:400;font-size:.84rem;color:var(--muted)}
+.snone{color:var(--muted);padding:8px 6px}
+.snone a{color:var(--rust-text);font-weight:700}
+.smore{margin:10px 6px 0;font-weight:700}
+.smore a{color:var(--rust-text)}
+.empty .suggest{color:var(--fg)}
+.suggest-btn{font:inherit;font-weight:700;color:var(--rust-text);background:none;border:0;padding:4px 0;min-height:32px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:960px){.appnav .navsearch{margin-left:auto}.navsearch .nsl{display:none}.navsearch{padding:0 11px}}
