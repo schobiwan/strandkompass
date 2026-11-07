@@ -23,6 +23,7 @@ function closeAll(except) {
   });
   if (!except && backdrop) backdrop.hidden = true;
 }
+let openedAt = 0; // Zeitpunkt, zu dem ein Menü per Maus aufging
 function open(t, focusFirst = false) {
   closeAll(t);
   t.setAttribute("aria-expanded", "true");
@@ -35,13 +36,18 @@ const isOpen = (t) => t.getAttribute("aria-expanded") === "true";
 let hoverTimer = 0;
 triggers.forEach((t) => {
   const li = t.parentElement;
-  t.addEventListener("click", (e) => { e.preventDefault(); if (isOpen(t)) closeAll(); else open(t); });
+  t.addEventListener("click", (e) => {
+    e.preventDefault();
+    // Wer mit der Maus hinzeigt und gleich klickt, will das Menü offen halten, nicht schließen
+    if (isOpen(t) && Date.now() - openedAt > 600) closeAll(); else open(t);
+  });
   t.addEventListener("keydown", (e) => {
     if (e.key === "ArrowDown" || ((e.key === "Enter" || e.key === " ") && !isOpen(t))) { e.preventDefault(); open(t, true); }
+    else if (e.key === " ") { e.preventDefault(); closeAll(); } // Leertaste schließt, statt die Seite zu scrollen
   });
   li.addEventListener("mouseenter", () => {
     if (!canHover() || mobile()) return;
-    clearTimeout(hoverTimer); hoverTimer = window.setTimeout(() => open(t), 80);
+    clearTimeout(hoverTimer); hoverTimer = window.setTimeout(() => { if (!isOpen(t)) { open(t); openedAt = Date.now(); } }, 80);
   });
   li.addEventListener("mouseleave", () => {
     if (!canHover() || mobile()) return;

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """Symbole, Logo und Zierelemente als SVG."""
-import json
-from .core import *
 
 # ------------------------------------------------------------------ Icons
 ICON = {

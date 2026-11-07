@@ -4,7 +4,7 @@ import { $, escapeHtml, focusEl } from "./util.js";
 import { prepare, rank, suggest } from "./search.js";
 
 const ROOT = document.documentElement.dataset.root || "./";
-const dlg = $("sdlg"), btn = $("navsearch"), sq = $("sq"), list = $("sresults"), more = $("smore"), moreLink = $("smore-link");
+const dlg = $("sdlg"), btn = $("navsearch"), sq = $("sq"), list = $("sresults"), more = $("smore"), moreLink = $("smore-link"), status = $("sstatus");
 const home = $("q"); // Suchfeld der Startseite
 
 let entries = null;
@@ -13,16 +13,17 @@ async function data() {
   try {
     const rows = await (await fetch(`${ROOT}search.json`)).json();
     entries = rows.map(([name, key, names, alt, marks]) => ({ name, key, e: prepare(names, alt, marks.split("|")) }));
-  } catch { entries = []; }
+  } catch { entries = null; return []; } // offline: beim nächsten Öffnen erneut versuchen
   return entries;
 }
 
 let seq = 0;
 async function results() {
   const q = sq.value.trim(), my = ++seq;
-  if (!q) { list.innerHTML = ""; more.hidden = true; return; }
+  if (!q) { list.innerHTML = ""; more.hidden = true; status.textContent = ""; return; }
   const all = await data();
   if (my !== seq) return; // eine neuere Eingabe ist schon unterwegs
+  if (!all.length) { list.innerHTML = '<li class="snone">Die Suche ist gerade nicht erreichbar.</li>'; status.textContent = "Die Suche ist gerade nicht erreichbar."; return; }
   const hits = all.map((x) => ({ ...x, r: rank(x.e, q) })).filter((x) => x.r >= 0)
     .sort((a, b) => a.r - b.r || a.name.localeCompare(b.name, "de"));
   if (!hits.length) {
@@ -34,6 +35,8 @@ async function results() {
       `<li><a href="${ROOT}arten/${x.key}/index.html"><img src="${ROOT}photos/${x.key}-400.webp" alt="" width="48" height="38" loading="lazy">${escapeHtml(x.name)}${x.r >= 3 ? `<span>${x.r === 3 ? "ähnelt der gesuchten Art" : "passt zum Aussehen"}</span>` : ""}</a></li>`).join("");
   }
   more.hidden = hits.length <= 8;
+  // Kurze Ansage für Screenreader statt der ganzen Liste
+  status.textContent = hits.length ? `${hits.length} Treffer${hits.length > 8 ? ", die ersten 8 werden gezeigt" : ""}` : "Nichts gefunden";
   moreLink.href = `${ROOT}index.html?q=${encodeURIComponent(q)}#arten`;
 }
 

@@ -2,7 +2,7 @@
 """Lädt Fotos von Wikimedia Commons (läuft in GitHub Actions).
 Liste: tools/photo_list.json  {key: ["Wikipedia-Artikel de", "Artikel en"] oder "File:Name.jpg"}
 Ergebnis: photos_src/incoming/<key>.jpg (+ <key>-alt.jpg) und meta.json"""
-import json, os, re, sys, time, urllib.parse, urllib.request, html
+import json, os, re, time, urllib.parse, urllib.request, html
 
 UA = "StrandkompassBot/1.0 (https://github.com/schobiwan/strandkompass)"
 OUT = "photos_src/incoming"

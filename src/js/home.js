@@ -117,6 +117,11 @@ function render() {
 let t = 0;
 q.addEventListener("input", () => { clearTimeout(t); t = setTimeout(() => { state.q = q.value; render(); }, 120); });
 q.addEventListener("keydown", (e) => { if (e.key === "Escape" && q.value) { e.preventDefault(); q.value = ""; state.q = ""; render(); } });
+// Escape schließt das Filterfeld und gibt den Fokus an den Filter-Knopf zurück
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape" || panel.hidden || !panel.contains(document.activeElement) && document.activeElement !== toggle) return;
+  showPanel(false); toggle.focus();
+});
 sortSel.addEventListener("change", () => { state.sort = sortSel.value; render(); });
 
 const panel = $("fpanel"), toggle = $("f-toggle");

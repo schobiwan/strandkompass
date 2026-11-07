@@ -65,7 +65,7 @@ def seabar(R):
 SEARCH_DLG = ('<dialog class="sdlg" id="sdlg" aria-labelledby="sdlg-title"> <form method="get" action="{R}index.html" class="sform" id="sform">'
               '<h2 class="sr-only" id="sdlg-title">Art suchen</h2><label class="search" for="sq">' + ICON["find"] + '<span class="sr-only">Name oder Aussehen</span>'
               '<input type="search" id="sq" name="q" placeholder="Name oder Aussehen, z. B. roter Schnabel" autocomplete="off" enterkeyhint="search"></label>'
-              '<button type="button" class="sclose" id="sclose">Schließen</button></form> <ul class="sresults" id="sresults" aria-live="polite"></ul>'
+              '<button type="button" class="sclose" id="sclose">Schließen</button></form> <p class="sr-only" id="sstatus" role="status" aria-live="polite"></p><ul class="sresults" id="sresults" aria-label="Treffer"></ul>'
               '<p class="smore" id="smore" hidden><a id="smore-link" href="{R}index.html#arten">Alle Treffer mit Filtern anzeigen</a></p> </dialog>')
 
 def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=None, is_home=False, og="og.jpg", seafilter=True):

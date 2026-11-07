@@ -504,3 +504,19 @@ footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips s
    und Abdunklung an der Kopfleiste statt am Bildschirm ausrichten (sie klebten dann oben). */
 @media(max-width:960px){.appnav{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--hdr-bg)}}
 @media(min-width:961px){.tabs>li.has-menu{display:flex;align-items:center}}
+
+/* ---------- Barrierefreiheit: Fokus und Zielgrößen ----------
+   PurgeCSS entfernt Regeln, die nur aus Pseudo-Klassen bestehen. Diese Regeln sind deshalb geschützt. */
+/* purgecss start ignore */
+:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
+.appnav :focus-visible,.tabs .tab:focus-visible,.hsearch-btn:focus-visible,.hsearch label:focus-within,.home-head :focus-visible{outline-color:var(--rust)}
+.tabs .tab:focus-visible{outline-offset:-3px;border-radius:8px}
+.sresults a:focus-visible{outline-offset:0}
+.mpanel a:focus-visible{outline-offset:0}
+/* purgecss end ignore */
+.hsearch-btn{color:var(--rust-fg)}
+.months span.h{color:var(--bg)}
+@media(prefers-color-scheme:light){.months span.h{color:#fffdf8}}
+.seabar-more{display:inline-flex;align-items:center;min-height:32px}
+.qtable th a,.qtab th a,table th[scope=row]>a{display:inline-flex;align-items:center;min-height:28px}
+.hsearch input{min-height:44px}

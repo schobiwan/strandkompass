@@ -7,7 +7,12 @@ import "./sound.js";
 // Abschnitte auf dem Handy eingeklappt, am Desktop offen
 const mq = matchMedia("(max-width: 760px)");
 const folds = $$("details[data-fold]");
-const syncFolds = () => folds.forEach((d) => { d.open = !mq.matches; });
+// Am Computer sind die Abschnitte immer offen; ihre Überschrift ist dann kein Bedienelement und kein Tab-Stopp
+const syncFolds = () => folds.forEach((d) => {
+  d.open = !mq.matches;
+  const s = d.querySelector("summary");
+  if (s) { if (mq.matches) s.removeAttribute("tabindex"); else s.tabIndex = -1; }
+});
 syncFolds();
 mq.addEventListener("change", syncFolds);
 folds.forEach((d) => d.querySelector("summary")?.addEventListener("click", (e) => { if (!mq.matches) e.preventDefault(); }));
