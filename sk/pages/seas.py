@@ -31,7 +31,7 @@ def build_seas():
 <section class="block" aria-labelledby="h-places"><div class="wrap"><h2 id="h-places">Gute Orte an der {I["name"]}</h2><ul class="explore tips">{places}</ul></div></section>
 <section class="block"><div class="wrap"><div class="prose">{why}<p><a href="{R}nordsee-ostsee/index.html">Nordsee und Ostsee im Vergleich</a> · <a href="{R}{SEA_INFO[other]["slug"]}/index.html">Zur {SEA_INFO[other]["name"]}</a></p></div></div></section>'''
         write(f'{I["slug"]}/index.html', page(f'{I["slug"]}/index.html', I["h1"], f'{I["lede"]} {len(here)} Seevögel, Robben, Wale und Strandfunde an der {I["name"]} bestimmen.', body,
-              active="nordsee-ostsee", crumbs=[("Meere", "nordsee-ostsee/index.html"), (I["name"], "")], seafilter=False))
+              active="nordsee-ostsee", crumbs=[("Nord- & Ostsee", "nordsee-ostsee/index.html"), (I["name"], "")], seafilter=False))
     # Vergleichsseite
     R = "../"
     N, O = SEA_INFO["nord"], SEA_INFO["ost"]
@@ -46,4 +46,4 @@ def build_seas():
 {seapair(R, overview=True)}
 <section class="block"><div class="wrap"><div class="prose"><h2>Warum hat die Ostsee kaum Ebbe und Flut?</h2><p>Gezeiten entstehen durch die Anziehung von Mond und Sonne. In einem großen, offenen Meer wie dem Atlantik baut sich dabei eine Flutwelle auf, die bis in die Nordsee läuft. Die Ostsee ist dafür zu klein und nur über schmale Meerengen mit der Nordsee verbunden. Ihr Wasserstand ändert sich deshalb vor allem durch Wind: Bei starkem Nordostwind kann es an der deutschen Küste zu Sturmfluten kommen.</p><h2>Was bedeutet das am Strand?</h2><p>An der Nordsee lohnt es sich, nach den Gezeiten zu planen: Bei Niedrigwasser suchen Watvögel im Watt nach Futter, bei Hochwasser sammeln sie sich an Rastplätzen. An der Ostsee kommt es eher auf den Wind an: Nach auflandigem Sturm liegt im Spülsaum am meisten, auch Bernstein.</p><h2>Am Küstenkompass umschalten</h2><p>Oben auf der Startseite, in der Liste aller Funde und im Strandjahr kannst du zwischen „Beide Meere“, „Nordsee“ und „Ostsee“ wählen. Dann siehst du nur, was es an deinem Meer gibt. Die Wahl merkt sich dein Browser, bis du sie änderst.</p></div></div></section>'''
     write("nordsee-ostsee/index.html", page("nordsee-ostsee/index.html", "Nordsee und Ostsee im Vergleich", "Gezeiten, Salzgehalt, Küste, Seevögel, Robben und Wale: Was Nordsee und Ostsee unterscheidet und was du wo entdeckst.", body,
-          active="nordsee-ostsee", crumbs=[("Meere", "")], seafilter=False))
+          active="nordsee-ostsee", crumbs=[("Nord- & Ostsee", "")], seafilter=False))

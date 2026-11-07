@@ -20,6 +20,12 @@ PAIRBY = {p["k"]: p for p in PAIRS}
 TAG = "schobiwan-21"
 
 
+def gslug(g):
+    """Anker einer Gruppe: „Wale & Delfine“ → wale-delfine, „Seevögel“ → seevoegel."""
+    import re as _re
+    t = g.lower().replace("ä", "ae").replace("ö", "oe").replace("ü", "ue").replace("ß", "ss")
+    return _re.sub(r"[^a-z0-9]+", "-", t).strip("-")
+
 def skey(x):
     """Sortierschlüssel nach Duden: Umlaute wie Grundbuchstaben (Säbelschnäbler vor Sturmmöwe)."""
     n = x["n"] if isinstance(x, dict) else x

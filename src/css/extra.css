@@ -36,7 +36,7 @@ body:before{background:var(--hdr-bg)}
   .appnav .tab:hover:after{opacity:.35}
   .appnav .tab[aria-current=page]:after{opacity:1}
 }
-@media(max-width:960px){.tabs{grid-template-columns:repeat(5,minmax(0,1fr))}}
+@media(max-width:960px){.tabs{grid-template-columns:repeat(4,minmax(0,1fr))}}
 
 /* ---------- Kopfbereich: Himmel, Sand und Rippelmarken ---------- */
 .hero6{position:relative;overflow:hidden;color:var(--fg);background:
@@ -465,3 +465,42 @@ footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips s
 .empty .suggest{color:var(--fg)}
 .suggest-btn{font:inherit;font-weight:700;color:var(--rust-text);background:none;border:0;padding:4px 0;min-height:32px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:960px){.appnav .navsearch{margin-left:auto}.navsearch .nsl{display:none}.navsearch{padding:0 11px}}
+
+/* ---------- Aufklappmenüs der Hauptnavigation (wie Vogelkompass) ---------- */
+.tabs>li.has-menu{position:relative}
+.tab .chev{display:inline-block!important;width:14px;height:14px;margin-left:2px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;opacity:.7;transition:transform .2s ease;vertical-align:-2px}
+.tab[aria-expanded=true] .chev{transform:rotate(180deg)}
+.tab[aria-current=true]{opacity:1;color:var(--deep)}
+.tab[aria-current=true]:after{transform:scaleX(1);opacity:1}
+.tab[aria-expanded=true]{opacity:1}
+.tab[aria-expanded=true]:after{transform:scaleX(1);opacity:.35}
+.tab[aria-current=true][aria-expanded=true]:after{opacity:1}
+.mpanel{position:absolute;top:calc(100% - 6px);left:-14px;z-index:30;width:360px;padding:12px;border-radius:14px;background:var(--surface);color:var(--fg);box-shadow:0 18px 48px rgba(0,0,0,.22),0 2px 6px rgba(0,0,0,.08)}
+.mpanel:before{content:"";position:absolute;left:0;right:0;top:-12px;height:12px}
+.mpanel .mintro{margin:2px 10px 8px;font-size:.8rem;font-weight:700;color:var(--muted)}
+.mpanel ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.mpanel a{display:grid;gap:1px;padding:9px 10px;border-radius:10px;color:var(--fg);text-decoration:none}
+.mpanel a b{font-weight:700;font-size:.98rem;color:var(--heading)}
+.mpanel a span{color:var(--muted);font-size:.86rem}
+.mpanel a:hover{background:color-mix(in srgb,var(--sky-top) 45%,var(--surface))}
+.mpanel a:hover b{color:var(--rust-text)}
+.mpanel a[aria-current=page]{background:color-mix(in srgb,var(--sky-top) 60%,var(--surface))}
+.mpanel :focus-visible{outline-color:var(--rust)}
+.mbackdrop{position:fixed;inset:0;z-index:19;background:rgba(0,0,0,.35)}
+.grpjump{margin:0 0 8px}
+.grp-h{scroll-margin-top:calc(var(--nav-h) + 16px)}
+@media(max-width:960px){
+  .tab .chev{display:none!important}
+  .tabs>li{display:flex;min-width:0}
+  .tabs>li>.tab{flex:1;width:100%}
+  .tab[aria-current=true]{color:var(--heading);background:color-mix(in srgb,var(--moss) 18%,var(--surface))!important}
+  .tab[aria-expanded=true]{color:var(--heading);background:color-mix(in srgb,var(--moss) 12%,var(--surface))!important}
+  .mpanel{position:fixed;top:auto;left:8px;right:8px;bottom:calc(76px + env(safe-area-inset-bottom,0px));width:auto;max-height:calc(100vh - 140px);overflow:auto;animation:sheet .22s ease both}
+  .mpanel:before{display:none}
+}
+@keyframes sheet{from{transform:translateY(16px);opacity:0}}
+@media(prefers-reduced-motion:reduce){.mpanel{animation:none}}
+/* Handy: kein Weichzeichner an der Kopfleiste. backdrop-filter würde die untere Leiste, Menüfenster
+   und Abdunklung an der Kopfleiste statt am Bildschirm ausrichten (sie klebten dann oben). */
+@media(max-width:960px){.appnav{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--hdr-bg)}}
+@media(min-width:961px){.tabs>li.has-menu{display:flex;align-items:center}}
