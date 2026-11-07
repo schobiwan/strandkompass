@@ -7,11 +7,13 @@ from ..components import *
 
 def build_pairs():
     R = "../"
-    isb = lambda p: p["a"] in BY and BY[p["a"]]["grp"] == "Seevögel"
-    body = (f'<section class="block page"> <div class="wrap"> <h1>Doppelgänger unterscheiden</h1> <p class="intro">Am Strand sieht sich manches zum Verwechseln ähnlich: Möwen, Strandläufer und Seeschwalben ebenso wie Quallen, bei denen der Unterschied sogar wichtig ist. Diese Merkmale helfen beim Unterscheiden.</p>'
-            f'<h2 class="h3 grp-h" id="voegel">Seevögel</h2><ul class="pairs">{"".join(pair_card(R, p, "h3") for p in PAIRS if isb(p))}</ul>'
-            f'<h2 class="h3 grp-h" id="funde">Strandfunde und Meerestiere</h2><ul class="pairs">{"".join(pair_card(R, p, "h3") for p in PAIRS if not isb(p))}</ul> </div> </section>')
-    write("unterscheiden/index.html", page("unterscheiden/index.html", "Doppelgänger unterscheiden", "Silbermöwe oder Heringsmöwe, Sanderling oder Alpenstrandläufer, Ohrenqualle oder Kompassqualle: Seevögel und Strandfunde sicher unterscheiden.", body, active="unterscheiden", crumbs=[("Doppelgänger", "")]))
+    grp = lambda p: BY[p["a"]]["grp"] if p["a"] in BY else ""
+    sec = [("voegel", "Seevögel", lambda g: g == "Seevögel"), ("robben-wale", "Robben, Wale und Delfine", lambda g: g in ("Robben", "Wale & Delfine")),
+           ("funde", "Quallen, Muscheln und andere Funde", lambda g: g not in ("Seevögel", "Robben", "Wale & Delfine"))]
+    lists = "".join(f'<h2 class="h3 grp-h" id="{i}">{t}</h2><ul class="pairs">{"".join(pair_card(R, p, "h3") for p in PAIRS if f(grp(p)))}</ul>' for i, t, f in sec)
+    body = (f'<section class="block page"> <div class="wrap"> <h1>Doppelgänger unterscheiden</h1> <p class="intro">An der Küste sieht sich vieles zum Verwechseln ähnlich: Möwen und Strandläufer, Seehund und Kegelrobbe, Schweinswal und Tümmler. Bei Quallen ist der Unterschied sogar wichtig, weil manche brennen. Diese Merkmale helfen dir.</p>'
+            f'{lists} </div> </section>')
+    write("unterscheiden/index.html", page("unterscheiden/index.html", "Doppelgänger unterscheiden", "Silbermöwe oder Heringsmöwe, Seehund oder Kegelrobbe, Schweinswal oder Tümmler: Seevögel, Robben, Wale und Quallen sicher unterscheiden.", body, active="unterscheiden", crumbs=[("Doppelgänger", "")]))
     for p in PAIRS:
         R = "../../"
         figs = ""

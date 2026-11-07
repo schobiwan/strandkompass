@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Strandkompass bauen: erzeugt die fertige Website in dist/.
+"""Küstenkompass bauen: erzeugt die fertige Website in dist/.
 
 Aufruf: python3 build.py   (vorher einmal npm ci für esbuild, lightningcss und purgecss)
 

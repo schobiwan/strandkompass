@@ -7,13 +7,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CREDITS = json.load(open(os.path.join(ROOT, "credits.json"), encoding="utf-8"))
 # Tonaufnahmen: key -> [Urheber, Lizenz, Quelle, Sekunden]
 AUDIO = json.load(open(os.path.join(ROOT, "audio.json"), encoding="utf-8")) if os.path.exists(os.path.join(ROOT, "audio.json")) else {}
-SITE = "Strandkompass"
-DOMAIN = "https://strandkompass.de"
+SITE = "Küstenkompass"
+DOMAIN = "https://kuestenkompass.de"
 OUT = os.path.join(ROOT, "dist")
 MONTHS = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
 MSHORT = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
 MSLUG = ["januar", "februar", "maerz", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "dezember"]
 BY = {s["k"]: s for s in SPECIES}
+# Doppelgänger in der Reihenfolge der Gruppen: Vögel, Robben, Wale, dann die übrigen Funde
+PAIRS.sort(key=lambda p: GROUPS.index(BY[p["a"]]["grp"]) if p["a"] in BY else len(GROUPS))
 PAIRBY = {p["k"]: p for p in PAIRS}
 TAG = "schobiwan-21"
 

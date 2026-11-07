@@ -49,8 +49,9 @@ const byName = (a, b) => a.name.localeCompare(b.name, "de");
 const nowRank = (a) => (a.peak.includes(NOW) ? 0 : a.present.includes(NOW) ? 1 : 2);
 let lastOrder = "";
 
-// Ohne Suche und Filter zeigt die Startseite nur die ersten Funde; die Seevögel stehen dann im Band darüber
+// Ohne Suche und Filter zeigt die Startseite nur die ersten Funde; Vögel, Robben und Wale stehen dann in den Bändern darüber
 const FIRST = 12;
+const BANDED = new Set(["Seevögel", "Robben", "Wale & Delfine"]);
 let expanded = false;
 const moreBox = $("gridmore"), moreBtn = $("more-btn");
 
@@ -61,10 +62,10 @@ function render() {
   else list.sort((a, b) => nowRank(a) - nowRank(b) || byName(a, b));
   const full = list.length;
   const collapsed = !expanded && !state.q.trim() && !state.count();
-  if (collapsed) list = list.filter((a) => a.grp !== "Seevögel").slice(0, FIRST);
+  if (collapsed) list = list.filter((a) => !BANDED.has(a.grp)).slice(0, FIRST);
   if (moreBox) {
     moreBox.hidden = !collapsed || list.length >= full;
-    moreBtn.textContent = `Alle ${full} Funde anzeigen`;
+    moreBtn.textContent = `Alle ${full} Arten und Funde anzeigen`;
   }
   const order = list.map((a) => a.key).join();
   grid.classList.toggle("calm", order === lastOrder);
@@ -87,7 +88,7 @@ function render() {
   const sea = getSea();
   const base = sea ? animals.filter((a) => a.act.includes(sea)).length : TOTAL;
   const where = sea === "nord" ? " an der Nordsee" : sea === "ost" ? " an der Ostsee" : "";
-  $("rcount").textContent = full === base ? `${base} Funde${where}` : `${full} von ${base} Funden${where}`;
+  $("rcount").textContent = full === base ? `${base} Arten und Funde${where}` : `${full} von ${base}${where}`;
 
   $$(".fchips .chip").forEach((c) => {
     const g = c.dataset.g, v = c.dataset.v;
@@ -145,7 +146,7 @@ grid.classList.add("calm");
 
 // Fund des Monats: erste Art in Hauptzeit, Seevögel haben Vorrang (Reihenfolge aus dem Build)
 const SPOT = JSON.parse($("spotdata")?.textContent || "[]");
-$$(".birdtiles > li").forEach((li, i) => { li.dataset.o = String(i); });
+$$(".birdtiles").forEach((ul) => [...ul.children].forEach((li, i) => { li.dataset.o = String(i); }));
 function setupNow() {
   const sea = getSea();
   const items = SPOT.filter((x) => !sea || x.act.includes(sea));
@@ -160,20 +161,19 @@ function setupNow() {
     $("spot-hl").textContent = top.hl;
     $("spot-cred").innerHTML = document.getElementById(top.k)?.querySelector(":scope > small")?.innerHTML || "";
   }
-  // Im Seevögel-Band rückt der Fund des Monats ans Ende, damit er nicht doppelt vorn steht
-  const band = document.querySelector(".birdtiles");
-  if (band) {
-    const tiles = $$(".birdtiles > li");
+  // In den Bändern rückt die Art aus dem Kopfbereich ans Ende, damit sie nicht doppelt vorn steht
+  $$(".birdtiles").forEach((band) => {
+    const tiles = [...band.children];
     tiles.sort((a, b) => (a.dataset.k === top.k) - (b.dataset.k === top.k) || Number(a.dataset.o) - Number(b.dataset.o));
     tiles.forEach((li) => band.appendChild(li));
-  }
+  });
 }
 setupNow();
 document.addEventListener("seachange", () => { setupNow(); render(); });
 
 // Tiergruppen im Kopfbereich und im Seevögel-Band setzen den Gruppenfilter
 $$("[data-hgrp]").forEach((b) => b.addEventListener("click", () => {
-  state.grp.clear(); state.grp.add(b.dataset.hgrp); render();
+  state.grp.clear(); b.dataset.hgrp.split("|").forEach((g) => state.grp.add(g)); render();
   $("arten").scrollIntoView({ behavior: reduced() ? "auto" : "smooth" });
 }));
 

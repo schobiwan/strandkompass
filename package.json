@@ -1,7 +1,7 @@
 {
-  "name": "strandkompass",
+  "name": "kuestenkompass",
   "private": true,
-  "description": "Strandkompass – statische Website zum Bestimmen von Strandfunden",
+  "description": "Küstenkompass – statische Website zum Bestimmen von Strandfunden",
   "scripts": {
     "build": "python3 build.py",
     "check": "python3 tools/check.py"

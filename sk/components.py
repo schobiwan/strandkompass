@@ -79,7 +79,7 @@ def seapair(R, overview=False):
         return (f'<li class="seacard seacard-{k}"><a href="{R}{"nordsee" if k == "nord" else "ostsee"}/index.html"><b>{title}</b><span>{esc(txt)}</span>'
                 f'<ul>{lis}</ul><span class="sc-n">{n} Arten und Funde{f", {only} davon nur hier" if only else ""}</span></a></li>')
     head = ('<h2 id="sp-h">Alle Funde je Meer</h2><p class="intro">Was du nur an der Nordsee oder nur an der Ostsee findest, mit allen Arten und Funden.</p>' if overview else
-            '<h2 id="sp-h">Nordsee oder Ostsee?</h2><p class="intro">Die beiden Meere sind sehr verschieden. Das merkst du schon daran, was am Strand liegt und welche Vögel dort leben.</p>')
+            '<h2 id="sp-h">Nordsee oder Ostsee?</h2><p class="intro">Die beiden Meere sind sehr verschieden. Das merkst du daran, welche Vögel, Robben und Wale dort leben und was am Strand liegt.</p>')
     return ('<section class="block seapair" aria-labelledby="sp-h"><div class="wrap">' + head + '<ul class="seacards">'
             + card_("nord", "Nordsee", ["Ebbe und Flut, 2 bis 4 Meter Unterschied", "Wattenmeer, Halligen und Sandbänke", "Seehunde, Basstölpel und Trottellummen"],
                     "Salziges Gezeitenmeer mit dem Wattenmeer, einem der wichtigsten Rastgebiete für Zugvögel weltweit.")

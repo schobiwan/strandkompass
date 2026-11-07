@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Inhalte des Strandkompass: Tiere, Pflanzen und Funde an Nord- und Ostsee."""
+"""Inhalte des Küstenkompass: Tiere, Pflanzen und Funde an Nord- und Ostsee."""
 
-GROUPS = ["Seevögel", "Meeressäuger", "Muscheln", "Schnecken", "Quallen", "Krebse & Würmer", "Seesterne & Seeigel", "Tang & Seegras", "Strandfunde"]
+GROUPS = ["Seevögel", "Robben", "Wale & Delfine", "Muscheln", "Schnecken", "Quallen", "Krebse & Würmer", "Seesterne & Seeigel", "Tang & Seegras", "Strandfunde"]
 HABS = ["Spülsaum", "Watt", "Salzwiese", "Steine & Buhnen", "Flachwasser", "Offenes Meer", "Vogelfelsen"]
 ACTS = {"nord": "Nordsee", "ost": "Ostsee"}
 SIZES = {"s": "klein (bis 3 cm)", "m": "handgroß (3–10 cm)", "l": "groß (10–40 cm)", "xl": "sehr groß (über 40 cm)"}
@@ -539,8 +539,8 @@ S("huehnergott", "Hühnergott", "m", "Feuerstein mit Loch", "Strandfunde", ["nor
   "Einzelne Steine zum Sammeln sind in der Regel kein Problem. Im Nationalpark und an Steilküsten gelten die Regeln vor Ort.",
   "Am Kiesstrand gegen die Sonne laufen: Durch Löcher scheint Licht und sie fallen schneller auf.",
   None),
-# ---------------------------------------------------------------- Meeressäuger
-S("seehund", "Seehund", "m", "Phoca vitulina", "Meeressäuger", ["nord", "ost"], ["Watt", "Offenes Meer"], "xl", "1,2–1,9 m", 155, ALL, [6, 7, 8],
+# ---------------------------------------------------------------- Robben, Wale und Delfine
+S("seehund", "Seehund", "m", "Phoca vitulina", "Robben", ["nord", "ost"], ["Watt", "Offenes Meer"], "xl", "1,2–1,9 m", 155, ALL, [6, 7, 8],
   "Im Juni und Juli bringen Seehunde ihre Jungen auf den Sandbänken zur Welt, im August wechseln sie ihr Fell.",
   "Häufigste Robbe an der Nordsee mit rundem Kopf, kurzer Schnauze und großen dunklen Augen.",
   ["Runder Kopf mit kurzer, hundeartiger Schnauze", "Fell grau mit vielen dunklen Flecken", "Nasenlöcher bilden ein V"],
@@ -551,7 +551,7 @@ S("seehund", "Seehund", "m", "Phoca vitulina", "Meeressäuger", ["nord", "ost"],
   "Ein Heuler allein am Strand ist meist nicht verlassen. Möglichst großen Abstand halten, empfohlen werden mehrere hundert Meter. Hunde anleinen, nicht anfassen und die Seehundstation oder die Polizei anrufen.",
   "Bei einer Seehundfahrt mit dem Schiff zu den Sandbänken kommst du ihnen nah, ohne sie zu stören.",
   "seehund-oder-kegelrobbe"),
-S("kegelrobbe", "Kegelrobbe", "f", "Halichoerus grypus", "Meeressäuger", ["nord", "ost"], ["Offenes Meer", "Watt"], "xl", "1,8–2,5 m", 215, ALL, [11, 12, 1],
+S("kegelrobbe", "Kegelrobbe", "f", "Halichoerus grypus", "Robben", ["nord", "ost"], ["Offenes Meer", "Watt"], "xl", "1,8–2,5 m", 215, ALL, [11, 12, 1],
   "Von November bis Januar bekommen Kegelrobben ihre Jungen, auf der Helgoländer Düne aus der Nähe zu sehen.",
   "Größtes Raubtier Deutschlands, mit langer, gerader Schnauze und weißen Jungen im Winter.",
   ["Lange, gerade Schnauze, der Kopf erinnert an ein Pferd", "Nasenlöcher parallel, nicht als V", "Junge mit dichtem, weißem Fell"],
@@ -562,7 +562,7 @@ S("kegelrobbe", "Kegelrobbe", "f", "Halichoerus grypus", "Meeressäuger", ["nord
   "Auf Helgoland gilt mindestens 30 m Abstand, sonst je nach Ort mehr. Kegelrobben können beißen. Nie zwischen Mutter und Junges gehen und Hunde fernhalten.",
   "Zur Wurfzeit im Dezember die Helgoländer Düne besuchen und den markierten Wegen folgen.",
   "seehund-oder-kegelrobbe"),
-S("weissschnauzendelfin", "Weißschnauzendelfin", "m", "Lagenorhynchus albirostris", "Meeressäuger", ["nord"], ["Offenes Meer"], "xl", "2,5–3 m", 280, ALL, [6, 7, 8, 9],
+S("weissschnauzendelfin", "Weißschnauzendelfin", "m", "Lagenorhynchus albirostris", "Wale & Delfine", ["nord"], ["Offenes Meer"], "xl", "2,5–3 m", 280, ALL, [6, 7, 8, 9],
   "Weißschnauzendelfine leben in der zentralen und nördlichen Nordsee. Von der deutschen Küste aus sind sie selten zu sehen, eher von der Fähre nach Helgoland.",
   "Kräftiger Delfin mit kurzer, heller Schnauze und großen weißen und grauen Flecken an den Flanken.",
   ["Kurze, dicke, weißliche Schnauze", "Rücken schwarz, an den Flanken hellgraue bis weiße Flecken", "Hohe, sichelförmige Rückenflosse in der Körpermitte"],
@@ -573,7 +573,7 @@ S("weissschnauzendelfin", "Weißschnauzendelfin", "m", "Lagenorhynchus albirostr
   "Delfine nicht mit dem Boot verfolgen. Sichtungen kannst du über Meldeportale wie BeachExplorer weitergeben.",
   "Auf der Überfahrt nach Helgoland bei ruhiger See aufs Wasser schauen, besonders im Sommer.",
   "weissschnauzendelfin-oder-grosser-tuemmler"),
-S("grosser-tuemmler", "Großer Tümmler", "m", "Tursiops truncatus", "Meeressäuger", ["nord", "ost"], ["Offenes Meer", "Flachwasser"], "xl", "2–4 m", 300, ALL, [5, 6, 7, 8, 9],
+S("grosser-tuemmler", "Großer Tümmler", "m", "Tursiops truncatus", "Wale & Delfine", ["nord", "ost"], ["Offenes Meer", "Flachwasser"], "xl", "2–4 m", 300, ALL, [5, 6, 7, 8, 9],
   "In der Nordsee kommt er regelmäßig vor, in die Ostsee verirren sich nur einzelne Tiere. Die werden dort schnell berühmt, etwa „Delle“ in Travemünde und Kiel.",
   "Der bekannte „Flipper“-Delfin: grau und kräftig, mit kurzer, deutlich abgesetzter Schnauze.",
   ["Einfarbig grau, Bauch heller", "Kurze, deutlich abgesetzte Schnauze", "Hohe, sichelförmige Rückenflosse"],
@@ -584,7 +584,7 @@ S("grosser-tuemmler", "Großer Tümmler", "m", "Tursiops truncatus", "Meeressäu
   "Abstand halten, nicht anfassen und nicht mit ihm schwimmen. Auch freundlich wirkende Einzeltiere können zubeißen.",
   "Taucht ein Tümmler in einer Förde auf, berichten lokale Medien schnell. Von Molen und Hafeneinfahrten aus ist er dann oft zu sehen.",
   "schweinswal-oder-grosser-tuemmler"),
-S("zwergwal", "Zwergwal", "m", "Balaenoptera acutorostrata", "Meeressäuger", ["nord"], ["Offenes Meer"], "xl", "7–9 m", 800, [4, 5, 6, 7, 8, 9, 10], [6, 7, 8],
+S("zwergwal", "Zwergwal", "m", "Balaenoptera acutorostrata", "Wale & Delfine", ["nord"], ["Offenes Meer"], "xl", "7–9 m", 800, [4, 5, 6, 7, 8, 9, 10], [6, 7, 8],
   "Zwergwale halten sich vor allem in der zentralen und nördlichen Nordsee auf, etwa an der Doggerbank. Vor der deutschen Küste sind sie selten.",
   "Der kleinste Bartenwal der Nordsee: schlank, mit spitzem Kopf und einem weißen Band auf den Brustflossen.",
   ["Spitzer, dreieckiger Kopf", "Kleine, sichelförmige Rückenflosse weit hinten", "Weißes Band auf den Brustflossen"],
@@ -595,7 +595,7 @@ S("zwergwal", "Zwergwal", "m", "Balaenoptera acutorostrata", "Meeressäuger", ["
   "Gestrandete oder treibende Wale nicht anfassen und der Polizei oder der Nationalparkverwaltung melden.",
   "Auf Fähren über die Nordsee nach einer kleinen Rückenflosse Ausschau halten, die kurz nach dem Rücken auftaucht.",
   None),
-S("buckelwal", "Buckelwal", "m", "Megaptera novaeangliae", "Meeressäuger", ["nord", "ost"], ["Offenes Meer"], "xl", "12–15 m", 1350, ALL, [6, 7, 8],
+S("buckelwal", "Buckelwal", "m", "Megaptera novaeangliae", "Wale & Delfine", ["nord", "ost"], ["Offenes Meer"], "xl", "12–15 m", 1350, ALL, [6, 7, 8],
   "Buckelwale sind seltene Gäste. In den letzten Jahren wurden sie aber mehrfach im Wattenmeer und in der westlichen Ostsee gesichtet, etwa in der Kieler und Flensburger Förde.",
   "Großer Bartenwal mit sehr langen, weißen Brustflossen, der beim Abtauchen oft die Schwanzflosse zeigt.",
   ["Sehr lange Brustflossen, bis zu einem Drittel der Körperlänge", "Knotige Höcker auf Kopf und Unterkiefer", "Zeigt beim Abtauchen die Schwanzflosse mit heller Unterseite"],
@@ -606,7 +606,7 @@ S("buckelwal", "Buckelwal", "m", "Megaptera novaeangliae", "Meeressäuger", ["no
   "Abstand halten und mit Booten nicht nähern. Sichtungen der Polizei oder dem zuständigen Umweltministerium melden.",
   "Wird ein Buckelwal gemeldet, bleibt er oft mehrere Tage in derselben Bucht. Von der Mole aus siehst du mit Fernglas am meisten.",
   None),
-S("pottwal", "Pottwal", "m", "Physeter macrocephalus", "Meeressäuger", ["nord"], ["Offenes Meer", "Watt"], "xl", "12–18 m", 1500, [11, 12, 1, 2, 3], [1, 2],
+S("pottwal", "Pottwal", "m", "Physeter macrocephalus", "Wale & Delfine", ["nord"], ["Offenes Meer", "Watt"], "xl", "12–18 m", 1500, [11, 12, 1, 2, 3], [1, 2],
   "Pottwale leben im tiefen Atlantik. Junge Bullen geraten im Winter manchmal in die flache Nordsee und stranden, wie 2016, als 30 Tiere an den Nordseeküsten starben.",
   "Riesiger Zahnwal mit kastenförmigem Kopf, der in der flachen Nordsee nur als Irrgast auftaucht.",
   ["Riesiger, kastenförmiger Kopf, etwa ein Drittel des Körpers", "Dunkelgraue, runzlige Haut", "Blas schräg nach vorn links"],
@@ -617,7 +617,7 @@ S("pottwal", "Pottwal", "m", "Physeter macrocephalus", "Meeressäuger", ["nord"]
   "Gestrandete Wale nicht anfassen und nicht besteigen, sondern Polizei oder Nationalparkverwaltung verständigen. Tote Wale können Krankheitserreger tragen.",
   "Ein Pottwal-Skelett kannst du dir in Nationalpark-Häusern und Ausstellungen an der Nordseeküste ansehen.",
   None),
-S("schweinswal", "Schweinswal", "m", "Phocoena phocoena", "Meeressäuger", ["nord", "ost"], ["Offenes Meer"], "xl", "1,4–1,8 m", 160, ALL, [5, 6, 7, 8],
+S("schweinswal", "Schweinswal", "m", "Phocoena phocoena", "Wale & Delfine", ["nord", "ost"], ["Offenes Meer"], "xl", "1,4–1,8 m", 160, ALL, [5, 6, 7, 8],
   "Von Mai bis August bekommen Schweinswale ihre Kälber, vor Sylt liegt dafür ein eigenes Schutzgebiet.",
   "Der einzige heimische Wal. Klein, scheu und mit dreieckiger Rückenflosse.",
   ["Kleine, dreieckige Rückenflosse", "Rücken dunkelgrau, Bauch hell", "Kurzer Kopf ohne Schnabel"],
@@ -779,8 +779,8 @@ SEA_NOTE = {
 
 # Steckbriefe der beiden Meere für die Seiten Nordsee, Ostsee und den Vergleich
 SEA_INFO = {
- "nord": dict(slug="nordsee", name="Nordsee", h1="Strandfunde und Seevögel an der Nordsee",
-   lede="Die Nordsee ist ein offenes, salziges Gezeitenmeer. Zweimal am Tag fällt das Wattenmeer trocken, und Millionen Zugvögel finden hier Nahrung.",
+ "nord": dict(slug="nordsee", name="Nordsee", h1="Seevögel, Robben und Strandfunde an der Nordsee",
+   lede="Die Nordsee ist ein offenes, salziges Gezeitenmeer. Zweimal am Tag fällt das Wattenmeer trocken: Millionen Zugvögel finden hier Nahrung, und auf den Sandbänken liegen Seehunde und Kegelrobben.",
    facts=[("Gezeiten", "Ebbe und Flut zweimal täglich, an der deutschen Küste etwa 2 bis 4 Meter Unterschied"),
           ("Salzgehalt", "etwa 3 bis 3,5 Prozent, im Wattenmeer etwas weniger"),
           ("Küste", "Wattenmeer, Inseln, Halligen, breite Sandstrände und Deiche"),
@@ -794,8 +794,8 @@ SEA_INFO = {
    why=[("Das Wattenmeer", "Bei Ebbe liegt der Meeresboden frei. In einem Quadratmeter Watt leben Tausende Würmer, Schnecken und Muscheln. Das macht das Wattenmeer zur wichtigsten Tankstelle für Zugvögel zwischen Arktis und Afrika."),
         ("Viel Salz, viele Arten", "Weil die Nordsee offen zum Atlantik ist, leben hier mehr Meerestiere als in der Ostsee: Schwertmuscheln, Wellhornschnecken, Seeigel und Rochen."),
         ("Sicherheit", "Die Flut kommt schnell. Vor einer Wattwanderung die Gezeiten prüfen und längere Strecken nur mit Führung gehen.")]),
- "ost": dict(slug="ostsee", name="Ostsee", h1="Strandfunde und Seevögel an der Ostsee",
-   lede="Die Ostsee ist ein fast geschlossenes Binnenmeer mit wenig Salz und kaum Gezeiten. Dafür gibt es Steilküsten, Bodden, Förden und die besten Bernsteinstrände.",
+ "ost": dict(slug="ostsee", name="Ostsee", h1="Seevögel, Robben und Strandfunde an der Ostsee",
+   lede="Die Ostsee ist ein fast geschlossenes Binnenmeer mit wenig Salz und kaum Gezeiten. Im Winter rasten hier riesige Eiderentenschwärme, vor der Küste jagen Schweinswale, und an den Stränden liegt Bernstein.",
    facts=[("Gezeiten", "kaum spürbar, nur wenige Zentimeter; Wind kann den Wasserstand aber um mehr als einen Meter heben oder senken"),
           ("Salzgehalt", "rund 1,5 Prozent in der Kieler Bucht, vor Usedom unter 1 Prozent"),
           ("Küste", "Sand- und Steinstrände, Steilküsten, Kreidefelsen, Bodden und Förden"),

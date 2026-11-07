@@ -1,5 +1,5 @@
 /* =====================================================================
-   Strandkompass – Ergänzungen zum Grundgerüst (base.css)
+   Küstenkompass – Ergänzungen zum Grundgerüst (base.css)
    Farbwelt „Nordsee bei Ebbe“: Schlick, Sand, Tonnenrot, Prielblau, Dünengras
    ===================================================================== */
 
@@ -438,3 +438,7 @@ footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips s
 .fold>summary:hover{color:var(--rust-text)}
 @media(min-width:761px){.fold>summary:hover{color:inherit}}
 .steps a:hover,.explore.tips span a:hover,.prose a:hover,.intro a:hover,.yeartext a:hover{text-decoration-thickness:2px}
+
+/* Kopfzeile „Wer taucht da auf?“ bleibt am Desktop einzeilig */
+.hero6 h1{font-size:clamp(2.1rem,3.7vw,3.15rem)}
+@media(min-width:600px){.ht-row{white-space:nowrap}}
