@@ -3,7 +3,6 @@
 from ..core import *
 from ..layout import *
 from ..components import *
-from ..products import *
 
 def cal_table(R):
     head = "".join(f'<th scope="col" data-month="{m}"><a href="{R}strandjahr/{MSLUG[m-1]}/index.html"><abbr title="{MONTHS[m-1]}"><span class="ml">{MSHORT[m-1]}</span><span class="ms" aria-hidden="true">{MONTHS[m-1][0]}</span></abbr></a></th>' for m in range(1, 13))
@@ -41,6 +40,6 @@ def build_year():
               + "".join(f'<a data-act="{acts_attr(s["act"])}" href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a>' for s in sleep) + '</div></div></section>') if sleep else ""
         body = seabar(R) + f'''<section class="block page"> <div class="wrap"> <h1>Die Küste im {MONTHS[m-1]}</h1> <p class="intro">{counts(peak + act)} der {counts(SPECIES)} Arten und Funde kannst du im {MONTHS[m-1]} erwarten, {counts(peak)} davon besonders häufig.</p> <ul class="evlist">{ev}</ul> <nav class="pager small" aria-label="Weitere Monate"><a rel="prev" href="{R}strandjahr/{MSLUG[prev_m-1]}/index.html"><span>Vorheriger Monat</span><b>{MONTHS[prev_m-1]}</b></a> <a rel="next" href="{R}strandjahr/{MSLUG[next_m-1]}/index.html"><span>Nächster Monat</span><b>{MONTHS[next_m-1]}</b></a></nav> </div> </section>
 <section class="block" aria-labelledby="h-pk"><div class="wrap"><h2 id="h-pk">Jetzt besonders gut zu sehen</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(peak))}</ul></div></section>
-<section class="block" aria-labelledby="h-ac"><div class="wrap"><h2 id="h-ac">Außerdem zu finden</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(act))}</ul></div></section> {sl} {month_gear(R, m)}'''
+<section class="block" aria-labelledby="h-ac"><div class="wrap"><h2 id="h-ac">Außerdem zu finden</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(act))}</ul></div></section> {sl}'''
         write(f"strandjahr/{MSLUG[m-1]}/index.html", page(f"strandjahr/{MSLUG[m-1]}/index.html", f"Die Küste im {MONTHS[m-1]}", f"Was du im {MONTHS[m-1]} an Nord- und Ostsee entdecken kannst: {MONTH_EVENTS[m][0][1]}", body, active="strandjahr",
               crumbs=[("Küstenjahr", "strandjahr/index.html"), (MONTHS[m-1], "")]))

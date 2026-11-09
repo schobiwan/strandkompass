@@ -152,9 +152,9 @@ body:before{background:var(--hdr-bg)}
 .latin{font-family:var(--body)}
 .grp-h{margin:34px 0 14px;color:var(--heading);font-size:1.5rem}
 .grp-h:first-of-type{margin-top:28px}
-.cred,.pcred{position:relative;z-index:3;display:block;font-size:.7rem;line-height:1.4;color:var(--muted)}
-.cred a,.pcred a,.spot-cred a,.pcred2 a{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:2px}
-.cred a:hover,.pcred a:hover,.spot-cred a:hover{text-decoration-color:currentColor}
+.cred{position:relative;z-index:3;display:block;font-size:.7rem;line-height:1.4;color:var(--muted)}
+.cred a,.spot-cred a{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 45%,transparent);text-underline-offset:2px}
+.cred a:hover,.spot-cred a:hover{text-decoration-color:currentColor}
 .bird .cred{padding:6px 16px 0}
 figcaption small a,.sp-photo figcaption a{position:relative;z-index:3;color:inherit;text-underline-offset:2px}
 .acts{position:absolute;left:10px;top:10px;z-index:2;display:flex;gap:4px;pointer-events:none}
@@ -288,16 +288,6 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .warnbox p,.warnbox li{max-width:70ch}
 .warnbox ul{margin:10px 0 0;padding-left:20px}
 
-/* ---------- Produktempfehlungen ---------- */
-.pcred{padding:6px 18px 0}
-.pcred2{display:block;margin-top:4px;font-size:.7rem;color:var(--muted)}
-.pcred2 a{position:relative;z-index:3;color:inherit}
-.products.compact .pimg img{height:100%}
-.pimg .picon svg{width:64px;height:64px}
-.gearband .products{grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:18px}
-.gearband .product .pwhy{font-size:.9rem}
-.gear-h{margin:34px 0 14px;color:var(--heading)}
-.gear-h:first-of-type{margin-top:8px}
 
 /* ---------- Textseiten und Links im Text ---------- */
 .prose a,.intro a,.text a,.yeartext a,.morelinks a,.seabar-more,.alike a,.footnote a{color:var(--priel)}
@@ -332,14 +322,6 @@ section.block .prose h2:first-child{margin-top:0}
   .nowband{background:linear-gradient(var(--forest) 0 96px,var(--bg) 96px)}
   .nowcards{gap:10px;margin-right:-16px;padding-right:16px}
   .nowcards li{flex-basis:44%}
-  .gearband .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .gearband .pwhy,.gearband .pby,.gearband .ptip{display:none}
-  .gearband .pcred{font-size:.62rem;padding:6px 11px 0}
-  .gearband .pbody{padding:10px 11px 12px}
-  .gearband .pname{font-size:.98rem}
-  .gearband .pmeta{font-size:.6rem;letter-spacing:.03em}
-  .gearband .pad{padding:0 6px}
-  .gearband .plink{font-size:.82rem;min-height:34px;margin-top:8px}
 }
 @media(prefers-reduced-motion:reduce){.nowcards{scroll-behavior:auto}.spot6{animation:none}}
 
@@ -400,13 +382,6 @@ section.block .prose h2:first-child{margin-top:0}
   .birdtiles{-webkit-mask-image:linear-gradient(90deg,#000 82%,transparent);mask-image:linear-gradient(90deg,#000 82%,transparent)}
 }
 
-/* ---------- Produkte ohne Foto: kompakt statt leerer Bildfläche ---------- */
-.products:not(.compact) .product.nopic .pimg{aspect-ratio:auto;height:auto;background:none;display:block;padding:18px 18px 0}
-.products:not(.compact) .product.nopic .picon{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;background:color-mix(in srgb,var(--forest) 8%,var(--surface));position:static}
-.products:not(.compact) .product.nopic .picon svg{width:26px!important;height:26px!important}
-.products:not(.compact) .product.nopic .ptip{position:static;display:inline-block;margin-left:10px;vertical-align:middle}
-.products:not(.compact) .product.nopic .pimg{display:flex;align-items:center}
-
 /* Textseiten: Spalte links an der Seitenkante statt mittig */
 .wrap.prose{max-width:1120px}
 .wrap.prose>*{max-width:760px}
@@ -431,10 +406,9 @@ section.block .prose h2:first-child{margin-top:0}
 .monthlinks a:hover{background:color-mix(in srgb,var(--forest) 6%,var(--surface));border-color:var(--forest)}
 .pair-link:hover,.bird h3 a:hover,.birdtiles li>a:hover b{color:var(--rust-text)}
 /* Textlinks: Unterstrich und Farbe wechseln */
-footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,
-.credits td a:hover,table a:hover,figcaption a:hover,.cb-cred a:hover,.pcred2 a:hover,.sp-photo figcaption a:hover,.crumbs a:hover{color:var(--rust-text);text-decoration-color:currentColor;text-decoration-line:underline}
+footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,
+.credits td a:hover,table a:hover,figcaption a:hover,.cb-cred a:hover,.sp-photo figcaption a:hover,.crumbs a:hover{color:var(--rust-text);text-decoration-color:currentColor;text-decoration-line:underline}
 .seabar-more{text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:2px}
-.gearmore{text-decoration-color:color-mix(in srgb,currentColor 35%,transparent)}
 .fold>summary:hover{color:var(--rust-text)}
 @media(min-width:761px){.fold>summary:hover{color:inherit}}
 .steps a:hover,.explore.tips span a:hover,.prose a:hover,.intro a:hover,.yeartext a:hover{text-decoration-thickness:2px}
@@ -523,15 +497,14 @@ footer a:hover,.gearmore:hover,.seabar-more:hover,.steps a:hover,.explore.tips s
 
 /* ---------- Abstände unter Überschriften und Einleitungen ----------
    Abschnittsüberschrift → Kartenraster, Link-Leiste oder Produkte: einheitlich 18–22 px */
-main h2+.grid,main h2+.pills,main h2+.products,main h2+.cmp-wrap,main h2+.seacards{margin-top:clamp(16px,2vw,22px)}
-main .intro+.grid,main .intro+.pills,main .intro+.products{margin-top:clamp(16px,2vw,22px)}
+main h2+.grid,main h2+.pills,main h2+.cmp-wrap,main h2+.seacards{margin-top:clamp(16px,2vw,22px)}
+main .intro+.grid,main .intro+.pills{margin-top:clamp(16px,2vw,22px)}
 .grpjump{margin:6px 0 0}
 main .grp-h{margin:44px 0 16px}
 .alike h2{margin-bottom:10px}
 .bb-sub{margin-top:12px}
 .grid-head{row-gap:10px}
 main .grp-h:first-of-type{margin-top:28px}
-.gearband .head-row{row-gap:12px}
 .head-row{row-gap:12px}
 
 /* Kurz gesagt: das Wichtigste zur Art auf einen Blick (wie beim Vogelkompass) */
@@ -609,3 +582,18 @@ section.block.rtype{padding-top:28px}
 .srclist{margin:0;padding-left:1.2em;font-size:.9rem;color:var(--muted)}
 .srclist a{color:inherit}
 #zahlen .tips,#kriterien .tips{margin-top:16px}
+
+
+/* Empfehlungen als Textliste (ohne Produktbilder): Name als Werbelink, darunter wofür */
+.gearlist{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:0;max-width:70ch}
+.gearlist li{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-top:1px solid var(--line)}
+.gearlist li:first-child{border-top:0;padding-top:0}
+.gearlist a{font-weight:700;color:var(--fg);text-underline-offset:3px;align-self:flex-start;min-height:24px}
+.gearlist a:hover{color:var(--rust-text,var(--rust))}
+.gearlist span:not(.sr-only){color:var(--muted)}
+
+/* Artseite: „Kurz gesagt“ rechts in der Seitenspalte, mitlaufend; auf dem Handy oben */
+.sp-cols>.sp-side{grid-column:2;grid-row:1;position:sticky;top:calc(var(--nav-h) + 16px)}
+.sp-cols>.sp-main{grid-column:1;grid-row:1}
+.sp-side .tldr{margin:0}
+@media(max-width:760px){.sp-cols>.sp-side,.sp-cols>.sp-main{grid-column:auto;grid-row:auto;position:static}}

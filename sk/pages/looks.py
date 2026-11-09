@@ -5,8 +5,6 @@ from ..layout import *
 from ..components import *
 from data_aussehen import LOOKS
 
-LOOKBY = {m["slug"]: m for m in LOOKS}
-
 def looks_for(key):
     """Merkmal-Seiten, auf denen eine Art vorkommt (für Links von der Artseite)."""
     return [m for m in LOOKS if any(k == key for k, _ in m["items"])]
@@ -27,7 +25,7 @@ def build_looks():
     tile = lambda m: (f'<li class="mcard"><a href="{R}aussehen/{m["slug"]}/index.html">{img(R, m.get("cover", m["items"][0][0]), "", sizes="(max-width: 600px) 92vw, 300px")}'
                       f'<span class="mname">{esc(m["h1"])}</span><span class="mwhy">{esc(", ".join(BY[k]["n"] for k, _ in m["items"][:3]))}{" …" if len(m["items"]) > 3 else ""}</span></a>{cred(m.get("cover", m["items"][0][0]))}</li>')
     sec = lambda h, i, ms: f'<h2 class="h3 grp-h" id="{i}">{h}</h2><ul class="mlist">{"".join(tile(m) for m in ms)}</ul>'
-    body = (f'<section class="block page"> <div class="wrap"> <h1>Nach Aussehen bestimmen</h1> <p class="intro">Du kennst den Namen nicht, aber weißt, wie es aussah? Wähle das auffälligste Merkmal. Jede Seite zeigt die passenden Arten mit Foto und dem Unterschied, auf den es ankommt.</p>'
+    body = ('<section class="block page"> <div class="wrap"> <h1>Nach Aussehen bestimmen</h1> <p class="intro">Du kennst den Namen nicht, aber weißt, wie es aussah? Wähle das auffälligste Merkmal. Jede Seite zeigt die passenden Arten mit Foto und dem Unterschied, auf den es ankommt.</p>'
             + sec("Seevögel", "voegel", birds) + sec("Robben, Wale und Delfine", "meeressaeuger", sea) + sec("Quallen und Strandfunde", "funde", rest)
             + f'<p class="mtip">Nicht dabei? Auf der <a href="{R}index.html#arten">Startseite</a> kannst du nach mehreren Merkmalen zugleich suchen, zum Beispiel „gelbe Beine“ oder „brennt“.</p> </div> </section>')
     ld_list = ld({"@context": "https://schema.org", "@type": "ItemList", "name": "Nach Aussehen bestimmen", "numberOfItems": len(LOOKS),
@@ -38,7 +36,7 @@ def build_looks():
         R = "../../"
         keys = {k for k, _ in m["items"]}
         pairs = [p for p in PAIRS if p["a"] in keys and p["b"] in keys]
-        pp = (f'<h2 class="mh2">Leicht zu verwechseln</h2><ul class="mother">' + "".join(
+        pp = ('<h2 class="mh2">Leicht zu verwechseln</h2><ul class="mother">' + "".join(
               f'<li><a href="{R}unterscheiden/{p["k"]}/index.html">{esc(name_of(p["a"]))} oder {esc(name_of(p["b"]))}?</a></li>' for p in pairs) + '</ul>') if pairs else ""
         body = (f'<section class="block page"> <div class="wrap"> <h1>{esc(m["h1"])}</h1> <p class="intro">{esc(m["intro"])}</p>'
                 f'<ul class="mlist">{"".join(mcard(R, k, w, i) for i, (k, w) in enumerate(m["items"]))}</ul> {pp}'

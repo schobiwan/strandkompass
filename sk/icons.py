@@ -9,7 +9,6 @@ ICON = {
  "find": '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>',
  "pair": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="8" height="12" rx="2"/><rect x="13" y="6" width="8" height="12" rx="2"/></svg>',
  "year": '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>',
- "arrow": '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"></path></svg>',
  "wave": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9c2.2 0 2.2-2 4.5-2S9.8 9 12 9s2.3-2 4.5-2S18.8 9 21 9M3 15c2.2 0 2.2-2 4.5-2s2.3 2 4.5 2 2.3-2 4.5-2 2.3 2 4.5 2"/></svg>',
  "bird": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14c3.5 0 5.5-1.6 7-4.5C11.4 6.8 13.2 5 16 5c2 0 3.6 1.3 4 3l1.5.6-1.6.9c-.4 4.6-3.8 8.5-9.4 8.5H6.5"/><path d="M9 17.5 7.5 20M12 17.5 11 20"/><circle cx="16.3" cy="8.2" r=".6" fill="currentColor" stroke="none"/></svg>',
  "seas": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4.5h7v15H4zM13 4.5h7v15h-7z"/><path d="M5.5 14c1 0 1-1 2-1s1 1 2 1M14.5 14c1 0 1-1 2-1s1 1 2 1"/></svg>',
@@ -57,6 +56,3 @@ def _ripples():
 RIPPLES = _ripples()
 
 # Zeichen vor den beiden Zeilen der Startseiten-Überschrift
-SHELL = ('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5 4.2 9.8C6 6.3 8.8 4.5 12 4.5s6 1.8 7.8 5.3z"/>'
-         '<path d="M12 19.5 8.6 6.2M12 19.5 12 4.5M12 19.5l3.4-13.3M12 19.5 5.8 8.2M12 19.5l6.2-11.3"/>'
-         '<path d="M10.2 19.5h3.6"/></svg>')
