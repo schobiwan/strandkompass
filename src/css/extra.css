@@ -309,16 +309,28 @@ section.block .prose h2:first-child{margin-top:0}
   .monthlinks span{font-size:.74rem}
 }
 
-/* ---------- Monatsleiste auf Fundseiten ---------- */
-.months span{font-size:.7rem;height:28px}
-.months span.h{background:var(--moss-strong);color:#fffdf8}
-.monthlegend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:8px 0 0;padding:0;list-style:none;font-size:.82rem;color:var(--muted)}
-.monthlegend li{display:flex;align-items:center;gap:6px}
-.monthlegend i{width:16px;height:12px;border-radius:3px;display:inline-block}
-.monthlegend i.p{background:color-mix(in srgb,var(--moss) 45%,var(--surface));box-shadow:inset 0 0 0 1.5px var(--moss)}
-.monthlegend i.h{background:var(--moss-strong)}
-.monthlegend i.now{box-shadow:inset 0 0 0 2px var(--rust)}
-@media(max-width:560px){.months{gap:2px}.months span{font-size:.62rem}}
+/* ---------- Jahresband auf Artseiten (wie beim Vogelkompass, in Meeresfarben) ----------
+   Schlanke Balken: beste Zeit Prielblau, zu finden helles Wasserblau, sonst Sand; Monatsnamen darunter, „jetzt“ Tonnenrot */
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;margin-top:10px}
+.months>span{height:auto;display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.72rem;line-height:1;color:var(--muted);font-weight:400;background:none;box-shadow:none;outline:0;border-radius:0}
+.months>span::before{content:"";align-self:stretch;height:10px;border-radius:2px;background:color-mix(in srgb,var(--line) 70%,transparent)}
+.months>span:first-child::before{border-radius:999px 2px 2px 999px}
+.months>span:last-child::before{border-radius:2px 999px 999px 2px}
+.months>span.p::before{background:color-mix(in srgb,var(--priel) 35%,var(--surface))}
+.months>span.h::before{background:var(--priel)}
+.months>span.h,.months>span.p{background:none;box-shadow:none;color:var(--muted)}
+.months i{font-style:normal}
+.months>span.h::after{content:none}
+.months>span.now{color:var(--rust-text);font-weight:700;outline:0}
+.months>span.now::after{content:"";width:5px;height:5px;margin-top:-2px;border-radius:50%;background:var(--rust)}
+.months .ms{display:none}
+@media(max-width:560px){.months{gap:2px}.months .ml{display:none}.months .ms{display:block}}
+.mlegend{display:flex;flex-wrap:wrap;gap:4px 16px;margin:10px 0 0;font-size:.78rem;color:var(--muted)}
+.mlegend span{display:inline-flex;align-items:center;gap:6px}
+.mlegend span::before{content:"";width:16px;height:8px;border-radius:2px}
+.mlegend .lh::before{background:var(--priel)}
+.mlegend .lp::before{background:color-mix(in srgb,var(--priel) 35%,var(--surface))}
+.mlegend .ln::before{width:6px;height:6px;border-radius:50%;background:var(--rust)}
 
 /* ---------- Gruppenmarke neutral, Rot bleibt Warnungen vorbehalten ---------- */
 .tag.status{background:color-mix(in srgb,var(--forest) 9%,var(--surface));border-color:color-mix(in srgb,var(--forest) 22%,var(--surface));color:var(--heading)}
@@ -447,8 +459,6 @@ footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,tabl
 .mpanel a:focus-visible{outline-offset:0}
 /* purgecss end ignore */
 .hsearch-btn{color:var(--rust-fg)}
-.months span.h{color:var(--bg)}
-@media(prefers-color-scheme:light){.months span.h{color:#fffdf8}}
 .seabar-more{display:inline-flex;align-items:center;min-height:32px}
 table th[scope=row]>a{display:inline-flex;align-items:center;min-height:28px}
 .hsearch input{min-height:44px}

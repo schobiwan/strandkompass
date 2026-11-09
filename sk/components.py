@@ -92,13 +92,14 @@ def card(R, s, i=0):
             f'<span class="acts">{acts}</span> </li>')
 
 def months_bar(s):
+    """Jahresband wie beim Vogelkompass: schlanke Balken in Meeresfarben, Monatsnamen darunter, aktueller Monat markiert (app.js setzt .now)."""
     out = []
     for m in range(1, 13):
         cls = "h" if m in s["h"] else ("p" if m in s["p"] else "")
-        t = "Hauptzeit" if cls == "h" else ("aktiv" if cls == "p" else "kaum zu sehen")
-        out.append(f'<span data-month="{m}" class="{cls}" title="{MONTHS[m-1]}: {t}">{MSHORT[m-1]}</span>')
-    return (f'<div class="months" aria-hidden="true"> {"".join(out)} </div>'
-            '<ul class="monthlegend" aria-hidden="true"><li><i class="p"></i>zu finden</li><li><i class="h"></i>beste Zeit</li><li><i class="now"></i>jetzt</li></ul>')
+        t = "beste Zeit" if cls == "h" else ("zu finden" if cls == "p" else "kaum zu finden")
+        out.append(f'<span data-month="{m}"{f' class="{cls}"' if cls else ""} title="{MONTHS[m-1]}: {t}"><i class="ml">{MSHORT[m-1]}</i><i class="ms">{MSHORT[m-1][0]}</i></span>')
+    return (f'<div class="months" aria-hidden="true">{"".join(out)}</div>'
+            '<p class="mlegend" aria-hidden="true"><span class="lh">beste Zeit</span><span class="lp">zu finden</span><span class="ln">jetzt</span></p>')
 
 def pair_card(R, p, h="h2"):
     figs = "".join(f'<figure>{img(R, photo_key(k))}<figcaption><span aria-hidden="true">{esc(name_of(k))}</span><small>{credit(photo_key(k), True)}</small></figcaption></figure>' for k in (p["a"], p["b"]))
