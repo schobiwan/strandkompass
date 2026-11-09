@@ -107,6 +107,7 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 - [Blasentang oder Sägetang?](https://meereskompass.de/unterscheiden/blasentang-oder-saegetang/)
 - [Nixentäschchen (Rochen-Ei) oder Katzenhai-Ei?](https://meereskompass.de/unterscheiden/nixentaeschchen-oder-katzenhai-ei/)
 
-## Rechtliches
+## Über
+- [Über den Meereskompass](https://meereskompass.de/ueber/): Betreiber, Quellen, Finanzierung, Fehler melden
 - [Impressum](https://meereskompass.de/impressum/)
 - [Bildnachweis und Lizenzen](https://meereskompass.de/bildnachweis/)

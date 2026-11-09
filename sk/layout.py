@@ -5,7 +5,7 @@ from .icons import *
 
 # Strukturierte Daten (schema.org): Herausgeber und Website sind über @id verknüpft; die Startseite beschreibt sie vollständig
 ORG_ID, WEBSITE_ID = DOMAIN + "/#org", DOMAIN + "/#website"
-AUTHOR = {"@type": "Person", "name": "Nico Schober", "url": DOMAIN + "/impressum/"}
+AUTHOR = {"@type": "Person", "name": "Nico Schober", "url": DOMAIN + "/ueber/"}
 def ld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False) + '</script>'
 LDJSON = ld({"@context": "https://schema.org", "@graph": [
@@ -104,6 +104,6 @@ def footer(R):
             ("unterscheiden/index.html", "Doppelgänger unterscheiden"), ("arten/index.html", "Alle Arten im Überblick")]
     ent = [("nordsee/index.html", "Nordsee"), ("ostsee/index.html", "Ostsee"), ("strandjahr/index.html", "Küstenjahr"),
            ("am-strand/index.html", "Sicher am Strand"), ("ausruestung/index.html", "Ausrüstung")]
-    leg = [("impressum/index.html", "Impressum"), ("datenschutz/index.html", "Datenschutz"), ("bildnachweis/index.html", "Bildnachweis und Lizenzen")]
+    leg = [("ueber/index.html", "Über den Meereskompass"), ("impressum/index.html", "Impressum"), ("datenschutz/index.html", "Datenschutz"), ("bildnachweis/index.html", "Bildnachweis und Lizenzen")]
     li = lambda xs: "".join(f'<li><a href="{R}{h}">{t}</a></li>' for h, t in xs)
-    return f'''<footer> <div class="wrap"> <a class="flogo" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span></a> <div class="fcols"> <nav aria-label="Bestimmen"><p class="fhead">Bestimmen</p><ul>{li(best)}</ul></nav> <nav aria-label="An der Küste"><p class="fhead">An der Küste</p><ul>{li(ent)}</ul></nav> <nav aria-label="Rechtliches"><p class="fhead">Rechtliches</p><ul>{li(leg)}</ul></nav> <nav aria-label="Schwesterseiten"><p class="fhead">Schwesterseiten</p><ul><li><a href="https://vogelkompass.de/" rel="noopener">Vogelkompass: Vögel bestimmen</a></li><li><a href="https://waldtierkompass.de/" rel="noopener">Waldtierkompass: Waldtiere bestimmen</a></li></ul></nav> </div> <p class="footnote">Fotos: Wikimedia Commons, unter freien Lizenzen. Mit * markierte Links sind Werbelinks. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> </div> </footer>'''
+    return f'''<footer> <div class="wrap"> <a class="flogo" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span></a> <div class="fcols"> <nav aria-label="Bestimmen"><p class="fhead">Bestimmen</p><ul>{li(best)}</ul></nav> <nav aria-label="An der Küste"><p class="fhead">An der Küste</p><ul>{li(ent)}</ul></nav> <nav aria-label="Über die Seite"><p class="fhead">Über die Seite</p><ul>{li(leg)}</ul></nav> <nav aria-label="Schwesterseiten"><p class="fhead">Schwesterseiten</p><ul><li><a href="https://vogelkompass.de/" rel="noopener">Vogelkompass: Vögel bestimmen</a></li><li><a href="https://waldtierkompass.de/" rel="noopener">Waldtierkompass: Waldtiere bestimmen</a></li></ul></nav> </div> <p class="footnote">Fotos: Wikimedia Commons, unter freien Lizenzen. Mit * markierte Links sind Werbelinks. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> </div> </footer>'''

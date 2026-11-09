@@ -13,7 +13,7 @@ from sk.pages.species import build_arten_index, build_species
 from sk.pages.pairs import build_pairs
 from sk.pages.year import build_year
 from sk.pages.seas import build_seas
-from sk.pages.info import build_beach, build_gear, build_legal, build_404
+from sk.pages.info import build_beach, build_gear, build_legal, build_404, build_about
 
 
 def main():
@@ -31,6 +31,7 @@ def main():
     build_gear()
     build_legal()
     build_404()
+    build_about()
     finalize()
     print("Dateien:", sum(len(fs) for _, _, fs in os.walk(OUT)))
 

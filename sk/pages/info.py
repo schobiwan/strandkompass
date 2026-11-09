@@ -28,6 +28,40 @@ def build_gear():
 <section class="block"><div class="wrap prose"><h2>Welches Fernglas?</h2><p>Für die Küste passt ein Fernglas mit 8- oder 10-facher Vergrößerung und 42 Millimetern Objektiv. Es ist hell genug für trübes Wetter und ruhig genug, um eine Robbe auf der Sandbank aus mehreren hundert Metern zu erkennen. Wasserdicht sollte es sein, denn Gischt und Regen gehören dazu.</p><h2>Mit UV-Licht nach Bernstein suchen</h2><p>Bernstein leuchtet unter ultraviolettem Licht mit 365 Nanometern bläulich bis gelblich. Am besten suchst du in der Dämmerung im frischen Tangsaum nach einem auflandigen Sturm. Leuchte nie in Augen und achte auf Lampen mit Filter, die kaum sichtbares Licht abgeben.</p><h2>Tiere nur kurz anschauen</h2><p>Krebse, Garnelen und Seestachelbeeren kannst du für ein paar Minuten in Meerwasser in einer Becherlupe beobachten. Stelle sie nicht in die Sonne und bringe sie danach genau dorthin zurück, wo du sie gefunden hast.</p></div></section>'''
     write("ausruestung/index.html", page("ausruestung/index.html", "Ausrüstung", "Fernglas und Vogelführer für Seevögel, Robben und Wale, dazu UV-Lampe, Becherlupe und Wattschuhe: Ausrüstung für die Küste an Nord- und Ostsee.", body, active="ausruestung", crumbs=[("Ausrüstung", "")]))
 
+def build_about():
+    """Über den Meereskompass: wer die Seite macht, woher die Inhalte stammen, wie sie sich finanziert.
+    Wichtig für Vertrauen bei Besuchern und für Google (Erfahrung, Fachwissen, Vertrauenswürdigkeit)."""
+    R = "../"
+    body = f'''<section class="block page"> <div class="wrap prose"> <h1>Über den Meereskompass</h1>
+<p>Der Meereskompass hilft dir, zu erkennen, was du an Nordsee und Ostsee siehst und findest: Seevögel, Robben, Wale und Delfine, dazu Quallen, Muscheln, Schnecken, Krebse, Tang und andere Strandfunde. Er zeigt {counts(SPECIES)} Arten und Funde mit Foto, Merkmalen und Vorkommen und erklärt in {len(PAIRS)} Vergleichen, wie du ähnliche Arten auseinanderhältst.</p>
+<h2>Wer den Meereskompass macht</h2>
+<p>Den Meereskompass betreibt Nico Schober aus Bremen als privates, unabhängiges Angebot. Texte, Auswahl der Arten und Gestaltung stammen von ihm. Die Seite gehört zu keinem Verband und keinem Hersteller. Die Kontaktdaten stehen im <a href="{R}impressum/index.html">Impressum</a>.</p>
+<h2>Woher die Inhalte stammen</h2>
+<ul>
+<li><b>Steckbriefe:</b> Merkmale, Größen, Lebensweise und Vorkommen sind für Laien zusammengefasst. Zum Nachlesen verlinkt jede Artseite unter „Mehr erfahren“ den passenden Wikipedia-Artikel.</li>
+<li><b>Jahreszeiten und Meere:</b> Die Angaben, wann und wo eine Art zu sehen ist, sind grobe Richtwerte für die deutsche Küste. Je nach Ort, Wetter und Jahr weichen sie ab.</li>
+<li><b>Fotos und Rufe:</b> von Wikimedia Commons, unter freien Lizenzen, mit Namen der Urheberinnen und Urheber an jedem Bild und jeder Aufnahme.</li>
+</ul>
+<p>Alle Urheber und Lizenzen stehen gesammelt unter <a href="{R}bildnachweis/index.html">Bildnachweis und Lizenzen</a>.</p>
+<h2>Sicherheit geht vor</h2>
+<p>Die Hinweise zu Quallen, Heulern, Phosphor und dem Watt ersetzen keine fachliche oder ärztliche Beratung. Bei gestrandeten Tieren hilft die örtliche Seehundstation oder Nationalparkverwaltung, im Notfall die 112. Mehr dazu unter <a href="{R}am-strand/index.html">Sicher am Strand</a>.</p>
+<h2>Wie sich die Seite finanziert</h2>
+<p>Der Meereskompass ist kostenlos und ohne Anmeldung nutzbar. Einige Seiten empfehlen Ferngläser, Bestimmungsbücher, UV-Lampen oder Wattschuhe mit Werbelinks zu Amazon, die mit * gekennzeichnet sind. Kaufst du über einen solchen Link, erhält der Betreiber eine kleine Provision, für dich ändert sich am Preis nichts. Die Empfehlungen sind nicht selbst getestet, wenn es nicht ausdrücklich dabeisteht, und Hersteller haben keinen Einfluss auf die Auswahl.</p>
+<h2>Deine Daten</h2>
+<p>Der Meereskompass setzt keine Cookies und misst keine Reichweite. Nur deine Wahl zwischen Nordsee und Ostsee merkt sich dein eigener Browser. Mehr dazu in der <a href="{R}datenschutz/index.html">Datenschutzerklärung</a>.</p>
+<h2>Fehler gefunden?</h2>
+<p>Wenn dir eine falsche Angabe, ein falsch zugeordnetes Foto oder ein vertauschter Ruf auffällt, schreib gern an <a href="mailto:info@nicoschober.com">info@nicoschober.com</a>. Hinweise werden geprüft und eingearbeitet.</p>
+<h2>Schwesterseiten</h2>
+<ul>
+<li><a href="https://vogelkompass.de/" rel="noopener">Vogelkompass</a>: Vögel in Garten, Park und Feld erkennen</li>
+<li><a href="https://waldtierkompass.de/" rel="noopener">Waldtierkompass</a>: Tiere im Wald erkennen</li>
+</ul> </div> </section>'''
+    about_ld = ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "Über den Meereskompass", "url": DOMAIN + "/ueber/",
+                   "inLanguage": "de-DE", "isPartOf": {"@id": WEBSITE_ID}, "mainEntity": {"@id": ORG_ID}})
+    write("ueber/index.html", page("ueber/index.html", "Über den Meereskompass: Macher, Quellen, Finanzierung",
+          "Wer den Meereskompass macht, woher Fotos, Rufe und Steckbriefe stammen, wie die Seite sich finanziert und wie du Fehler meldest.",
+          body, crumbs=[("Über den Meereskompass", "")], seafilter=False, extra_ld=about_ld))
+
 def build_404():
     """Fehlerseite; statichost zeigt sie unter jeder unbekannten Adresse, deshalb Links ab der Wurzel (/)."""
     body = (f'<section class="block page" style="padding-top:clamp(32px,6vw,64px)"> <div class="wrap prose"> <h1>Hier ist nichts angespült</h1> <p>Die Seite, die du suchst, gibt es nicht oder nicht mehr. '

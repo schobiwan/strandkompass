@@ -118,7 +118,8 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 ## Vergleiche
 {pairs}
 
-## Rechtliches
+## Über
+- [Über den Meereskompass]({u('ueber/')}): Betreiber, Quellen, Finanzierung, Fehler melden
 - [Impressum]({u('impressum/')})
 - [Bildnachweis und Lizenzen]({u('bildnachweis/')})
 """
