@@ -51,9 +51,10 @@ const byName = (a, b) => a.name.localeCompare(b.name, "de");
 const nowRank = (a) => (a.peak.includes(NOW) ? 0 : a.present.includes(NOW) ? 1 : 2);
 let lastOrder = "";
 
-// Ohne Suche und Filter zeigt die Startseite nur die ersten Funde; Vögel, Robben und Wale stehen dann in den Bändern darüber
+// Ohne Suche und Filter zeigt die Startseite nur die ersten Funde; bei gleicher Jahreszeit stehen Vögel, Robben und Wale vorn
 const FIRST = 12;
-const BANDED = new Set(["Seevögel", "Robben", "Wale & Delfine"]);
+const GRP_RANK = { "Seevögel": 0, "Robben": 1, "Wale & Delfine": 2 };
+const grpRank = (a) => GRP_RANK[a.grp] ?? 3;
 let expanded = false;
 const moreBox = $("gridmore"), moreBtn = $("more-btn");
 
@@ -63,10 +64,10 @@ function render() {
   const byScore = (a, b) => (state.q.trim() ? a.score - b.score : 0);
   if (state.sort === "az") list.sort((a, b) => byScore(a, b) || byName(a, b));
   else if (state.sort === "size") list.sort((a, b) => byScore(a, b) || a.mid - b.mid || byName(a, b));
-  else list.sort((a, b) => byScore(a, b) || nowRank(a) - nowRank(b) || byName(a, b));
+  else list.sort((a, b) => byScore(a, b) || nowRank(a) - nowRank(b) || grpRank(a) - grpRank(b) || byName(a, b));
   const full = list.length;
   const collapsed = !expanded && !state.q.trim() && !state.count();
-  if (collapsed) list = list.filter((a) => !BANDED.has(a.grp)).slice(0, FIRST);
+  if (collapsed) list = list.slice(0, FIRST);
   if (moreBox) {
     moreBox.hidden = !collapsed || list.length >= full;
     moreBtn.textContent = `Alle ${full} Arten und Funde anzeigen`;
