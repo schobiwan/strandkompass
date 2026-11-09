@@ -44,10 +44,10 @@ def species_pick(s):
     return SPECIES_PICK_FOR.get(s["k"]) or SPECIES_PICK.get(s["grp"], "buch")
 
 def gear_inline(key):
-    """Ein einzelner Werbelink als Pille, mit Sternchen; Hinweis darunter."""
+    """Ein einzelner Werbelink als Pille, mit Sternchen (Hinweis AD_SHORT darunter)."""
     p = PRODUCTS[key]
-    return (f'<li><a href="{p["url"]}" target="_blank" rel="sponsored nofollow noopener">{esc(p["name"])}<span aria-hidden="true">*</span>'
-            f'<span class="sr-only"> (Werbelink, öffnet in neuem Fenster)</span></a></li>')
+    return (f'<a href="{p["url"]}" target="_blank" rel="sponsored nofollow noopener">{esc(p["name"])}<span aria-hidden="true">*</span>'
+            f'<span class="sr-only"> (Werbelink, öffnet in neuem Fenster)</span></a>')
 
 AD_SHORT = '<p class="adshort"><span aria-hidden="true">*</span> Werbelink zu Amazon: Kaufst du darüber, erhält der Meereskompass eine kleine Provision. Für dich ändert sich am Preis nichts.</p>'
 

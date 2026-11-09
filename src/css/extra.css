@@ -365,7 +365,7 @@ section.block .prose h2:first-child{margin-top:0}
 .tag.status{background:color-mix(in srgb,var(--forest) 9%,var(--surface));border-color:color-mix(in srgb,var(--forest) 22%,var(--surface));color:var(--heading)}
 .habs{display:block;font-size:.9rem;color:var(--muted);margin-top:10px}
 .habs .habs-l{font-weight:700;color:var(--fg)}
-.sp .more .pills{margin-bottom:6px}
+.sp .more .pills{margin-bottom:0}
 
 /* ---------- Startseite: Rasterkopf, Mehr-Knopf, Legende ---------- */
 .grid-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px;padding-top:48px;margin-bottom:12px}
@@ -597,3 +597,12 @@ section.block.rtype{padding-top:28px}
 .sp-cols>.sp-main{grid-column:1;grid-row:1}
 .sp-side .tldr{margin:0}
 @media(max-width:760px){.sp-cols>.sp-side,.sp-cols>.sp-main{grid-column:auto;grid-row:auto;position:static}}.adshort{margin:10px 0 0;font-size:.78rem;color:var(--muted);max-width:60ch}
+
+/* Artseite „Mehr erfahren“: je Zeile links die Art des Links, rechts die Pillen */
+.morerows{margin:0;display:grid;gap:0}
+.morerows>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:8px 20px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.morerows>div:first-child{border-top:0;padding-top:4px}
+.morerows dt{font:700 .88rem var(--body);color:var(--muted);padding-top:10px}
+.morerows dd{margin:0}
+.morerows a[target=_blank]::after{content:"↗";font-size:.8em;color:var(--muted);margin-left:6px}
+@media(max-width:560px){.morerows>div{grid-template-columns:1fr;gap:6px}.morerows dt{padding-top:0}}
