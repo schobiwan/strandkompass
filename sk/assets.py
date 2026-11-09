@@ -76,7 +76,7 @@ def finalize():
                 urls.append(rel[:-len("index.html")])
     urls.sort(key=lambda u: (u.count("/"), u))
     write("sitemap.xml", '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n'
-          + "".join(f"  <url><loc>{DOMAIN}/{u}</loc>" + "".join(f"<image:image><image:loc>{DOMAIN}/photos/{k}.webp</image:loc></image:image>" for k in pics.get(u, []))
+          + "".join(f"  <url><loc>{DOMAIN}/{u}</loc>" + (f"<lastmod>{CONTENT_UPDATED}</lastmod>" if u.startswith(("arten/", "unterscheiden/", "aussehen/")) and u.count("/") == 2 else "") + "".join(f"<image:image><image:loc>{DOMAIN}/photos/{k}.webp</image:loc></image:image>" for k in pics.get(u, []))
                     + "</url>\n" for u in urls) + "</urlset>\n")
     write("llms.txt", llms_txt())
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n")

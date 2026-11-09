@@ -69,6 +69,11 @@ def der(g, case="nom"):
 
 MOBILE = ("Seevögel", "Robben", "Wale & Delfine")
 
+# Stand der Steckbriefe, Vergleiche und Merkmal-Seiten: bei inhaltlichen Änderungen anheben (Sitemap lastmod, strukturierte Daten, sichtbarer Stand)
+CONTENT_PUBLISHED = "2026-11-03"
+CONTENT_UPDATED = "2026-11-09"
+STAND = "November 2026"
+
 def mit_artikel(key, case="nom"):
     """Name mit bestimmtem Artikel, Adjektiv schwach gebeugt: der Große Tümmler, den Großen Tümmler, der Blauen Nesselqualle."""
     n, g = re.sub(r"\s*\(.*?\)", "", name_of(key)), (BY[key]["g"] if key in BY else EXT[key]["g"])  # ohne Klammerzusatz

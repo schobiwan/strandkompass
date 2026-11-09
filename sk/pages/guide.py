@@ -53,7 +53,8 @@ def build_guide():
         f'<div><h3>Darauf achten</h3><ul class="rlist minus">{"".join(f"<li>{esc(g)}</li>" for g in m["achtung"])}</ul></div></div>'
         f'<p class="rsearch"><a class="btn ghost" href="{m["link"]}" target="_blank" rel="sponsored nofollow noopener">{esc(m["name"])} bei Amazon ansehen<span aria-hidden="true">*</span><span class="sr-only"> (Werbelink, öffnet in neuem Fenster)</span></a></p></div></section>'
         for m in MODELLE)
-    faq = '<dl class="faq">' + "".join(f"<dt>{esc(q)}</dt><dd>{esc(a)}</dd>" for q, a in FAQ) + "</dl>"
+    # Häufige Fragen: am Computer offen, auf dem Handy eingeklappt (Inhalt bleibt vollständig im HTML)
+    faq = '<div class="faq">' + "".join(f'<details class="fold faqitem" open data-fold><summary><h3>{esc(q)}</h3></summary><p>{esc(a)}</p></details>' for q, a in FAQ) + "</div>"
     src = '<h3 class="srchead">Quellen</h3><ul class="srclist">' + "".join(f"<li>{ext(u, t)}</li>" for t, u in SOURCES) + "</ul>"
     body = f'''<section class="block page"> <div class="wrap"> <h1>Fernglas für die Küste</h1>
 <p class="intro">An der Küste ist fast alles weit weg: die Robben auf der Sandbank, die Eiderenten draußen auf dem Wasser, der Basstölpel über den Wellen. Mit einem guten Fernglas erkennst du sie trotzdem. Es muss aber Wind, Gischt und Sand aushalten.</p>

@@ -2,14 +2,22 @@
 // Mehrere Wörter in beliebiger Reihenfolge, Wortendungen und Umlaute egal („rote“, „roter“, „Moewe“).
 // Reine Funktionen ohne DOM, damit Startseite und Schnellsuche dieselbe Rangfolge nutzen.
 
+// Umlaute auf den Grundvokal falten (ä → a, auch getipptes „ae“ → a), auf beiden Seiten gleich.
+// So bleibt „grün“ ein Wort mit vier Buchstaben und wird nicht wie „grüen“ gekürzt.
 export const fold = (t) => String(t || "").toLowerCase()
-  .replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
+  .replace(/ä/g, "a").replace(/ö/g, "o").replace(/ü/g, "u").replace(/ß/g, "ss")
+  .replace(/ae/g, "a").replace(/oe/g, "o").replace(/ue/g, "u");
 
 const STOP = new Set(["mit", "und", "oder", "der", "die", "das", "den", "dem", "des", "ein", "eine", "einen", "einem", "einer",
   "am", "im", "an", "in", "auf", "von", "vom", "zum", "zur"]);
 
-/** Wortstamm: eine typische Endung abschneiden, mindestens drei Buchstaben bleiben */
-const stem = (w) => { const s = w.replace(/(en|er|es|em|e|s|n)$/, ""); return s.length >= 3 ? s : w; };
+/** Wortstamm: eine typische Endung abschneiden, mindestens drei Buchstaben bleiben.
+    Ein einzelnes -n erst ab fünf Buchstaben („blaun“ → „blau“), damit kurze Wörter wie „grün“ nicht zu „gru“ werden. */
+const stem = (w) => {
+  const s = w.replace(/(en|er|es|em|e|s)$/, "");
+  if (s !== w) return s.length >= 3 ? s : w;
+  return w.length >= 5 && w.endsWith("n") ? w.slice(0, -1) : w;
+};
 
 export const searchWords = (q) => (fold(q).match(/[a-z0-9]+/g) || []).filter((w) => !STOP.has(w)).map(stem);
 

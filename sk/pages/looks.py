@@ -36,12 +36,12 @@ def build_looks():
         R = "../../"
         keys = {k for k, _ in m["items"]}
         pairs = [p for p in PAIRS if p["a"] in keys and p["b"] in keys]
-        pp = ('<h2 class="mh2">Leicht zu verwechseln</h2><ul class="mother">' + "".join(
-              f'<li><a href="{R}unterscheiden/{p["k"]}/index.html">{esc(name_of(p["a"]))} oder {esc(name_of(p["b"]))}?</a></li>' for p in pairs) + '</ul>') if pairs else ""
+        pp = ('<details class="fold mfold" open data-fold><summary><h2 class="mh2">Leicht zu verwechseln</h2></summary><ul class="mother">' + "".join(
+              f'<li><a href="{R}unterscheiden/{p["k"]}/index.html">{esc(name_of(p["a"]))} oder {esc(name_of(p["b"]))}?</a></li>' for p in pairs) + '</ul></details>') if pairs else ""
         body = (f'<section class="block page"> <div class="wrap"> <h1>{esc(m["h1"])}</h1> <p class="intro">{esc(m["intro"])}</p>'
                 f'<ul class="mlist">{"".join(mcard(R, k, w, i) for i, (k, w) in enumerate(m["items"]))}</ul> {pp}'
                 f'<p class="mtip">Nicht dabei? Auf der <a href="{R}index.html#arten">Startseite</a> kannst du nach mehreren Merkmalen zugleich suchen.</p>'
-                f'<h2 class="mh2">Weitere Merkmale</h2>{others_nav(R, m)} </div> </section>')
+                f'<h2 class="mh2">Weitere Merkmale</h2>{others_nav(R, m)} <p class="stand">Stand: {STAND}</p> </div> </section>')
         names = ", ".join(BY[k]["n"] for k, _ in m["items"])
         ld_list = ld({"@context": "https://schema.org", "@type": "ItemList", "name": m["h1"], "numberOfItems": len(m["items"]),
                       "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": BY[k]["n"], "url": f"{DOMAIN}/arten/{k}/"} for i, (k, _) in enumerate(m["items"])]})

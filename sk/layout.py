@@ -64,7 +64,8 @@ def nav_tabs(R, path, active):
     return "".join(out)
 
 # Gewähltes Meer früh setzen, damit beim Laden nichts springt
-SEA_BOOT = '<script>try{var s=localStorage.getItem("sk-sea");if(s==="nord"||s==="ost")document.documentElement.dataset.sea=s}catch(e){}</script>'
+# Kopfskript: gewähltes Meer anwenden; Familienlink (?familie) blendet Werbung in diesem Browser dauerhaft aus, ?werbung=an zeigt sie wieder
+SEA_BOOT = '<script>try{var s=localStorage.getItem("sk-sea");if(s==="nord"||s==="ost")document.documentElement.dataset.sea=s}catch(e){}try{var u=new URLSearchParams(location.search);if(u.has("familie"))localStorage.setItem("sk-ohnewerbung","1");if(u.get("werbung")==="an")localStorage.removeItem("sk-ohnewerbung");if(localStorage.getItem("sk-ohnewerbung"))document.documentElement.dataset.ohnewerbung=""}catch(e){}</script>'
 
 def seaswitch(extra=""):
     """Umschalter Beide · Nordsee · Ostsee; app.js merkt sich die Wahl."""

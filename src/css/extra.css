@@ -433,7 +433,7 @@ footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,
 .sresults img{width:48px;height:38px;object-fit:cover;border-radius:6px;grid-row:span 2}
 .sresults a span{grid-column:2;font-weight:400;font-size:.84rem;color:var(--muted)}
 .snone{color:var(--muted);padding:8px 6px}
-.snone a{color:var(--rust-text);font-weight:700}
+.snone a{color:var(--priel)}
 .smore{margin:10px 6px 0;font-weight:700}
 .smore a{color:var(--rust-text)}
 .empty .suggest{color:var(--fg)}
@@ -547,7 +547,7 @@ main .grp-h:first-of-type{margin-top:28px}
 .mother a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--control);background:var(--surface);color:var(--fg);text-decoration:none;font-weight:600;font-size:.92rem}
 .mother a:hover{border-color:var(--forest)}
 .mtip{color:var(--muted);max-width:70ch;margin-top:28px}
-.mtip a{color:var(--fg);font-weight:700;text-underline-offset:3px}
+.mtip a{color:var(--priel)}
 
 /* Ratgeber: Werbehinweis, Sprungmarken, Vergleichstabelle, Pro und Contra, Fragen, Quellen */
 .adbanner{margin:0 0 18px;padding:10px 14px;border-radius:8px;background:color-mix(in srgb,var(--line) 45%,var(--surface));font-size:.92rem;max-width:70ch}
@@ -588,8 +588,7 @@ section.block.rtype{padding-top:28px}
 .gearlist{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:0;max-width:70ch}
 .gearlist li{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-top:1px solid var(--line)}
 .gearlist li:first-child{border-top:0;padding-top:0}
-.gearlist a{font-weight:700;color:var(--fg);text-underline-offset:3px;align-self:flex-start;min-height:24px}
-.gearlist a:hover{color:var(--rust-text,var(--rust))}
+.gearlist a{align-self:flex-start;min-height:24px}
 .gearlist span:not(.sr-only){color:var(--muted)}
 
 /* Artseite: „Kurz gesagt“ rechts in der Seitenspalte, mitlaufend; auf dem Handy oben */
@@ -606,3 +605,31 @@ section.block.rtype{padding-top:28px}
 .morerows dd{margin:0}
 .morerows a[target=_blank]::after{content:"↗";font-size:.8em;color:var(--muted);margin-left:6px}
 @media(max-width:560px){.morerows>div{grid-template-columns:1fr;gap:6px}.morerows dt{padding-top:0}}
+
+
+/* Textlinks einheitlich (wie beim Vogelkompass, in der Meeresfarbe Priel): im Fließtext blau, normale Schrift, feine Unterstreichung mit Abstand,
+   beim Überfahren kräftiger. Bewusst schwache Regel (nur Elementselektoren), Navigation, Karten, Pillen und Brotkrumen überschreiben sie. */
+:where(main :is(p, li, dd, td, th, figcaption)) a{color:var(--priel);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+:where(main :is(p, li, dd, td, th, figcaption)) a:hover{text-decoration-thickness:2px}
+.cmp th a,.intro a,.yeartext a,.related>p a,.fcols li a{font-weight:400}
+
+/* Sichtbarer Stand der Inhalte */
+.stand{margin:28px 0 0;font-size:.82rem;color:var(--muted)}
+
+/* Vergleich: „Kurz gesagt“ als Satz */
+.pairpage .tldr{margin:18px 0 26px;max-width:70ch}
+.pairpage .tldr p{margin:0}
+.pairpage details.related{margin-top:40px}
+
+/* Aufklappbare Abschnitte mit kleinerer Überschrift: Fragen im Ratgeber, Verwechslungen auf Merkmal-Seiten */
+.faq .faqitem{margin:0;padding:14px 0;border-top:1px solid var(--line)}
+.faq .faqitem:first-child{border-top:0;padding-top:0}
+.faqitem>summary h3{font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--heading);margin:0}
+.faqitem p{margin:6px 0 0;color:var(--muted);max-width:75ch}
+.mfold{margin-top:36px}
+.mfold>summary .mh2{margin:0 0 12px}
+
+/* purgecss start ignore */
+/* Familienlink (?familie): Werbelinks und Werbehinweise ausblenden */
+html[data-ohnewerbung] :is(.adbanner,.adnote,.adshort,.rsearch,.gearlist),html[data-ohnewerbung] a[rel~=sponsored]{display:none!important}
+/* purgecss end ignore */
