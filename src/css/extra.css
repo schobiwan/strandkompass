@@ -596,4 +596,4 @@ section.block.rtype{padding-top:28px}
 .sp-cols>.sp-side{grid-column:2;grid-row:1;position:sticky;top:calc(var(--nav-h) + 16px)}
 .sp-cols>.sp-main{grid-column:1;grid-row:1}
 .sp-side .tldr{margin:0}
-@media(max-width:760px){.sp-cols>.sp-side,.sp-cols>.sp-main{grid-column:auto;grid-row:auto;position:static}}
+@media(max-width:760px){.sp-cols>.sp-side,.sp-cols>.sp-main{grid-column:auto;grid-row:auto;position:static}}.adshort{margin:10px 0 0;font-size:.78rem;color:var(--muted);max-width:60ch}

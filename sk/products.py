@@ -36,6 +36,21 @@ PRODUCTS = {
    url="https://www.amazon.de/s?k=strandmuschel+uv+schutz&tag=" + TAG),
 }
 
+# Je Artseite ein dezenter Text-Werbelink unter „Mehr erfahren“, passend zur Gruppe
+SPECIES_PICK = {"Seevögel": "vogelbuch", "Robben": "fernglas", "Wale & Delfine": "fernglas"}
+SPECIES_PICK_FOR = {"bernstein": "uvlampe"}
+
+def species_pick(s):
+    return SPECIES_PICK_FOR.get(s["k"]) or SPECIES_PICK.get(s["grp"], "buch")
+
+def gear_inline(key):
+    """Ein einzelner Werbelink als Pille, mit Sternchen; Hinweis darunter."""
+    p = PRODUCTS[key]
+    return (f'<li><a href="{p["url"]}" target="_blank" rel="sponsored nofollow noopener">{esc(p["name"])}<span aria-hidden="true">*</span>'
+            f'<span class="sr-only"> (Werbelink, öffnet in neuem Fenster)</span></a></li>')
+
+AD_SHORT = '<p class="adshort"><span aria-hidden="true">*</span> Werbelink zu Amazon: Kaufst du darüber, erhält der Meereskompass eine kleine Provision. Für dich ändert sich am Preis nichts.</p>'
+
 def gear_list(keys):
     """Empfehlungen als schlichte Textliste: Name als Werbelink, darunter kurz, wofür."""
     li = "".join(f'<li><a href="{PRODUCTS[k]["url"]}" target="_blank" rel="sponsored nofollow noopener">{esc(PRODUCTS[k]["name"])}<span aria-hidden="true">*</span>'
