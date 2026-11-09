@@ -19,7 +19,7 @@ const stem = (w) => {
   return w.length >= 5 && w.endsWith("n") ? w.slice(0, -1) : w;
 };
 
-export const searchWords = (q) => (fold(q).match(/[a-z0-9]+/g) || []).filter((w) => !STOP.has(w)).map(stem);
+const searchWords = (q) => (fold(q).match(/[a-z0-9]+/g) || []).filter((w) => !STOP.has(w)).map(stem);
 
 export const prepare = (names, alt, marks) => ({ names: fold(names), alt: fold(alt), marks: marks.filter(Boolean).map(fold) });
 

@@ -45,16 +45,13 @@ def species_pick(s):
 
 def gear_inline(key):
     """Ein einzelner Werbelink als Pille, mit Sternchen (Hinweis AD_SHORT darunter)."""
-    p = PRODUCTS[key]
-    return (f'<a href="{p["url"]}" target="_blank" rel="sponsored nofollow noopener">{esc(p["name"])}<span aria-hidden="true">*</span>'
-            f'<span class="sr-only"> (Werbelink, öffnet in neuem Fenster)</span></a>')
+    return ad_link(PRODUCTS[key]["url"], esc(PRODUCTS[key]["name"]))
 
 AD_SHORT = '<p class="adshort"><span aria-hidden="true">*</span> Werbelink zu Amazon: Kaufst du darüber, erhält der Meereskompass eine kleine Provision. Für dich ändert sich am Preis nichts.</p>'
 
 def gear_list(keys):
     """Empfehlungen als schlichte Textliste: Name als Werbelink, darunter kurz, wofür."""
-    li = "".join(f'<li><a href="{PRODUCTS[k]["url"]}" target="_blank" rel="sponsored nofollow noopener">{esc(PRODUCTS[k]["name"])}<span aria-hidden="true">*</span>'
-                 f'<span class="sr-only"> (Werbelink, öffnet in neuem Fenster)</span></a><span>{esc(PRODUCTS[k]["why"])}</span></li>' for k in keys)
+    li = "".join(f'<li>{ad_link(PRODUCTS[k]["url"], esc(PRODUCTS[k]["name"]))}<span>{esc(PRODUCTS[k]["why"])}</span></li>' for k in keys)
     return f'<ul class="gearlist">{li}</ul>'
 
 ADNOTE = '<p class="adnote"><span aria-hidden="true">*</span> Werbelink: Wenn du über diesen Link etwas kaufst, erhält der Meereskompass eine kleine Provision von Amazon. Für dich ändert sich am Preis nichts. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>'

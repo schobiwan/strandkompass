@@ -21,18 +21,20 @@ python3 tools/check.py  # prüft Links, Fotos, Bildnachweise und Daten
 | Pfad | Inhalt |
 | --- | --- |
 | `data.py` | Alle Inhalte: Funde, Doppelgänger, Strandjahr, Nordsee/Ostsee |
+| `data_aussehen.py` | Seiten „Nach Aussehen“ (Merkmal → passende Arten) |
 | `credits.json` | Bildnachweise (Urheber, Lizenz, Quelle) je Foto |
 | `photos/` | Fotos als WebP, 720 × 576 und 400 × 320 |
-| `sk/core.py` | Pfade, Konstanten, Helfer |
+| `sk/core.py` | Pfade, Konstanten, Stand der Inhalte, Helfer (Sortierung, Artikel) |
 | `sk/icons.py` | Symbole, Logo, Tonne, Rippelmarken |
 | `sk/layout.py` | Seitengerüst, Navigation, Fuß, Meer-Umschalter |
-| `sk/components.py` | Bausteine: Fotos, Bildangaben, Fundkarten, Kästen |
-| `sk/products.py` | Produktempfehlungen mit Amazon-Werbelinks |
-| `sk/pages/` | Die Seiten: Start, Funde, Doppelgänger, Strandjahr, Meere, Info |
-| `sk/assets.py` | Schriften und Fotos kopieren, CSS/JS bündeln, Sitemap |
+| `sk/components.py` | Bausteine: Fotos, Bildangaben, Fundkarten, „Kurz gesagt“, externe und Werbelinks |
+| `sk/products.py` | Empfehlungen als Text-Werbelinks (Amazon), ohne Produktbilder |
+| `sk/pages/` | Die Seiten: Start, Arten, Doppelgänger, Nach Aussehen, Küstenjahr, Meere, Fernglas-Ratgeber, Info, Über, 404 |
+| `sk/assets.py` | Schriften, Fotos und Icons kopieren, CSS/JS bündeln, Sitemap, llms.txt, _headers |
 | `src/css/` | `base.css` (Grundgerüst), `extra.css` (Meereskompass) |
-| `src/js/` | `app.js` (jede Seite), `home.js` (Startseite) |
-| `tools/` | Prüfskript und Foto-Werkzeug |
+| `src/js/` | `app.js` (jede Seite, mit Menü, Schnellsuche, Tönen), `home.js` (Startseite), `search.js` (Suche) |
+| `icons/` | Favicon und App-Icons (aus `favicon.svg` gerendert) |
+| `tools/` | Prüfskript, Foto- und Ton-Werkzeuge |
 
 ## Neue Fotos
 

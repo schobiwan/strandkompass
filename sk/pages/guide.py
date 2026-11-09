@@ -4,6 +4,7 @@ vier Modelle im Vergleich, Pflege, häufige Fragen. Technische Daten aus Herstel
 Stand November 2026, dieselben Modelle wie im Fernglas-Ratgeber des Vogelkompass. Bei Modellwechseln hier anpassen."""
 from ..core import *
 from ..layout import *
+from ..components import ad_link, ext_link
 from ..products import ADNOTE
 
 amazon_dp = lambda asin: f"https://www.amazon.de/dp/{asin}?tag={TAG}"
@@ -40,9 +41,6 @@ SOURCES = [
     ("Cornell Lab of Ornithology (All About Birds): Vortex Diamondback HD 8x42 im Test (Februar 2023)", "https://www.allaboutbirds.org/news/?p=55900"),
 ]
 
-def ext(u, t):
-    return f'<a href="{esc(u)}" target="_blank" rel="noopener">{esc(t)}<span class="sr-only"> (öffnet in neuem Fenster)</span></a>'
-
 def build_guide():
     R = "../../"
     tips = lambda xs: '<ul class="tips">' + "".join(f"<li><b>{a}</b><span>{b}</span></li>" for a, b in xs) + "</ul>"
@@ -51,11 +49,11 @@ def build_guide():
         f'<section class="block rtype" id="{m["id"]}" aria-labelledby="h-{m["id"]}"><div class="wrap"><h2 id="h-{m["id"]}">{esc(m["name"])}</h2><div class="rcols">'
         f'<div><h3>Spricht dafür</h3><ul class="rlist plus">{"".join(f"<li>{esc(g)}</li>" for g in m["gut"])}</ul></div>'
         f'<div><h3>Darauf achten</h3><ul class="rlist minus">{"".join(f"<li>{esc(g)}</li>" for g in m["achtung"])}</ul></div></div>'
-        f'<p class="rsearch"><a class="btn ghost" href="{m["link"]}" target="_blank" rel="sponsored nofollow noopener">{esc(m["name"])} bei Amazon ansehen<span aria-hidden="true">*</span><span class="sr-only"> (Werbelink, öffnet in neuem Fenster)</span></a></p></div></section>'
+        f'<p class="rsearch">{ad_link(m["link"], esc(m["name"]) + " bei Amazon ansehen", cls="btn ghost")}</p></div></section>'
         for m in MODELLE)
     # Häufige Fragen: am Computer offen, auf dem Handy eingeklappt (Inhalt bleibt vollständig im HTML)
     faq = '<div class="faq">' + "".join(f'<details class="fold faqitem" open data-fold><summary><h3>{esc(q)}</h3></summary><p>{esc(a)}</p></details>' for q, a in FAQ) + "</div>"
-    src = '<h3 class="srchead">Quellen</h3><ul class="srclist">' + "".join(f"<li>{ext(u, t)}</li>" for t, u in SOURCES) + "</ul>"
+    src = '<h3 class="srchead">Quellen</h3><ul class="srclist">' + "".join(f"<li>{ext_link(esc(u), esc(t))}</li>" for t, u in SOURCES) + "</ul>"
     body = f'''<section class="block page"> <div class="wrap"> <h1>Fernglas für die Küste</h1>
 <p class="intro">An der Küste ist fast alles weit weg: die Robben auf der Sandbank, die Eiderenten draußen auf dem Wasser, der Basstölpel über den Wellen. Mit einem guten Fernglas erkennst du sie trotzdem. Es muss aber Wind, Gischt und Sand aushalten.</p>
 <p class="adbanner"><b>Werbung:</b> Diese Seite enthält Werbelinks zu Amazon, gekennzeichnet mit einem Sternchen. Kaufst du darüber, erhalte ich eine kleine Provision, für dich ändert sich am Preis nichts. Ich habe die Gläser nicht selbst getestet. Die Daten stammen von den Herstellern und aus den unten genannten Testberichten, Stand November 2026.</p>

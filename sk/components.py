@@ -18,6 +18,22 @@ def img(R, key, alt="", eager=False, cls="", sizes="(max-width: 600px) 92vw, 400
     return (f'<img{c} src="{R}photos/{key}.webp" srcset="{R}photos/{key}-400.webp 400w, {R}photos/{key}.webp 720w" sizes="{sizes}" '
             f'alt="{esc(alt)}" width="720" height="576" loading="{lz}" decoding="async">')
 
+def ext_link(url, text, rel="noopener", cls="", mark=""):
+    """Link in neuem Fenster, mit Hinweis für Screenreader. mark z. B. „*“ für Werbelinks (sichtbar, aber nicht vorgelesen)."""
+    c = f' class="{cls}"' if cls else ""
+    star = f'<span aria-hidden="true">{mark}</span>' if mark else ""
+    sr = "Werbelink, öffnet in neuem Fenster" if "sponsored" in rel else "öffnet in neuem Fenster"
+    return f'<a{c} href="{url}" target="_blank" rel="{rel}">{text}{star}<span class="sr-only"> ({sr})</span></a>'
+
+def ad_link(url, text, cls=""):
+    """Amazon-Werbelink mit Sternchen."""
+    return ext_link(url, text, rel="sponsored nofollow noopener", cls=cls, mark="*")
+
+def tldr_box(content):
+    """Kasten „Kurz gesagt“: content ist ein Satz oder eine Liste aus (Begriff, Text)."""
+    body = f"<p>{esc(content)}</p>" if isinstance(content, str) else "<dl>" + "".join(f"<dt>{esc(a)}</dt><dd>{esc(b)}</dd>" for a, b in content) + "</dl>"
+    return f'<section class="tldr" aria-labelledby="h-tldr"><h2 id="h-tldr">Kurz gesagt</h2>{body}</section>'
+
 def lic_url(lic):
     """Link auf den Lizenztext (Creative Commons verlangt ihn bei jeder Nutzung)."""
     import re as _re

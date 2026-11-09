@@ -59,14 +59,6 @@ def name_of(key):
 def lat_of(key):
     return BY[key]["lat"] if key in BY else EXT[key]["lat"]
 
-def der(g, case="nom"):
-    """Bestimmter Artikel: der/die/das, im Akkusativ den/die/das."""
-    if g == "f":
-        return "die"
-    if g == "n":
-        return "das"
-    return "den" if case == "acc" else "der"
-
 MOBILE = ("Seevögel", "Robben", "Wale & Delfine")
 
 # Stand der Steckbriefe, Vergleiche und Merkmal-Seiten: bei inhaltlichen Änderungen anheben (Sitemap lastmod, strukturierte Daten, sichtbarer Stand)
@@ -84,11 +76,6 @@ def mit_artikel(key, case="nom"):
         weak_e = case == "nom" or (case == "acc" and g != "m")
         w[0] = stem + ("e" if weak_e else "en")
     return f"{art} {' '.join(w)}"
-
-def ein(g, case="nom"):
-    if case == "dat":
-        return "der" if g == "f" else "dem"
-    return "eine" if g == "f" else "ein"
 
 def mlist(ms):
     ms = list(ms)

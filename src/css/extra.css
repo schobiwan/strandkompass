@@ -68,7 +68,7 @@ body:before{background:var(--hdr-bg)}
 .hsearch label:focus-within{outline:3px solid var(--logo-on-dark);outline-offset:2px}
 .hsearch-btn{min-height:50px;padding:0 22px;border-radius:999px;border:0;background:var(--rust);color:#fff;font:700 .98rem var(--body);cursor:pointer}
 .hsearch-btn:hover{background:color-mix(in srgb,var(--rust) 85%,#000)}
-.hsearch-btn:focus-visible,.cbtn:focus-visible{outline:3px solid var(--logo-on-dark);outline-offset:2px}
+.hsearch-btn:focus-visible{outline:3px solid var(--logo-on-dark);outline-offset:2px}
 
 /* Gruppen-Knöpfe */
 .hchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;max-width:640px}
@@ -94,13 +94,6 @@ body:before{background:var(--hdr-bg)}
 .spot-cred{display:block;margin:10px 0 0;font-size:.7rem;color:var(--muted)}
 
 /* Monatsereignisse als Leiste */
-.h6-month{position:relative;z-index:1;padding-block:14px 54px}
-.h5-mh{font:700 .8rem var(--body);letter-spacing:.07em;text-transform:uppercase;color:var(--rust-text);margin:0 0 10px}
-.h5-events{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.h5-events li{position:relative;padding:10px 14px 10px 32px;border-radius:10px;background:color-mix(in srgb,var(--surface) 78%,transparent);box-shadow:var(--shadow);font-size:.92rem;line-height:1.45;color:var(--fg)}
-.h5-events li:before{content:"";position:absolute;left:14px;top:1.15em;width:8px;height:8px;border-radius:50%;background:var(--priel)}
-.h5-events li[data-sea-only=ost]:before{background:var(--ost)}
-.h5-events li[data-sea-only=beide]:before{background:var(--moss)}
 .h6-ripples{position:absolute;left:0;right:0;bottom:0;width:100%;height:60px;fill:none;stroke:color-mix(in srgb,#b08a4a 34%,transparent);stroke-width:1.4;pointer-events:none}
 
 /* ---------- Seevögel-Band ---------- */
@@ -120,32 +113,6 @@ body:before{background:var(--hdr-bg)}
 .bt-s{padding:2px 13px 12px;font-size:.8rem;color:var(--muted)}
 .birdtiles .cred{margin-top:5px;font-size:.64rem;line-height:1.35}
 @media(min-width:1000px){.birdtiles{gap:18px 16px}}
-
-/* ---------- Karussell „Jetzt zu finden“ ---------- */
-.nowband{background:linear-gradient(var(--forest) 0 120px,var(--bg) 120px);padding-bottom:30px}
-.now-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;padding-top:4px}
-.now-head h2{font:600 1.02rem var(--body);color:var(--forest-ink)}
-.now-nav{display:flex;align-items:center;gap:6px}
-.now-nav a{margin-right:8px;font-size:.88rem;font-weight:600;color:color-mix(in srgb,var(--forest-ink) 80%,var(--forest));text-underline-offset:3px}
-.now-nav a:hover{color:var(--forest-ink)}
-.cbtn{display:grid;place-items:center;width:36px;height:36px;padding:0;border-radius:50%;border:1px solid color-mix(in srgb,var(--forest-ink) 30%,var(--forest));background:transparent;color:var(--forest-ink);cursor:pointer;transition:background .2s ease,opacity .2s ease}
-.cbtn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
-.cbtn:hover:not(:disabled){background:color-mix(in srgb,var(--forest-ink) 12%,var(--forest))}
-.cbtn:disabled{opacity:.35;cursor:default}
-.nowcards{--per:5;list-style:none;margin:0;padding:0 0 8px;display:flex;gap:14px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
-.nowcards::-webkit-scrollbar{display:none}
-.nowcards li{position:relative;flex:0 0 calc((100% - (var(--per) - 1) * 14px) / var(--per));scroll-snap-align:start}
-.nowcards li[hidden]{display:none}
-.nowcards li>a{position:relative;display:block;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);color:#fff;text-decoration:none}
-.nowcards img{width:100%;aspect-ratio:4 / 3;object-fit:cover;display:block;transition:transform .5s var(--ease)}
-.nowcards li>a:hover img{transform:scale(1.05)}
-.nowcards li>a:focus-visible{outline:3px solid var(--rust);outline-offset:2px}
-.nowcards .cred{margin-top:5px;font-size:.66rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.nc-ov{position:absolute;inset:0;display:flex;align-items:flex-end;gap:6px;padding:28px 12px 10px;background:linear-gradient(transparent 50%,#141c1bd9)}
-.nc-ov b{font:600 1.08rem/1.15 var(--display)}
-.nowcards li .nc-ov i{display:none;position:absolute;top:10px;left:10px;font:700 .66rem var(--body);font-style:normal;padding:2px 8px;border-radius:999px;background:var(--logo-on-dark);color:#1a1310;white-space:nowrap}
-.nowcards li.pk .nc-ov i{display:inline-block}
-@media(max-width:960px){.nowcards{--per:3}}
 
 /* ---------- Fundkarten, Bildangaben, Meer-Kennzeichen ---------- */
 .bird img{background:color-mix(in srgb,var(--moss) 12%,var(--surface))}
@@ -232,8 +199,6 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .pair figure img,.ph.big img,.alike img{background:color-mix(in srgb,var(--moss) 12%,var(--surface))}
 .pair figcaption{z-index:2}
 .pair .pair-link:after{z-index:1}
-.merksatz{margin:16px 0 0;padding:14px 16px;border-left:4px solid var(--rust);background:var(--surface);border-radius:0 8px 8px 0;max-width:60em}
-.merksatz b{color:var(--rust)}
 .pairpage>section{margin-top:28px}
 .pairpage .ph.big{margin-top:6px}
 .cmp-wrap,.cal-wrap{position:relative}
@@ -288,9 +253,8 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .warnbox p,.warnbox li{max-width:70ch}
 .warnbox ul{margin:10px 0 0;padding-left:20px}
 
-
 /* ---------- Textseiten und Links im Text ---------- */
-.prose a,.intro a,.text a,.yeartext a,.morelinks a,.seabar-more,.alike a,.footnote a{color:var(--priel)}
+.prose a,.intro a,.text a,.yeartext a,.seabar-more,.alike a,.footnote a{color:var(--priel)}
 .prose a:hover,.intro a:hover,.yeartext a:hover{color:var(--rust)}
 section.block .prose h1,.page .prose h1{font-size:clamp(1.75rem,3vw,2.2rem);margin-bottom:10px}
 section.block .prose h2,.prose h2{font:600 1.2rem/1.3 var(--display);letter-spacing:0;color:var(--heading);margin:30px 0 6px}
@@ -303,7 +267,6 @@ section.block .prose h2:first-child{margin-top:0}
   .hero6-in{grid-template-columns:minmax(0,1fr);padding-top:28px}
   .spot6{margin:12px auto 0;max-width:520px}
   .s6-label{margin-left:-6px}
-  .h6-month{display:none}
   .h6-ripples{height:40px}
 }
 @media(max-width:760px){.seabtn,.hchip{min-height:44px}}
@@ -314,16 +277,12 @@ section.block .prose h2:first-child{margin-top:0}
   .birdtiles li{flex:0 0 42%;scroll-snap-align:start}
 }
 @media(max-width:560px){
-  .hsearch-btn,.cbtn{display:none}
-  .now-nav a{margin:0}
+  .hsearch-btn{display:none}
   .hchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-16px;padding-right:16px}
   .hchips::-webkit-scrollbar{display:none}
   .hchip{flex:none}
-  .nowband{background:linear-gradient(var(--forest) 0 96px,var(--bg) 96px)}
-  .nowcards{gap:10px;margin-right:-16px;padding-right:16px}
-  .nowcards li{flex-basis:44%}
 }
-@media(prefers-reduced-motion:reduce){.nowcards{scroll-behavior:auto}.spot6{animation:none}}
+@media(prefers-reduced-motion:reduce){.spot6{animation:none}}
 
 /* ---------- Strandjahr: Legende und Handy ---------- */
 .callegend{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 12px;padding:0;font-size:.9rem;color:var(--muted)}
@@ -406,8 +365,7 @@ section.block .prose h2:first-child{margin-top:0}
 .monthlinks a:hover{background:color-mix(in srgb,var(--forest) 6%,var(--surface));border-color:var(--forest)}
 .pair-link:hover,.bird h3 a:hover,.birdtiles li>a:hover b{color:var(--rust-text)}
 /* Textlinks: Unterstrich und Farbe wechseln */
-footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,
-.credits td a:hover,table a:hover,figcaption a:hover,.cb-cred a:hover,.sp-photo figcaption a:hover,.crumbs a:hover{color:var(--rust-text);text-decoration-color:currentColor;text-decoration-line:underline}
+footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,table a:hover,figcaption a:hover,.cb-cred a:hover,.sp-photo figcaption a:hover,.crumbs a:hover{color:var(--rust-text);text-decoration-color:currentColor;text-decoration-line:underline}
 .seabar-more{text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:2px}
 .fold>summary:hover{color:var(--rust-text)}
 @media(min-width:761px){.fold>summary:hover{color:inherit}}
@@ -492,7 +450,7 @@ footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,
 .months span.h{color:var(--bg)}
 @media(prefers-color-scheme:light){.months span.h{color:#fffdf8}}
 .seabar-more{display:inline-flex;align-items:center;min-height:32px}
-.qtable th a,.qtab th a,table th[scope=row]>a{display:inline-flex;align-items:center;min-height:28px}
+table th[scope=row]>a{display:inline-flex;align-items:center;min-height:28px}
 .hsearch input{min-height:44px}
 
 /* ---------- Abstände unter Überschriften und Einleitungen ----------
@@ -505,7 +463,6 @@ main .grp-h{margin:44px 0 16px}
 .bb-sub{margin-top:12px}
 .grid-head{row-gap:10px}
 main .grp-h:first-of-type{margin-top:28px}
-.head-row{row-gap:12px}
 
 /* Kurz gesagt: das Wichtigste zur Art auf einen Blick (wie beim Vogelkompass) */
 .tldr{background:var(--surface);border-radius:8px;box-shadow:var(--shadow);border-left:4px solid var(--moss);padding:16px 20px 18px;margin:0 0 32px}
@@ -583,7 +540,6 @@ section.block.rtype{padding-top:28px}
 .srclist a{color:inherit}
 #zahlen .tips,#kriterien .tips{margin-top:16px}
 
-
 /* Empfehlungen als Textliste (ohne Produktbilder): Name als Werbelink, darunter wofür */
 .gearlist{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:0;max-width:70ch}
 .gearlist li{display:flex;flex-direction:column;gap:2px;padding:12px 0;border-top:1px solid var(--line)}
@@ -605,7 +561,6 @@ section.block.rtype{padding-top:28px}
 .morerows dd{margin:0}
 .morerows a[target=_blank]::after{content:"↗";font-size:.8em;color:var(--muted);margin-left:6px}
 @media(max-width:560px){.morerows>div{grid-template-columns:1fr;gap:6px}.morerows dt{padding-top:0}}
-
 
 /* Textlinks einheitlich (wie beim Vogelkompass, in der Meeresfarbe Priel): im Fließtext blau, normale Schrift, feine Unterstreichung mit Abstand,
    beim Überfahren kräftiger. Bewusst schwache Regel (nur Elementselektoren), Navigation, Karten, Pillen und Brotkrumen überschreiben sie. */

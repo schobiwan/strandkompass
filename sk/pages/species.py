@@ -43,7 +43,7 @@ def build_species(s):
     rows = [(f'Mehr {esc(s["grp"])}', "".join(pill(f'{R}arten/{x["k"]}/index.html', x["n"]) for x in sib)),
             ("Nach Aussehen", "".join(pill(f'{R}aussehen/{m["slug"]}/index.html', m["h1"]) for m in looks_for(k))),
             ("Ausrüstung", (pill(f"{R}ratgeber/fernglas/index.html", "Fernglas für die Küste") if s["grp"] in MOBILE else "") + gear_inline(species_pick(s))),
-            ("Weiterlesen", f'<a href="{wiki}" target="_blank" rel="noopener">Wikipedia<span class="sr-only"> (öffnet in neuem Fenster)</span></a>')]
+            ("Weiterlesen", ext_link(wiki, 'Wikipedia'))]
     more = '<dl class="morerows">' + "".join(f'<div><dt>{t}</dt><dd class="pills">{v}</dd></div>' for t, v in rows if v) + '</dl>' 
     # Überschriften als Fragen, wie Leute sie suchen; Tiere beobachtet man, Funde findet man
     nom, acc, dat = (esc(mit_artikel(k, c)) for c in ("nom", "acc", "dat"))
@@ -55,10 +55,7 @@ def build_species(s):
     third = (("Brennt sie?", fact["Brennt sie?"]) if "Brennt sie?" in fact else ("Ruf", s["call"]) if s.get("call") else ("Größe", fact["Größe"]))
     # was im Kasten steht, nicht noch einmal im Steckbrief
     facts = "".join(f"<dt>{esc(a)}</dt><dd>{esc(b)}</dd>" for a, b in s["facts"] if not (a == "Ruf" and s.get("call")) and a not in ("Wo zu finden", third[0]))
-    tldr = ('<section class="tldr" aria-labelledby="h-tldr"><h2 id="h-tldr">Kurz gesagt</h2><dl>'
-            f'<dt>{"Zu sehen" if see == "zu sehen" else "Zu finden"}</dt><dd>{esc(when)}</dd>'
-            f'<dt>Wo</dt><dd>{esc(fact["Wo zu finden"])}</dd>'
-            f'<dt>{esc(third[0])}</dt><dd>{esc(third[1])}</dd></dl></section>')
+    tldr = tldr_box([("Zu sehen" if see == "zu sehen" else "Zu finden", when), ("Wo", fact["Wo zu finden"]), third])
     # Blättern: vorherige und nächste Art in der Reihenfolge der Übersicht (Gruppe, dann Name)
     order = [x for g in GROUPS for x in sorted((y for y in SPECIES if y["grp"] == g), key=skey)]
     i = order.index(s)
