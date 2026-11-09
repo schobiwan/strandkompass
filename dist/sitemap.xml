@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url><loc>https://meereskompass.de/</loc></url>
   <url><loc>https://meereskompass.de/am-strand/</loc></url>
   <url><loc>https://meereskompass.de/arten/</loc></url>
@@ -12,61 +12,61 @@
   <url><loc>https://meereskompass.de/ostsee/</loc></url>
   <url><loc>https://meereskompass.de/strandjahr/</loc></url>
   <url><loc>https://meereskompass.de/unterscheiden/</loc></url>
-  <url><loc>https://meereskompass.de/arten/alpenstrandlaeufer/</loc></url>
-  <url><loc>https://meereskompass.de/arten/auster/</loc></url>
-  <url><loc>https://meereskompass.de/arten/austernfischer/</loc></url>
-  <url><loc>https://meereskompass.de/arten/basstoelpel/</loc></url>
-  <url><loc>https://meereskompass.de/arten/bernstein/</loc></url>
-  <url><loc>https://meereskompass.de/arten/blasentang/</loc></url>
-  <url><loc>https://meereskompass.de/arten/blaue-nesselqualle/</loc></url>
-  <url><loc>https://meereskompass.de/arten/brandgans/</loc></url>
-  <url><loc>https://meereskompass.de/arten/buckelwal/</loc></url>
-  <url><loc>https://meereskompass.de/arten/donnerkeil/</loc></url>
-  <url><loc>https://meereskompass.de/arten/eiderente/</loc></url>
-  <url><loc>https://meereskompass.de/arten/einsiedlerkrebs/</loc></url>
-  <url><loc>https://meereskompass.de/arten/feuerqualle/</loc></url>
-  <url><loc>https://meereskompass.de/arten/flussseeschwalbe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/grosser-tuemmler/</loc></url>
-  <url><loc>https://meereskompass.de/arten/heringsmoewe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/herzigel/</loc></url>
-  <url><loc>https://meereskompass.de/arten/herzmuschel/</loc></url>
-  <url><loc>https://meereskompass.de/arten/huehnergott/</loc></url>
-  <url><loc>https://meereskompass.de/arten/katzenhai-ei/</loc></url>
-  <url><loc>https://meereskompass.de/arten/kegelrobbe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/kompassqualle/</loc></url>
-  <url><loc>https://meereskompass.de/arten/kormoran/</loc></url>
-  <url><loc>https://meereskompass.de/arten/lachmoewe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/lungenqualle/</loc></url>
-  <url><loc>https://meereskompass.de/arten/mantelmoewe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/meersalat/</loc></url>
-  <url><loc>https://meereskompass.de/arten/miesmuschel/</loc></url>
-  <url><loc>https://meereskompass.de/arten/nixentaeschchen/</loc></url>
-  <url><loc>https://meereskompass.de/arten/nordseegarnele/</loc></url>
-  <url><loc>https://meereskompass.de/arten/ohrenqualle/</loc></url>
-  <url><loc>https://meereskompass.de/arten/pantoffelschnecke/</loc></url>
-  <url><loc>https://meereskompass.de/arten/plattmuschel/</loc></url>
-  <url><loc>https://meereskompass.de/arten/pottwal/</loc></url>
-  <url><loc>https://meereskompass.de/arten/ringelgans/</loc></url>
-  <url><loc>https://meereskompass.de/arten/saebelschnaebler/</loc></url>
-  <url><loc>https://meereskompass.de/arten/sanderling/</loc></url>
-  <url><loc>https://meereskompass.de/arten/sandklaffmuschel/</loc></url>
-  <url><loc>https://meereskompass.de/arten/schweinswal/</loc></url>
-  <url><loc>https://meereskompass.de/arten/schwertmuschel/</loc></url>
-  <url><loc>https://meereskompass.de/arten/seegras/</loc></url>
-  <url><loc>https://meereskompass.de/arten/seehund/</loc></url>
-  <url><loc>https://meereskompass.de/arten/seepocke/</loc></url>
-  <url><loc>https://meereskompass.de/arten/seestachelbeere/</loc></url>
-  <url><loc>https://meereskompass.de/arten/seestern/</loc></url>
-  <url><loc>https://meereskompass.de/arten/sepiaschale/</loc></url>
-  <url><loc>https://meereskompass.de/arten/silbermoewe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/strandkrabbe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/strandschnecke/</loc></url>
-  <url><loc>https://meereskompass.de/arten/sturmmoewe/</loc></url>
-  <url><loc>https://meereskompass.de/arten/trottellumme/</loc></url>
-  <url><loc>https://meereskompass.de/arten/wattwurm/</loc></url>
-  <url><loc>https://meereskompass.de/arten/weissschnauzendelfin/</loc></url>
-  <url><loc>https://meereskompass.de/arten/wellhornschnecke/</loc></url>
-  <url><loc>https://meereskompass.de/arten/zwergwal/</loc></url>
+  <url><loc>https://meereskompass.de/arten/alpenstrandlaeufer/</loc><image:image><image:loc>https://meereskompass.de/photos/alpenstrandlaeufer.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/auster/</loc><image:image><image:loc>https://meereskompass.de/photos/auster.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/austernfischer/</loc><image:image><image:loc>https://meereskompass.de/photos/austernfischer.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/basstoelpel/</loc><image:image><image:loc>https://meereskompass.de/photos/basstoelpel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/bernstein/</loc><image:image><image:loc>https://meereskompass.de/photos/bernstein.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/blasentang/</loc><image:image><image:loc>https://meereskompass.de/photos/blasentang.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/blaue-nesselqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/blaue-nesselqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/brandgans/</loc><image:image><image:loc>https://meereskompass.de/photos/brandgans.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/buckelwal/</loc><image:image><image:loc>https://meereskompass.de/photos/buckelwal.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/donnerkeil/</loc><image:image><image:loc>https://meereskompass.de/photos/donnerkeil.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/eiderente/</loc><image:image><image:loc>https://meereskompass.de/photos/eiderente.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/einsiedlerkrebs/</loc><image:image><image:loc>https://meereskompass.de/photos/einsiedlerkrebs.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/feuerqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/feuerqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/flussseeschwalbe/</loc><image:image><image:loc>https://meereskompass.de/photos/flussseeschwalbe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/grosser-tuemmler/</loc><image:image><image:loc>https://meereskompass.de/photos/grosser-tuemmler.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/heringsmoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/heringsmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/herzigel/</loc><image:image><image:loc>https://meereskompass.de/photos/herzigel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/herzmuschel/</loc><image:image><image:loc>https://meereskompass.de/photos/herzmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/huehnergott/</loc><image:image><image:loc>https://meereskompass.de/photos/huehnergott.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/katzenhai-ei/</loc><image:image><image:loc>https://meereskompass.de/photos/katzenhai-ei.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/kegelrobbe/</loc><image:image><image:loc>https://meereskompass.de/photos/kegelrobbe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/kompassqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/kompassqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/kormoran/</loc><image:image><image:loc>https://meereskompass.de/photos/kormoran.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/lachmoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/lachmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/lungenqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/lungenqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/mantelmoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/mantelmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/meersalat/</loc><image:image><image:loc>https://meereskompass.de/photos/meersalat.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/miesmuschel/</loc><image:image><image:loc>https://meereskompass.de/photos/miesmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/nixentaeschchen/</loc><image:image><image:loc>https://meereskompass.de/photos/nixentaeschchen.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/nordseegarnele/</loc><image:image><image:loc>https://meereskompass.de/photos/nordseegarnele.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/ohrenqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/ohrenqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/pantoffelschnecke/</loc><image:image><image:loc>https://meereskompass.de/photos/pantoffelschnecke.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/plattmuschel/</loc><image:image><image:loc>https://meereskompass.de/photos/plattmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/pottwal/</loc><image:image><image:loc>https://meereskompass.de/photos/pottwal.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/ringelgans/</loc><image:image><image:loc>https://meereskompass.de/photos/ringelgans.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/saebelschnaebler/</loc><image:image><image:loc>https://meereskompass.de/photos/saebelschnaebler.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/sanderling/</loc><image:image><image:loc>https://meereskompass.de/photos/sanderling.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/sandklaffmuschel/</loc><image:image><image:loc>https://meereskompass.de/photos/sandklaffmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/schweinswal/</loc><image:image><image:loc>https://meereskompass.de/photos/schweinswal.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/schwertmuschel/</loc><image:image><image:loc>https://meereskompass.de/photos/schwertmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/seegras/</loc><image:image><image:loc>https://meereskompass.de/photos/seegras.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/seehund/</loc><image:image><image:loc>https://meereskompass.de/photos/seehund.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/seepocke/</loc><image:image><image:loc>https://meereskompass.de/photos/seepocke.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/seestachelbeere/</loc><image:image><image:loc>https://meereskompass.de/photos/seestachelbeere.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/seestern/</loc><image:image><image:loc>https://meereskompass.de/photos/seestern.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/sepiaschale/</loc><image:image><image:loc>https://meereskompass.de/photos/sepiaschale.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/silbermoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/silbermoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/strandkrabbe/</loc><image:image><image:loc>https://meereskompass.de/photos/strandkrabbe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/strandschnecke/</loc><image:image><image:loc>https://meereskompass.de/photos/strandschnecke.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/sturmmoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/sturmmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/trottellumme/</loc><image:image><image:loc>https://meereskompass.de/photos/trottellumme.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/wattwurm/</loc><image:image><image:loc>https://meereskompass.de/photos/wattwurm.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/weissschnauzendelfin/</loc><image:image><image:loc>https://meereskompass.de/photos/weissschnauzendelfin.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/wellhornschnecke/</loc><image:image><image:loc>https://meereskompass.de/photos/wellhornschnecke.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/zwergwal/</loc><image:image><image:loc>https://meereskompass.de/photos/zwergwal.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/strandjahr/april/</loc></url>
   <url><loc>https://meereskompass.de/strandjahr/august/</loc></url>
   <url><loc>https://meereskompass.de/strandjahr/dezember/</loc></url>
@@ -79,21 +79,21 @@
   <url><loc>https://meereskompass.de/strandjahr/november/</loc></url>
   <url><loc>https://meereskompass.de/strandjahr/oktober/</loc></url>
   <url><loc>https://meereskompass.de/strandjahr/september/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/blasentang-oder-saegetang/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/feuerqualle-oder-blaue-nesselqualle/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/flussseeschwalbe-oder-kuestenseeschwalbe/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/herzmuschel-oder-plattmuschel/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/lachmoewe-oder-sturmmoewe/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/mantelmoewe-oder-heringsmoewe/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/nixentaeschchen-oder-katzenhai-ei/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/ohrenqualle-oder-kompassqualle/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/pantoffelschnecke-oder-napfschnecke/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/sanderling-oder-alpenstrandlaeufer/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/schweinswal-oder-grosser-tuemmler/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/seehund-oder-kegelrobbe/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/seestachelbeere-oder-ohrenqualle/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/silbermoewe-oder-heringsmoewe/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/strandkrabbe-oder-schwimmkrabbe/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/trottellumme-oder-tordalk/</loc></url>
-  <url><loc>https://meereskompass.de/unterscheiden/weissschnauzendelfin-oder-grosser-tuemmler/</loc></url>
+  <url><loc>https://meereskompass.de/unterscheiden/blasentang-oder-saegetang/</loc><image:image><image:loc>https://meereskompass.de/photos/blasentang.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/x-saegetang.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/feuerqualle-oder-blaue-nesselqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/feuerqualle.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/blaue-nesselqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/flussseeschwalbe-oder-kuestenseeschwalbe/</loc><image:image><image:loc>https://meereskompass.de/photos/flussseeschwalbe.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/x-kuestenseeschwalbe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/herzmuschel-oder-plattmuschel/</loc><image:image><image:loc>https://meereskompass.de/photos/herzmuschel.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/plattmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/lachmoewe-oder-sturmmoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/lachmoewe.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/sturmmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/mantelmoewe-oder-heringsmoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/mantelmoewe.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/heringsmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/nixentaeschchen-oder-katzenhai-ei/</loc><image:image><image:loc>https://meereskompass.de/photos/nixentaeschchen.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/katzenhai-ei.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/ohrenqualle-oder-kompassqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/ohrenqualle.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/kompassqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/pantoffelschnecke-oder-napfschnecke/</loc><image:image><image:loc>https://meereskompass.de/photos/pantoffelschnecke.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/x-napfschnecke.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/sanderling-oder-alpenstrandlaeufer/</loc><image:image><image:loc>https://meereskompass.de/photos/sanderling.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/alpenstrandlaeufer.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/schweinswal-oder-grosser-tuemmler/</loc><image:image><image:loc>https://meereskompass.de/photos/schweinswal.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/grosser-tuemmler.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/seehund-oder-kegelrobbe/</loc><image:image><image:loc>https://meereskompass.de/photos/seehund.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/kegelrobbe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/seestachelbeere-oder-ohrenqualle/</loc><image:image><image:loc>https://meereskompass.de/photos/seestachelbeere.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/ohrenqualle.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/silbermoewe-oder-heringsmoewe/</loc><image:image><image:loc>https://meereskompass.de/photos/silbermoewe.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/heringsmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/strandkrabbe-oder-schwimmkrabbe/</loc><image:image><image:loc>https://meereskompass.de/photos/strandkrabbe.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/x-schwimmkrabbe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/trottellumme-oder-tordalk/</loc><image:image><image:loc>https://meereskompass.de/photos/trottellumme.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/x-tordalk.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/unterscheiden/weissschnauzendelfin-oder-grosser-tuemmler/</loc><image:image><image:loc>https://meereskompass.de/photos/weissschnauzendelfin.webp</image:loc></image:image><image:image><image:loc>https://meereskompass.de/photos/grosser-tuemmler.webp</image:loc></image:image></url>
 </urlset>

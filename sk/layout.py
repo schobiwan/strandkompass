@@ -3,8 +3,21 @@
 from .core import *
 from .icons import *
 
-LDJSON = ('<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": SITE, "url": DOMAIN + "/",
-          "inLanguage": "de-DE", "description": "Seevögel, Robben und Wale an Nord- und Ostsee bestimmen, dazu Quallen, Muscheln und Strandfunde."}, ensure_ascii=False) + '</script>')
+# Strukturierte Daten (schema.org): Herausgeber und Website sind über @id verknüpft; die Startseite beschreibt sie vollständig
+ORG_ID, WEBSITE_ID = DOMAIN + "/#org", DOMAIN + "/#website"
+AUTHOR = {"@type": "Person", "name": "Nico Schober", "url": DOMAIN + "/impressum/"}
+def ld(obj):
+    return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False) + '</script>'
+LDJSON = ld({"@context": "https://schema.org", "@graph": [
+    {"@type": "Organization", "@id": ORG_ID, "name": SITE, "url": DOMAIN + "/", "logo": DOMAIN + "/icon-512.png",
+     "founder": {"@type": "Person", "name": "Nico Schober"}, "sameAs": ["https://vogelkompass.de/", "https://waldtierkompass.de/"]},
+    {"@type": "WebSite", "@id": WEBSITE_ID, "name": SITE, "url": DOMAIN + "/", "inLanguage": "de-DE", "publisher": {"@id": ORG_ID},
+     "description": "Seevögel, Robben und Wale an Nord- und Ostsee bestimmen, dazu Quallen, Muscheln und Strandfunde."}]})
+
+def crumbs_ld(crumbs):
+    items = [(SITE, DOMAIN + "/")] + [(lab, DOMAIN + "/" + href.replace("index.html", "")) for lab, href in crumbs[:-1]] + [(crumbs[-1][0], None)]
+    return ld({"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [
+        {"@type": "ListItem", "position": i + 1, "name": n, **({"item": u} if u else {})} for i, (n, u) in enumerate(items)]})
 
 # Hauptnavigation nach den Fragen der Besucher (wie beim Vogelkompass):
 # Bestimmen ▾ (Wer ist das?) · Nord- & Ostsee ▾ (Was gibt es wo?) · Küstenjahr (Was ist jetzt los?) · Unterwegs ▾ (Sicher und gut ausgerüstet)
@@ -68,9 +81,10 @@ SEARCH_DLG = ('<dialog class="sdlg" id="sdlg" aria-labelledby="sdlg-title"> <for
               '<button type="button" class="sclose" id="sclose">Schließen</button></form> <p class="sr-only" id="sstatus" role="status" aria-live="polite"></p><ul class="sresults" id="sresults" aria-label="Treffer"></ul>'
               '<p class="smore" id="smore" hidden><a id="smore-link" href="{R}index.html#arten">Alle Treffer mit Filtern anzeigen</a></p> </dialog>')
 
-def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=None, is_home=False, og="og.jpg", seafilter=True):
+def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=None, is_home=False, og="og.jpg", seafilter=True, root=None, noindex=False, extra_ld=""):
+    """root: fester Pfad zur Wurzel, z. B. "/" für die 404-Seite, die unter beliebigen Adressen erscheint."""
     depth = path.count("/")
-    R = "../" * depth
+    R = "../" * depth if root is None else root
     canon = DOMAIN + "/" + (path[:-len("index.html")] if path.endswith("index.html") else path)
     cr = ""
     if crumbs:
@@ -79,10 +93,11 @@ def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=Non
             items.append(f'<li><a href="{R}{href}">{esc(lab)}</a></li>')
         items.append(f'<li><span aria-current="page">{esc(crumbs[-1][0])}</span></li>')
         cr = f'<nav class="crumbs wrap" aria-label="Brotkrumen"><ol> {" ".join(items)} </ol></nav>'
+        extra_ld += crumbs_ld(crumbs)
     dj = f'<script type="application/json" id="wk-data">{json.dumps(data, ensure_ascii=False)}</script>' if data is not None else ""
     sc = f'<script type="module" src="{R}assets/{(scripts[0] if scripts else "app.js")}"></script>'
     full_title = title if is_home else f"{title} · {SITE}"
-    return f'''<!DOCTYPE html><html lang="de" data-root="{R or './'}" data-index> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>{esc(full_title)}</title><meta name="description" content="{esc(desc)}"><link rel="canonical" href="{canon}"><meta name="theme-color" content="#fbf6ea" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14232c" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">{SEA_BOOT}<link rel="icon" href="{R}favicon.svg" type="image/svg+xml"><link rel="preload" href="{R}fonts/outfit-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="{R}fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><meta property="og:type" content="website"><meta property="og:site_name" content="{SITE}"><meta property="og:locale" content="de_DE"><meta property="og:title" content="{esc(full_title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{DOMAIN}/photos/{og}"><meta name="twitter:card" content="summary_large_image">{LDJSON if is_home else ""}<link rel="stylesheet" href="{R}assets/site.css"></head> <body> {LOGO} <a class="skip" href="#main">Zum Inhalt springen</a> <nav class="appnav" aria-label="Hauptnavigation"> <div class="wrap"> <a class="brand" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span><span class="sr-only">, zur Startseite</span></a> <ul class="tabs" id="tabs"> {nav_tabs(R, path, active)} </ul> <button class="navsearch" type="button" id="navsearch" aria-haspopup="dialog" aria-controls="sdlg">{ICON["find"]}<span class="sr-only">Art suchen</span><span class="nsl" aria-hidden="true">Suchen</span></button> </div> <div class="mbackdrop" id="mbackdrop" hidden></div> </nav> {SEARCH_DLG.replace("{R}", R or "")} <main id="main" tabindex="-1"{' class="seafilter"' if seafilter else ""}> {cr} {body} </main> {footer(R)} {dj}{sc} </body> </html>'''
+    return f'''<!DOCTYPE html><html lang="de" data-root="{R or './'}" data-index> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>{esc(full_title)}</title><meta name="description" content="{esc(desc)}">{'<meta name="robots" content="noindex">' if noindex else f'<link rel="canonical" href="{canon}">'}<meta name="theme-color" content="#fbf6ea" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#14232c" media="(prefers-color-scheme: dark)"><meta name="color-scheme" content="light dark">{SEA_BOOT}<link rel="icon" href="{R}favicon.ico" sizes="32x32"><link rel="icon" href="{R}favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="{R}apple-touch-icon.png"><link rel="manifest" href="{R}site.webmanifest"><link rel="preload" href="{R}fonts/outfit-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="{R}fonts/instrument-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><meta property="og:type" content="website"><meta property="og:site_name" content="{SITE}"><meta property="og:locale" content="de_DE"><meta property="og:title" content="{esc(full_title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:url" content="{canon}"><meta property="og:image" content="{DOMAIN}/photos/{og}"><meta name="twitter:card" content="summary_large_image">{LDJSON if is_home else ""}{extra_ld}<link rel="stylesheet" href="{R}assets/site.css"></head> <body> {LOGO} <a class="skip" href="#main">Zum Inhalt springen</a> <nav class="appnav" aria-label="Hauptnavigation"> <div class="wrap"> <a class="brand" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span><span class="sr-only">, zur Startseite</span></a> <ul class="tabs" id="tabs"> {nav_tabs(R, path, active)} </ul> <button class="navsearch" type="button" id="navsearch" aria-haspopup="dialog" aria-controls="sdlg">{ICON["find"]}<span class="sr-only">Art suchen</span><span class="nsl" aria-hidden="true">Suchen</span></button> </div> <div class="mbackdrop" id="mbackdrop" hidden></div> </nav> {SEARCH_DLG.replace("{R}", R or "")} <main id="main" tabindex="-1"{' class="seafilter"' if seafilter else ""}> {cr} {body} </main> {footer(R)} {dj}{sc} </body> </html>'''
 
 def footer(R):
     best = [("arten/index.html#seevoegel", "Seevögel"), ("arten/index.html#robben", "Robben, Wale und Delfine"), ("arten/index.html#quallen", "Quallen, Muscheln und Strandfunde"),

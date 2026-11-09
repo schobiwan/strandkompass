@@ -59,6 +59,27 @@ def name_of(key):
 def lat_of(key):
     return BY[key]["lat"] if key in BY else EXT[key]["lat"]
 
+def der(g, case="nom"):
+    """Bestimmter Artikel: der/die/das, im Akkusativ den/die/das."""
+    if g == "f":
+        return "die"
+    if g == "n":
+        return "das"
+    return "den" if case == "acc" else "der"
+
+MOBILE = ("Seevögel", "Robben", "Wale & Delfine")
+
+def mit_artikel(key, case="nom"):
+    """Name mit bestimmtem Artikel, Adjektiv schwach gebeugt: der Große Tümmler, den Großen Tümmler, der Blauen Nesselqualle."""
+    n, g = re.sub(r"\s*\(.*?\)", "", name_of(key)), (BY[key]["g"] if key in BY else EXT[key]["g"])  # ohne Klammerzusatz
+    art = {"nom": {"m": "der", "f": "die", "n": "das"}, "acc": {"m": "den", "f": "die", "n": "das"}, "dat": {"m": "dem", "f": "der", "n": "dem"}}[case][g]
+    w = n.split(" ")
+    if len(w) > 1 and w[1][:1].isupper() and w[0].endswith(("er", "es", "e")):
+        stem = w[0][:-2] if w[0].endswith(("er", "es")) else w[0][:-1]
+        weak_e = case == "nom" or (case == "acc" and g != "m")
+        w[0] = stem + ("e" if weak_e else "en")
+    return f"{art} {' '.join(w)}"
+
 def ein(g, case="nom"):
     if case == "dat":
         return "der" if g == "f" else "dem"

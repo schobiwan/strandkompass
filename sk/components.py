@@ -116,7 +116,7 @@ def seabox(s):
         txt = note.get(a) or (f"An der {ACTS[a]} zu finden." if has else f"An der {ACTS[a]} kaum oder gar nicht.")
         cols += (f'<div class="seacol seacol-{a}{"" if has else " no"}"><h3>{ACTS[a]}</h3>'
                  f'<p class="seayes">{"Kommt vor" if has else "Kaum oder gar nicht"}</p><p>{esc(txt)}</p></div>')
-    return f'<section class="seabox" aria-labelledby="h-sea"><h2 id="h-sea">Nordsee und Ostsee</h2><div class="seacols">{cols}</div></section>'
+    return f'<section class="seabox" aria-labelledby="h-sea"><h2 id="h-sea">Gibt es {esc(mit_artikel(s["k"], "acc"))} in Nordsee und Ostsee?</h2><div class="seacols">{cols}</div></section>'
 
 SEA_LBL = {"nord": "Nordsee", "ost": "Ostsee", "beide": "Nord- und Ostsee"}
 

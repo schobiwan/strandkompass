@@ -533,3 +533,27 @@ main .grp-h{margin:44px 0 16px}
 main .grp-h:first-of-type{margin-top:28px}
 .gearband .head-row{row-gap:12px}
 .head-row{row-gap:12px}
+
+/* Kurz gesagt: das Wichtigste zur Art auf einen Blick (wie beim Vogelkompass) */
+.tldr{background:var(--surface);border-radius:8px;box-shadow:var(--shadow);border-left:4px solid var(--moss);padding:16px 20px 18px;margin:0 0 32px}
+.tldr h2{font-size:1.2rem;color:var(--heading);margin:0 0 10px}
+.tldr dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;margin:0}
+.tldr dt{font-weight:700;color:var(--muted);font-size:.9rem}
+.tldr dd{margin:0}
+@media(max-width:520px){.tldr dl{grid-template-columns:1fr;gap:0}.tldr dd{margin-bottom:8px}}
+
+/* Blättern zwischen Arten oder Monaten: schlichte Textlinks mit Pfeil, getrennt durch eine feine Linie */
+.pager{display:flex;justify-content:space-between;gap:16px;margin-top:48px;padding-top:16px;border-top:1px solid var(--line)}
+.pager a{display:flex;flex-direction:column;gap:2px;min-height:24px;padding:4px 0;border:0;border-radius:0;background:none;text-decoration:none}
+.pager a[rel=next]{text-align:right;margin-left:auto}
+.pager span{font-size:.82rem;color:var(--muted)}
+.pager b{font-family:var(--display);font-size:1.1rem;color:var(--heading)}
+.pager a[rel=prev] b::before{content:"← " / ""}
+.pager a[rel=next] b::after{content:" →" / ""}
+.pager a:hover b,.pager a:focus-visible b{color:var(--rust);text-decoration:underline;text-underline-offset:3px}
+.pager.small{margin-top:22px}
+.pager.small b{font-size:1rem}
+
+/* Knöpfe in Fließtext-Seiten behalten ihre Knopffarben */
+.prose a.btn{color:var(--forest-ink)}
+.prose a.btn.ghost{color:var(--fg)}

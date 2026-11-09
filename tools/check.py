@@ -31,7 +31,7 @@ for d, _, files in os.walk(DIST):
             if ref.startswith(("http:", "https:", "mailto:", "tel:")):
                 continue
             ref = ref.split("?")[0] or "./"
-            target = os.path.normpath(os.path.join(d, ref))
+            target = os.path.normpath(os.path.join(DIST, ref.lstrip("/")) if ref.startswith("/") else os.path.join(d, ref))
             if ref.endswith("/") or ref in (".", ".."):
                 target = os.path.join(target, "index.html")
             if not os.path.exists(target):
