@@ -65,6 +65,8 @@ def finalize():
                     "--legal-comments=none", f"--outdir={os.path.join(OUT, 'assets')}", "--log-level=warning"], check=True)
     # Sitemap mit Bildangaben: Art- und Vergleichsseiten nennen ihre Fotos, damit Google sie in der Bildersuche der richtigen Seite zuordnet
     pics = {f"arten/{s['k']}/": [s["k"]] for s in SPECIES}
+    from data_aussehen import LOOKS
+    pics.update({f"aussehen/{m['slug']}/": [k for k, _ in m["items"]] for m in LOOKS})
     pics.update({f"unterscheiden/{p['k']}/": [photo_key(p["a"]), photo_key(p["b"])] for p in PAIRS})
     urls = []
     for d, _, fs in os.walk(OUT):
@@ -87,6 +89,8 @@ def llms_txt():
     u = lambda path: f"{DOMAIN}/{path}"
     groups = "\n".join(f"- [{g}]({u('arten/#' + gslug(g))})" for g in GROUPS)
     arten = "\n".join(f"- [{s['n']} ({s['lat']})]({u('arten/' + s['k'] + '/')}): {s['short']}" for s in sorted(SPECIES, key=skey))
+    from data_aussehen import LOOKS
+    looks = "\n".join(f"- [{m['h1']}]({u('aussehen/' + m['slug'] + '/')})" for m in LOOKS)
     pairs = "\n".join(f"- [{name_of(p['a'])} oder {name_of(p['b'])}?]({u('unterscheiden/' + p['k'] + '/')})" for p in PAIRS)
     return f"""# {SITE}
 
@@ -97,6 +101,7 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 ## Bestimmen
 - [Startseite mit Suche und Filtern]({u('')})
 - [Alle Arten und Funde nach Gruppen]({u('arten/')})
+- [Nach Aussehen]({u('aussehen/')}): z. B. Möwe mit schwarzem Kopf, rote Qualle, schwarzes Ei am Strand
 - [Doppelgänger unterscheiden]({u('unterscheiden/')}): ähnliche Arten im direkten Vergleich
 - [Küstenjahr]({u('strandjahr/')}): was in welchem Monat zu sehen ist
 
@@ -111,6 +116,10 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 ## Unterwegs
 - [Sicher am Strand]({u('am-strand/')}): Quallen, Heuler, Phosphor, Watt
 - [Ausrüstung]({u('ausruestung/')}): Fernglas, Bestimmungsbücher, UV-Lampe, Wattschuhe
+- [Fernglas für die Küste]({u('ratgeber/fernglas/')}): 8x42 oder 10x42, vier Gläser im Vergleich
+
+## Nach Aussehen
+{looks}
 
 ## Arten
 {arten}

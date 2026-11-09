@@ -5,6 +5,7 @@ from ..icons import *
 from ..layout import *
 from ..components import *
 from ..products import *
+from .looks import looks_for
 
 def build_arten_index():
     R = "../"
@@ -36,7 +37,10 @@ def build_species(s):
         alike = (f'<section class="alike" aria-labelledby="h-alike"> {img(R, okey, name_of(other))} <div> <h2 id="h-alike">Nicht verwechseln mit {esc(mit_artikel(other, "dat"))}</h2> '
                  f'<p>{esc(p["short"])}</p> <p><a href="{R}unterscheiden/{p["k"]}/index.html">{esc(name_of(p["a"]))} oder {esc(name_of(p["b"]))}? Alle Unterschiede</a></p> </div> </section>')
     sib = [x for x in sorted(SPECIES, key=skey) if x["grp"] == s["grp"] and x["k"] != k][:6]
-    same = (f'<p class="h4">Mehr {esc(s["grp"])}</p><div class="pills">' + "".join(f'<a href="{R}arten/{x["k"]}/index.html">{esc(x["n"])}</a>' for x in sib) + '</div><p class="h4">Weiterlesen</p>') if sib else ""
+    same = (f'<p class="h4">Mehr {esc(s["grp"])}</p><div class="pills">' + "".join(f'<a href="{R}arten/{x["k"]}/index.html">{esc(x["n"])}</a>' for x in sib) + '</div>') if sib else ""
+    lk = looks_for(k)
+    same += (f'<p class="h4">Nach Aussehen</p><div class="pills">' + "".join(f'<a href="{R}aussehen/{m["slug"]}/index.html">{esc(m["h1"])}</a>' for m in lk) + '</div>') if lk else ""
+    same += '<p class="h4">Weiterlesen</p>' if same else ""
     wiki = "https://de.wikipedia.org/w/index.php?search=" + s["lat"].replace(" ", "+")
     gear = GEAR_FOR.get(k) or GEAR_GRP[s["grp"]]
     # Überschriften als Fragen, wie Leute sie suchen; Tiere beobachtet man, Funde findet man

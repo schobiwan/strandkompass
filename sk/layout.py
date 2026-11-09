@@ -25,10 +25,11 @@ def crumbs_ld(crumbs):
 def _n(g): return sum(1 for x in SPECIES if x["grp"] in g)
 NAV = [
     dict(key="bestimmen", label="Bestimmen", short="Bestimmen", icon="bino", href="index.html", intro="Wer oder was ist das?", items=[
-        ("index.html#arten", "Nach Name oder Aussehen", "Suchen und filtern, z. B. „roter Schnabel“"),
+        ("index.html#arten", "Suchen und filtern", "Nach Name oder Merkmal, z. B. „Möwe“ oder „brennt“"),
         ("arten/index.html#seevoegel", "Seevögel", f"{_n(('Seevögel',))} Arten, von der Möwe bis zum Basstölpel"),
         ("arten/index.html#robben", "Robben, Wale und Delfine", f"{_n(('Robben', 'Wale & Delfine'))} Arten, vom Seehund bis zum Pottwal"),
         ("arten/index.html#quallen", "Quallen, Muscheln und Strandfunde", f"{len(SPECIES) - _n(('Seevögel', 'Robben', 'Wale & Delfine'))} Arten und Funde am Spülsaum"),
+        ("aussehen/index.html", "Nach Aussehen", "Möwe mit schwarzem Kopf, rote Qualle …"),
         ("unterscheiden/index.html", "Doppelgänger unterscheiden", f"{len(PAIRS)} ähnliche Arten im direkten Vergleich"),
         ("arten/index.html", "Alle Arten im Überblick", f"{len(SPECIES)} Steckbriefe nach Gruppen"),
     ]),
@@ -41,11 +42,12 @@ NAV = [
     dict(key="unterwegs", label="Unterwegs", short="Unterwegs", icon="pack", href="am-strand/index.html", intro="Sicher und gut ausgerüstet an die Küste", items=[
         ("am-strand/index.html", "Sicher am Strand", "Quallen, Heuler, Phosphor und das Watt"),
         ("ausruestung/index.html", "Ausrüstung", "Fernglas, Vogelführer, UV-Lampe und Wattschuhe"),
+        ("ratgeber/fernglas/index.html", "Fernglas für die Küste", "8x42 oder 10x42? Vier Gläser im Vergleich"),
     ]),
 ]
 # Seiten-Schlüssel (active) → Bereich der Navigation
 AREA = {"index": "bestimmen", "arten": "bestimmen", "unterscheiden": "bestimmen", "nordsee-ostsee": "meere", "nordsee": "meere", "ostsee": "meere",
-        "strandjahr": "jahr", "am-strand": "unterwegs", "ausruestung": "unterwegs"}
+        "strandjahr": "jahr", "am-strand": "unterwegs", "ausruestung": "unterwegs", "aussehen": "bestimmen"}
 
 def nav_tabs(R, path, active):
     area = AREA.get(active or "", None)
@@ -101,9 +103,9 @@ def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=Non
 
 def footer(R):
     best = [("arten/index.html#seevoegel", "Seevögel"), ("arten/index.html#robben", "Robben, Wale und Delfine"), ("arten/index.html#quallen", "Quallen, Muscheln und Strandfunde"),
-            ("unterscheiden/index.html", "Doppelgänger unterscheiden"), ("arten/index.html", "Alle Arten im Überblick")]
+            ("aussehen/index.html", "Nach Aussehen bestimmen"), ("unterscheiden/index.html", "Doppelgänger unterscheiden"), ("arten/index.html", "Alle Arten im Überblick")]
     ent = [("nordsee/index.html", "Nordsee"), ("ostsee/index.html", "Ostsee"), ("strandjahr/index.html", "Küstenjahr"),
-           ("am-strand/index.html", "Sicher am Strand"), ("ausruestung/index.html", "Ausrüstung")]
+           ("am-strand/index.html", "Sicher am Strand"), ("ausruestung/index.html", "Ausrüstung"), ("ratgeber/fernglas/index.html", "Fernglas für die Küste")]
     leg = [("ueber/index.html", "Über den Meereskompass"), ("impressum/index.html", "Impressum"), ("datenschutz/index.html", "Datenschutz"), ("bildnachweis/index.html", "Bildnachweis und Lizenzen")]
     li = lambda xs: "".join(f'<li><a href="{R}{h}">{t}</a></li>' for h, t in xs)
     return f'''<footer> <div class="wrap"> <a class="flogo" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span></a> <div class="fcols"> <nav aria-label="Bestimmen"><p class="fhead">Bestimmen</p><ul>{li(best)}</ul></nav> <nav aria-label="An der Küste"><p class="fhead">An der Küste</p><ul>{li(ent)}</ul></nav> <nav aria-label="Über die Seite"><p class="fhead">Über die Seite</p><ul>{li(leg)}</ul></nav> <nav aria-label="Schwesterseiten"><p class="fhead">Schwesterseiten</p><ul><li><a href="https://vogelkompass.de/" rel="noopener">Vogelkompass: Vögel bestimmen</a></li><li><a href="https://waldtierkompass.de/" rel="noopener">Waldtierkompass: Waldtiere bestimmen</a></li></ul></nav> </div> <p class="footnote">Fotos: Wikimedia Commons, unter freien Lizenzen. Mit * markierte Links sind Werbelinks. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> </div> </footer>'''

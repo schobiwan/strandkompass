@@ -557,3 +557,55 @@ main .grp-h:first-of-type{margin-top:28px}
 /* Knöpfe in Fließtext-Seiten behalten ihre Knopffarben */
 .prose a.btn{color:var(--forest-ink)}
 .prose a.btn.ghost{color:var(--fg)}
+
+/* Nach Aussehen: Karten mit Begründung, Merkmal-Pillen (wie beim Vogelkompass) */
+.mlist{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px}
+.mcard{position:relative;background:var(--surface);border-radius:8px;box-shadow:var(--shadow);overflow:hidden}
+.mcard>a{display:grid;gap:4px;color:var(--fg);text-decoration:none;padding-bottom:14px}
+.mcard img{width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;display:block;margin-bottom:8px}
+.mcard .mname{font-family:var(--display);font-weight:600;font-size:1.2rem;color:var(--heading);padding-inline:14px}
+.mcard .mwhy{padding-inline:14px}
+.mcard .mmeta{padding-inline:14px;color:var(--muted);font-size:.88rem}
+.mcard>a:hover .mname,.mcard>a:focus-visible .mname{text-decoration:underline;text-underline-offset:3px}
+.mcard .cred{position:static;display:block;padding:0 14px 12px;margin-top:-6px;font-size:.72rem;color:var(--muted);background:none}
+.mcard .cred a{color:inherit}
+.mh2{margin-top:36px;margin-bottom:12px;font-size:1.35rem;color:var(--heading)}
+.mother{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px}
+.mother a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--control);background:var(--surface);color:var(--fg);text-decoration:none;font-weight:600;font-size:.92rem}
+.mother a:hover{border-color:var(--forest)}
+.mtip{color:var(--muted);max-width:70ch;margin-top:28px}
+.mtip a{color:var(--fg);font-weight:700;text-underline-offset:3px}
+
+/* Ratgeber: Werbehinweis, Sprungmarken, Vergleichstabelle, Pro und Contra, Fragen, Quellen */
+.adbanner{margin:0 0 18px;padding:10px 14px;border-radius:8px;background:color-mix(in srgb,var(--line) 45%,var(--surface));font-size:.92rem;max-width:70ch}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.toc a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--control);color:var(--fg);text-decoration:none;font-weight:600;font-size:.9rem}
+.toc a:hover{border-color:var(--forest)}
+.cmp-wrap{overflow-x:auto;background:var(--surface);border-radius:8px;box-shadow:var(--shadow);margin-top:8px}
+table.cmp{border-collapse:collapse;width:100%;min-width:680px;font-size:.92rem}
+.cmp th,.cmp td{text-align:left;padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
+.cmp thead th,.cmp thead td{border-top:0;color:var(--muted);font-size:.8rem;font-weight:700}
+.cmp tbody th{font-weight:700;white-space:nowrap}
+.cmp tbody th a{color:var(--fg);display:inline-block;min-height:24px;padding-block:2px}
+.thumbnote{margin:8px 0 0;font-size:.8rem;color:var(--muted)}
+.rtype .wrap{border-top:1px solid var(--line);padding-top:28px}
+section.block.rtype{padding-top:28px}
+.rtype h2{margin-bottom:12px;font-size:1.5rem;color:var(--heading)}
+.rcols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px 32px}
+.rcols h3{font-size:1rem;margin:0 0 6px}
+.rlist{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.rlist li{position:relative;padding-left:22px;color:var(--muted)}
+.rlist li::before{position:absolute;left:0;top:0;font-weight:700}
+.rlist.plus li::before{content:"+";color:var(--moss-strong,var(--moss))}
+.rlist.minus li::before{content:"–";color:var(--rust)}
+.rsearch{margin:14px 0 0}
+.tiplist{margin:12px 0 0;padding-left:1.3em;display:grid;gap:10px;max-width:46em}
+.tiplist li::marker{font-weight:700;color:var(--heading)}
+.faq{margin:16px 0 0;max-width:75ch}
+.faq dt{font-family:var(--display);font-weight:600;font-size:1.1rem;color:var(--heading);margin-top:18px}
+.faq dt:first-child{margin-top:0}
+.faq dd{margin:4px 0 0;color:var(--muted)}
+.srchead{font-size:1rem;margin:28px 0 6px}
+.srclist{margin:0;padding-left:1.2em;font-size:.9rem;color:var(--muted)}
+.srclist a{color:inherit}
+#zahlen .tips,#kriterien .tips{margin-top:16px}

@@ -7,6 +7,7 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 ## Bestimmen
 - [Startseite mit Suche und Filtern](https://meereskompass.de/)
 - [Alle Arten und Funde nach Gruppen](https://meereskompass.de/arten/)
+- [Nach Aussehen](https://meereskompass.de/aussehen/): z. B. Möwe mit schwarzem Kopf, rote Qualle, schwarzes Ei am Strand
 - [Doppelgänger unterscheiden](https://meereskompass.de/unterscheiden/): ähnliche Arten im direkten Vergleich
 - [Küstenjahr](https://meereskompass.de/strandjahr/): was in welchem Monat zu sehen ist
 
@@ -30,6 +31,21 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 ## Unterwegs
 - [Sicher am Strand](https://meereskompass.de/am-strand/): Quallen, Heuler, Phosphor, Watt
 - [Ausrüstung](https://meereskompass.de/ausruestung/): Fernglas, Bestimmungsbücher, UV-Lampe, Wattschuhe
+- [Fernglas für die Küste](https://meereskompass.de/ratgeber/fernglas/): 8x42 oder 10x42, vier Gläser im Vergleich
+
+## Nach Aussehen
+- [Möwe mit schwarzem Kopf](https://meereskompass.de/aussehen/moewe-mit-schwarzem-kopf/)
+- [Schwarz-weißer Vogel am Strand](https://meereskompass.de/aussehen/schwarz-weisser-vogel-am-strand/)
+- [Schwarzer Vogel an der Küste](https://meereskompass.de/aussehen/schwarzer-vogel-an-der-kueste/)
+- [Vogel mit rotem Schnabel](https://meereskompass.de/aussehen/vogel-mit-rotem-schnabel/)
+- [Vogel im Watt und am Spülsaum](https://meereskompass.de/aussehen/vogel-im-watt/)
+- [Flosse oder Kopf im Meer gesehen](https://meereskompass.de/aussehen/flosse-im-meer/)
+- [Durchsichtige Qualle](https://meereskompass.de/aussehen/durchsichtige-qualle/)
+- [Rote oder braune Qualle](https://meereskompass.de/aussehen/rote-qualle/)
+- [Blaue oder lila Qualle](https://meereskompass.de/aussehen/blaue-qualle/)
+- [Schwarzes Ei am Strand](https://meereskompass.de/aussehen/schwarzes-ei-am-strand/)
+- [Weißer Fund am Strand](https://meereskompass.de/aussehen/weisser-fund-am-strand/)
+- [Besonderer Stein am Strand](https://meereskompass.de/aussehen/stein-am-strand/)
 
 ## Arten
 - [Alpenstrandläufer (Calidris alpina)](https://meereskompass.de/arten/alpenstrandlaeufer/): Der häufigste Watvogel im Wattenmeer, mit leicht gebogenem Schnabel. Im Sommer trägt er einen schwarzen Bauchfleck.
