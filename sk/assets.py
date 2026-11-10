@@ -79,6 +79,7 @@ def finalize():
           + "".join(f"  <url><loc>{DOMAIN}/{u}</loc>" + (f"<lastmod>{CONTENT_UPDATED}</lastmod>" if u.startswith(("arten/", "unterscheiden/", "aussehen/")) and u.count("/") == 2 else "") + "".join(f"<image:image><image:loc>{DOMAIN}/photos/{k}.webp</image:loc></image:image>" for k in pics.get(u, []))
                     + "</url>\n" for u in urls) + "</urlset>\n")
     write("llms.txt", llms_txt())
+    cache_bust()
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n")
     # Zeitpunkt des Builds, um zu prüfen, ob die Live-Seite aktuell ist
     write("version.txt", datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") + "\n")
@@ -132,3 +133,18 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 - [Impressum]({u('impressum/')})
 - [Bildnachweis und Lizenzen]({u('bildnachweis/')})
 """
+
+
+def cache_bust():
+    """Versionsanhang an CSS und JS (?v=<Prüfsumme>): Browser halten /assets/ eine Woche im Speicher (_headers);
+    ändert sich eine Datei, ändert sich ihre Adresse, und neue HTML-Seiten bekommen nie altes CSS."""
+    import hashlib, re
+    ver = {f: hashlib.sha1(open(os.path.join(OUT, "assets", f), "rb").read()).hexdigest()[:10] for f in ("site.css", "app.js", "home.js")}
+    pat = re.compile(r'(assets/(site\.css|app\.js|home\.js))"')
+    for d, _, fs in os.walk(OUT):
+        for f in fs:
+            if f.endswith(".html"):
+                path = os.path.join(d, f); html = open(path, encoding="utf-8").read()
+                new = pat.sub(lambda m: f'{m.group(1)}?v={ver[m.group(2)]}"', html)
+                if new != html:
+                    open(path, "w", encoding="utf-8").write(new)
