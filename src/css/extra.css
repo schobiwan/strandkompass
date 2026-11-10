@@ -645,3 +645,9 @@ table.cal .n a{min-height:34px}
 .stand a{color:inherit}
 .fproject{margin:6px 0 0;font-size:.82rem;color:var(--muted)}
 .fproject a{color:inherit}
+/* Ruf-Kasten: Knopf oben bündig zur Überschrift, enger an der Kante, Text daneben; Bildangabe unter dem Text */
+.callbox{align-items:flex-start;gap:14px;padding:14px 18px 14px 14px}
+.callbox .play{margin:0;flex:none;left:auto;top:auto}
+.callbox .cb-txt{min-width:0;padding-top:2px}
+.cb-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.cb-sec{margin-left:0}
