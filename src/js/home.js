@@ -174,6 +174,7 @@ function setupNow() {
   const items = SPOT.filter((x) => !sea || x.act.includes(sea));
   const top = items.find((x) => x.h.includes(NOW)) || items.find((x) => x.p.includes(NOW));
   if (!top) return;
+  // Beim Laden hat das Kopfskript (SPOT_BOOT in home.py) Bild und Text schon gesetzt; hier bei Meerwechsel und für die Bildangabe
   if (top.k !== $("spot-link")?.getAttribute("href")?.split("/")[1]) {
     const im = $("spot-img");
     $("spot-link").href = `arten/${top.k}/`;
@@ -181,7 +182,11 @@ function setupNow() {
     im.srcset = `photos/${top.k}-400.webp 400w, photos/${top.k}.webp 720w`;
     $("spot-name").textContent = top.n;
     $("spot-hl").textContent = top.hl;
-    $("spot-cred").innerHTML = document.getElementById(top.k)?.querySelector(":scope > small")?.innerHTML || "";
+  }
+  const cred = $("spot-cred");
+  if (cred && cred.dataset.k !== top.k) {
+    cred.innerHTML = document.getElementById(top.k)?.querySelector(":scope > small")?.innerHTML || "";
+    cred.dataset.k = top.k;
   }
   // In den Bändern rückt die Art aus dem Kopfbereich ans Ende, damit sie nicht doppelt vorn steht
   $$(".birdtiles").forEach((band) => {

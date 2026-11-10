@@ -4,7 +4,7 @@ vier Modelle im Vergleich, Pflege, häufige Fragen. Technische Daten aus Herstel
 Stand November 2026, dieselben Modelle wie im Fernglas-Ratgeber des Vogelkompass. Bei Modellwechseln hier anpassen."""
 from ..core import *
 from ..layout import *
-from ..components import ad_link, ext_link
+from ..components import ad_link, ext_link, byline
 from ..products import ADNOTE
 
 amazon_dp = lambda asin: f"https://www.amazon.de/dp/{asin}?tag={TAG}"
@@ -84,7 +84,7 @@ def build_guide():
 </ol></div></section>
 <section class="block" id="fragen" aria-labelledby="h-faq"><div class="wrap"><h2 id="h-faq">Häufige Fragen</h2>{faq}
 <p class="intro">Was du sonst an die Küste mitnimmst, zeigt die Seite <a href="{R}ausruestung/index.html">Ausrüstung</a>. Welche Tiere gerade zu sehen sind, steht im <a href="{R}strandjahr/index.html" data-now-link>Küstenjahr</a>.</p>
-{src}{ADNOTE}</div></section>'''
+{src}{ADNOTE}{byline(R)}</div></section>'''
     ld_all = ld({"@context": "https://schema.org", "@type": "Article", "headline": "Fernglas für die Küste: 8x42 oder 10x42 und vier Modelle im Vergleich", "inLanguage": "de-DE",
                  "author": AUTHOR, "publisher": {"@id": ORG_ID}, "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": f"{DOMAIN}/ratgeber/fernglas/"}) + \
              ld({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]})

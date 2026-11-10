@@ -12,7 +12,7 @@ def counts(ss):
     return f'<span data-cnt-all="{a}" data-cnt-nord="{n}" data-cnt-ost="{o}">{a}</span>'
 
 # ------------------------------------------------------------------ Bausteine
-def img(R, key, alt="", eager=False, cls="", sizes="(max-width: 600px) 92vw, 400px"):
+def img(R, key, alt="", eager=False, cls="", sizes="(max-width: 600px) 46vw, 300px"):
     lz = "eager" if eager else "lazy"
     c = f' class="{cls}"' if cls else ""
     return (f'<img{c} src="{R}photos/{key}.webp" srcset="{R}photos/{key}-400.webp 400w, {R}photos/{key}.webp 720w" sizes="{sizes}" '
@@ -28,6 +28,10 @@ def ext_link(url, text, rel="noopener", cls="", mark=""):
 def ad_link(url, text, cls=""):
     """Amazon-Werbelink mit Sternchen."""
     return ext_link(url, text, rel="sponsored nofollow noopener", cls=cls, mark="*")
+
+def byline(R):
+    """Sichtbare Autorenzeile mit Stand; passt zu author in den strukturierten Daten (Vertrauen für Leser und Google)."""
+    return f'<p class="stand">Von <a href="{R}ueber/index.html" rel="author">Nico Schober</a> · Stand: {STAND}</p>'
 
 def tldr_box(content):
     """Kasten „Kurz gesagt“: content ist ein Satz oder eine Liste aus (Begriff, Text)."""

@@ -638,3 +638,10 @@ table.cal .n a{min-height:34px}
   :root:not([data-theme=light]) table.cal td.m.p::before{background:color-mix(in srgb,var(--priel) 50%,var(--surface))}
   :root:not([data-theme=light]) table.cal td.m.h::before{background:var(--priel)}
 }
+
+/* Kartenrahmen nur bei Tastaturfokus, nicht nach Mausklick oder Antippen */
+.bird:focus-within,.pair:focus-within{outline:0}
+.bird:has(:focus-visible),.pair:has(:focus-visible){outline:3px solid var(--rust);outline-offset:2px}
+.stand a{color:inherit}
+.fproject{margin:6px 0 0;font-size:.82rem;color:var(--muted)}
+.fproject a{color:inherit}
