@@ -598,3 +598,25 @@ section.block.rtype{padding-top:28px}
 /* Familienlink (?familie): Werbelinks und Werbehinweise ausblenden */
 html[data-ohnewerbung] :is(.adbanner,.adnote,.adshort,.rsearch,.gearlist),html[data-ohnewerbung] a[rel~=sponsored]{display:none!important}
 /* purgecss end ignore */
+
+/* ---------- Dunkelmodus „Nordsee bei Nacht“ ----------
+   Statt Grüngrau ein durchgehend tiefes Nachtblau, passend zum Kopfbereich; Text in warmem Mondlicht-Sand,
+   Akzente Priel (Hellblau) und Leuchtfeuer (Rot). Auf dem Handy wichtig: keine grellen hellen Flächen,
+   Karten mit feiner Linie statt Schatten (Schatten sind im Dunkeln unsichtbar), Fotos leicht gedämpft. */
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){
+  --bg:#0f1b21;--surface:#16262e;--line:#29404a;--control:#5f7a84;
+  --fg:#e9e4d8;--heading:#f3eee2;--muted:#a3b4b9;--forest-ink:#e9e4d8;
+  --seen:#7fc6da;--seen-fg:#0b161b;--rust:#f28b6d;--rust-fg:#1a0f0b;--moss:#b9c48e;
+  --forest:#0c171c;--hdr-bg:#0c171c;--hdr-line:#1f323b;--sky-top:#14303e;--sky-mid:#112630;--sand-warm:#1f2a26;
+  --nord-soft:#173341;--shadow:0 0 0 1px var(--line)
+}
+:root:not([data-theme=light]) img{filter:brightness(.92)}
+:root:not([data-theme=light]) .months>span.p::before,:root:not([data-theme=light]) .mlegend .lp::before{background:color-mix(in srgb,var(--priel) 50%,var(--surface))}
+:root:not([data-theme=light]) .months>span::before{background:color-mix(in srgb,var(--line) 60%,var(--bg))}
+:root:not([data-theme=light]) .months>span.h::before{background:var(--priel)}
+:root:not([data-theme=light]) .seabtn-all[aria-pressed=true]{background:color-mix(in srgb,var(--priel) 22%,var(--surface));color:var(--heading);box-shadow:inset 0 0 0 1.5px var(--priel)}
+}
+@media(prefers-color-scheme:dark) and (max-width:960px){
+  :root:not([data-theme=light]) .appnav .tabs{background:var(--hdr-bg);border-top:1px solid var(--hdr-line)}
+  :root:not([data-theme=light]) .appnav .tab[aria-current=page],:root:not([data-theme=light]) .appnav .tab[aria-current=true]{background:color-mix(in srgb,var(--priel) 18%,transparent);color:var(--heading)}
+}
