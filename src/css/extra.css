@@ -285,14 +285,6 @@ section.block .prose h2:first-child{margin-top:0}
 @media(prefers-reduced-motion:reduce){.spot6{animation:none}}
 
 /* ---------- Strandjahr: Legende und Handy ---------- */
-.callegend{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;margin:0 0 12px;padding:0;font-size:.9rem;color:var(--muted)}
-.callegend li{display:flex;align-items:center;gap:7px}
-.callegend .lgi{position:relative;width:22px;height:18px;border-radius:4px;background:color-mix(in srgb,var(--line) 55%,var(--surface))}
-.callegend .lgi.p{background:color-mix(in srgb,var(--moss) 45%,var(--surface));box-shadow:inset 0 0 0 1.5px var(--moss)}
-.callegend .lgi.h{background:var(--moss-strong)}
-.callegend .lgi.h:after{content:"";position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;background:var(--surface)}
-.callegend .lgi.now{background:transparent;box-shadow:inset 0 0 0 2px var(--rust)}
-.cal td.m.h{background:var(--moss-strong)}
 .cal .ms{display:none}
 @media(max-width:600px){
   table.cal{min-width:0;border-spacing:2px;padding:6px 6px 8px}
@@ -301,7 +293,6 @@ section.block .prose h2:first-child{margin-top:0}
   .cal .n{white-space:normal;width:7.2em;max-width:7.2em;font-size:.8rem;line-height:1.15;padding-right:4px}
   .cal .n a{min-height:30px}
   .cal td.m{height:22px}
-  .cal td.m.h:after{width:4px;height:4px;margin:-2px 0 0 -2px}
   .yearline{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:82%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px;scrollbar-width:thin}
   .yearline li{scroll-snap-align:start}
   .monthlinks{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
@@ -619,4 +610,31 @@ html[data-ohnewerbung] :is(.adbanner,.adnote,.adshort,.rsearch,.gearlist),html[d
 @media(prefers-color-scheme:dark) and (max-width:960px){
   :root:not([data-theme=light]) .appnav .tabs{background:var(--hdr-bg);border-top:1px solid var(--hdr-line)}
   :root:not([data-theme=light]) .appnav .tab[aria-current=page],:root:not([data-theme=light]) .appnav .tab[aria-current=true]{background:color-mix(in srgb,var(--priel) 18%,transparent);color:var(--heading)}
+}
+
+/* ---------- Küstenjahr „Wann findest du was?“: dieselbe Bildsprache wie das Jahresband der Artseiten ----------
+   Je Zelle ein schlanker Balken (beste Zeit Prielblau, zu finden helles Wasserblau, sonst Sand),
+   der aktuelle Monat als leicht getönte Spalte mit rotem Monatskürzel und Punkt statt roter Kästchen. */
+.callegend{margin:0 0 14px}
+table.cal{border-spacing:2px 0}
+table.cal td.m{position:relative;height:34px;background:none;box-shadow:none;border-radius:0}
+table.cal td.m.p,table.cal td.m.h{background:none;box-shadow:none}
+table.cal td.m::before{content:"";position:absolute;left:0;right:0;top:50%;height:10px;margin-top:-5px;border-radius:2px;background:color-mix(in srgb,var(--line) 70%,transparent)}
+table.cal td.m.p::before{background:color-mix(in srgb,var(--priel) 35%,var(--surface))}
+table.cal td.m.h::before{background:var(--priel)}
+table.cal td.m.h::after{content:none}
+table.cal td.m.now,table.cal td.m.p.now,table.cal td.m.h.now,table.cal td.m.now.sel{box-shadow:none;background:color-mix(in srgb,var(--rust) 9%,transparent)}
+table.cal tbody tr:not(.grow):hover td.m{background-color:color-mix(in srgb,var(--fg) 4%,transparent)}
+table.cal th.now{color:var(--rust-text)}
+table.cal th.now abbr::after{content:"";display:block;width:5px;height:5px;margin:3px auto 0;border-radius:50%;background:var(--rust)}
+table.cal th.sel,table.cal td.m.sel{box-shadow:none}
+table.cal td.m.sel::before{outline:2px solid var(--forest);outline-offset:1px}
+table.cal td.m:first-of-type::before{border-radius:999px 2px 2px 999px}
+table.cal td.m:last-child::before{border-radius:2px 999px 999px 2px}
+table.cal .n a{min-height:34px}
+@media(max-width:560px){table.cal td.m{height:30px}table.cal td.m::before{height:8px;margin-top:-4px}table.cal .n a{min-height:30px}}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme=light]) table.cal td.m::before{background:color-mix(in srgb,var(--line) 60%,var(--bg))}
+  :root:not([data-theme=light]) table.cal td.m.p::before{background:color-mix(in srgb,var(--priel) 50%,var(--surface))}
+  :root:not([data-theme=light]) table.cal td.m.h::before{background:var(--priel)}
 }
