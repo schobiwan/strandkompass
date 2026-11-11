@@ -651,3 +651,13 @@ table.cal .n a{min-height:34px}
 .callbox .cb-txt{min-width:0;padding-top:2px}
 .cb-h{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .cb-sec{margin-left:0}
+
+/* Einheitliche Trennlinien zwischen aufeinanderfolgenden Abschnitten (wie beim Vogelkompass):
+   überall dieselbe feine Linie mit 32 px Luft darüber und darunter */
+:root{--sep:32px}
+section.block+section.block,section.block.rtype{padding-top:calc(var(--sep) - 8px)}
+section.block+section.block>.wrap,.rtype .wrap{border-top:1px solid var(--line);padding-top:var(--sep)}
+section.block>.wrap>:last-child,section.block>.wrap>:last-child>:last-child{margin-bottom:0}
+.pager{margin-top:var(--sep);padding-top:var(--sep)}
+.alike,.more{margin-top:var(--sep);padding-top:var(--sep)}
+:is(.alike,.more)>:last-child{margin-bottom:0}
