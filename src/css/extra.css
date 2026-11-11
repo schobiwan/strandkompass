@@ -661,3 +661,8 @@ section.block>.wrap>:last-child,section.block>.wrap>:last-child>:last-child{marg
 .pager{margin-top:var(--sep);padding-top:var(--sep)}
 .alike,.more{margin-top:var(--sep);padding-top:var(--sep)}
 :is(.alike,.more)>:last-child{margin-bottom:0}
+
+/* Hover für alle Pillen-Links (Sprungmarken, Merkmale, „Mehr erfahren“): wie die umrandeten Knöpfe,
+   dunklerer Rand und leichte Fläche; der bisherige Randwechsel allein war kaum zu sehen */
+.toc a,.mother a,.pills a{transition:background-color .15s,border-color .15s}
+.toc a:hover,.mother a:hover,.pills a:hover{background:color-mix(in srgb,var(--fg) 6%,var(--surface));border-color:var(--fg)}
