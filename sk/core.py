@@ -18,6 +18,12 @@ BY = {s["k"]: s for s in SPECIES}
 PAIRS.sort(key=lambda p: GROUPS.index(BY[p["a"]]["grp"]) if p["a"] in BY else len(GROUPS))
 PAIRBY = {p["k"]: p for p in PAIRS}
 TAG = "schobiwan-21"
+# Reise-Partnerprogramme: IDs eintragen, sobald die Anmeldung bestätigt ist. Solange sie leer sind,
+# erscheinen keine Reiselinks auf der Seite. Mit SK_TRIPS=1 baut man eine Vorschau mit Platzhaltern.
+GYG_PARTNER = ""            # GetYourGuide Partner-ID (partner.getyourguide.com)
+AWIN_AFF = ""               # deine Awin-Publisher-ID
+AWIN_HOLIDU = ""            # Awin-Programm-ID von Holidu bzw. „Ferienwohnungen DE“
+TRIPS_ON = bool(GYG_PARTNER or os.environ.get("SK_TRIPS") == "1")
 
 
 def gslug(g):

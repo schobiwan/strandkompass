@@ -4,6 +4,7 @@ from ..core import *
 from ..icons import *
 from ..layout import *
 from ..components import *
+from ..trips import sea_trips
 
 def build_seas():
     for k in ("nord", "ost"):
@@ -28,7 +29,7 @@ def build_seas():
 {sec("h-mams", f"Robben, Wale und Delfine an der {I['name']}", "", mams)}
 {sec("h-rest", f"Quallen, Muscheln und Strandfunde an der {I['name']}", '<p class="intro">Die Markierung N oder O zeigt, ob es eine Art auch am anderen Meer gibt.</p>', rest)}
 {miss}
-<section class="block" aria-labelledby="h-places"><div class="wrap"><h2 id="h-places">Gute Orte an der {I["name"]}</h2><ul class="explore tips">{places}</ul></div></section>
+<section class="block" aria-labelledby="h-places"><div class="wrap"><h2 id="h-places">Gute Orte an der {I["name"]}</h2><ul class="explore tips">{places}</ul></div></section>{sea_trips(k, I["name"])}
 <section class="block"><div class="wrap"><div class="prose">{why}<p><a href="{R}nordsee-ostsee/index.html">Nordsee und Ostsee im Vergleich</a> · <a href="{R}{SEA_INFO[other]["slug"]}/index.html">Zur {SEA_INFO[other]["name"]}</a></p></div></div></section>'''
         write(f'{I["slug"]}/index.html', page(f'{I["slug"]}/index.html', I["h1"], f'{I["lede"]} {len(here)} Seevögel, Robben, Wale und Strandfunde an der {I["name"]} bestimmen.', body,
               active="nordsee-ostsee", crumbs=[("Nord- & Ostsee", "nordsee-ostsee/index.html"), (I["name"], "")], seafilter=False))
