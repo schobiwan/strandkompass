@@ -18,9 +18,14 @@ def img(R, key, alt="", eager=False, cls="", sizes="(max-width: 600px) 46vw, 300
     return (f'<img{c} src="{R}photos/{key}.webp" srcset="{R}photos/{key}-400.webp 400w, {R}photos/{key}.webp 720w" sizes="{sizes}" '
             f'alt="{esc(alt)}" width="720" height="576" loading="{lz}" decoding="async">')
 
+FAMILY = ("vogelkompass.de", "waldtierkompass.de", "gartentierkompass.de", "meereskompass.de")
+
 def ext_link(url, text, rel="noopener", cls="", mark=""):
-    """Link in neuem Fenster, mit Hinweis für Screenreader. mark z. B. „*“ für Werbelinks (sichtbar, aber nicht vorgelesen)."""
+    """Link-Regel (siehe README, „Redaktionsregeln“): fremde Seiten öffnen ein neues Fenster mit Hinweis für Screenreader,
+    die Schwesterseiten der Kompass-Familie im selben Fenster. mark z. B. „*“ für Werbelinks (sichtbar, aber nicht vorgelesen)."""
     c = f' class="{cls}"' if cls else ""
+    if any(d in url.split("/")[2] for d in FAMILY):
+        return f'<a{c} href="{url}">{text}</a>'
     star = f'<span aria-hidden="true">{mark}</span>' if mark else ""
     sr = "Werbelink, öffnet in neuem Fenster" if "sponsored" in rel else "öffnet in neuem Fenster"
     return f'<a{c} href="{url}" target="_blank" rel="{rel}">{text}{star}<span class="sr-only"> ({sr})</span></a>'
@@ -50,10 +55,10 @@ def lic_url(lic):
 
 def lic_link(lic):
     u = lic_url(lic)
-    return f'<a href="{u}" target="_blank" rel="noopener license">{esc(lic)}</a>' if u else esc(lic)
+    return ext_link(u, esc(lic), rel="noopener license") if u else esc(lic)
 
 def credit_parts(a, lic, url):
-    return (f'Foto: <a href="{esc(url)}" target="_blank" rel="noopener">{esc(a)}</a>, {lic_link(lic)}')
+    return f'Foto: {ext_link(esc(url), esc(a))}, {lic_link(lic)}'
 
 def credit(key, short=False):
     a, lic, url = CREDITS[key]
@@ -127,7 +132,7 @@ def seapair(R, overview=False):
                     "Salziges Gezeitenmeer mit dem Wattenmeer, einem der wichtigsten Rastgebiete für Zugvögel weltweit.")
             + card_("ost", "Ostsee", ["Kaum Gezeiten, der Wind bestimmt den Wasserstand", "Viel weniger Salz als die Nordsee", "Bernstein, Feuersteine und Steilküsten"],
                     "Ein fast geschlossenes Binnenmeer mit Bodden, Förden und Steilküsten. Im Winter rasten hier riesige Entenschwärme.")
-            + '</ul>' + ('' if overview else f'<p class="actions"><a class="btn ghost" href="{R}nordsee-ostsee/index.html">Alle Unterschiede im Vergleich</a></p>') + '</div></section>')
+            + '</ul>' + ('' if overview else f'<p class="actions"><a class="btn ghost" href="{R}nordsee-ostsee/index.html">Alle Unterschiede ansehen</a></p>') + '</div></section>')
 
 def seabox(s):
     note = SEA_NOTE.get(s["k"], {})
@@ -161,7 +166,7 @@ def play_button(R, key, name, cls=""):
 
 def sound_credit(key):
     a, lic, url, _ = AUDIO[key]
-    return f'Aufnahme: <a href="{esc(url)}" target="_blank" rel="noopener">{esc(a)}</a>, {lic_link(lic)}'
+    return f'Aufnahme: {ext_link(esc(url), esc(a))}, {lic_link(lic)}'
 
 def callbox(R, s):
     """Ruf mit Abspielknopf, Beschreibung und Nachweis der Aufnahme."""

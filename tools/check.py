@@ -7,12 +7,15 @@ Aufruf: python3 tools/check.py   (nach python3 build.py)
 - jeder Fund und jeder Doppelgänger hat Foto und Bildnachweis
 - jeder Doppelgänger-Verweis in data.py gibt es auch als Vergleich
 - jeder Monat hat Ereignisse für Nordsee und Ostsee
+- Link-Regeln (README, „Redaktionsregeln“): fremde Seiten in neuem Fenster mit Hinweis,
+  Schwesterseiten im selben Fenster, Werbelinks mit rel=sponsored nofollow und Sternchen
 """
 import json, os, re, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
 from data import SPECIES, EXT, PAIRS, MONTH_EVENTS  # noqa: E402
+from sk.components import FAMILY  # noqa: E402
 
 DIST = os.path.join(ROOT, "dist")
 problems = []
@@ -27,6 +30,23 @@ for d, _, files in os.walk(DIST):
         refs = re.findall(r'(?:href|src)="([^"#]+)', page)
         for srcset in re.findall(r'srcset="([^"]+)"', page):
             refs += [part.strip().split(" ")[0] for part in srcset.split(",")]
+        rel_path = os.path.relpath(path, DIST)
+        for attrs, inner in re.findall(r"<a\s([^>]*)>(.*?)</a>", page, re.S):
+            href = (re.search(r'href="([^"]*)"', attrs) or [None, ""])[1]
+            if not href.startswith("http"):
+                continue
+            dom = re.sub(r"^https?://(www\.)?", "", href).split("/")[0]
+            if dom in FAMILY:
+                if 'target="_blank"' in attrs:
+                    problems.append(f"Link-Regel in {rel_path}: Schwesterseite öffnet neues Fenster -> {dom}")
+                continue
+            if 'target="_blank"' not in attrs:
+                problems.append(f"Link-Regel in {rel_path}: fremde Seite ohne neues Fenster -> {dom}")
+            elif "neuem Fenster" not in inner:
+                problems.append(f"Link-Regel in {rel_path}: neues Fenster ohne Hinweis -> {dom}")
+            partner = "tag=" in href or "partner_id=" in href or "awin1.com" in dom
+            if partner and not ("sponsored" in attrs and "nofollow" in attrs and "Werbelink" in inner):
+                problems.append(f"Link-Regel in {rel_path}: Werbelink ohne rel=sponsored nofollow oder Kennzeichnung -> {dom}")
         for ref in refs:
             if ref.startswith(("http:", "https:", "mailto:", "tel:")):
                 continue

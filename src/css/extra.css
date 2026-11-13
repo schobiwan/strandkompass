@@ -238,13 +238,12 @@ html[data-sea=ost] [data-sea-only=nord]{display:none!important}
 .steps{list-style:none;counter-reset:s;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
 .steps li{counter-increment:s;padding:16px 18px 18px;background:var(--surface);border-radius:8px;box-shadow:var(--shadow);font-size:.95rem;color:var(--muted)}
 .steps li:before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--forest);color:var(--forest-ink);font:700 .95rem var(--body);margin-bottom:10px}
-.steps a{color:var(--rust-text);text-underline-offset:2px}
 .steps b{display:block;font-family:var(--display);font-size:1.15rem;color:var(--heading);margin-bottom:4px}
 .explore.tips{margin-top:14px}
 .explore.tips li>div{display:flex;flex-direction:column;gap:6px;height:100%;padding:18px 20px;background:var(--surface);border-radius:8px;box-shadow:var(--shadow);border-top:3px solid var(--moss)}
 .explore.tips b{font-family:var(--display);font-size:1.2rem;color:var(--heading)}
 .explore.tips span{color:var(--muted);font-size:.94rem}
-.explore.tips span a,.explore.tips span a:hover{display:inline;height:auto;padding:0;background:none;box-shadow:none;border:0;border-radius:0;transform:none;transition:none;color:var(--rust-text);text-decoration:underline;text-underline-offset:2px}
+.explore.tips span a,.explore.tips span a:hover{display:inline;height:auto;padding:0;background:none;box-shadow:none;border:0;border-radius:0;transform:none;transition:none;color:var(--priel);text-decoration:underline;text-underline-offset:3px}
 .sub-h{margin:28px 0 10px;color:var(--heading)}
 .burn{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}
 .burn-g{background:#5f9a6b}.burn-y{background:#d9b54a}.burn-o{background:#e07b3c}.burn-r{background:#c0392b}
@@ -396,7 +395,7 @@ footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,tabl
 .snone{color:var(--muted);padding:8px 6px}
 .snone a{color:var(--priel)}
 .smore{margin:10px 6px 0;font-weight:700}
-.smore a{color:var(--rust-text)}
+.smore a{color:var(--priel)}
 .empty .suggest{color:var(--fg)}
 .suggest-btn{font:inherit;font-weight:700;color:var(--rust-text);background:none;border:0;padding:4px 0;min-height:32px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:960px){.appnav .navsearch{margin-left:auto}.navsearch .nsl{display:none}.navsearch{padding:0 11px}}
@@ -517,7 +516,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:680px;font-size:.92rem}
 .cmp th,.cmp td{text-align:left;padding:10px 14px;border-top:1px solid var(--line);vertical-align:top}
 .cmp thead th,.cmp thead td{border-top:0;color:var(--muted);font-size:.8rem;font-weight:700}
 .cmp tbody th{font-weight:700;white-space:nowrap}
-.cmp tbody th a{color:var(--fg);display:inline-block;min-height:24px;padding-block:2px}
+.cmp tbody th a{display:inline-block;min-height:24px;padding-block:2px}
 .thumbnote{margin:8px 0 0;font-size:.8rem;color:var(--muted)}
 .rtype .wrap{border-top:1px solid var(--line);padding-top:28px}
 section.block.rtype{padding-top:28px}
@@ -560,14 +559,14 @@ section.block.rtype{padding-top:28px}
 .morerows>div:first-child{border-top:0;padding-top:4px}
 .morerows dt{font:700 .88rem var(--body);color:var(--muted);padding-top:10px}
 .morerows dd{margin:0}
-.morerows a[target=_blank]::after{content:"↗";font-size:.8em;color:var(--muted);margin-left:6px}
+.pills a[target=_blank]::after,.toc a[target=_blank]::after,.mother a[target=_blank]::after{content:"↗";font-size:.8em;color:var(--muted);margin-left:6px}
 @media(max-width:560px){.morerows>div{grid-template-columns:1fr;gap:6px}.morerows dt{padding-top:0}}
 
 /* Textlinks einheitlich (wie beim Vogelkompass, in der Meeresfarbe Priel): im Fließtext blau, normale Schrift, feine Unterstreichung mit Abstand,
    beim Überfahren kräftiger. Bewusst schwache Regel (nur Elementselektoren), Navigation, Karten, Pillen und Brotkrumen überschreiben sie. */
 :where(main :is(p, li, dd, td, th, figcaption)) a{color:var(--priel);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
-:where(main :is(p, li, dd, td, th, figcaption)) a:hover{text-decoration-thickness:2px}
-.cmp th a,.intro a,.yeartext a,.related>p a,.fcols li a{font-weight:400}
+:where(main :is(p, li, dd, td, th, figcaption)) a:hover{color:var(--rust-text);text-decoration-thickness:2px}
+.cmp th a,.intro a,.yeartext a,.related>p a,.fcols li a,.alike a,.explore.tips span a,.smore a{font-weight:400}
 
 /* Sichtbarer Stand der Inhalte */
 .stand{margin:28px 0 0;font-size:.82rem;color:var(--muted)}
@@ -666,3 +665,12 @@ section.block>.wrap>:last-child,section.block>.wrap>:last-child>:last-child{marg
    dunklerer Rand und leichte Fläche; der bisherige Randwechsel allein war kaum zu sehen */
 .toc a,.mother a,.pills a{transition:background-color .15s,border-color .15s}
 .toc a:hover,.mother a:hover,.pills a:hover{background:color-mix(in srgb,var(--fg) 6%,var(--surface));border-color:var(--fg)}
+
+/* --- Linktypen (siehe README, „Redaktionsregeln“) ---
+   1. Textlink in Absätzen, Listen und Tabellen: Priel-Blau, dünn unterstrichen; beim Überfahren dunkelrot, dicker unterstrichen
+   2. Leiser Link (Bildnachweise, Stand-Zeile, Fußzeile): Textfarbe, unterstrichen
+   3. Pille (Mehr erfahren, Inhalt, Nach Aussehen): gleiche Form, Größe und Fläche; fremde Seiten mit ↗
+   4. Schaltfläche (.btn): Hauptweg einer Seite
+   5. Karte (Arten, Doppelgänger, Weiter entdecken): ganze Fläche klickbar */
+.prose a:hover,.intro a:hover,.yeartext a:hover{color:var(--rust-text)}
+.pills a,.toc a,.mother a{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--control);background:var(--surface);color:var(--fg);font:600 .9rem var(--body);text-decoration:none}

@@ -36,6 +36,25 @@ python3 tools/check.py  # prüft Links, Fotos, Bildnachweise und Daten
 | `icons/` | Favicon und App-Icons (aus `favicon.svg` gerendert) |
 | `tools/` | Prüfskript, Foto- und Ton-Werkzeuge |
 
+## Redaktionsregeln: Links
+
+`python3 tools/check.py` prüft die Regeln, die sich automatisch prüfen lassen. Gleiche Regeln wie beim Gartentierkompass.
+
+**Verhalten**
+- Interne Links: im selben Fenster. Der Linktext sagt, wohin es geht („Seehund oder Kegelrobbe? Alle Unterschiede“), nie „hier“.
+- Sammel-Links enden einheitlich auf „… ansehen“ („Alle Quallen ansehen“, „Alle Treffer mit Filtern ansehen“).
+- Fremde Seiten (Wikipedia, Wikimedia, BSH …): neues Fenster, `rel="noopener"`, Screenreader-Hinweis „(öffnet in neuem Fenster)“. Immer über `ext_link()` in `sk/components.py`.
+- Schwesterseiten (Vogel-, Waldtier-, Gartentierkompass): im selben Fenster, ohne Hinweis. `ext_link()` erkennt sie an `FAMILY`.
+- Werbelinks (Amazon, GetYourGuide, Holidu): Produkt- oder Tourname als Text mit Sternchen, neues Fenster, `rel="sponsored nofollow noopener"`, Werbehinweis auf der Seite. Über `ad_link()` bzw. `trip_ad()`.
+- Bild- und Tonnachweise: Urheber verlinkt auf die Commons-Seite, Lizenzkürzel auf den Lizenztext, beides wie fremde Seiten.
+
+**Aussehen** (Abschnitt „Linktypen“ am Ende von `src/css/extra.css`)
+1. Textlink in Absätzen, Listen und Tabellen: Priel-Blau, dünn unterstrichen, normale Schriftstärke; beim Überfahren dunkelrot und dicker unterstrichen.
+2. Leiser Link (Bildnachweise, Stand-Zeile, Fußzeile): Textfarbe, unterstrichen.
+3. Pille (Mehr erfahren, Inhaltsverzeichnis, Nach Aussehen): überall gleiche Form, Größe und Fläche; fremde Seiten mit ↗.
+4. Schaltfläche (`.btn`, `.btn.ghost`): Hauptweg einer Seite.
+5. Karte (Arten, Doppelgänger, Weiter entdecken): die ganze Fläche ist der Link.
+
 ## Neue Fotos
 
 Die Fotos kommen von Wikimedia Commons. Ein GitHub-Workflow lädt sie:

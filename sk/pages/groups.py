@@ -38,7 +38,7 @@ def build_groups():
         lk = ('<h2>Nach Aussehen bestimmen</h2><div class="pills">' + "".join(
               f'<a href="{R}aussehen/{m["slug"]}/index.html">{esc(m["h1"])}</a>' for m in looks) + '</div>') if looks else ""
         others = ('<h2>Weitere Gruppen</h2><div class="pills">' + "".join(
-                  f'<a href="{group_url(o, R)}">{esc(o)}</a>' for o in GROUPS if o != g) + f'<a href="{R}arten/index.html">Alle Arten</a></div>')
+                  f'<a href="{group_url(o, R)}">{esc(o)}</a>' for o in GROUPS if o != g) + f'<a href="{R}arten/index.html">Alle Arten ansehen</a></div>')
         body = (seabar(R) + f'<section class="block page"> <div class="wrap"> <h1>{esc(I["h1"])}</h1> {intro} {tags} '
                 f'<ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul> </div> </section>'
                 f'{burn}'

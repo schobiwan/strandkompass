@@ -41,7 +41,7 @@ def build_species(s):
     wiki = "https://de.wikipedia.org/w/index.php?search=" + s["lat"].replace(" ", "+")
     # „Mehr erfahren“ als Zeilen: links die Art des Links, rechts die Links; auf dem Handy untereinander
     pill = lambda h, t: f'<a href="{h}">{esc(t)}</a>'
-    rows = [(f'Mehr {esc(s["grp"])}', pill(f'{R}arten/{gslug(s["grp"])}/index.html', f'Alle {s["grp"]}') + "".join(pill(f'{R}arten/{x["k"]}/index.html', x["n"]) for x in sib)),
+    rows = [(f'Mehr {esc(s["grp"])}', pill(f'{R}arten/{gslug(s["grp"])}/index.html', f'Alle {s["grp"]} ansehen') + "".join(pill(f'{R}arten/{x["k"]}/index.html', x["n"]) for x in sib)),
             ("Nach Aussehen", "".join(pill(f'{R}aussehen/{m["slug"]}/index.html', m["h1"]) for m in looks_for(k))),
             ("Ausrüstung", (pill(f"{R}ratgeber/fernglas/index.html", "Fernglas für die Küste") if s["grp"] in MOBILE else "") + gear_inline(species_pick(s))),
             ("Erleben", species_tour(s)),

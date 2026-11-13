@@ -75,14 +75,14 @@ def seaswitch(extra=""):
 
 def seabar(R):
     return (f'<div class="seabar"><div class="wrap seabar-in"><span class="seabar-l">Zeige Arten von</span>{seaswitch()}'
-            f'<a class="seabar-more" href="{R}nordsee-ostsee/index.html">Was ist der Unterschied?</a></div></div>')
+            f'<a class="seabar-more" href="{R}nordsee-ostsee/index.html">Unterschiede ansehen<span class="sr-only"> (Nordsee und Ostsee im Vergleich)</span></a></div></div>')
 
 # ------------------------------------------------------------------ Layout
 SEARCH_DLG = ('<dialog class="sdlg" id="sdlg" aria-labelledby="sdlg-title"> <form method="get" action="{R}index.html" class="sform" id="sform">'
               '<h2 class="sr-only" id="sdlg-title">Art suchen</h2><label class="search" for="sq">' + ICON["find"] + '<span class="sr-only">Name oder Aussehen</span>'
               '<input type="search" id="sq" name="q" placeholder="Name oder Aussehen, z. B. roter Schnabel" autocomplete="off" enterkeyhint="search"></label>'
               '<button type="button" class="sclose" id="sclose">Schließen</button></form> <p class="sr-only" id="sstatus" role="status" aria-live="polite"></p><ul class="sresults" id="sresults" aria-label="Treffer"></ul>'
-              '<p class="smore" id="smore" hidden><a id="smore-link" href="{R}index.html#arten">Alle Treffer mit Filtern anzeigen</a></p> </dialog>')
+              '<p class="smore" id="smore" hidden><a id="smore-link" href="{R}index.html#arten">Alle Treffer mit Filtern ansehen</a></p> </dialog>')
 
 def page(path, title, desc, body, active=None, scripts=(), crumbs=None, data=None, is_home=False, og="og.jpg", seafilter=True, root=None, noindex=False, extra_ld=""):
     """root: fester Pfad zur Wurzel, z. B. "/" für die 404-Seite, die unter beliebigen Adressen erscheint."""
@@ -110,4 +110,4 @@ def footer(R):
            ("am-strand/index.html", "Sicher am Strand"), ("ausruestung/index.html", "Ausrüstung"), ("ratgeber/fernglas/index.html", "Fernglas für die Küste")]
     leg = [("ueber/index.html", "Über den Meereskompass"), ("impressum/index.html", "Impressum"), ("datenschutz/index.html", "Datenschutz"), ("bildnachweis/index.html", "Bildnachweis und Lizenzen")]
     li = lambda xs: "".join(f'<li><a href="{R}{h}">{t}</a></li>' for h, t in xs)
-    return f'''<footer> <div class="wrap"> <a class="flogo" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span></a> <div class="fcols"> <nav aria-label="Bestimmen"><p class="fhead">Bestimmen</p><ul>{li(best)}</ul></nav> <nav aria-label="An der Küste"><p class="fhead">An der Küste</p><ul>{li(ent)}</ul></nav> <nav aria-label="Über die Seite"><p class="fhead">Über die Seite</p><ul>{li(leg)}</ul></nav> <nav aria-label="Schwesterseiten"><p class="fhead">Schwesterseiten</p><ul><li><a href="https://vogelkompass.de/" rel="noopener">Vogelkompass: Vögel bestimmen</a></li><li><a href="https://waldtierkompass.de/" rel="noopener">Waldtierkompass: Waldtiere bestimmen</a></li></ul></nav> </div> <p class="footnote">Fotos: Wikimedia Commons, unter freien Lizenzen. Mit * markierte Links sind Werbelinks. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> <p class="fproject">Ein privates Projekt von <a href="{R}ueber/index.html">Nico Schober</a> aus Bremen.</p> </div> </footer>'''
+    return f'''<footer> <div class="wrap"> <a class="flogo" href="{R}index.html"><svg class="logo" aria-hidden="true"><use href="#logo-mark"></use></svg><span>{SITE}</span></a> <div class="fcols"> <nav aria-label="Bestimmen"><p class="fhead">Bestimmen</p><ul>{li(best)}</ul></nav> <nav aria-label="An der Küste"><p class="fhead">An der Küste</p><ul>{li(ent)}</ul></nav> <nav aria-label="Über die Seite"><p class="fhead">Über die Seite</p><ul>{li(leg)}</ul></nav> <nav aria-label="Schwesterseiten"><p class="fhead">Schwesterseiten</p><ul><li><a href="https://vogelkompass.de/">Vogelkompass: Vögel bestimmen</a></li><li><a href="https://waldtierkompass.de/">Waldtierkompass: Waldtiere bestimmen</a></li></ul></nav> </div> <p class="footnote">Fotos: Wikimedia Commons, unter freien Lizenzen. Mit * markierte Links sind Werbelinks. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p> <p class="fproject">Ein privates Projekt von <a href="{R}ueber/index.html">Nico Schober</a> aus Bremen.</p> </div> </footer>'''
