@@ -4,7 +4,8 @@
   "description": "Meereskompass – statische Website zum Bestimmen von Strandfunden",
   "scripts": {
     "build": "python3 build.py",
-    "check": "python3 tools/check.py"
+    "check": "python3 tools/check.py",
+    "perf": "node tests/perf.mjs"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",

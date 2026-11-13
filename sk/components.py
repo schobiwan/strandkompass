@@ -34,9 +34,20 @@ def ad_link(url, text, cls=""):
     """Amazon-Werbelink mit Sternchen."""
     return ext_link(url, text, rel="sponsored nofollow noopener", cls=cls, mark="*")
 
-def byline(R):
-    """Sichtbare Autorenzeile mit Stand; passt zu author in den strukturierten Daten (Vertrauen für Leser und Google)."""
-    return f'<p class="stand">Von <a href="{R}ueber/index.html" rel="author">Nico Schober</a> · Stand: {STAND}</p>'
+FEEDBACK_MAIL = "info@nicoschober.com"
+FB_PAGE = "%%SEITE%%"   # page() ersetzt das durch die Adresse der Seite
+
+def feedback_href(topic="", kind="Hinweis"):
+    """E-Mail-Link mit vorausgefülltem Betreff und der Seitenadresse, statt eines Kontaktformulars (wie beim Vogelkompass)."""
+    from urllib.parse import quote
+    subj = f"{SITE}: {kind}" + (f" zu {topic}" if topic else "")
+    return f"mailto:{FEEDBACK_MAIL}?subject={quote(subj)}&amp;body={quote('Seite: ')}{FB_PAGE}{quote(chr(10) + chr(10))}"
+
+def byline(R, topic=""):
+    """Sichtbare Autorenzeile mit Stand und Feedback-Link per E-Mail; passt zu author in den strukturierten Daten.
+    topic: Name der Seite für den Betreff, z. B. der Artname."""
+    return (f'<p class="stand">Von <a href="{R}ueber/index.html" rel="author">Nico Schober</a> · Stand: {STAND}'
+            f' · <a href="{feedback_href(topic)}">Fehler entdeckt? Schreib mir</a></p>')
 
 def tldr_box(content):
     """Kasten „Kurz gesagt“: content ist ein Satz oder eine Liste aus (Begriff, Text)."""

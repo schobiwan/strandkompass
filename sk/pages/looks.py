@@ -41,7 +41,7 @@ def build_looks():
         body = (f'<section class="block page"> <div class="wrap"> <h1>{esc(m["h1"])}</h1> <p class="intro">{esc(m["intro"])}</p>'
                 f'<ul class="mlist">{"".join(mcard(R, k, w, i) for i, (k, w) in enumerate(m["items"]))}</ul> {pp}'
                 f'<p class="mtip">Nicht dabei? Auf der <a href="{R}index.html#arten">Startseite</a> kannst du nach mehreren Merkmalen zugleich suchen.</p>'
-                f'<h2 class="mh2">Weitere Merkmale</h2>{others_nav(R, m)} {byline(R)} </div> </section>')
+                f'<h2 class="mh2">Weitere Merkmale</h2>{others_nav(R, m)} {byline(R, m["h1"])} </div> </section>')
         names = ", ".join(BY[k]["n"] for k, _ in m["items"])
         ld_list = ld({"@context": "https://schema.org", "@type": "ItemList", "name": m["h1"], "numberOfItems": len(m["items"]),
                       "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": BY[k]["n"], "url": f"{DOMAIN}/arten/{k}/"} for i, (k, _) in enumerate(m["items"])]})

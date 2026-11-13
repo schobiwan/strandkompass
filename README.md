@@ -12,6 +12,7 @@ Reihenfolge der Gruppen überall: Seevögel, Robben, Wale & Delfine, danach die 
 npm ci                  # einmalig: esbuild, lightningcss, purgecss
 python3 build.py        # erzeugt die fertige Seite in dist/
 python3 tools/check.py  # prüft Links, Fotos, Bildnachweise und Daten
+npm run perf            # Leistungsbudget (Lighthouse Handy), muss vor jedem Push grün sein
 ```
 
 `dist/` wird mit ins Repository eingecheckt. statichost.eu veröffentlicht den Ordner direkt (siehe `statichost.yml`).
@@ -22,6 +23,7 @@ python3 tools/check.py  # prüft Links, Fotos, Bildnachweise und Daten
 | --- | --- |
 | `data.py` | Alle Inhalte: Funde, Doppelgänger, Strandjahr, Nordsee/Ostsee |
 | `data_aussehen.py` | Seiten „Nach Aussehen“ (Merkmal → passende Arten) |
+| `data_helfen.py` | Anleitungen „Tieren helfen“ (/helfen/): junge Robbe, Totfund, kranker Seevogel, Strandmüll, Spülsaum mit Kindern, Vögel nicht stören |
 | `credits.json` | Bildnachweise (Urheber, Lizenz, Quelle) je Foto |
 | `photos/` | Fotos als WebP, 720 × 576 und 400 × 320 |
 | `sk/core.py` | Pfade, Konstanten, Stand der Inhalte, Helfer (Sortierung, Artikel) |

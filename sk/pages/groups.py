@@ -5,6 +5,7 @@ from ..layout import *
 from ..components import *
 from .looks import looks_for
 from data_gruppen import GROUP_INFO
+from .helfen import group_teaser
 
 
 def group_url(g, R=""):
@@ -41,8 +42,8 @@ def build_groups():
                   f'<a href="{group_url(o, R)}">{esc(o)}</a>' for o in GROUPS if o != g) + f'<a href="{R}arten/index.html">Alle Arten ansehen</a></div>')
         body = (seabar(R) + f'<section class="block page"> <div class="wrap"> <h1>{esc(I["h1"])}</h1> {intro} {tags} '
                 f'<ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul> </div> </section>'
-                f'{burn}'
-                f'<section class="block"><div class="wrap"><div class="prose">{nord_only}{pp}{lk}{others}</div> {byline(R)} </div></section>')
+                f'{burn}{group_teaser(R, g)}'
+                f'<section class="block"><div class="wrap"><div class="prose">{nord_only}{pp}{lk}{others}</div> {byline(R, g)} </div></section>')
         ld_list = ld({"@context": "https://schema.org", "@type": "CollectionPage", "name": I["h1"], "description": I["desc"], "inLanguage": "de-DE",
                       "url": f"{DOMAIN}/arten/{gslug(g)}/", "isPartOf": {"@id": WEBSITE_ID}, "publisher": {"@id": ORG_ID},
                       "dateModified": CONTENT_UPDATED,

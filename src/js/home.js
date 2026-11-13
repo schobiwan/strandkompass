@@ -49,7 +49,7 @@ const state = {
 
 const byName = (a, b) => a.name.localeCompare(b.name, "de");
 const nowRank = (a) => (a.peak.includes(NOW) ? 0 : a.present.includes(NOW) ? 1 : 2);
-let lastOrder = "";
+let lastOrder = null;
 
 // Ohne Suche und Filter zeigt die Startseite nur die ersten Funde; bei gleicher Jahreszeit stehen Vögel, Robben und Wale vorn
 const FIRST = 12;
@@ -81,7 +81,9 @@ function render() {
       a.li.style.setProperty("--i", String(Math.min(i, 14)));
       grid.appendChild(a.li);
     });
-    if (!reduced()) list.forEach((a) => { a.li.style.animation = "none"; void a.li.offsetWidth; a.li.style.animation = ""; });
+    // Karten nur nach einem Filterwechsel einblenden, nie beim ersten Zeichnen (PageSpeed wertet Ausgeblendetes als nicht sichtbar);
+    // ein einziger Umbruch für alle Karten statt einem pro Karte
+    if (lastOrder !== null && !reduced()) { grid.classList.remove("anim"); void grid.offsetWidth; grid.classList.add("anim"); }
   }
   lastOrder = order;
   $("empty").hidden = list.length > 0;

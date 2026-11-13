@@ -55,3 +55,10 @@ def gear_list(keys):
     return f'<ul class="gearlist">{li}</ul>'
 
 ADNOTE = '<p class="adnote"><span aria-hidden="true">*</span> Werbelink: Wenn du über diesen Link etwas kaufst, erhält der Meereskompass eine kleine Provision von Amazon. Für dich ändert sich am Preis nichts. Als Amazon-Partner verdiene ich an qualifizierten Verkäufen.</p>'
+
+AMAZON_NOTICE = "Als Amazon-Partner verdiene ich an qualifizierten Verkäufen"
+def adbanner(extra=""):
+    """Werbehinweis als schlanke Zeile direkt unter der Überschrift, vor dem ersten Werbelink (wie beim Vogelkompass)."""
+    return (f'<p class="adbanner"><b>Werbung</b> · Links mit <span aria-hidden="true">*</span><span class="sr-only">Sternchen</span> führen zu Amazon. '
+            f'{AMAZON_NOTICE}, für dich ändert sich am Preis nichts.{(" " + extra) if extra else ""}</p>')
+ADLABEL = '<p class="adlabel">Werbung</p>'

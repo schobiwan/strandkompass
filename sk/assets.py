@@ -117,6 +117,7 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 
 ## Unterwegs
 - [Sicher am Strand]({u('am-strand/')}): Quallen, Heuler, Phosphor, Watt
+- [Tieren an der Küste helfen]({u('helfen/')}): junge Robbe, Totfund, kranker Seevogel, Strandmüll, Spülsaum mit Kindern, Vögel nicht stören
 - [Ausrüstung]({u('ausruestung/')}): Fernglas, Bestimmungsbücher, UV-Lampe, Wattschuhe
 - [Fernglas für die Küste]({u('ratgeber/fernglas/')}): 8x42 oder 10x42, vier Gläser im Vergleich
 

@@ -59,6 +59,8 @@ body:before{background:var(--hdr-bg)}
 .hero6 .seabtn-all[aria-pressed=true]{background:var(--deep);color:var(--hdr-bg)}
 .h6-sea{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:14px}
 .h6-l{font:600 .92rem var(--body);color:var(--muted)}
+/* Handy: Beschriftung immer über dem Umschalter, damit die Zeile beim Schriftwechsel nicht umbricht (CLS) */
+@media(max-width:600px){.h6-l{flex-basis:100%}}
 
 /* Suche */
 .hsearch{display:flex;gap:8px;margin-top:18px;max-width:520px}
@@ -281,7 +283,7 @@ section.block .prose h2:first-child{margin-top:0}
   .hchips::-webkit-scrollbar{display:none}
   .hchip{flex:none}
 }
-@media(prefers-reduced-motion:reduce){.spot6{animation:none}}
+
 
 /* ---------- Strandjahr: Legende und Handy ---------- */
 .cal .ms{display:none}
@@ -434,6 +436,7 @@ footer a:hover,.seabar-more:hover,.steps a:hover,.explore.tips span a:hover,tabl
 }
 @keyframes sheet{from{transform:translateY(16px);opacity:0}}
 @media(prefers-reduced-motion:reduce){.mpanel{animation:none}}
+@media(prefers-reduced-motion:reduce){.spot6{animation:none}}
 /* Handy: kein Weichzeichner an der Kopfleiste. backdrop-filter würde die untere Leiste, Menüfenster
    und Abdunklung an der Kopfleiste statt am Bildschirm ausrichten (sie klebten dann oben). */
 @media(max-width:960px){.appnav{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--hdr-bg)}}
@@ -507,7 +510,8 @@ main .grp-h:first-of-type{margin-top:28px}
 .mtip a{color:var(--priel)}
 
 /* Ratgeber: Werbehinweis, Sprungmarken, Vergleichstabelle, Pro und Contra, Fragen, Quellen */
-.adbanner{margin:0 0 18px;padding:10px 14px;border-radius:8px;background:color-mix(in srgb,var(--line) 45%,var(--surface));font-size:.92rem;max-width:70ch}
+.adbanner{margin:12px 0 4px;padding:1px 0 1px 10px;border-left:3px solid var(--rust);color:var(--muted);font-size:.86rem;line-height:1.5;max-width:70ch}.adbanner b{color:var(--fg);font-weight:700}
+.adlabel{margin:0 0 6px;font:700 .72rem var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .toc a{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--control);color:var(--fg);text-decoration:none;font-weight:600;font-size:.9rem}
 .toc a:hover{border-color:var(--forest)}
@@ -585,8 +589,9 @@ section.block.rtype{padding-top:28px}
 .mfold>summary .mh2{margin:0 0 12px}
 
 /* purgecss start ignore */
-/* Familienlink (?familie): Werbelinks und Werbehinweise ausblenden */
-html[data-ohnewerbung] :is(.adbanner,.adnote,.adshort,.rsearch,.gearlist),html[data-ohnewerbung] a[rel~=sponsored]{display:none!important}
+/* Familienlink (?familie): Werbelinks und Werbehinweise ausblenden, stattdessen Anleitungen „Tieren helfen“ zeigen (.famonly) */
+.famonly{display:none}html[data-ohnewerbung] .famonly{display:block}
+html[data-ohnewerbung] :is(.adbanner,.adnote,.adshort,.rsearch,.gearlist,.adlabel,.adsec),html[data-ohnewerbung] a[rel~=sponsored]{display:none!important}
 /* purgecss end ignore */
 
 /* ---------- Dunkelmodus „Nordsee bei Nacht“ ----------
@@ -674,3 +679,11 @@ section.block>.wrap>:last-child,section.block>.wrap>:last-child>:last-child{marg
    5. Karte (Arten, Doppelgänger, Weiter entdecken): ganze Fläche klickbar */
 .prose a:hover,.intro a:hover,.yeartext a:hover{color:var(--rust-text)}
 .pills a,.toc a,.mother a{min-height:40px;padding:0 14px;border-radius:999px;border:1px solid var(--control);background:var(--surface);color:var(--fg);font:600 .9rem var(--body);text-decoration:none}
+
+/* Anleitungen „Tieren helfen“: Kopf mit Foto rechts */
+.hp-head{display:grid;gap:24px;align-items:start}
+@media(min-width:761px){.hp-head{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:36px}}
+.hp-photo{margin:6px 0 0}
+.hp-photo img{display:block;width:100%;height:auto;border-radius:8px;box-shadow:var(--shadow)}
+.hp-photo figcaption{margin-top:6px;font-size:.78rem;color:var(--muted)}
+.hp-photo figcaption a{color:inherit}

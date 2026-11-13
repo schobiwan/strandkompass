@@ -5,7 +5,7 @@ Stand November 2026, dieselben Modelle wie im Fernglas-Ratgeber des Vogelkompass
 from ..core import *
 from ..layout import *
 from ..components import ad_link, ext_link, byline
-from ..products import ADNOTE
+from ..products import ADNOTE, adbanner
 
 amazon_dp = lambda asin: f"https://www.amazon.de/dp/{asin}?tag={TAG}"
 amazon_s = lambda q: "https://www.amazon.de/s?k=" + q.replace(" ", "+") + "&tag=" + TAG
@@ -56,7 +56,7 @@ def build_guide():
     src = '<h3 class="srchead">Quellen</h3><ul class="srclist">' + "".join(f"<li>{ext_link(esc(u), esc(t))}</li>" for t, u in SOURCES) + "</ul>"
     body = f'''<section class="block page"> <div class="wrap"> <h1>Fernglas für die Küste</h1>
 <p class="intro">An der Küste ist fast alles weit weg: die Robben auf der Sandbank, die Eiderenten draußen auf dem Wasser, der Basstölpel über den Wellen. Mit einem guten Fernglas erkennst du sie trotzdem. Es muss aber Wind, Gischt und Sand aushalten.</p>
-<p class="adbanner"><b>Werbung:</b> Diese Seite enthält Werbelinks zu Amazon, gekennzeichnet mit einem Sternchen. Kaufst du darüber, erhalte ich eine kleine Provision, für dich ändert sich am Preis nichts. Ich habe die Gläser nicht selbst getestet. Die Daten stammen von den Herstellern und aus den unten genannten Testberichten, Stand November 2026.</p>
+{adbanner("Ich habe die Gläser nicht selbst getestet. Die Daten stammen von den Herstellern und aus den unten genannten Testberichten, Stand November 2026.")}
 <p><b>Kurz gesagt:</b> Nimm ein <b>wasserdichtes 8x42</b> mit einem Sehfeld von mindestens 120 Metern auf 1.000 Meter. Schaust du vor allem weit aufs Meer oder auf Robbenbänke, ist ein <b>10x42</b> die bessere Wahl. Für den Einstieg reicht ein günstiges Glas.</p>
 <nav class="toc" aria-label="Auf dieser Seite"><a href="#zahlen">Was 8x42 bedeutet</a><a href="#kriterien">Worauf es an der Küste ankommt</a><a href="#modelle">Modelle im Vergleich</a><a href="#pflege">Pflege nach dem Strand</a><a href="#fragen">Fragen</a></nav> </div> </section>
 <section class="block" id="zahlen" aria-labelledby="h-zahl"><div class="wrap"><h2 id="h-zahl">Was 8x42 bedeutet</h2>{tips([
@@ -84,7 +84,7 @@ def build_guide():
 </ol></div></section>
 <section class="block" id="fragen" aria-labelledby="h-faq"><div class="wrap"><h2 id="h-faq">Häufige Fragen</h2>{faq}
 <p class="intro">Was du sonst an die Küste mitnimmst, zeigt die Seite <a href="{R}ausruestung/index.html">Ausrüstung</a>. Welche Tiere gerade zu sehen sind, steht im <a href="{R}strandjahr/index.html" data-now-link>Küstenjahr</a>.</p>
-{src}{ADNOTE}{byline(R)}</div></section>'''
+{src}{ADNOTE}{byline(R, "Fernglas für die Küste")}</div></section>'''
     ld_all = ld({"@context": "https://schema.org", "@type": "Article", "headline": "Fernglas für die Küste: 8x42 oder 10x42 und vier Modelle im Vergleich", "inLanguage": "de-DE",
                  "author": AUTHOR, "publisher": {"@id": ORG_ID}, "datePublished": "2026-11-09", "dateModified": "2026-11-09", "mainEntityOfPage": f"{DOMAIN}/ratgeber/fernglas/"}) + \
              ld({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": q, "acceptedAnswer": {"@type": "Answer", "text": a}} for q, a in FAQ]})
