@@ -80,6 +80,7 @@ def finalize():
                     + "</url>\n" for u in urls) + "</urlset>\n")
     write("llms.txt", llms_txt())
     cache_bust()
+    write(f"{INDEXNOW_KEY}.txt", INDEXNOW_KEY + "\n")
     write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n")
     # Zeitpunkt des Builds, um zu prüfen, ob die Live-Seite aktuell ist
     write("version.txt", datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ") + "\n")
@@ -88,7 +89,7 @@ def finalize():
 def llms_txt():
     """Kompakte Übersicht für KI-Assistenten und KI-Suchmaschinen (Vorschlag llmstxt.org)."""
     u = lambda path: f"{DOMAIN}/{path}"
-    groups = "\n".join(f"- [{g}]({u('arten/#' + gslug(g))})" for g in GROUPS)
+    groups = "\n".join(f"- [{g}]({u('arten/' + gslug(g) + '/')})" for g in GROUPS)
     arten = "\n".join(f"- [{s['n']} ({s['lat']})]({u('arten/' + s['k'] + '/')}): {s['short']}" for s in sorted(SPECIES, key=skey))
     from data_aussehen import LOOKS
     looks = "\n".join(f"- [{m['h1']}]({u('aussehen/' + m['slug'] + '/')})" for m in LOOKS)

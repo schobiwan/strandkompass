@@ -18,6 +18,8 @@ BY = {s["k"]: s for s in SPECIES}
 PAIRS.sort(key=lambda p: GROUPS.index(BY[p["a"]]["grp"]) if p["a"] in BY else len(GROUPS))
 PAIRBY = {p["k"]: p for p in PAIRS}
 TAG = "schobiwan-21"
+# IndexNow (Bing, Ecosia, Yandex, Seznam): Schlüssel liegt als /<Schlüssel>.txt auf der Seite, der Workflow .github/workflows/indexnow.yml meldet geänderte Seiten
+INDEXNOW_KEY = "2cd124f74a023f97f32aed35f184978f"
 # Reise-Partnerprogramme: IDs eintragen, sobald die Anmeldung bestätigt ist. Solange sie leer sind,
 # erscheinen keine Reiselinks auf der Seite. Mit SK_TRIPS=1 baut man eine Vorschau mit Platzhaltern.
 GYG_PARTNER = ""            # GetYourGuide Partner-ID (partner.getyourguide.com)

@@ -12,16 +12,16 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 - [Küstenjahr](https://meereskompass.de/strandjahr/): was in welchem Monat zu sehen ist
 
 ## Gruppen
-- [Seevögel](https://meereskompass.de/arten/#seevoegel)
-- [Robben](https://meereskompass.de/arten/#robben)
-- [Wale & Delfine](https://meereskompass.de/arten/#wale-delfine)
-- [Muscheln](https://meereskompass.de/arten/#muscheln)
-- [Schnecken](https://meereskompass.de/arten/#schnecken)
-- [Quallen](https://meereskompass.de/arten/#quallen)
-- [Krebse & Würmer](https://meereskompass.de/arten/#krebse-wuermer)
-- [Seesterne & Seeigel](https://meereskompass.de/arten/#seesterne-seeigel)
-- [Tang & Seegras](https://meereskompass.de/arten/#tang-seegras)
-- [Strandfunde](https://meereskompass.de/arten/#strandfunde)
+- [Seevögel](https://meereskompass.de/arten/seevoegel/)
+- [Robben](https://meereskompass.de/arten/robben/)
+- [Wale & Delfine](https://meereskompass.de/arten/wale-delfine/)
+- [Muscheln](https://meereskompass.de/arten/muscheln/)
+- [Schnecken](https://meereskompass.de/arten/schnecken/)
+- [Quallen](https://meereskompass.de/arten/quallen/)
+- [Krebse & Würmer](https://meereskompass.de/arten/krebse-wuermer/)
+- [Seesterne & Seeigel](https://meereskompass.de/arten/seesterne-seeigel/)
+- [Tang & Seegras](https://meereskompass.de/arten/tang-seegras/)
+- [Strandfunde](https://meereskompass.de/arten/strandfunde/)
 
 ## Nordsee und Ostsee
 - [Nordsee](https://meereskompass.de/nordsee/)

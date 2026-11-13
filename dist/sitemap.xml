@@ -37,21 +37,26 @@
   <url><loc>https://meereskompass.de/arten/kegelrobbe/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/kegelrobbe.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/kompassqualle/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/kompassqualle.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/kormoran/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/kormoran.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/krebse-wuermer/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/lachmoewe/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/lachmoewe.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/lungenqualle/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/lungenqualle.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/mantelmoewe/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/mantelmoewe.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/meersalat/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/meersalat.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/miesmuschel/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/miesmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/muscheln/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/nixentaeschchen/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/nixentaeschchen.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/nordseegarnele/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/nordseegarnele.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/ohrenqualle/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/ohrenqualle.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/pantoffelschnecke/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/pantoffelschnecke.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/plattmuschel/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/plattmuschel.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/pottwal/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/pottwal.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/quallen/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/ringelgans/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/ringelgans.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/robben/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/saebelschnaebler/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/saebelschnaebler.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/sanderling/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/sanderling.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/sandklaffmuschel/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/sandklaffmuschel.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/schnecken/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/schweinswal/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/schweinswal.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/schwertmuschel/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/schwertmuschel.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/seegras/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/seegras.webp</image:loc></image:image></url>
@@ -59,12 +64,17 @@
   <url><loc>https://meereskompass.de/arten/seepocke/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/seepocke.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/seestachelbeere/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/seestachelbeere.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/seestern/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/seestern.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/seesterne-seeigel/</loc><lastmod>2026-11-09</lastmod></url>
+  <url><loc>https://meereskompass.de/arten/seevoegel/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/sepiaschale/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/sepiaschale.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/silbermoewe/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/silbermoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/strandfunde/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/strandkrabbe/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/strandkrabbe.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/strandschnecke/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/strandschnecke.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/sturmmoewe/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/sturmmoewe.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/tang-seegras/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/trottellumme/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/trottellumme.webp</image:loc></image:image></url>
+  <url><loc>https://meereskompass.de/arten/wale-delfine/</loc><lastmod>2026-11-09</lastmod></url>
   <url><loc>https://meereskompass.de/arten/wattwurm/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/wattwurm.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/weissschnauzendelfin/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/weissschnauzendelfin.webp</image:loc></image:image></url>
   <url><loc>https://meereskompass.de/arten/wellhornschnecke/</loc><lastmod>2026-11-09</lastmod><image:image><image:loc>https://meereskompass.de/photos/wellhornschnecke.webp</image:loc></image:image></url>

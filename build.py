@@ -10,6 +10,7 @@ from sk.core import OUT, SPECIES
 from sk.assets import build_assets, finalize
 from sk.pages.home import build_home
 from sk.pages.species import build_arten_index, build_species
+from sk.pages.groups import build_groups
 from sk.pages.pairs import build_pairs
 from sk.pages.year import build_year
 from sk.pages.seas import build_seas
@@ -26,6 +27,7 @@ def main():
     build_arten_index()
     for s in SPECIES:
         build_species(s)
+    build_groups()
     build_pairs()
     build_year()
     build_seas()

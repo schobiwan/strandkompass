@@ -171,3 +171,12 @@ def callbox(R, s):
     sec = f'<span class="cb-sec">{AUDIO[s["k"]][3]} Sekunden</span>' if s["k"] in AUDIO else ""
     cr = f'<small class="cb-cred">{sound_credit(s["k"])}</small>' if s["k"] in AUDIO else ""
     return (f'<div class="callbox">{btn}<div class="cb-txt"><p class="cb-h">Ruf {sec}</p><p class="cb-call">{esc(s["call"])}</p>{cr}</div></div>')
+
+def burn_table(R):
+    """Tabelle „Welche Quallen brennen?“ (Sicher am Strand und Gruppenseite Quallen)."""
+    qrows = ""
+    for k, burn, lvl in [("seestachelbeere", "nie, Rippenquallen haben keine Nesselzellen", "g"), ("ohrenqualle", "kaum spürbar", "g"),
+                         ("lungenqualle", "schwach, kann auf empfindlicher Haut jucken", "y"), ("blaue-nesselqualle", "spürbar", "o"),
+                         ("kompassqualle", "deutlich, wie Brennnesseln", "o"), ("feuerqualle", "stark, auch abgerissene Tentakel", "r")]:
+        qrows += f'<tr><th scope="row"><a href="{R}arten/{k}/index.html">{esc(BY[k]["n"])}</a></th><td><span class="burn burn-{lvl}" aria-hidden="true"></span>{esc(burn)}</td></tr>'
+    return f'<div class="cmp-wrap"><table class="cmp"><thead><tr><th scope="col">Qualle</th><th scope="col">Brennt sie?</th></tr></thead><tbody>{qrows}</tbody></table></div>'

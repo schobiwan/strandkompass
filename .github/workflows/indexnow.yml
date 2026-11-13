@@ -1,0 +1,54 @@
+# Meldet geänderte Seiten per IndexNow an Bing, Ecosia, Yandex und Seznam, sobald dist/ auf main geändert wurde.
+# Google nutzt IndexNow nicht; dafür ist die Sitemap in der Google Search Console da.
+name: IndexNow melden
+
+on:
+  push:
+    branches: [main]
+    paths: ["dist/**"]
+  workflow_dispatch:
+    inputs:
+      alle:
+        description: "Alle Seiten aus der Sitemap melden"
+        type: boolean
+        default: true
+
+jobs:
+  melden:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Warten, bis statichost.eu die neue Version ausgeliefert hat
+        run: |
+          want=$(cat dist/version.txt)
+          for i in $(seq 1 30); do
+            live=$(curl -fsS https://meereskompass.de/version.txt || true)
+            [ "$live" = "$want" ] && echo "Live-Version aktuell" && exit 0
+            sleep 20
+          done
+          echo "Live-Version nach 10 Minuten noch nicht aktuell, melde trotzdem"
+      - name: Seiten melden
+        env:
+          ALLE: ${{ github.event_name == 'workflow_dispatch' && inputs.alle }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re, subprocess, urllib.request
+          host = "meereskompass.de"
+          key = re.search(r'INDEXNOW_KEY = "([0-9a-f]+)"', open("sk/core.py").read()).group(1)
+          alle = os.environ.get("ALLE") == "true"
+          if alle:
+              urls = re.findall(r"<loc>(.*?)</loc>", open("dist/sitemap.xml").read())
+          else:
+              changed = subprocess.run(["git", "diff", "--name-only", "HEAD~1", "HEAD", "--", "dist"], capture_output=True, text=True).stdout.split()
+              urls = sorted({f"https://{host}/" + f[len("dist/"):-len("index.html")] for f in changed if f.endswith("index.html")})
+              if "dist/sitemap.xml" in changed:
+                  urls.append(f"https://{host}/sitemap.xml")
+          if not urls:
+              print("Keine geänderten Seiten"); raise SystemExit
+          body = json.dumps({"host": host, "key": key, "keyLocation": f"https://{host}/{key}.txt", "urlList": urls[:10000]}).encode()
+          req = urllib.request.Request("https://api.indexnow.org/indexnow", data=body, headers={"Content-Type": "application/json; charset=utf-8"})
+          with urllib.request.urlopen(req, timeout=30) as r:
+              print(r.status, f"{len(urls)} Adressen gemeldet")
+          PY
