@@ -14,7 +14,7 @@ Website meereskompass.de (statisch, Python-Generator `build.py` + Paket `sk/`, R
 ## Ablauf je Änderung
 1. `npm ci` (einmalig), dann `python3 build.py`
 2. `python3 tools/check.py` (Links, Fotos, Bildnachweise, Daten)
-3. `npm run perf` (Lighthouse Handy, 5 Seitentypen, Median aus 3 Läufen; Budget in `tests/perf.mjs`)
+3. `npm run perf` (Lighthouse Handy, 5 Seitentypen, Median aus 3 Läufen; Budget in `tests/perf.mjs`). Nur die Startseite: `NUR_START=1 node tests/perf.mjs`. Zum Vergleich auch den Stand vor der Änderung messen, die Punkte schwanken um etwa ±3.
 4. Barrierefreiheit hell und dunkel mit axe prüfen (z. B. axe-core per Playwright gegen `dist/`)
 5. Commit als Nico: `git -c user.name="Nico Schober" -c user.email="info@nicoschober.com" commit …`, dann `git push origin main`
 6. Vorschau veröffentlichen
@@ -22,8 +22,10 @@ Website meereskompass.de (statisch, Python-Generator `build.py` + Paket `sk/`, R
 ## Vorschau-Artifact
 - Artifact „Meereskompass Website“: https://claude.ai/artifact/6N5Ft7rGrivLCDRvnM5TDv
 - Inhalt ist `dist/` (ohne `photos_src`), höchstens 256 Dateien pro Aufruf, daher in zwei Teilen veröffentlichen.
+- Ein Artifact fasst höchstens 512 Dateien. Seit Nov. 2026 fehlen dort deshalb robots.txt, sitemap.xml, llms.txt, die Schrift-Lizenztexte und die nicht mehr genutzten x-Fotos. Am einfachsten nur geänderte Dateien hochladen (`git diff --name-only HEAD~1 -- dist`).
 
 ## Nützliches
+- Neue Arten: Eintrag in `data.py` (dazu `CALLS` und `SEA_NOTE`), Foto plus Nachweis in `credits.json`, bei Seevögeln Ruf in `audio/` und `audio.json`. Commons blockt Anfragen aus der Claude-Umgebung oft (HTTP 429), dann über GitHub Actions laden. Die Startseiten-Karten tragen keine Suchtexte, `home.js` lädt sie bei der ersten Suche aus `search.json`.
 - Inhalte: `data.py` (Arten), `data_aussehen.py`, `data_gruppen.py`, `data_helfen.py` (Anleitungen „Tieren helfen“ unter /helfen/).
 - Familienmodus (`?familie`): blendet Werbung aus; Abschnitte mit Klasse `adsec` verschwinden ganz, Blöcke mit `famonly` erscheinen dafür.
 - Fotos: Neben jedem WebP liegt eine AVIF-Fassung (`node tools/make_avif.mjs` nach neuen Fotos). Fotos immer über `img()`/`thumb()` in `sk/components.py` einbinden, die das `<picture>` mit AVIF-Quelle schreiben.
