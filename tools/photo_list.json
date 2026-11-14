@@ -1,1 +1,23 @@
-{}
+{
+ "dreizehenmoewe": ["Dreizehenmöwe", "Black-legged kittiwake"],
+ "brandseeschwalbe": ["Brandseeschwalbe", "Sandwich tern"],
+ "rotschenkel": ["Rotschenkel", "Common redshank"],
+ "grosser-brachvogel": ["Großer Brachvogel", "Eurasian curlew"],
+ "knutt": ["Knutt", "Red knot"],
+ "eisente": ["Eisente", "Long-tailed duck"],
+ "strahlenkoerbchen": ["Strahlenkörbchen", "Mactra stultorum"],
+ "bohrmuschel": ["Amerikanische Bohrmuschel", "Petricolaria pholadiformis"],
+ "islandmuschel": ["Islandmuschel", "Arctica islandica"],
+ "wattschnecke": ["Gemeine Wattschnecke", "Peringia ulvae"],
+ "purpurschnecke": ["Nordische Purpurschnecke", "Dog whelk"],
+ "meerwalnuss": ["Meerwalnuss", "Mnemiopsis"],
+ "taschenkrebs": ["Taschenkrebs", "Cancer pagurus"],
+ "strandfloh": ["Strandfloh", "Talitrus saltator"],
+ "baeumchenroehrenwurm": ["Bäumchenröhrenwurm", "Lanice conchilega"],
+ "strandseeigel": ["Strandseeigel", "Psammechinus miliaris"],
+ "schlangenstern": ["Gewöhnlicher Schlangenstern", "Ophiura ophiura"],
+ "zuckertang": ["Zuckertang", "Saccharina latissima"],
+ "knotentang": ["Knotentang", "Ascophyllum nodosum"],
+ "wellhorn-laich": ["Wellhornschnecke", "Common whelk"],
+ "blaettermoostierchen": ["Blättermoostierchen", "Flustra foliacea"]
+}

@@ -1,6 +1,6 @@
 # Meereskompass
 
-> Seevögel, Robben, Wale und Delfine an Nord- und Ostsee erkennen, dazu Quallen, Muscheln und andere Strandfunde: 55 Steckbriefe mit Foto, Merkmalen, Vorkommen in Nordsee und Ostsee und im Jahresverlauf, Rufe der Seevögel zum Anhören und 17 Vergleiche ähnlicher Arten. Privates, unabhängiges Angebot von Nico Schober aus Bremen. Fotos und Rufaufnahmen von Wikimedia Commons unter freien Lizenzen.
+> Seevögel, Robben, Wale und Delfine an Nord- und Ostsee erkennen, dazu Quallen, Muscheln und andere Strandfunde: 80 Steckbriefe mit Foto, Merkmalen, Vorkommen in Nordsee und Ostsee und im Jahresverlauf, Rufe der Seevögel zum Anhören und 17 Vergleiche ähnlicher Arten. Privates, unabhängiges Angebot von Nico Schober aus Bremen. Fotos und Rufaufnahmen von Wikimedia Commons unter freien Lizenzen.
 
 Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte für die deutsche Küste.
 
@@ -50,59 +50,84 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 
 ## Arten
 - [Alpenstrandläufer (Calidris alpina)](https://meereskompass.de/arten/alpenstrandlaeufer/): Der häufigste Watvogel im Wattenmeer, mit leicht gebogenem Schnabel. Im Sommer trägt er einen schwarzen Bauchfleck.
+- [Amerikanische Bohrmuschel (Petricolaria pholadiformis)](https://meereskompass.de/arten/bohrmuschel/): Längliche, weiße Muschel mit kräftigen Rippen und kleinen Zähnchen vorn, die an einen Flügel erinnert.
 - [Amerikanische Schwertmuschel (Ensis leei)](https://meereskompass.de/arten/schwertmuschel/): Lange, schmale Muschel, die aussieht wie ein altes Rasiermesser.
 - [Austernfischer (Haematopus ostralegus)](https://meereskompass.de/arten/austernfischer/): Schwarz-weißer Watvogel mit leuchtend orangerotem Schnabel und lautem, schrillem Ruf.
 - [Baltische Plattmuschel (Limecola balthica)](https://meereskompass.de/arten/plattmuschel/): Kleine, glatte, rundliche Muschel in Rosa, Gelb, Weiß oder Orange.
 - [Basstölpel (Morus bassanus)](https://meereskompass.de/arten/basstoelpel/): Großer weißer Seevogel mit schwarzen Flügelspitzen und gelblichem Kopf, der sich wie ein Pfeil ins Meer stürzt.
+- [Bäumchenröhrenwurm (Lanice conchilega)](https://meereskompass.de/arten/baeumchenroehrenwurm/): Wurm, der in einer Röhre aus Sandkörnchen lebt. Oben ragt ein ausgefranstes Bäumchen aus dem Watt.
 - [Bernstein (fossiles Baumharz)](https://meereskompass.de/arten/bernstein/): Goldgelbes bis braunes, sehr leichtes Harz aus Wäldern, die vor rund 40 Millionen Jahren wuchsen.
 - [Blasentang (Fucus vesiculosus)](https://meereskompass.de/arten/blasentang/): Olivbrauner Tang mit paarigen Luftblasen, die beim Drücken knallen.
+- [Blättermoostierchen (Flustra foliacea)](https://meereskompass.de/arten/blaettermoostierchen/): Sieht aus wie ein hellbrauner Tang mit flachen Lappen, ist aber eine Kolonie aus winzigen Tieren und riecht nach Zitrone.
 - [Blaue Nesselqualle (Cyanea lamarckii)](https://meereskompass.de/arten/blaue-nesselqualle/): Bläuliche bis violette Qualle mit einem Vorhang aus feinen Tentakeln, die kleine Verwandte der Feuerqualle.
 - [Brandgans (Tadorna tadorna)](https://meereskompass.de/arten/brandgans/): Bunte Halbgans: weiß mit rostbraunem Brustband, dunkelgrünem Kopf und leuchtend rotem Schnabel.
+- [Brandseeschwalbe (Thalasseus sandvicensis)](https://meereskompass.de/arten/brandseeschwalbe/): Große, sehr helle Seeschwalbe mit zotteliger schwarzer Haube und schwarzem Schnabel mit gelber Spitze.
 - [Buckelwal (Megaptera novaeangliae)](https://meereskompass.de/arten/buckelwal/): Großer Bartenwal mit sehr langen, weißen Brustflossen, der beim Abtauchen oft die Schwanzflosse zeigt.
 - [Donnerkeil (Belemnit) (Belemnitida, fossil)](https://meereskompass.de/arten/donnerkeil/): Spitze, patronenförmige Versteinerung aus der Urzeit, der Rest eines ausgestorbenen Tintenfischs.
+- [Dreizehenmöwe (Rissa tridactyla)](https://meereskompass.de/arten/dreizehenmoewe/): Zierliche Hochseemöwe mit gelbem Schnabel ohne Fleck, schwarzen Beinen und Flügelspitzen wie in Tinte getaucht.
 - [Eiderente (Somateria mollissima)](https://meereskompass.de/arten/eiderente/): Große, schwere Meeresente. Das Männchen ist schwarz-weiß mit grünem Nacken, das Weibchen braun gebändert.
 - [Einsiedlerkrebs (Pagurus bernhardus)](https://meereskompass.de/arten/einsiedlerkrebs/): Krebs mit weichem Hinterleib, der in einem leeren Schneckenhaus wohnt und es mit sich herumträgt.
+- [Eisente (Clangula hyemalis)](https://meereskompass.de/arten/eisente/): Kleine Meeresente, im Winter auffällig weiß mit dunklen Flecken; das Männchen hat lange, spitze Schwanzfedern.
 - [Feuerqualle (Cyanea capillata)](https://meereskompass.de/arten/feuerqualle/): Große, gelbrote Qualle mit einem dichten Vorhang aus langen, feinen Tentakeln. Auch Gelbe Haarqualle genannt.
 - [Flussseeschwalbe (Sterna hirundo)](https://meereskompass.de/arten/flussseeschwalbe/): Schlanker, weißer Seevogel mit schwarzer Kappe, rotem Schnabel und tief gegabeltem Schwanz.
+- [Gemeine Napfschnecke (Patella vulgata)](https://meereskompass.de/arten/napfschnecke/): Kegelförmige Schnecke wie ein kleiner Hut, die sich fest an Felsen saugt.
+- [Gemeine Schwimmkrabbe (Liocarcinus holsatus)](https://meereskompass.de/arten/schwimmkrabbe/): Mittelgroße graue Krabbe, deren letztes Beinpaar zu flachen Paddeln geformt ist.
 - [Gemeine Strandschnecke (Littorina littorea)](https://meereskompass.de/arten/strandschnecke/): Kleine, kegelförmige Schnecke mit dunkler, fein gestreifter Schale.
+- [Gemeine Wattschnecke (Peringia ulvae)](https://meereskompass.de/arten/wattschnecke/): Winzige, spitze, braune Schnecke, die bei Ebbe in riesiger Zahl auf dem Watt sitzt.
 - [Gemeiner Seestern (Asterias rubens)](https://meereskompass.de/arten/seestern/): Orange bis rotbrauner Seestern mit fünf Armen und vielen kleinen Füßchen auf der Unterseite.
+- [Gewöhnlicher Schlangenstern (Ophiura ophiura)](https://meereskompass.de/arten/schlangenstern/): Seestern mit kleiner runder Mittelscheibe und fünf dünnen, biegsamen Armen.
 - [Gewöhnliches Seegras (Zostera marina)](https://meereskompass.de/arten/seegras/): Grasähnliche Meerespflanze mit langen, schmalen Blättern, die im Flachwasser Wiesen bildet.
+- [Großer Brachvogel (Numenius arquata)](https://meereskompass.de/arten/grosser-brachvogel/): Größter Watvogel Europas, braun gesprenkelt, mit sehr langem, nach unten gebogenem Schnabel.
 - [Großer Tümmler (Tursiops truncatus)](https://meereskompass.de/arten/grosser-tuemmler/): Der bekannte „Flipper“-Delfin: grau und kräftig, mit kurzer, deutlich abgesetzter Schnauze.
 - [Heringsmöwe (Larus fuscus)](https://meereskompass.de/arten/heringsmoewe/): So groß wie die Silbermöwe, aber mit schiefergrauem Rücken und leuchtend gelben Beinen.
 - [Herzigel (Echinocardium cordatum)](https://meereskompass.de/arten/herzigel/): Seeigel mit herzförmigem, sehr dünnem Gehäuse. Am Strand findest du meist nur die weiße Schale ohne Stacheln.
 - [Herzmuschel (Cerastoderma edule)](https://meereskompass.de/arten/herzmuschel/): Rundliche, gerippte Muschel. Zwei Hälften zusammen sehen von der Seite aus wie ein Herz.
 - [Hühnergott (Feuerstein mit Loch)](https://meereskompass.de/arten/huehnergott/): Ein Feuerstein mit einem natürlichen Loch. Er gilt an der Küste als Glücksbringer.
+- [Islandmuschel (Arctica islandica)](https://meereskompass.de/arten/islandmuschel/): Große, dickschalige, runde Muschel mit dunkelbrauner bis schwarzer Haut auf der Schale.
 - [Katzenhai-Ei (Scyliorhinus canicula)](https://meereskompass.de/arten/katzenhai-ei/): Gelbbraune, durchscheinende Eikapsel mit langen, gekringelten Ranken an den Ecken. Die Eihülle des Kleingefleckten Katzenhais.
 - [Kegelrobbe (Halichoerus grypus)](https://meereskompass.de/arten/kegelrobbe/): Größtes Raubtier Deutschlands, mit langer, gerader Schnauze und weißen Jungen im Winter.
+- [Knutt (Calidris canutus)](https://meereskompass.de/arten/knutt/): Rundlicher, kurzbeiniger Watvogel: im Winter schlicht grau, im Frühjahr mit rostroter Brust.
 - [Kompassqualle (Chrysaora hysoscella)](https://meereskompass.de/arten/kompassqualle/): Qualle mit braunen, V-förmigen Streifen auf dem Schirm, die wie eine Kompassrose aussehen.
 - [Kormoran (Phalacrocorax carbo)](https://meereskompass.de/arten/kormoran/): Großer, dunkler Wasservogel, der oft mit ausgebreiteten Flügeln auf Buhnen und Pfählen sitzt.
+- [Küstenseeschwalbe (Sterna paradisaea)](https://meereskompass.de/arten/kuestenseeschwalbe/): Zierliche, hellgraue Seeschwalbe mit schwarzer Kappe, ganz rotem Schnabel und langen Schwanzspießen.
 - [Lachmöwe (Chroicocephalus ridibundus)](https://meereskompass.de/arten/lachmoewe/): Kleine, wendige Möwe mit dunkelrotem Schnabel. Im Sommer trägt sie eine schokoladenbraune Kappe.
 - [Lungenqualle (Rhizostoma octopus)](https://meereskompass.de/arten/lungenqualle/): Sehr große, feste Qualle mit bläulichem Rand und dicken, krausen Mundarmen statt Tentakeln.
 - [Mantelmöwe (Larus marinus)](https://meereskompass.de/arten/mantelmoewe/): Die größte Möwe der Welt, mit fast schwarzem Rücken und mächtigem Schnabel.
 - [Meersalat (Ulva lactuca)](https://meereskompass.de/arten/meersalat/): Leuchtend grüne, hauchdünne Alge, die aussieht wie ein Salatblatt.
+- [Meerwalnuss (Mnemiopsis leidyi)](https://meereskompass.de/arten/meerwalnuss/): Durchsichtige, walnussförmige Rippenqualle mit zwei großen Lappen und schillernden Wimpernreihen.
 - [Miesmuschel (Mytilus edulis)](https://meereskompass.de/arten/miesmuschel/): Längliche, blauschwarze Muschel, die in dichten Bänken an Steinen, Buhnen und im Watt sitzt.
 - [Nixentäschchen (Rochen-Ei) (Rajidae)](https://meereskompass.de/arten/nixentaeschchen/): Schwarze, rechteckige Eikapsel mit vier Hörnchen. Darin ist ein junger Rochen herangewachsen.
 - [Nordseegarnele (Crangon crangon)](https://meereskompass.de/arten/nordseegarnele/): Kleine, sandfarbene Garnele, die sich blitzschnell im Sand eingräbt. Auf dem Teller heißt sie Krabbe.
 - [Ohrenqualle (Aurelia aurita)](https://meereskompass.de/arten/ohrenqualle/): Durchsichtige, flache Qualle mit vier ringförmigen Organen in der Mitte, die wie Ohren aussehen.
 - [Pantoffelschnecke (Crepidula fornicata)](https://meereskompass.de/arten/pantoffelschnecke/): Flache Schnecke, die innen ein kleines Querbrett hat und dadurch aussieht wie ein Pantoffel.
 - [Pazifische Auster (Magallana gigas)](https://meereskompass.de/arten/auster/): Große, unregelmäßig geformte Muschel mit blättrig-schuppiger, grauer Schale.
+- [Pfuhlschnepfe (Limosa lapponica)](https://meereskompass.de/arten/pfuhlschnepfe/): Großer Watvogel mit langem, leicht nach oben gebogenem Schnabel.
 - [Pottwal (Physeter macrocephalus)](https://meereskompass.de/arten/pottwal/): Riesiger Zahnwal mit kastenförmigem Kopf, der in der flachen Nordsee nur als Irrgast auftaucht.
 - [Ringelgans (Branta bernicla)](https://meereskompass.de/arten/ringelgans/): Kleine, dunkle Meeresgans mit schwarzem Kopf und Hals und einem schmalen weißen Halsring.
+- [Rotschenkel (Tringa totanus)](https://meereskompass.de/arten/rotschenkel/): Graubrauner Watvogel mit leuchtend roten Beinen und rotem Schnabelansatz, laut und schreckhaft.
 - [Säbelschnäbler (Recurvirostra avosetta)](https://meereskompass.de/arten/saebelschnaebler/): Eleganter schwarz-weißer Watvogel mit langem, nach oben gebogenem Schnabel.
+- [Sägetang (Fucus serratus)](https://meereskompass.de/arten/saegetang/): Brauntang ohne Luftblasen, mit fein gesägtem Rand und deutlicher Mittelrippe.
 - [Sanderling (Calidris alba)](https://meereskompass.de/arten/sanderling/): Kleiner, heller Strandläufer, der wie ein Uhrwerk vor den auslaufenden Wellen hin und her rennt.
 - [Sandklaffmuschel (Mya arenaria)](https://meereskompass.de/arten/sandklaffmuschel/): Große, ovale, kreideweiße Muschel, deren Hälften hinten nicht ganz schließen.
 - [Schweinswal (Phocoena phocoena)](https://meereskompass.de/arten/schweinswal/): Der einzige heimische Wal. Klein, scheu und mit dreieckiger Rückenflosse.
 - [Seehund (Phoca vitulina)](https://meereskompass.de/arten/seehund/): Häufigste Robbe an der Nordsee mit rundem Kopf, kurzer Schnauze und großen dunklen Augen.
+- [Seemannsseife (Laich der Wellhornschnecke) (Eier von Buccinum undatum)](https://meereskompass.de/arten/seemannsseife/): Hellgelber, schwammiger Ballen aus vielen kleinen, leeren Eikapseln, der beim Anfassen raschelt.
 - [Seepocke (Semibalanus balanoides)](https://meereskompass.de/arten/seepocke/): Kleiner weißer Kegel aus Kalkplatten auf Steinen und Muscheln. Darin wohnt ein Krebs, der auf dem Kopf steht.
 - [Seestachelbeere (Pleurobrachia pileus)](https://meereskompass.de/arten/seestachelbeere/): Kleine, glasklare Kugel mit acht Rippen. Eine Rippenqualle, keine echte Qualle, und sie brennt nicht.
 - [Sepiaschale (Sepia officinalis)](https://meereskompass.de/arten/sepiaschale/): Weiße, ovale und sehr leichte Platte. Es ist die innere Schale eines Tintenfischs, des Gemeinen Tintenfischs.
 - [Silbermöwe (Larus argentatus)](https://meereskompass.de/arten/silbermoewe/): Die typische große Möwe an Nord- und Ostsee: hellgrauer Rücken und gelber Schnabel mit rotem Fleck.
+- [Strahlenkörbchen (Mactra stultorum)](https://meereskompass.de/arten/strahlenkoerbchen/): Dreieckig-ovale, dünne Muschel, cremeweiß mit hellbraunen Strahlen vom Wirbel zum Rand.
+- [Strandfloh (Talitrus saltator)](https://meereskompass.de/arten/strandfloh/): Kleiner, grau-beiger Flohkrebs, der unter angespültem Tang lebt und weit springen kann.
 - [Strandkrabbe (Carcinus maenas)](https://meereskompass.de/arten/strandkrabbe/): Häufigste Krabbe an unseren Küsten, grünlich bis braun, mit fünf Zacken an jeder Panzerseite.
+- [Strandseeigel (Psammechinus miliaris)](https://meereskompass.de/arten/strandseeigel/): Kleiner Seeigel mit kurzen, grünlichen bis hellen Stacheln, deren Spitzen violett sind.
 - [Sturmmöwe (Larus canus)](https://meereskompass.de/arten/sturmmoewe/): Mittelgroße Möwe mit freundlichem Gesicht: dünner, grüngelber Schnabel ohne roten Fleck und dunkles Auge.
+- [Taschenkrebs (Cancer pagurus)](https://meereskompass.de/arten/taschenkrebs/): Großer, rotbrauner Krebs mit ovalem Panzer, dessen Rand wie eine Pastetenkruste gekerbt ist.
+- [Tordalk (Alca torda)](https://meereskompass.de/arten/tordalk/): Schwarz-weißer Alkenvogel mit hohem, seitlich flachem Schnabel und feinem weißem Strich darauf.
 - [Trottellumme (Uria aalge)](https://meereskompass.de/arten/trottellumme/): Schwarz-weißer Seevogel, der aussieht wie ein kleiner Pinguin und dicht gedrängt auf schmalen Felsbändern brütet.
 - [Wattwurm (Arenicola marina)](https://meereskompass.de/arten/wattwurm/): Großer Wurm, der in einer U-förmigen Röhre im Watt lebt. Bekannt sind seine geringelten Sandhaufen.
 - [Weißschnauzendelfin (Lagenorhynchus albirostris)](https://meereskompass.de/arten/weissschnauzendelfin/): Kräftiger Delfin mit kurzer, heller Schnauze und großen weißen und grauen Flecken an den Flanken.
 - [Wellhornschnecke (Buccinum undatum)](https://meereskompass.de/arten/wellhornschnecke/): Große Meeresschnecke mit welligen Rippen. Ihre Laichballen sehen aus wie ein gelber Schaumstoffklumpen.
+- [Zuckertang (Saccharina latissima)](https://meereskompass.de/arten/zuckertang/): Langes, bandförmiges, gelbbraunes Blatt mit gewelltem Rand und einem kurzen Stiel mit Haftkralle.
 - [Zwergwal (Balaenoptera acutorostrata)](https://meereskompass.de/arten/zwergwal/): Der kleinste Bartenwal der Nordsee: schlank, mit spitzem Kopf und einem weißen Band auf den Brustflossen.
 
 ## Vergleiche

@@ -10,9 +10,10 @@ BIRD_PRIO = ["eiderente", "basstoelpel", "trottellumme", "austernfischer", "saeb
 
 def birdband(R):
     birds = sorted([x for x in SPECIES if x["grp"] == "Seevögel"], key=lambda x: BIRD_PRIO.index(x["k"]) if x["k"] in BIRD_PRIO else 99)
+    # Im Band nur die bekanntesten Seevögel (Ladezeit der Startseite), alle übrigen über „Alle Seevögel in der Liste“
     tiles = "".join(
         f'<li data-k="{x["k"]}" data-act="{acts_attr(x["act"])}"><a href="{R}arten/{x["k"]}/index.html">{thumb(R, x["k"])}'
-        f'<span class="bt-n">{esc(x["n"])}</span><span class="bt-s">{esc(x["sz"])}{" · nur Nordsee" if x["act"] == ["nord"] else ""}</span></a>{play_button(R, x["k"], x["n"], "play-sm")}{cred(x["k"])}</li>' for x in birds)
+        f'<span class="bt-n">{esc(x["n"])}</span><span class="bt-s">{esc(x["sz"])}{" · nur Nordsee" if x["act"] == ["nord"] else ""}</span></a>{play_button(R, x["k"], x["n"], "play-sm")}{cred(x["k"])}</li>' for x in birds[:len(BIRD_PRIO)])
     return (f'<section class="birdband" aria-labelledby="bb-h"> <div class="wrap"> <div class="bb-head"><div><p class="kicker">{ICON["bird"]}Seevögel</p>'
             f'<h2 id="bb-h">Seevögel an der Küste</h2><p class="bb-sub">Möwen, Watvögel, Meeresenten und die Felsenbrüter von Helgoland: {counts(birds)} Arten, die dir an Nord- und Ostsee begegnen.</p></div>'
             f'<div class="bb-links"><button type="button" class="btn" data-hgrp="Seevögel">Alle Seevögel in der Liste</button><a class="btn ghost" href="{R}unterscheiden/index.html#voegel">Möwen unterscheiden</a></div></div>'
@@ -52,7 +53,7 @@ def build_home():
             '<fieldset><legend>Außerdem</legend><div class="fchips"><button class="chip" type="button" data-g="flag" data-v="now" aria-pressed="false">Jetzt im <span data-now-name>November</span> zu finden</button>'
             '</div></fieldset>')
     # Die Karten beginnen unter Kopfbereich und Filterleiste: kein Foto sofort laden, damit Text, Schriften und das große Foto oben Vorrang haben
-    cards = "".join(card(R, s, i, eager=0) for i, s in enumerate(sorted(SPECIES, key=skey)))
+    cards = "".join(card(R, s, i, eager=0, lean=True) for i, s in enumerate(sorted(SPECIES, key=skey)))
     NOWM_BUILD = 11
     # Reihenfolge für Tier des Monats und Karussell: auffällige Funde zuerst
     PRIO = BIRD_PRIO + MAMMAL_PRIO + ["bernstein", "kompassqualle", "feuerqualle", "ohrenqualle", "lungenqualle", "seestern",

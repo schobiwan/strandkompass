@@ -73,7 +73,7 @@ for k in keys:
 
 # Vogelrufe: jeder Seevogel hat Beschreibung und Aufnahme
 # Ohne freie Aufnahme auf Commons (Stand Nov. 2026): nur Beschreibung
-NO_AUDIO = {"sanderling"}
+NO_AUDIO = {"sanderling", "knutt"}
 audio_path = os.path.join(ROOT, "audio.json")
 audio = json.load(open(audio_path, encoding="utf-8")) if os.path.exists(audio_path) else {}
 for s in SPECIES:

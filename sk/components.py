@@ -107,12 +107,13 @@ def search_json():
         _SEARCH_JSON = json.dumps(rows, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return _SEARCH_JSON
 
-def card(R, s, i=0, eager=6):
-    """Fundkarte. eager: so viele erste Fotos sofort laden; 0, wenn die Karten erst unter dem ersten Bildschirm beginnen (Startseite)."""
+def card(R, s, i=0, eager=6, lean=False):
+    """Fundkarte. eager: so viele erste Fotos sofort laden; 0, wenn die Karten erst unter dem ersten Bildschirm beginnen (Startseite).
+    lean: ohne Suchtexte in data-Attributen (Startseite: home.js lädt sie bei der ersten Suche aus search.json, das hält die Seite klein)."""
     acts = "".join(f'<span class="act" title="{ACTS[a]}">{act_svg(a)}<span class="sr-only">{ACTS[a]}</span></span>' for a in s["act"])
     names, alt, marks = search_fields(s)
-    return (f'<li class="bird" id="{s["k"]}" style="--i:{i}" data-key="{s["k"]}" data-name="{esc(s["n"])}" data-search="{esc(names)}" '
-            f'data-alt="{esc(alt)}" data-marks="{esc("|".join(marks))}" '
+    stxt = "" if lean else f'data-search="{esc(names)}" data-alt="{esc(alt)}" data-marks="{esc("|".join(marks))}" '
+    return (f'<li class="bird" id="{s["k"]}" style="--i:{i}" data-key="{s["k"]}" data-name="{esc(s["n"])}" {stxt}'
             f'data-grp="{esc(s["grp"])}" data-act="{"|".join(s["act"])}" data-hab="{esc("|".join(s["hab"]))}" data-size="{s["size"]}" data-mid="{s["mid"]}" '
             f'data-present="{",".join(map(str, s["p"]))}" data-peak="{",".join(map(str, s["h"]))}"> '
             f'{img(R, s["k"], "", eager=i < eager)}{cred(s["k"])} <div class="txt"> <h3><a class="open" href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a></h3> '
@@ -200,7 +201,8 @@ def callbox(R, s):
 def burn_table(R):
     """Tabelle „Welche Quallen brennen?“ (Sicher am Strand und Gruppenseite Quallen)."""
     qrows = ""
-    for k, burn, lvl in [("seestachelbeere", "nie, Rippenquallen haben keine Nesselzellen", "g"), ("ohrenqualle", "kaum spürbar", "g"),
+    for k, burn, lvl in [("seestachelbeere", "nie, Rippenquallen haben keine Nesselzellen", "g"), ("meerwalnuss", "nie, ebenfalls eine Rippenqualle", "g"),
+                         ("ohrenqualle", "kaum spürbar", "g"),
                          ("lungenqualle", "schwach, kann auf empfindlicher Haut jucken", "y"), ("blaue-nesselqualle", "spürbar", "o"),
                          ("kompassqualle", "deutlich, wie Brennnesseln", "o"), ("feuerqualle", "stark, auch abgerissene Tentakel", "r")]:
         qrows += f'<tr><th scope="row"><a href="{R}arten/{k}/index.html">{esc(BY[k]["n"])}</a></th><td><span class="burn burn-{lvl}" aria-hidden="true"></span>{esc(burn)}</td></tr>'

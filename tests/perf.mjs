@@ -11,7 +11,7 @@ import path from 'node:path';
 
 /* Budget je Seite: Datenmenge höchstens (KB), rund 10 % über dem Stand vom 13.11.2026 (ohne Kompression gemessen).
    Die Punkte schwanken in dieser Umgebung um etwa ±3, daher liegt die Grenze etwas unter dem gemessenen Median. */
-const PAGES = [
+const PAGES = process.env.NUR_START ? [{ path: '', name: 'Startseite', kb: 920 }] : [
   { path: '', name: 'Startseite', kb: 920 },
   { path: 'arten/seehund/', name: 'Artseite', kb: 270 },
   { path: 'arten/robben/', name: 'Gruppe', kb: 260 },

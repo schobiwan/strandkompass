@@ -1,6 +1,6 @@
 // Startseite: Suche, Filter und Sortierung
 import { getSea } from "./app.js";
-import { $, $$, nums, escapeHtml, NOW, reduced, setPressed, focusEl } from "./util.js";
+import { $, $$, nums, escapeHtml, NOW, reduced, setPressed, focusEl, href } from "./util.js";
 import { prepare, rank, suggest } from "./search.js";
 
 const grid = $("grid");
@@ -10,7 +10,8 @@ const animals = $$("#grid > li.bird").map((li) => ({
   li,
   key: li.dataset.key,
   name: li.dataset.name,
-  search: prepare(li.dataset.search, li.dataset.alt || "", (li.dataset.marks || "").split("|")),
+  // Bis search.json geladen ist, nur nach dem Namen suchen (die Karten tragen keine Suchtexte, das hält die Startseite klein)
+  search: li.dataset.search ? prepare(li.dataset.search, li.dataset.alt || "", (li.dataset.marks || "").split("|")) : prepare(li.dataset.name, "", []),
   score: 0,
   grp: li.dataset.grp,
   act: li.dataset.act.split("|"),
@@ -58,7 +59,19 @@ const grpRank = (a) => GRP_RANK[a.grp] ?? 3;
 let expanded = false;
 const moreBox = $("gridmore"), moreBtn = $("more-btn");
 
+// Suchtexte (Namen, Doppelgänger, Merkmale) erst bei der ersten Suche laden, danach Liste neu zeichnen
+let texts = null;
+function loadTexts() {
+  if (texts || animals.every((a) => a.li.dataset.search)) return;
+  texts = fetch(href("search.json")).then((r) => r.json()).then((rows) => {
+    const m = new Map(rows.map(([, key, names, alt, marks]) => [key, prepare(names, alt, marks.split("|"))]));
+    animals.forEach((a) => { const e = m.get(a.key); if (e) a.search = e; });
+    render();
+  }).catch(() => { texts = null; }); // offline: bei der nächsten Eingabe erneut versuchen
+}
+
 function render() {
+  if (state.q.trim()) loadTexts();
   let list = animals.filter((a) => state.matches(a));
   // Mit Suchbegriff zuerst nach Treffergüte: Name vor Doppelgänger vor Aussehen
   const byScore = (a, b) => (state.q.trim() ? a.score - b.score : 0);
