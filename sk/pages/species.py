@@ -24,7 +24,7 @@ def build_species(s):
     habs = " · ".join(esc(h) for h in s["hab"])
     # Meer, Ruf, Fundort und Brennen stehen schon oben (Marken, Ruf-Kasten, Kurz gesagt), deshalb nicht noch einmal im Steckbrief
     facts = "".join(f"<dt>{esc(a)}</dt><dd>{esc(b)}</dd>" for a, b in s["facts"] if not (a == "Ruf" and s.get("call")) and a not in ("Wo zu finden", "Brennt sie?"))
-    life = "".join(f'<details class="fold" open data-fold><summary><h3>{esc(a)}</h3></summary><p>{esc(b)}</p></details>' for a, b in s["life"])
+    life = "".join(f'<details class="fold" open data-fold><summary><h3>{esc(a)}</h3></summary><p>{esc(b)}</p></details>' for a, b in s["life"] + DEEP.get(s["k"], {}).get("life", []))
     peak = [MONTHS[m-1] for m in s["h"]]
     pl = peak[0] if len(peak) == 1 else ", ".join(peak[:-1]) + " und " + peak[-1]
     # Der Satz zur Jahreszeit (hl) steht schon in der Einleitung, hier nur die Monate

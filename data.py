@@ -840,7 +840,7 @@ for _k, _e in EXT.items():
     _e["call"] = CALLS.get(_k)
 
 # Vertiefung einzelner Artseiten: eigener Titel und Beschreibung, häufige Fragen (auch als FAQPage-Daten), Quellen
-# und eigenes Änderungsdatum. Für Seiten, die in der Suche schon Einblendungen bekommen und mehr Tiefe brauchen.
+# zusätzliche Abschnitte unter „Lebensweise“ (life) und eigenes Änderungsdatum. Für Seiten, die in der Suche schon Einblendungen bekommen und mehr Tiefe brauchen.
 DEEP = {
  "grosser-tuemmler": {
   "updated": "2026-11-14",
@@ -860,6 +860,63 @@ DEEP = {
    ("Rote-Liste-Zentrum", "https://www.rote-liste-zentrum.de/detail/pdf/54019"),
    ("DDA: Zählflüge Nordsee 2026", "https://www.dda-web.de/downloads/marbird/surveyberichte/2026_05_Flugbericht_Nordsee.pdf"),
    ("Deutsches Meeresmuseum: Sichtung melden", "https://www.deutsches-meeresmuseum.de/wissenschaft/sichtungen/sichtung-melden"),
+  ],
+ },
+ "katzenhai-ei": {
+  "updated": "2026-11-14",
+  "title": "Katzenhai-Ei am Strand: Eikapsel erkennen und melden",
+  "desc": "Katzenhai-Ei gefunden? So erkennst du die Eikapsel mit den langen Ranken, unterscheidest sie vom Nixentäschchen und weißt, was du mit dem Fund tun kannst.",
+  "life": [["Gibt es Haie in der Nordsee?", "Ja. In den küstennahen Gewässern der deutschen Nordsee kommen drei kleine Haiarten vor: der Kleingefleckte Katzenhai, der Großgefleckte Katzenhai und der Glatthai. Ab und zu wird sogar ein lebender Katzenhai im Watt gefunden."]],
+  "faq": [
+   ("Was ist das für ein Ei mit Ranken am Strand?", "Eine gelbbraune, längliche Kapsel mit langen, gekringelten Ranken an den Ecken ist die Eihülle eines Katzenhais. Eine schwarze, fast rechteckige Kapsel mit kurzen Hörnchen stammt von einem Rochen und heißt Nixentäschchen."),
+   ("Gibt es Haie in der Nordsee?", "Ja, drei kleine Arten leben in den küstennahen Gewässern der deutschen Nordsee: Kleingefleckter Katzenhai, Großgefleckter Katzenhai und Glatthai."),
+   ("Ist der Katzenhai gefährlich?", "Nein. Der Kleingefleckte Katzenhai ist klein und für Menschen ungefährlich."),
+   ("Ist in der Kapsel noch ein Hai?", "Angespülte Kapseln sind oft leer und braun. Ist die Kapsel noch fest und prall, kann ein Junges darin sein. Dann gehört sie zurück ins tiefere Wasser."),
+   ("Wo kann ich ein Katzenhai-Ei melden?", "Strandfunde von der Nordsee kannst du beim BeachExplorer melden. Dort sind schon über 200 Funde von Eikapseln des Kleingefleckten Katzenhais eingetragen."),
+  ],
+  "sources": [
+   ("BeachExplorer: Eikapsel Kleingefleckter Katzenhai", "https://www.beachexplorer.org/en/species/scyliorhinus-canicula-eggs/description"),
+   ("Bericht mit Angaben des Multimar Wattforums", "https://www.leinetal24.de/niedersachsen/hai-nordsee-katzenhai-borkum-toenning-ausgewildert-aquarium-kueste-schleswig-holstein-91693096.html"),
+  ],
+ },
+ "nixentaeschchen": {
+  "updated": "2026-11-14",
+  "title": "Nixentäschchen: Rochen-Ei am Strand erkennen und melden",
+  "desc": "Nixentäschchen gefunden? Die schwarze Eikapsel mit vier Hörnchen stammt von einem Rochen. Merkmale, Herkunft und Unterschied zum Katzenhai-Ei.",
+  "life": [["Welche Rochen-Eier findet man?", "An der Nordsee werden vor allem Kapseln von Nagelrochen und Sternrochen gemeldet, andere Arten sind sehr selten. Die Kapsel des Nagelrochens hat kurze Hörnchen und breite Seitenränder."],
+           ["Warum sind Rochen selten geworden?", "Der Nagelrochen wurde vor rund hundert Jahren in großen Mengen aus der deutschen Nordsee gefischt. Durch Überfischung ist er im Wattenmeer fast verschwunden. Er vermehrt sich langsam: Ein Weibchen wird erst mit etwa acht Jahren geschlechtsreif. Leere Kapseln an unseren Stränden wurden oft aus Westeuropa herangetrieben."]],
+  "faq": [
+   ("Was ist ein Nixentäschchen?", "Die Eikapsel eines Rochens: schwarz oder braun, ledrig, fast rechteckig, mit einem Hörnchen an jeder Ecke."),
+   ("Von welchem Tier stammt das Nixentäschchen?", "Von Rochen. An der Nordsee werden vor allem Kapseln von Nagelrochen und Sternrochen gemeldet."),
+   ("Darf ich ein Nixentäschchen mitnehmen?", "Leere Kapseln kannst du mitnehmen. Eine geschlossene, feste Kapsel kann noch ein Junges enthalten und gehört zurück ins Meer."),
+   ("Was ist der Unterschied zum Katzenhai-Ei?", "Das Rochen-Ei ist schwarz bis dunkelbraun, fast rechteckig und hat vier kurze Hörnchen. Das Katzenhai-Ei ist gelbbraun, schmal und hat lange, gekringelte Ranken."),
+   ("Gibt es Nixentäschchen an der Ostsee?", "An der deutschen Ostsee kaum: Der Nagelrochen ist in der westlichen Ostsee sehr selten."),
+   ("Wo melde ich einen Fund?", "Beim BeachExplorer. Jeder gemeldete Fund hilft zu zeigen, wo Rochen noch vorkommen."),
+  ],
+  "sources": [
+   ("BeachExplorer: Eikapsel Nagelrochen", "https://www.beachexplorer.org/en/species/raja-clavata-eggs/description"),
+   ("Schutzstation Wattenmeer: Nagelrochen", "https://www.schutzstation-wattenmeer.de/wissen/tiere/fische/nagelrochen/"),
+   ("NABU: Steckbrief Nagelrochen", "https://www2014.nabu.de/imperia/md/content/nabude/meeresschutz/160610-nabu-steckbrief-nagelrochen.pdf"),
+   ("WWF: Unterwasserwelt Nordsee und Wattenmeer", "https://mobil.wwf.de/fileadmin/fm-wwf/Publikationen-PDF/Deutschland/WWF-Flyer-Unterwasserwelt-Nordsee-Wattenmeer-2022.pdf"),
+  ],
+ },
+ "blaue-nesselqualle": {
+  "updated": "2026-11-14",
+  "title": "Blaue Nesselqualle: Brennt sie? Erkennen und Erste Hilfe",
+  "desc": "Blaue Nesselqualle (Cyanea lamarckii): bläuliche Qualle der Nordsee, die spürbar brennt. Merkmale, Unterschied zur Feuerqualle und was nach Kontakt hilft.",
+  "life": [["Andere Namen", "Sie heißt auch Blaue Haarqualle oder Blaue Feuerqualle."]],
+  "faq": [
+   ("Brennt die Blaue Nesselqualle?", "Ja. Ihr Nesselgift brennt auf der Haut, meist schwächer als bei der Feuerqualle. Das ist unangenehm, in der Regel aber nicht gefährlich."),
+   ("Was tun nach Kontakt mit einer Nesselqualle?", "Raus aus dem Wasser. Tentakelreste entfernen, denn die meisten Nesselkapseln darin haben sich noch nicht entladen. Die Stelle mit Meerwasser abspülen. Bei Blasen, großflächigen Hautschäden, Übelkeit oder Kreislaufproblemen ärztliche Hilfe holen."),
+   ("Was ist der Unterschied zwischen Blauer und Gelber Nesselqualle?", "Die Gelbe Nesselqualle ist die Feuerqualle: gelb bis rotbraun, größer und stärker nesselnd. Die Blaue Nesselqualle ist bläulich bis violett und kleiner."),
+   ("Welche Quallen brennen an der Nordsee?", "Vor allem drei: Feuerqualle, Blaue Nesselqualle und Kompassqualle. Ohrenquallen sind für Menschen weitgehend harmlos."),
+   ("Ist die Blaue Nesselqualle immer blau?", "Nein. Manche Tiere sind farblos oder blassgelb, ältere werden kräftig blau bis violett."),
+  ],
+  "sources": [
+   ("BeachExplorer: Blaue Nesselqualle", "https://www.beachexplorer.org/en/species/cyanea-lamarcki/description"),
+   ("Apotheken Umschau: Erste Hilfe bei Quallenverletzungen", "https://www.apotheken-umschau.de/mein-koerper/haut-und-haare/erste-hilfe-bei-quallenverletzungen-718077.html"),
+   ("ADAC: Quallenstiche", "https://www.adac.de/gesundheit/krankheiten/quallenstiche/"),
+   ("Spektrum: Interview zu Quallen", "https://www.spektrum.de/news/die-durchsichtigen-ohrenquallen-sind-ungefaehrlich/1753618"),
   ],
  },
 }
