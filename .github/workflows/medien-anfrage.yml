@@ -9,8 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: mkdir -p eingang/fotos && python3 anfrage/fetch.py anfrage/list.json eingang/fotos
-      - run: python3 anfrage/audio.py anfrage/audiolist.json eingang/toene
+      - run: python3 anfrage/extra.py
       - run: |
           git config user.name "github-actions"
           git config user.email "github-actions@users.noreply.github.com"
