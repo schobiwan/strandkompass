@@ -15,8 +15,16 @@ def counts(ss):
 def img(R, key, alt="", eager=False, cls="", sizes="(max-width: 600px) 46vw, 300px"):
     lz = "eager" if eager else "lazy"
     c = f' class="{cls}"' if cls else ""
-    return (f'<img{c} src="{R}photos/{key}.webp" srcset="{R}photos/{key}-400.webp 400w, {R}photos/{key}.webp 720w" sizes="{sizes}" '
-            f'alt="{esc(alt)}" width="720" height="576" loading="{lz}" decoding="async">')
+    # AVIF für Browser, die es können (rund ein Viertel kleiner), sonst WebP; <picture> ist per CSS display:contents
+    return (f'<picture><source type="image/avif" srcset="{R}photos/{key}-400.avif 400w, {R}photos/{key}.avif 720w" sizes="{sizes}">'
+            f'<img{c} src="{R}photos/{key}.webp" srcset="{R}photos/{key}-400.webp 400w, {R}photos/{key}.webp 720w" sizes="{sizes}" '
+            f'alt="{esc(alt)}" width="720" height="576" loading="{lz}" decoding="async"></picture>')
+
+
+def thumb(R, key):
+    """Kleines Kachelbild (nur die 400er Fassung), AVIF mit WebP als Rückfall."""
+    return (f'<picture><source type="image/avif" srcset="{R}photos/{key}-400.avif">'
+            f'<img src="{R}photos/{key}-400.webp" alt="" width="400" height="320" loading="lazy" decoding="async"></picture>')
 
 FAMILY = ("vogelkompass.de", "waldtierkompass.de", "gartentierkompass.de", "meereskompass.de")
 

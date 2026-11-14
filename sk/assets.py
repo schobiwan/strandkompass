@@ -41,7 +41,7 @@ def build_assets():
             shutil.copy(os.path.join(ROOT, "fonts", f), os.path.join(OUT, "fonts", f))
     os.makedirs(os.path.join(OUT, "photos"), exist_ok=True)
     for f in os.listdir(os.path.join(ROOT, "photos")):
-        if f.endswith(".webp"):
+        if f.endswith((".webp", ".avif")):
             shutil.copy(os.path.join(ROOT, "photos", f), os.path.join(OUT, "photos", f))
     if os.path.isdir(os.path.join(ROOT, "audio")):
         shutil.copytree(os.path.join(ROOT, "audio"), os.path.join(OUT, "audio"), dirs_exist_ok=True)

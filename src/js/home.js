@@ -180,6 +180,8 @@ function setupNow() {
   if (top.k !== $("spot-link")?.getAttribute("href")?.split("/")[1]) {
     const im = $("spot-img");
     $("spot-link").href = `arten/${top.k}/`;
+    const so = $("spot-src"); // AVIF-Quelle zuerst, damit der Browser nicht kurz das alte Bild wählt
+    if (so) so.srcset = `photos/${top.k}-400.avif 400w, photos/${top.k}.avif 720w`;
     im.src = `photos/${top.k}.webp`;
     im.srcset = `photos/${top.k}-400.webp 400w, photos/${top.k}.webp 720w`;
     $("spot-name").textContent = top.n;

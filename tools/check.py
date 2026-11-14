@@ -66,6 +66,10 @@ for k in keys:
     for name in (f"{k}.webp", f"{k}-400.webp"):
         if not os.path.exists(os.path.join(ROOT, "photos", name)):
             problems.append(f"Foto fehlt: photos/{name}")
+            continue
+        avif = os.path.join(ROOT, "photos", name[:-5] + ".avif")
+        if not os.path.exists(avif) or os.path.getmtime(avif) < os.path.getmtime(os.path.join(ROOT, "photos", name)):
+            problems.append(f"AVIF fehlt oder ist veraltet: photos/{name[:-5]}.avif (node tools/make_avif.mjs)")
 
 # Vogelrufe: jeder Seevogel hat Beschreibung und Aufnahme
 # Ohne freie Aufnahme auf Commons (Stand Nov. 2026): nur Beschreibung

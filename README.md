@@ -25,7 +25,7 @@ npm run perf            # Leistungsbudget (Lighthouse Handy), muss vor jedem Pus
 | `data_aussehen.py` | Seiten „Nach Aussehen“ (Merkmal → passende Arten) |
 | `data_helfen.py` | Anleitungen „Tieren helfen“ (/helfen/): junge Robbe, Totfund, kranker Seevogel, Strandmüll, Spülsaum mit Kindern, Vögel nicht stören |
 | `credits.json` | Bildnachweise (Urheber, Lizenz, Quelle) je Foto |
-| `photos/` | Fotos als WebP, 720 × 576 und 400 × 320 |
+| `photos/` | Fotos als WebP und AVIF, je 720 × 576 und 400 × 320 |
 | `sk/core.py` | Pfade, Konstanten, Stand der Inhalte, Helfer (Sortierung, Artikel) |
 | `sk/icons.py` | Symbole, Logo, Tonne, Rippelmarken |
 | `sk/layout.py` | Seitengerüst, Navigation, Fuß, Meer-Umschalter |
@@ -64,3 +64,4 @@ Die Fotos kommen von Wikimedia Commons. Ein GitHub-Workflow lädt sie:
 1. Arten in `tools/photo_list.json` eintragen (Wikipedia-Artikel oder `File:Name.jpg`).
 2. Workflow „Fotos laden“ unter *Actions* starten. Das Ergebnis landet im Zweig `fotos-eingang`.
 3. Fotos zuschneiden, nach `photos/` legen und Urheber, Lizenz und Quelle in `credits.json` eintragen.
+4. `node tools/make_avif.mjs` erzeugt die AVIF-Fassungen (rund ein Viertel kleiner). Die Seiten liefern AVIF über `<picture>` aus, WebP bleibt Rückfall. `tools/check.py` meldet fehlende oder veraltete AVIF-Dateien.

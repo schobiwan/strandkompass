@@ -26,4 +26,6 @@ Website meereskompass.de (statisch, Python-Generator `build.py` + Paket `sk/`, R
 ## Nützliches
 - Inhalte: `data.py` (Arten), `data_aussehen.py`, `data_gruppen.py`, `data_helfen.py` (Anleitungen „Tieren helfen“ unter /helfen/).
 - Familienmodus (`?familie`): blendet Werbung aus; Abschnitte mit Klasse `adsec` verschwinden ganz, Blöcke mit `famonly` erscheinen dafür.
+- Fotos: Neben jedem WebP liegt eine AVIF-Fassung (`node tools/make_avif.mjs` nach neuen Fotos). Fotos immer über `img()`/`thumb()` in `sk/components.py` einbinden, die das `<picture>` mit AVIF-Quelle schreiben.
+- Getestet und verworfen (Nov. 2026): kritisches CSS inline (verschlechterte LCP auf Start- und Bildseiten), eigenes kleineres CSS für die Startseite (kein Gewinn), Schriften weiter verkleinern (unter 10 %).
 - Keine Einblende-Animationen beim ersten Zeichnen für Karten. Ersatzschriften mit angepassten Maßen am Anfang von `src/css/base.css` verhindern Verrutschen beim Schriftwechsel (CLS 0).

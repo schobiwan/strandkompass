@@ -32,7 +32,7 @@ async function results() {
     list.innerHTML = `<li class="snone">Nichts gefunden.${hit ? ` Meintest du <a href="${ROOT}arten/${hit.key}/">${escapeHtml(hit.name)}</a>?` : ""}</li>`;
   } else {
     list.innerHTML = hits.slice(0, 8).map((x) =>
-      `<li><a href="${ROOT}arten/${x.key}/"><img src="${ROOT}photos/${x.key}-400.webp" alt="" width="48" height="38" loading="lazy">${escapeHtml(x.name)}${x.r >= 3 ? `<span>${x.r === 3 ? "ähnelt der gesuchten Art" : "passt zum Aussehen"}</span>` : ""}</a></li>`).join("");
+      `<li><a href="${ROOT}arten/${x.key}/"><picture><source type="image/avif" srcset="${ROOT}photos/${x.key}-400.avif"><img src="${ROOT}photos/${x.key}-400.webp" alt="" width="48" height="38" loading="lazy"></picture>${escapeHtml(x.name)}${x.r >= 3 ? `<span>${x.r === 3 ? "ähnelt der gesuchten Art" : "passt zum Aussehen"}</span>` : ""}</a></li>`).join("");
   }
   more.hidden = hits.length <= 8;
   // Kurze Ansage für Screenreader statt der ganzen Liste
