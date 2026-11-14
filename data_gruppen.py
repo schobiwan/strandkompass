@@ -6,7 +6,7 @@ Schlüssel = Gruppenname aus data.GROUPS. Die Karten, Zahlen und Verweise kommen
 
 GROUP_INFO = {
     "Seevögel": dict(
-        title="Seevögel an Nord- und Ostsee bestimmen: Möwen, Watvögel, Enten",
+        title="Seevögel an Nord- und Ostsee bestimmen: Möwen, Watvögel",
         h1="Seevögel an Nord- und Ostsee",
         desc="Seevögel der deutschen Küste mit Foto, Ruf zum Anhören und Erkennungsmerkmalen: Möwen, Austernfischer, Säbelschnäbler, Eiderente, Basstölpel und mehr.",
         intro=["An der deutschen Küste begegnen dir vor allem Möwen, Watvögel und Meeresenten. Möwen unterscheidest du am besten an Rückenfarbe, Beinen und Schnabel, Watvögel an der Schnabelform und daran, wie sie sich bewegen.",
@@ -18,7 +18,7 @@ GROUP_INFO = {
         intro=["An der deutschen Küste leben zwei Robbenarten: der Seehund und die Kegelrobbe. Seehunde liegen vor allem auf den Sandbänken im Wattenmeer. Kegelrobben, die größten Raubtiere Deutschlands, siehst du auf Helgoland und immer öfter auch an der Ostsee vor Rügen.",
                "Am sichersten unterscheidest du die beiden an der Kopfform: rundlicher Kopf mit kurzer Schnauze beim Seehund, lange, gerade Schnauze bei der Kegelrobbe. Liegt ein junger Seehund allein am Strand, halte Abstand und gib der Seehundstation Bescheid."]),
     "Wale & Delfine": dict(
-        title="Wale und Delfine in Nord- und Ostsee: Schweinswal, Tümmler und Co.",
+        title="Wale und Delfine in Nord- und Ostsee: Schweinswal & Co.",
         h1="Wale und Delfine in Nord- und Ostsee",
         desc="Welche Wale und Delfine gibt es in Nordsee und Ostsee? Schweinswal, Großer Tümmler, Weißschnauzendelfin, Zwergwal und seltene Gäste mit Foto und Merkmalen.",
         intro=["Der einzige Wal, der dauerhaft an der deutschen Küste lebt, ist der Schweinswal, ein kleiner Zahnwal von etwa anderthalb Metern Länge. Mit etwas Glück siehst du ihn in der Nordsee und in der westlichen Ostsee vom Strand oder von der Fähre aus.",
@@ -60,7 +60,7 @@ GROUP_INFO = {
         intro=["Was am Spülsaum grün und braun liegt, ist meist Tang oder Seegras. Blasentang erkennst du an den luftgefüllten Blasen, Meersalat an den dünnen, hellgrünen Blättern.",
                "Seegras ist keine Alge, sondern eine Blütenpflanze. Es bildet unter Wasser Wiesen, die vielen Fischen und Krebsen als Kinderstube dienen."]),
     "Strandfunde": dict(
-        title="Strandfunde an Nord- und Ostsee: Bernstein, Hühnergott und Co.",
+        title="Strandfunde an Nord- und Ostsee: Bernstein, Hühnergott & Co.",
         h1="Besondere Strandfunde an Nord- und Ostsee",
         desc="Bernstein, Hühnergott, Donnerkeil, Rochen-Ei, Katzenhai-Ei und Sepiaschale: besondere Strandfunde von Nord- und Ostsee mit Foto erkennen.",
         intro=["Neben Muscheln und Schnecken spült das Meer auch besondere Funde an. An der Ostsee suchen viele nach Bernstein, Hühnergöttern und Donnerkeilen, den versteinerten Resten urzeitlicher Tintenfische. An der Nordsee findest du die schwarzen Eikapseln von Rochen und Katzenhaien und weiße Sepiaschalen.",

@@ -13,7 +13,7 @@ HEADERS = """# Meereskompass – Header für statichost.eu (auch Cloudflare Page
     X-Content-Type-Options: nosniff
     Referrer-Policy: strict-origin-when-cross-origin
 /assets/*
-    Cache-Control: public, max-age=604800
+    Cache-Control: public, max-age=31536000, immutable
 /fonts/*
     Cache-Control: public, max-age=31536000, immutable
 /photos/*
@@ -138,7 +138,7 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 
 
 def cache_bust():
-    """Versionsanhang an CSS und JS (?v=<Prüfsumme>): Browser halten /assets/ eine Woche im Speicher (_headers);
+    """Versionsanhang an CSS und JS (?v=<Prüfsumme>): Browser halten /assets/ ein Jahr im Speicher (_headers);
     ändert sich eine Datei, ändert sich ihre Adresse, und neue HTML-Seiten bekommen nie altes CSS."""
     import hashlib, re
     ver = {f: hashlib.sha1(open(os.path.join(OUT, "assets", f), "rb").read()).hexdigest()[:10] for f in ("site.css", "app.js", "home.js")}

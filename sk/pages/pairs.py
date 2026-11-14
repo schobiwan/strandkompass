@@ -5,6 +5,12 @@ from ..core import *
 from ..layout import *
 from ..components import *
 
+def pair_title(p):
+    """Titel fürs Suchergebnis: lange Artnamen bekommen den kürzeren Zusatz, damit die Frage ganz zu lesen ist."""
+    q = f"{name_of(p['a'])} oder {name_of(p['b'])}?"
+    return next((t for t in (f"{q} So erkennst du den Unterschied", f"{q} Die Unterschiede") if len(t) <= 60), q)
+
+
 def build_pairs():
     R = "../"
     grp = lambda p: BY[p["a"]]["grp"] if p["a"] in BY else ""
@@ -28,5 +34,5 @@ def build_pairs():
         others = [q for q in PAIRS if q["k"] != p["k"]]
         rnd = random.Random(p["k"]); rel = rnd.sample(others, 3)
         body = f'''<article class="wrap pairpage"> <h1>{esc(name_of(p["a"]))} oder {esc(name_of(p["b"]))}?</h1> <p class="intro">{esc(p["short"])}</p> {tldr_box(p["tip"])} <div class="ph big"> {figs} </div> <section aria-labelledby="h-cmp"> <h2 id="h-cmp">Die Unterschiede</h2> <div class="cmp-wrap"><table class="cmp"> <thead><tr><td></td><th scope="col">{esc(name_of(p["a"]))}</th><th scope="col">{esc(name_of(p["b"]))}</th></tr></thead> <tbody>{rows}</tbody> </table></div> <p class="actions"> {btns} </p> </section> {byline(R, f'{name_of(p["a"])} oder {name_of(p["b"])}')} <details class="fold related" open data-fold><summary><h2>Weitere Doppelgänger</h2></summary> <ul class="pairs three">{"".join(pair_card(R, q, "h3") for q in rel)}</ul> </details> </article>'''
-        write(f"unterscheiden/{p['k']}/index.html", page(f"unterscheiden/{p['k']}/index.html", f"{name_of(p['a'])} oder {name_of(p['b'])}? So erkennst du den Unterschied", p["short"], body, active="unterscheiden",
+        write(f"unterscheiden/{p['k']}/index.html", page(f"unterscheiden/{p['k']}/index.html", pair_title(p), p["short"], body, active="unterscheiden",
               crumbs=[("Doppelgänger", "unterscheiden/index.html"), (f"{name_of(p['a'])} oder {name_of(p['b'])}", "")]))

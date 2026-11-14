@@ -75,7 +75,7 @@ LOOKS = [
                 ("herzmuschel", "Weiß bis hellbraun mit kräftigen Rippen"),
                 ("auster", "Innen glatt und porzellanweiß, außen blättrig"),
                 ("pantoffelschnecke", "Flache, ovale Schale mit weißer Querplatte innen")]),
-    dict(slug="stein-am-strand", h1="Besonderer Stein am Strand", short="Stein oder Fossil", title="Besonderer Stein am Strand: Bernstein, Donnerkeil oder Hühnergott?",
+    dict(slug="stein-am-strand", h1="Besonderer Stein am Strand", short="Stein oder Fossil", title="Besonderer Stein am Strand: Bernstein oder Donnerkeil?",
          intro="Nicht jeder Stein am Spülsaum ist ein Stein. Bernstein ist versteinertes Harz und fühlt sich warm und leicht an. Ein Donnerkeil ist ein Fossil. Ein Stein mit Loch heißt Hühnergott und gilt als Glücksbringer.",
          items=[("bernstein", "Gelb bis braun, sehr leicht und handwarm, nicht kalt wie ein Stein"),
                 ("donnerkeil", "Länglich und spitz wie eine Patrone, bräunlich durchscheinend"),

@@ -16,7 +16,7 @@ def build_arten_index():
         sec.append(f'<h2 class="h3 grp-h" id="{gslug(g)}" data-grp-h="{esc(g)}"><a href="{gslug(g)}/index.html">{esc(g)}</a></h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul>')
     jump = '<nav class="pills grpjump" aria-label="Gruppen">' + "".join(f'<a href="#{gslug(g)}">{esc(g)}</a>' for g in GROUPS) + '</nav>'
     body = seabar(R) + f'<section class="block page"> <div class="wrap"> <h1>Alle Arten und Funde</h1> <p class="intro">{counts(SPECIES)} Arten und Funde, nach Gruppen geordnet: zuerst Seevögel, dann Robben, Wale und Delfine, danach Quallen, Muscheln und andere Strandfunde. Suchen und filtern kannst du auf der <a href="../index.html#arten">Startseite</a>.</p> {jump} {"".join(sec)} </div> </section>'
-    write("arten/index.html", page("arten/index.html", "Alle Arten an Nord- und Ostsee: Seevögel, Robben, Quallen, Muscheln", "Alle Arten und Funde im Überblick: Seevögel, Robben, Wale und Delfine, Quallen, Muscheln, Schnecken, Krebse, Seesterne, Tang und Strandfunde.", body, active="index", crumbs=[("Alle Arten", "")]))
+    write("arten/index.html", page("arten/index.html", "Alle Arten an Nord- und Ostsee: Seevögel, Robben, Quallen", "Alle Arten und Funde im Überblick: Seevögel, Robben, Wale und Delfine, Quallen, Muscheln, Schnecken, Krebse, Seesterne, Tang und Strandfunde.", body, active="index", crumbs=[("Alle Arten", "")]))
 
 def build_species(s):
     R = "../../"
@@ -70,6 +70,12 @@ def build_species(s):
     title = (f"{s['n']}: Ruf anhören, Merkmale und Doppelgänger" if k in AUDIO else
              f"{s['n']}: Brennt sie? Merkmale und Vorkommen" if "Brennt sie?" in fact else
              f"{s['n']} erkennen: Merkmale und Vorkommen")
+    if len(title) > 60:
+        title = f"{s['n']}: Merkmale und Vorkommen"
+    # Beschreibung fürs Suchergebnis: die längste Fassung, die noch ganz angezeigt wird
+    tail = f"Merkmale, Lebensweise und wann du {'sie' if s['g']=='f' else ('es' if s['g']=='n' else 'ihn')} am Strand findest."
+    desc = next((d for d in (f"{s['n']} ({s['lat']}): {s['short']} {tail}", f"{s['n']}: {s['short']} {tail}",
+                             f"{s['n']} ({s['lat']}): {s['short']}", f"{s['n']}: {s['short']}") if len(d) <= 158), f"{s['n']}: {s['short']}")
     audio_ld = {"audio": {"@type": "AudioObject", "name": f"Ruf: {s['n']}", "contentUrl": f"{DOMAIN}/audio/{k}.mp3", "encodingFormat": "audio/mpeg"}} if k in AUDIO else {}
     page_ld = ld({"@context": "https://schema.org", "@type": "WebPage", "name": f'{s["n"]} ({s["lat"]})', "description": s["short"], "inLanguage": "de-DE",
                   "url": f'{DOMAIN}/arten/{k}/', "isPartOf": {"@id": WEBSITE_ID}, "publisher": {"@id": ORG_ID}, "author": AUTHOR,
@@ -78,5 +84,5 @@ def build_species(s):
                   "datePublished": CONTENT_PUBLISHED, "dateModified": CONTENT_UPDATED, **audio_ld})
     body = f'''<article class="sp wrap"> <div class="sp-top"> <figure class="sp-photo"> {img(R, k, f'{s["n"]}: {s["marks"][0]}', eager=True, sizes="(max-width: 760px) 92vw, 560px")} <figcaption>{credit(k)}</figcaption> </figure> <div class="sp-intro"> <h1>{esc(s["n"])}</h1> <p class="latin" lang="la">{esc(s["lat"])}</p> <p class="row"><span class="tag status">{esc(s["grp"])}</span><span class="tag">{esc(s["sz"])}</span>{"".join(f'<span class="tag act-tag act-{a}">{act_svg(a)}{ACTS[a]}</span>' for a in s["act"])}{'<span class="tag act-tag act-none">nicht an der Ostsee</span>' if s["act"] == ["nord"] else ""}</p> <p class="habs"><span class="habs-l">Lebensraum:</span> {habs}</p> {callbox(R, s)} <p class="text">{esc(s["short"])} {esc(s["hl"])}</p>  </div> </div>
 <div class="sp-cols"> <aside class="sp-side" aria-label="Auf einen Blick"> {tldr} </aside> <div class="sp-main"> <section aria-labelledby="h-marks"> <h2 id="h-marks">So erkennst du {acc}</h2> <ul class="marks">{"".join(f"<li>{esc(m)}</li>" for m in s["marks"])}</ul> <dl class="facts">{facts}</dl> </section> {seabox(s)} <section aria-labelledby="h-year"> <h2 id="h-year">Wann ist {nom} {see}?</h2> {months_bar(s)} <p class="sr-only">Aktiv: {mlist(s["p"])}. Hauptzeit: {mlist(s["h"])}.</p> <p class="yeartext">{yeartext}</p> </section> <section class="life" aria-labelledby="h-life"> <h2 id="h-life">Lebensweise</h2> {life} </section> <section class="helpbox" aria-label="Hilfe und Beobachtung"> <details class="fold" open data-fold><summary><h2>Was du {dat} beachten solltest</h2></summary><p>{esc(s["help"])}</p></details> <details class="fold" open data-fold><summary><h2>Wo und wie du {acc} {verb}</h2></summary><p>{esc(s["tip"])}</p></details> </section> {alike} <section class="more" aria-labelledby="h-more"> <h2 id="h-more">Mehr erfahren</h2> {more} {adshort} </section> {byline(R, s["n"])} {pager} </div> </div> </article>'''
-    write(f"arten/{k}/index.html", page(f"arten/{k}/index.html", title, f"{s['n']} ({s['lat']}): {s['short']} Merkmale, Lebensweise und wann du {'sie' if s['g']=='f' else ('es' if s['g']=='n' else 'ihn')} am Strand findest.",
+    write(f"arten/{k}/index.html", page(f"arten/{k}/index.html", title, desc,
                                         body, active="index", crumbs=[("Alle Arten", "arten/index.html"), (s["grp"], f'arten/{gslug(s["grp"])}/index.html'), (s["n"], "")], og=f"{k}.webp", extra_ld=page_ld))
