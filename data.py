@@ -573,15 +573,17 @@ S("weissschnauzendelfin", "Weißschnauzendelfin", "m", "Lagenorhynchus albirostr
   "Delfine nicht mit dem Boot verfolgen. Sichtungen kannst du über Meldeportale wie BeachExplorer weitergeben.",
   "Auf der Überfahrt nach Helgoland bei ruhiger See aufs Wasser schauen, besonders im Sommer.",
   "weissschnauzendelfin-oder-grosser-tuemmler"),
-S("grosser-tuemmler", "Großer Tümmler", "m", "Tursiops truncatus", "Wale & Delfine", ["nord", "ost"], ["Offenes Meer", "Flachwasser"], "xl", "2–4 m", 300, ALL, [5, 6, 7, 8, 9],
-  "In der Nordsee kommt er regelmäßig vor, in die Ostsee verirren sich nur einzelne Tiere. Die werden dort schnell berühmt, etwa „Delle“ in Travemünde und Kiel.",
+S("grosser-tuemmler", "Großer Tümmler", "m", "Tursiops truncatus", "Wale & Delfine", ["nord", "ost"], ["Offenes Meer", "Flachwasser"], "xl", "2,5–3,8 m", 300, ALL, [5, 6, 7, 8, 9],
+  "An der deutschen Küste ist er ein seltener Gast: In der Nordsee tauchen einzelne Tiere auf der Durchreise auf, in die Ostsee verirren sich Einzelgänger, die oft monatelang bleiben. Die werden dort schnell berühmt, etwa „Delle“ in Travemünde.",
   "Der bekannte „Flipper“-Delfin: grau und kräftig, mit kurzer, deutlich abgesetzter Schnauze.",
-  ["Einfarbig grau, Bauch heller", "Kurze, deutlich abgesetzte Schnauze", "Hohe, sichelförmige Rückenflosse"],
-  [["Größe", "2 bis 4 m"], ["Wo zu finden", "Nordsee; in der westlichen Ostsee nur einzelne Irrgäste"], ["In der Ostsee", "Einzeltiere bekommen oft Namen, etwa „Delle“"]],
-  [["Wie lebt der Große Tümmler?", "Er jagt Fische, oft gemeinsam in Gruppen, und ist sehr verspielt."],
-   ["Warum kommt er nah an Boote?", "Einzeltiere ohne Gruppe suchen manchmal die Nähe von Booten, Seglern und Schwimmern."],
+  ["Einfarbig grau, Bauch heller, keine auffällige Zeichnung", "Kurze, deutlich abgesetzte Schnauze", "Hohe, sichelförmige Rückenflosse", "Springt oft aus dem Wasser und schwimmt in der Bugwelle von Schiffen"],
+  [["Größe", "2,5 bis 3,8 m, Kälber 1 bis 1,3 m"], ["Wo zu finden", "selten: Nordsee vor allem auf See, westliche Ostsee nur als Irrgast"], ["Verwandtschaft", "Zahnwal aus der Familie der Delfine"],
+   ["In der Ostsee", "Einzeltiere bekommen oft Namen, etwa „Delle“"]],
+  [["Wie lebt der Große Tümmler?", "Er jagt Fische und Tintenfische, oft gemeinsam in Gruppen. Große Tümmler sind sehr gesellig, springen häufig und schwimmen gern in der Bugwelle von Schiffen."],
+   ["Warum kommt er nah an Boote?", "Einzeltiere ohne Gruppe suchen manchmal die Nähe von Booten, Seglern und Schwimmern. Fachleute nennen solche Einzelgänger Solitärdelfine."],
+   ["Gab es ihn früher an der deutschen Küste?", "Ja. Bis ins 19. Jahrhundert war der Große Tümmler in der Nordsee weit verbreitet und schwamm auch in Flussmündungen. In den 1960er-Jahren verschwand er aus der Deutschen Bucht. Die nächste feste Gruppe lebt heute im Moray Firth an der schottischen Ostküste."],
    ["Gut zu wissen", "Große Tümmler sind keine Kuscheltiere: Sie können Schweinswale angreifen und auch Menschen verletzen."]],
-  "Abstand halten, nicht anfassen und nicht mit ihm schwimmen. Auch freundlich wirkende Einzeltiere können zubeißen.",
+  "Abstand halten, nicht anfassen, nicht füttern und nicht mit ihm schwimmen. Auch freundlich wirkende Einzeltiere können zubeißen. Mit dem Boot nicht auf ihn zufahren und ihn nicht verfolgen. Sichtungen von Meeressäugern sammelt das Deutsche Meeresmuseum in Stralsund.",
   "Taucht ein Tümmler in einer Förde auf, berichten lokale Medien schnell. Von Molen und Hafeneinfahrten aus ist er dann oft zu sehen.",
   "schweinswal-oder-grosser-tuemmler"),
 S("zwergwal", "Zwergwal", "m", "Balaenoptera acutorostrata", "Wale & Delfine", ["nord"], ["Offenes Meer"], "xl", "7–9 m", 800, [4, 5, 6, 7, 8, 9, 10], [6, 7, 8],
@@ -671,13 +673,13 @@ PAIRS = [
   "tip": "Spitzer Dolch: Lumme. Dicker Schnabel mit weißem Strich: Tordalk."},
  {"k": "schweinswal-oder-grosser-tuemmler", "a": "schweinswal", "b": "grosser-tuemmler",
   "short": "Bei beiden taucht eine dreieckige Rückenflosse aus dem Wasser. Der Schweinswal ist klein, scheu und hat keine Schnauze, der Große Tümmler ist viel größer und hat eine kurze Schnauze.",
-  "rows": [("Größe", "1,4 bis 1,8 m", "2 bis 4 m"), ("Kopf", "rund, ohne Schnauze", "kurze, deutlich abgesetzte Schnauze"), ("Rückenflosse", "klein und dreieckig", "hoch und sichelförmig"),
+  "rows": [("Größe", "1,4 bis 1,8 m", "2,5 bis 3,8 m"), ("Kopf", "rund, ohne Schnauze", "kurze, deutlich abgesetzte Schnauze"), ("Rückenflosse", "klein und dreieckig", "hoch und sichelförmig"),
            ("Verhalten", "scheu, taucht nur kurz auf", "springt oft, neugierig"), ("In der Ostsee", "heimisch", "nur einzelne Irrgäste")],
   "tip": "Klein und rundköpfig: Schweinswal. Groß mit Schnauze und hoher Flosse: Tümmler."},
  {"k": "weissschnauzendelfin-oder-grosser-tuemmler", "a": "weissschnauzendelfin", "b": "grosser-tuemmler",
   "short": "Zwei große Delfine der Nordsee. Der Weißschnauzendelfin hat eine helle Schnauze und weiße Flecken an den Flanken, der Große Tümmler ist einfarbig grau.",
   "rows": [("Färbung", "schwarz mit hellen Flecken an den Flanken", "einfarbig grau, Bauch heller"), ("Schnauze", "kurz und weißlich", "kurz und grau"),
-           ("Größe", "2,5 bis 3 m", "2 bis 4 m"), ("Vorkommen", "zentrale und nördliche Nordsee", "Nordsee, in der Ostsee nur Irrgast")],
+           ("Größe", "2,5 bis 3 m", "2,5 bis 3,8 m"), ("Vorkommen", "zentrale und nördliche Nordsee", "vor der deutschen Küste selten, in der Ostsee nur Irrgast")],
   "tip": "Helle Flecken: Weißschnauze. Ganz grau: Tümmler."},
  {"k": "ohrenqualle-oder-kompassqualle", "a": "ohrenqualle", "b": "kompassqualle",
   "short": "Beide sind groß und hell. Die Ohrenqualle hat vier Ringe in der Mitte und ist harmlos, die Kompassqualle braune Streifen und brennt.",
@@ -745,7 +747,7 @@ MONTH_EVENTS = {
 # Unterschiede zwischen Nord- und Ostsee je Fund (wird auf der Fundseite gezeigt)
 SEA_NOTE = {
  "weissschnauzendelfin": {"nord": "Regelmäßig in der zentralen und nördlichen Nordsee, vor der Küste selten.", "ost": "Nur ganz vereinzelt als Irrgast."},
- "grosser-tuemmler": {"nord": "Regelmäßig in der Nordsee, oft in kleinen Gruppen.", "ost": "Nur einzelne Irrgäste, etwa in der Lübecker Bucht und der Kieler Förde."},
+ "grosser-tuemmler": {"nord": "Seltener Gast. Bis in die 1960er-Jahre war er in der Deutschen Bucht heimisch, heute kommen nur einzelne Tiere, zuletzt im April 2026 nordwestlich von Helgoland. Auch in den Mündungen von Elbe und Weser wurden Tümmler gesehen.", "ost": "Nur Irrgäste, seit 2016 aber regelmäßig in der Lübecker Bucht und der Kieler Förde. „Delle“ kam Ende April 2023 aus Dänemark nach Travemünde."},
  "zwergwal": {"nord": "Vor allem in der zentralen Nordsee, etwa an der Doggerbank.", "ost": "Nur ganz selten als verirrtes Einzeltier."},
  "buckelwal": {"nord": "Seltener Gast, zuletzt mehrfach im Wattenmeer gesichtet.", "ost": "Seltener Gast, in den letzten Jahren mehrfach in Förden und Buchten."},
  "pottwal": {"nord": "Nur als Irrgast, meist im Winter und oft mit tödlicher Strandung.", "ost": "Nur in Ausnahmefällen als verirrtes Einzeltier."},
@@ -836,3 +838,28 @@ for _s in SPECIES:
     _s["call"] = CALLS.get(_s["k"])
 for _k, _e in EXT.items():
     _e["call"] = CALLS.get(_k)
+
+# Vertiefung einzelner Artseiten: eigener Titel und Beschreibung, häufige Fragen (auch als FAQPage-Daten), Quellen
+# und eigenes Änderungsdatum. Für Seiten, die in der Suche schon Einblendungen bekommen und mehr Tiefe brauchen.
+DEEP = {
+ "grosser-tuemmler": {
+  "updated": "2026-11-14",
+  "title": "Großer Tümmler: Delfin in Nordsee und Ostsee erkennen",
+  "desc": "Großer Tümmler (Tursiops truncatus): So erkennst du den Delfin, wo er in Nordsee und Ostsee auftaucht und wie du ihn vom Schweinswal unterscheidest.",
+  "faq": [
+   ("Ist der Große Tümmler ein Delfin?", "Ja. Er gehört zu den Zahnwalen und dort zur Familie der Delfine. Es ist die Art, die die meisten aus Film und Fernsehen kennen, etwa als „Flipper“."),
+   ("Gibt es Delfine in der Nordsee?", "Ja, vor der deutschen Küste aber selten. Große Tümmler leben dauerhaft vor Schottland, Weißschnauzendelfine in der zentralen und nördlichen Nordsee. An die deutsche Küste kommen meist nur einzelne Tiere."),
+   ("Gibt es Delfine in der Ostsee?", "Nicht dauerhaft. Heimisch ist dort nur der Schweinswal. Große Tümmler schwimmen aber immer wieder in die westliche Ostsee, seit 2016 regelmäßig in die Kieler Förde und die Lübecker Bucht."),
+   ("Wer ist Delfin „Delle“?", "Ein Großer Tümmler, der als Einzelgänger in der westlichen Ostsee unterwegs ist. Bekannt wurde er im dänischen Svendborgsund. Ende April 2023 tauchte er in Travemünde auf und sprang dort wochenlang vor Schiffen."),
+   ("Was ist der Unterschied zwischen Tümmler und Schweinswal?", "Der Schweinswal wird nur bis etwa 1,80 m lang, hat einen runden Kopf ohne Schnauze und eine kleine, dreieckige Rückenflosse. Der Große Tümmler ist mit 2,5 bis 3,8 m viel größer, hat eine kurze Schnauze und eine hohe, sichelförmige Rückenflosse. Der Schweinswal heißt auch Kleiner Tümmler, ist aber kein Delfin."),
+   ("Ist ein Großer Tümmler gefährlich?", "Er ist ein großes Wildtier. Tümmler greifen Schweinswale an, und auch zutrauliche Einzelgänger können Menschen verletzen. Deshalb Abstand halten und nicht zu ihm ins Wasser gehen."),
+  ],
+  "sources": [
+   ("Bundesamt für Naturschutz: Verbreitung", "https://www.bfn.de/sites/default/files/AN4/documents/mammalia/tursiops_truncatus_verbr.pdf"),
+   ("Bundesamt für Naturschutz: Merkmale", "https://bfn.de/sites/default/files/AN4/documents/mammalia/tursiops_truncatus_merkm.pdf"),
+   ("Rote-Liste-Zentrum", "https://www.rote-liste-zentrum.de/detail/pdf/54019"),
+   ("DDA: Zählflüge Nordsee 2026", "https://www.dda-web.de/downloads/marbird/surveyberichte/2026_05_Flugbericht_Nordsee.pdf"),
+   ("Deutsches Meeresmuseum: Sichtung melden", "https://www.deutsches-meeresmuseum.de/wissenschaft/sichtungen/sichtung-melden"),
+  ],
+ },
+}

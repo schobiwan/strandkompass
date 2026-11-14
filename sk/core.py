@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Grundlagen: Pfade, Konstanten, Daten-Nachschlagen und kleine Helfer."""
 import os, json, html, re
-from data import SPECIES, PAIRS, EXT, GROUPS, HABS, ACTS, SIZES, MONTH_EVENTS, SEA_NOTE, SEA_INFO
+from data import SPECIES, PAIRS, EXT, GROUPS, HABS, ACTS, SIZES, MONTH_EVENTS, SEA_NOTE, SEA_INFO, DEEP
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CREDITS = json.load(open(os.path.join(ROOT, "credits.json"), encoding="utf-8"))
