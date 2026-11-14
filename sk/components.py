@@ -99,14 +99,15 @@ def search_json():
         _SEARCH_JSON = json.dumps(rows, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     return _SEARCH_JSON
 
-def card(R, s, i=0):
+def card(R, s, i=0, eager=6):
+    """Fundkarte. eager: so viele erste Fotos sofort laden; 0, wenn die Karten erst unter dem ersten Bildschirm beginnen (Startseite)."""
     acts = "".join(f'<span class="act" title="{ACTS[a]}">{act_svg(a)}<span class="sr-only">{ACTS[a]}</span></span>' for a in s["act"])
     names, alt, marks = search_fields(s)
     return (f'<li class="bird" id="{s["k"]}" style="--i:{i}" data-key="{s["k"]}" data-name="{esc(s["n"])}" data-search="{esc(names)}" '
             f'data-alt="{esc(alt)}" data-marks="{esc("|".join(marks))}" '
             f'data-grp="{esc(s["grp"])}" data-act="{"|".join(s["act"])}" data-hab="{esc("|".join(s["hab"]))}" data-size="{s["size"]}" data-mid="{s["mid"]}" '
             f'data-present="{",".join(map(str, s["p"]))}" data-peak="{",".join(map(str, s["h"]))}"> '
-            f'{img(R, s["k"], "", eager=i < 6)}{cred(s["k"])} <div class="txt"> <h3><a class="open" href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a></h3> '
+            f'{img(R, s["k"], "", eager=i < eager)}{cred(s["k"])} <div class="txt"> <h3><a class="open" href="{R}arten/{s["k"]}/index.html">{esc(s["n"])}</a></h3> '
             f'<span class="meta"><span class="latin" lang="la">{esc(s["lat"])}</span><span class="size">{esc(s["sz"])}</span></span> '
             f'<span class="row"><span class="tag status">{esc(s["grp"])}</span></span> <p class="short">{esc(s["short"])}</p> </div> '
             f'<span class="acts">{acts}</span> </li>')
@@ -195,4 +196,4 @@ def burn_table(R):
                          ("lungenqualle", "schwach, kann auf empfindlicher Haut jucken", "y"), ("blaue-nesselqualle", "spürbar", "o"),
                          ("kompassqualle", "deutlich, wie Brennnesseln", "o"), ("feuerqualle", "stark, auch abgerissene Tentakel", "r")]:
         qrows += f'<tr><th scope="row"><a href="{R}arten/{k}/index.html">{esc(BY[k]["n"])}</a></th><td><span class="burn burn-{lvl}" aria-hidden="true"></span>{esc(burn)}</td></tr>'
-    return f'<div class="cmp-wrap"><table class="cmp"><thead><tr><th scope="col">Qualle</th><th scope="col">Brennt sie?</th></tr></thead><tbody>{qrows}</tbody></table></div>'
+    return f'<div class="cmp-wrap" tabindex="0" role="region" aria-label="Vergleichstabelle, seitlich scrollbar"><table class="cmp"><thead><tr><th scope="col">Qualle</th><th scope="col">Brennt sie?</th></tr></thead><tbody>{qrows}</tbody></table></div>'

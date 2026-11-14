@@ -34,7 +34,11 @@ def build_assets():
                   {"src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml"}]}, ensure_ascii=False, indent=2) + "\n")
     # Header für statichost.eu: lange Zwischenspeicherung für Dateien, die sich selten ändern
     write("_headers", HEADERS)
-    shutil.copytree(os.path.join(ROOT, "fonts"), os.path.join(OUT, "fonts"), dirs_exist_ok=True)
+    # Nur die Schriftdateien, die das CSS lädt (variable Schriften), dazu die Lizenzen; die Einzelschnitte bleiben im Ordner fonts/ liegen
+    os.makedirs(os.path.join(OUT, "fonts"), exist_ok=True)
+    for f in os.listdir(os.path.join(ROOT, "fonts")):
+        if f.endswith("-wght-normal.woff2") or f.endswith(".txt"):
+            shutil.copy(os.path.join(ROOT, "fonts", f), os.path.join(OUT, "fonts", f))
     os.makedirs(os.path.join(OUT, "photos"), exist_ok=True)
     for f in os.listdir(os.path.join(ROOT, "photos")):
         if f.endswith(".webp"):

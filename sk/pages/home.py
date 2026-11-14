@@ -51,7 +51,8 @@ def build_home():
             chipset("Größe", "size", list(SIZES.items())) +
             '<fieldset><legend>Außerdem</legend><div class="fchips"><button class="chip" type="button" data-g="flag" data-v="now" aria-pressed="false">Jetzt im <span data-now-name>November</span> zu finden</button>'
             '</div></fieldset>')
-    cards = "".join(card(R, s, i) for i, s in enumerate(sorted(SPECIES, key=skey)))
+    # Die Karten beginnen unter Kopfbereich und Filterleiste: kein Foto sofort laden, damit Text, Schriften und das große Foto oben Vorrang haben
+    cards = "".join(card(R, s, i, eager=0) for i, s in enumerate(sorted(SPECIES, key=skey)))
     NOWM_BUILD = 11
     # Reihenfolge für Tier des Monats und Karussell: auffällige Funde zuerst
     PRIO = BIRD_PRIO + MAMMAL_PRIO + ["bernstein", "kompassqualle", "feuerqualle", "ohrenqualle", "lungenqualle", "seestern",
