@@ -22,7 +22,7 @@ Website meereskompass.de (statisch, Python-Generator `build.py` + Paket `sk/`, R
 ## Vorschau-Artifact
 - Artifact „Meereskompass Website“: https://claude.ai/artifact/6N5Ft7rGrivLCDRvnM5TDv
 - Inhalt ist `dist/` (ohne `photos_src`), höchstens 256 Dateien pro Aufruf, daher in zwei Teilen veröffentlichen.
-- Ein Artifact fasst höchstens 512 Dateien. Seit Nov. 2026 fehlen dort deshalb robots.txt, sitemap.xml, llms.txt, die Schrift-Lizenztexte und die nicht mehr genutzten x-Fotos. Am einfachsten nur geänderte Dateien hochladen (`git diff --name-only HEAD~1 -- dist`).
+- Ein Artifact fasst höchstens 512 Dateien. Seit Nov. 2026 fehlen dort deshalb robots.txt, sitemap.xml, llms.txt, die Schrift-Lizenztexte und die nicht mehr genutzten x-Fotos. Seit 18. Nov. 2026 außerdem 404.html, site.webmanifest, icon-192/512.png und apple-touch-icon.png (Platz für neue Seiten). Das Artifact ist damit wieder bei 511 von 512 Dateien: vor neuen Seiten weitere unwichtige Dateien per `remove` herausnehmen. Am einfachsten nur geänderte Dateien hochladen (`git diff --name-only HEAD~1 -- dist`).
 
 ## Nützliches
 - Neue Arten: Eintrag in `data.py` (dazu `CALLS` und `SEA_NOTE`), Foto plus Nachweis in `credits.json`, bei Seevögeln Ruf in `audio/` und `audio.json`. Commons blockt Anfragen aus der Claude-Umgebung oft (HTTP 429), dann über GitHub Actions laden. Die Startseiten-Karten tragen keine Suchtexte, `home.js` lädt sie bei der ersten Suche aus `search.json`.
