@@ -40,12 +40,17 @@ Sprache: Deutsch. Angaben zu Vorkommen und Jahreszeiten sind grobe Richtwerte f�
 - [Schwarzer Vogel an der Küste](https://meereskompass.de/aussehen/schwarzer-vogel-an-der-kueste/)
 - [Vogel mit rotem Schnabel](https://meereskompass.de/aussehen/vogel-mit-rotem-schnabel/)
 - [Vogel im Watt und am Spülsaum](https://meereskompass.de/aussehen/vogel-im-watt/)
+- [Vogel mit roten Beinen](https://meereskompass.de/aussehen/vogel-mit-roten-beinen/)
+- [Vogel mit langem Schnabel](https://meereskompass.de/aussehen/vogel-mit-langem-schnabel/)
+- [Vogel mit gebogenem Schnabel](https://meereskompass.de/aussehen/vogel-mit-gebogenem-schnabel/)
+- [Möwen an Nord- und Ostsee](https://meereskompass.de/aussehen/moewen-an-nord-und-ostsee/)
 - [Flosse oder Kopf im Meer gesehen](https://meereskompass.de/aussehen/flosse-im-meer/)
 - [Durchsichtige Qualle](https://meereskompass.de/aussehen/durchsichtige-qualle/)
 - [Rote oder braune Qualle](https://meereskompass.de/aussehen/rote-qualle/)
 - [Blaue oder lila Qualle](https://meereskompass.de/aussehen/blaue-qualle/)
 - [Schwarzes Ei am Strand](https://meereskompass.de/aussehen/schwarzes-ei-am-strand/)
 - [Weißer Fund am Strand](https://meereskompass.de/aussehen/weisser-fund-am-strand/)
+- [Schwarze Muschel am Strand](https://meereskompass.de/aussehen/schwarze-muschel-am-strand/)
 - [Besonderer Stein am Strand](https://meereskompass.de/aussehen/stein-am-strand/)
 
 ## Arten
