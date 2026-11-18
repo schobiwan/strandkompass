@@ -12,6 +12,19 @@ DOMAIN = "https://meereskompass.de"
 OUT = os.path.join(ROOT, "dist")
 MONTHS = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"]
 MSHORT = ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"]
+# Monat des Baus (deutsche Zeit), damit Startseite und „Jetzt im …“ auch ohne JavaScript und für Google stimmen.
+# Überschreibbar mit BUILD_MONTH=1..12; .github/workflows/monatlich.yml baut am 1. jedes Monats neu.
+def _build_month():
+    import datetime
+    env = os.environ.get("BUILD_MONTH", "")
+    if env.isdigit() and 1 <= int(env) <= 12:
+        return int(env)
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.datetime.now(ZoneInfo("Europe/Berlin")).month
+    except Exception:
+        return (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)).month
+NOWM_BUILD = _build_month()
 MSLUG = ["januar", "februar", "maerz", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "dezember"]
 BY = {s["k"]: s for s in SPECIES}
 # Doppelgänger in der Reihenfolge der Gruppen: Vögel, Robben, Wale, dann die übrigen Funde

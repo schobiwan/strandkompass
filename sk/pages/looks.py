@@ -46,5 +46,7 @@ def build_looks():
         ld_list = ld({"@context": "https://schema.org", "@type": "ItemList", "name": m["h1"], "numberOfItems": len(m["items"]),
                       "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": BY[k]["n"], "url": f"{DOMAIN}/arten/{k}/"} for i, (k, _) in enumerate(m["items"])]})
         desc = f'{m["h1"]}? {len(m["items"])} Arten von Nord- und Ostsee, auf die das passt, mit Foto und Erkennungsmerkmal: {names}.'
-        write(f'aussehen/{m["slug"]}/index.html', page(f'aussehen/{m["slug"]}/index.html', m["title"], desc[:300], body, active="aussehen",
+        # Titelformel wie beim Vogelkompass (rankt dort am besten): „Vogel mit gelbem Bauch? 7 heimische Arten mit Fotos“
+        title = f'{m["h1"]}? {len(m["items"])} Arten mit Fotos' if m["title"].endswith(": diese Arten passen") else m["title"]
+        write(f'aussehen/{m["slug"]}/index.html', page(f'aussehen/{m["slug"]}/index.html', title, desc[:300], body, active="aussehen",
               crumbs=[("Nach Aussehen", "aussehen/index.html"), (m["h1"], "")], seafilter=False, og=f'{m["items"][0][0]}.webp', extra_ld=ld_list))

@@ -26,7 +26,7 @@ LOOKS = [
                 ("ringelgans", "Kopf, Hals und Brust schwarz, kleiner weißer Fleck am Hals"),
                 ("mantelmoewe", "Rücken und Flügel fast schwarz, sehr groß und massig"),
                 ("heringsmoewe", "Rücken dunkel schiefergrau, Beine leuchtend gelb")]),
-    dict(slug="vogel-mit-rotem-schnabel", cover="brandgans", h1="Vogel mit rotem Schnabel", short="Roter Schnabel", title="Vogel mit rotem Schnabel an der Küste",
+    dict(slug="vogel-mit-rotem-schnabel", cover="brandgans", h1="Vogel mit rotem Schnabel", short="Roter Schnabel", title="Vogel mit rotem Schnabel: diese Arten passen",
          intro="Ein roter oder orangeroter Schnabel ist ein gutes Erkennungszeichen. Ganz rot ist er bei Brandgans und Lachmöwe, orangerot beim Austernfischer. Die großen Möwen haben einen gelben Schnabel mit nur einem roten Fleck.",
          items=[("austernfischer", "Langer, gerader, orangeroter Schnabel und rotes Auge"),
                 ("brandgans", "Leuchtend roter Schnabel, Männchen mit Höcker an der Stirn"),

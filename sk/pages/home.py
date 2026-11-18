@@ -50,11 +50,10 @@ def build_home():
             chipset("Meer", "act", [(k, v) for k, v in ACTS.items()]) +
             chipset("Lebensraum", "hab", [(h, h) for h in HABS]) +
             chipset("Größe", "size", list(SIZES.items())) +
-            '<fieldset><legend>Außerdem</legend><div class="fchips"><button class="chip" type="button" data-g="flag" data-v="now" aria-pressed="false">Jetzt im <span data-now-name>November</span> zu finden</button>'
+            '<fieldset><legend>Außerdem</legend><div class="fchips"><button class="chip" type="button" data-g="flag" data-v="now" aria-pressed="false">Jetzt im <span data-now-name>' + MONTHS[NOWM_BUILD - 1] + '</span> zu finden</button>'
             '</div></fieldset>')
     # Die Karten beginnen unter Kopfbereich und Filterleiste: kein Foto sofort laden, damit Text, Schriften und das große Foto oben Vorrang haben
     cards = "".join(card(R, s, i, eager=0, lean=True) for i, s in enumerate(sorted(SPECIES, key=skey)))
-    NOWM_BUILD = 11
     # Reihenfolge für Tier des Monats und Karussell: auffällige Funde zuerst
     PRIO = BIRD_PRIO + MAMMAL_PRIO + ["bernstein", "kompassqualle", "feuerqualle", "ohrenqualle", "lungenqualle", "seestern",
             "nixentaeschchen", "wellhornschnecke", "strandkrabbe", "einsiedlerkrebs", "seestachelbeere", "blaue-nesselqualle", "herzigel", "donnerkeil"]

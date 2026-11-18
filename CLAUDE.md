@@ -26,6 +26,8 @@ Website meereskompass.de (statisch, Python-Generator `build.py` + Paket `sk/`, R
 
 ## Nützliches
 - Neue Arten: Eintrag in `data.py` (dazu `CALLS` und `SEA_NOTE`), Foto plus Nachweis in `credits.json`, bei Seevögeln Ruf in `audio/` und `audio.json`. Commons blockt Anfragen aus der Claude-Umgebung oft (HTTP 429), dann über GitHub Actions laden. Die Startseiten-Karten tragen keine Suchtexte, `home.js` lädt sie bei der ersten Suche aus `search.json`.
+- Monat der Startseite (Tier des Monats, „Jetzt im …“) wird beim Bauen gesetzt (`NOWM_BUILD` in `sk/core.py`, überschreibbar mit `BUILD_MONTH`); `.github/workflows/monatlich.yml` baut am 1. jedes Monats neu und pusht `dist/`.
+- Aussehen-Seiten: Titel, die auf „: diese Arten passen“ enden, werden automatisch zu „<h1>? n Arten mit Fotos“ (Formel vom Vogelkompass, rankt dort am besten).
 - Inhalte: `data.py` (Arten), `data_aussehen.py`, `data_gruppen.py`, `data_helfen.py` (Anleitungen „Tieren helfen“ unter /helfen/).
 - Familienmodus (`?familie`): blendet Werbung aus; Abschnitte mit Klasse `adsec` verschwinden ganz, Blöcke mit `famonly` erscheinen dafür.
 - Fotos: Neben jedem WebP liegt eine AVIF-Fassung (`node tools/make_avif.mjs` nach neuen Fotos). Fotos immer über `img()`/`thumb()` in `sk/components.py` einbinden, die das `<picture>` mit AVIF-Quelle schreiben.
