@@ -59,6 +59,7 @@ def build_about():
 <ul>
 <li><a href="https://vogelkompass.de/">Vogelkompass</a>: Vögel in Garten, Park und Feld erkennen</li>
 <li><a href="https://waldtierkompass.de/">Waldtierkompass</a>: Tiere im Wald erkennen</li>
+<li><a href="https://gartentierkompass.de/">Gartentierkompass</a>: Tiere im Garten erkennen</li>
 </ul> </div> </section>'''
     about_ld = ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "Über den Meereskompass", "url": DOMAIN + "/ueber/",
                    "inLanguage": "de-DE", "isPartOf": {"@id": WEBSITE_ID}, "mainEntity": {"@id": ORG_ID}})
