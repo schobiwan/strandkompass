@@ -19,6 +19,10 @@ NABU_ICCD = ("NABU: Küstenputztag (International Coastal Cleanup Day)", "https:
 NLPV_MUELL = ("Nationalpark Niedersächsisches Wattenmeer: Faltblatt Meeresmüll und Strand-Müll-Boxen", "https://www.nationalpark-wattenmeer.de/wp-content/uploads/2025/03/fb_meeresmuell_nlpv_202502_web.pdf")
 NATIONALPARK = ("Nationalpark Wattenmeer: Informationen der Nationalparkverwaltungen", "https://www.nationalpark-wattenmeer.de/")
 
+HELGOLAND_WINTER = ("Helgoland Tourismus-Service: Robben erleben auf der Helgoländer Düne im Winter (Faltblatt)", "https://www.helgoland.de/content/uploads/2025/09/Robben-erleben-auf-Helgoland_Winter.pdf")
+JORDSAND_WURFSAISON = ("Verein Jordsand, Seevögel 46/1: Wurfsaison 2024/2025 auf der Helgoländer Düne", "https://www.zobodat.at/pdf/Seevoegel_46_1_2025_0005.pdf")
+WATTENMEER_KEGELROBBEN = ("Gemeinsames Wattenmeersekretariat: Kegelrobben-Zählung 2025–2026", "https://waddensea-worldheritage.org/da/node/2812")
+NABU_DUENE = ("NABU: Kegelrobben auf der Helgoländer Düne", "https://www.nabu.de/tiere-und-pflanzen/saeugetiere/robben-und-wale/12593.html")
 TEL_FRIEDRICHSKOOG = '<a href="tel:+4948541372">04854 1372</a>'
 TEL_NORDDEICH = '<a href="tel:+494931973330">04931 973330</a>'
 TEL_MEERESMUSEUM = '<a href="tel:+49383126503333">03831 2650 3333</a>'
@@ -83,6 +87,34 @@ GUIDES = [
             ("Darf ich einen Zahn oder Knochen mitnehmen?", "Nein. Schweinswale und Robben sind streng geschützt, auch tote Tiere und ihre Teile. Lass alles liegen und melde den Fund."),
         ],
         sources=[NABU_MEERESMUSEUM, SH_MEERESSAEUGER, SEEHUNDSTATION_NORDDEICH],
+    ),
+    dict(
+        slug="kegelrobben-helgoland", name="Kegelrobben-Babys auf Helgoland", photo="kegelrobbe",
+        title="Kegelrobben-Babys auf Helgoland: beobachten mit Abstand",
+        desc="Von November bis Januar kommen auf der Helgoländer Düne über 1.000 Kegelrobben zur Welt. Wann du sie siehst, welche Regeln gelten und wie du die Tiere nicht störst.",
+        card="Von November bis Januar auf der Düne: wann, wo und mit welchem Abstand.",
+        intro="Jeden Winter wird die Düne vor Helgoland zur größten Kinderstube der Kegelrobben in Deutschland. In der Wurfsaison 2025/26 kamen dort 1.077 Junge zur Welt. Mit etwas Abstand erlebst du Mütter und weiße Robbenbabys ganz aus der Nähe, ohne sie zu stören.",
+        tldr=[("Wann", "November bis Januar, die meisten Jungen im Dezember"),
+              ("Wo", "Strände der Helgoländer Düne, mit der Dünenfähre ab der Hauptinsel"),
+              ("Abstand", "immer mindestens 30 Meter, auch zu ruhenden Tieren"),
+              ("Nie", "anfassen, füttern, Lärm machen oder Locklaute nachahmen")],
+        steps=[("Mit der Dünenfähre übersetzen", "Die Düne erreichst du mit der kleinen Fähre von der Hauptinsel. Achte auf die Durchsage an Bord: Dort hörst du, welche Strände gerade offen sind."),
+               ("Auf dem Dünenrundweg bleiben", "Der ausgeschilderte Rundweg führt über den Panoramaweg am Nordstrand, den Südstrand und durch das Innere der Düne. Folge den Schildern und den Hinweisen der Betreuerinnen und Betreuer vor Ort."),
+               ("30 Meter Abstand halten", "Das gilt für Mütter mit Jungen genauso wie für ruhende Robben. Kommst du einem Jungen aus Versehen zu nah, geh ruhig, aber zügig zurück."),
+               ("Gesperrte Strände respektieren", "Von etwa Mitte November bis Mitte Januar werden Strandabschnitte zeitweise gesperrt, je nachdem, wo Junge und Bullen liegen. Die Sperrungen schützen die Tiere und dich."),
+               ("Kinder an die Hand, Hunde an die Leine", "Robben können sich mit Bissen verteidigen. Halte Kinder dicht bei dir, geh möglichst in der Gruppe und führe Hunde an der Leine."),
+               ("Kranke Tiere melden statt hingehen", "Wirkt eine Robbe verletzt oder krank, geh nicht näher heran. Sag den Betreuerinnen und Betreuern auf der Düne Bescheid, die Telefonnummern stehen auch im Faltblatt der Gemeinde.")],
+        tips=[("Vom weißen Bündel zur kleinen Robbe", "Die Jungen wiegen bei der Geburt 10 bis 14 kg und werden 2,5 bis 3 Wochen mit sehr fetter Milch gesäugt. In dieser Zeit legen sie bis auf rund 50 kg zu."),
+              ("Allein ist ganz normal", "Nach der Säugezeit verlässt die Mutter ihr Junges. Es bleibt noch 3 bis 4 Wochen am Strand, lebt von seinem Fett, wechselt das weiße Fell und schwimmt dann los. Ein Junges ohne Mutter braucht also meist keine Hilfe."),
+              ("Auch Paarungszeit", "Gleichzeitig mit den Geburten paaren sich die Kegelrobben. Bullen verteidigen ihre Plätze und können schnell werden: noch ein Grund für Abstand."),
+              ("Fernglas statt Nähe", "Mit Fernglas oder Teleobjektiv siehst du Gesichter, Krallen und das Säugen, ohne näher heranzugehen. Locklaute oder Rufe, um ein besseres Foto zu bekommen, stören die Tiere.")],
+        species=["kegelrobbe", "seehund"],
+        faq=[("Wann ist die beste Zeit für Robbenbabys auf Helgoland?", "Die ersten Jungen kommen Anfang November zur Welt, die meisten im Dezember. Bis in den Januar hinein gibt es weitere Geburten, danach verschwinden die weißen Jungen nach und nach."),
+             ("Wie viele Kegelrobben werden auf Helgoland geboren?", "In der Wurfsaison 2025/26 waren es 1.077 Junge. Zusammen mit dem Wattenmeer von den Niederlanden bis Dänemark wurden 3.385 Jungtiere gezählt, so viele wie nie seit Beginn der gemeinsamen Zählungen."),
+             ("Darf ich ein Junges ohne Mutter ins Wasser bringen oder füttern?", "Nein. Robben dürfen nicht angefasst und nicht gefüttert werden. Ein Junges allein am Strand ist bei Kegelrobben fast immer normal. Wirkt es krank oder verletzt, sag den Betreuern auf der Düne Bescheid."),
+             ("Gibt es auch außerhalb der Wurfzeit Robben auf der Düne?", "Ja, Kegelrobben und Seehunde liegen das ganze Jahr auf der Düne. Von Ende Februar bis in den April kommen viele Kegelrobben zum Fellwechsel."),
+             ("Warum nur 30 Meter und nicht 100 bis 300 wie im Nationalpark Wattenmeer?", "Auf der kleinen Düne ist für größere Abstände kein Platz, und die Robben sind dort an Menschen gewöhnt. Die 30 Meter sind das Minimum, damit die Tiere ruhig bleiben und sich nicht noch mehr an Menschen gewöhnen.")],
+        sources=[HELGOLAND_WINTER, JORDSAND_WURFSAISON, WATTENMEER_KEGELROBBEN, NABU_DUENE],
     ),
     dict(
         slug="seevogel-gefunden", name="Kranker oder toter Seevogel", photo="trottellumme",
@@ -205,7 +237,7 @@ GUIDES = [
 
 # Welche Anleitungen auf welchen Seiten als Block „Helfen an der Küste“ erscheinen (Gruppe → Anleitungen)
 TEASERS = {
-    "Robben": ["robbe-am-strand", "totfund-melden", "strandmuell-sammeln"],
+    "Robben": ["robbe-am-strand", "kegelrobben-helgoland", "totfund-melden"],
     "Wale & Delfine": ["totfund-melden", "strandmuell-sammeln", "robbe-am-strand"],
     "Seevögel": ["seevoegel-nicht-stoeren", "seevogel-gefunden", "strandmuell-sammeln"],
     "Muscheln": ["spuelsaum-entdecken", "strandmuell-sammeln", "seevoegel-nicht-stoeren"],
