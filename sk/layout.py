@@ -7,7 +7,10 @@ from .components import feedback_href, FB_PAGE
 
 # Strukturierte Daten (schema.org): Herausgeber und Website sind über @id verknüpft; die Startseite beschreibt sie vollständig
 ORG_ID, WEBSITE_ID = DOMAIN + "/#org", DOMAIN + "/#website"
-AUTHOR = {"@type": "Person", "name": "Nico Schober", "url": DOMAIN + "/ueber/"}
+# Gemeinsame Kennung für Nico Schober auf allen Kompassseiten (Vogel-, Wald-, Meeres-, Gartentierkompass).
+# Muss nicht erreichbar sein; so erkennt Google, dass dieselbe Person hinter allen Seiten steht.
+PERSON_ID = "https://nicoschober.com/#person"
+AUTHOR = {"@type": "Person", "@id": PERSON_ID, "name": "Nico Schober", "url": DOMAIN + "/ueber/"}
 # Awin-Bestätigung der Werbefläche (nur Startseite)
 AWIN_META = '<meta name="verification" content="ee293cf1f85b91260fdca62510538eb4">'
 
@@ -15,7 +18,7 @@ def ld(obj):
     return '<script type="application/ld+json">' + json.dumps(obj, ensure_ascii=False) + '</script>'
 LDJSON = ld({"@context": "https://schema.org", "@graph": [
     {"@type": "Organization", "@id": ORG_ID, "name": SITE, "url": DOMAIN + "/", "logo": DOMAIN + "/icon-512.png",
-     "founder": {"@type": "Person", "name": "Nico Schober"}, "sameAs": ["https://vogelkompass.de/", "https://waldtierkompass.de/", "https://gartentierkompass.de/"]},
+     "founder": AUTHOR},
     {"@type": "WebSite", "@id": WEBSITE_ID, "name": SITE, "url": DOMAIN + "/", "inLanguage": "de-DE", "publisher": {"@id": ORG_ID},
      "description": "Seevögel, Robben und Wale an Nord- und Ostsee bestimmen, dazu Quallen, Muscheln und Strandfunde."}]})
 

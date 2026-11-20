@@ -62,7 +62,8 @@ def build_about():
 <li><a href="https://gartentierkompass.de/">Gartentierkompass</a>: Tiere im Garten erkennen</li>
 </ul> </div> </section>'''
     about_ld = ld({"@context": "https://schema.org", "@type": "AboutPage", "name": "Über den Meereskompass", "url": DOMAIN + "/ueber/",
-                   "inLanguage": "de-DE", "isPartOf": {"@id": WEBSITE_ID}, "mainEntity": {"@id": ORG_ID}})
+                   "inLanguage": "de-DE", "isPartOf": {"@id": WEBSITE_ID}, "about": {"@id": ORG_ID},
+                   "mainEntity": {**AUTHOR, "address": {"@type": "PostalAddress", "addressLocality": "Bremen", "addressCountry": "DE"}}})
     write("ueber/index.html", page("ueber/index.html", "Über den Meereskompass: Macher, Quellen, Finanzierung",
           "Wer den Meereskompass macht, woher Fotos, Rufe und Steckbriefe stammen, wie die Seite sich finanziert und wie du Fehler meldest.",
           body, crumbs=[("Über den Meereskompass", "")], seafilter=False, extra_ld=about_ld))
