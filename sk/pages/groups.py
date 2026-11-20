@@ -41,7 +41,7 @@ def build_groups():
         others = ('<h2>Weitere Gruppen</h2><div class="pills">' + "".join(
                   f'<a href="{group_url(o, R)}">{esc(o)}</a>' for o in GROUPS if o != g) + f'<a href="{R}arten/index.html">Alle Arten ansehen</a></div>')
         body = (seabar(R) + f'<section class="block page"> <div class="wrap"> <h1>{esc(I["h1"])}</h1> {intro} {tags} '
-                f'<ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul> </div> </section>'
+                f'<h2 class="sr-only">Die Arten im Überblick</h2><ul class="grid">{"".join(card(R, s, i) for i, s in enumerate(ss))}</ul> </div> </section>'
                 f'{burn}{group_teaser(R, g)}'
                 f'<section class="block"><div class="wrap"><div class="prose">{nord_only}{pp}{lk}{others}</div> {byline(R, g)} </div></section>')
         ld_list = ld({"@context": "https://schema.org", "@type": "CollectionPage", "name": I["h1"], "description": I["desc"], "inLanguage": "de-DE",
