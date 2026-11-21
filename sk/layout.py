@@ -10,7 +10,7 @@ ORG_ID, WEBSITE_ID = DOMAIN + "/#org", DOMAIN + "/#website"
 # Gemeinsame Kennung für Nico Schober auf allen Kompassseiten (Vogel-, Wald-, Meeres-, Gartentierkompass).
 # Muss nicht erreichbar sein; so erkennt Google, dass dieselbe Person hinter allen Seiten steht.
 PERSON_ID = "https://nicoschober.com/#person"
-AUTHOR = {"@type": "Person", "@id": PERSON_ID, "name": "Nico Schober", "url": DOMAIN + "/ueber/"}
+AUTHOR = {"@type": "Person", "@id": PERSON_ID, "name": "Nico Schober", "url": "https://nicoschober.com/"}
 # Awin-Bestätigung der Werbefläche (nur Startseite)
 AWIN_META = '<meta name="verification" content="ee293cf1f85b91260fdca62510538eb4">'
 

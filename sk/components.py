@@ -26,7 +26,8 @@ def thumb(R, key):
     return (f'<picture><source type="image/avif" srcset="{R}photos/{key}-400.avif">'
             f'<img src="{R}photos/{key}-400.webp" alt="" width="400" height="320" loading="lazy" decoding="async"></picture>')
 
-FAMILY = ("vogelkompass.de", "waldtierkompass.de", "gartentierkompass.de", "meereskompass.de")
+# Eigene Seiten von Nico: öffnen im selben Fenster (Kompass-Familie und seine Homepage)
+FAMILY = ("vogelkompass.de", "waldtierkompass.de", "gartentierkompass.de", "meereskompass.de", "nicoschober.com")
 
 def ext_link(url, text, rel="noopener", cls="", mark=""):
     """Link-Regel (siehe README, „Redaktionsregeln“): fremde Seiten öffnen ein neues Fenster mit Hinweis für Screenreader,
